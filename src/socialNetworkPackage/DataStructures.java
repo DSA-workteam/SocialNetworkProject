@@ -20,9 +20,57 @@ public class DataStructures {
 		}
 		
 	}
+	
+	public static class StringBlock{
+			public ArrayList<String> ids;
+			public String data;
+			
+			public StringBlock less,more;
+			public StringBlock(String _data) {
+				data = _data;
+				ids = new ArrayList<String>(2);
+				
+			}
+			
+			
+			public void addId(String id) {				
+					ids.add(id);
+			}
+			public ArrayList<String> getIds(){
+				return ids;
+			}
+			
+			public StringBlock getBlock(String otherData) {
+				StringBlock ret = null;
+				
+					
+				int comparation = data.toUpperCase().compareTo(otherData.toUpperCase());
+				if( comparation == 0) {
+					ret = this;
+				}else if(comparation < 0) {
+					if(less != null)
+						ret = less.getBlock(otherData);	
+					else {
+						less = new StringBlock(otherData);
+						ret = less;
+					}
+				
+				}else {
+					if(more != null)
+						ret = more.getBlock(otherData);
+					else {
+						more = new StringBlock(otherData);
+						ret = more;
+					}
+				}				
+					return ret;
+			}
+	}
+	
+	
 	public class Person {
 		public String id;
-		public String name;
+		public StringBlock name;
 		public ArrayList<String> surnames;
 		public String birthdate;
 		public String birthplace;
@@ -32,29 +80,38 @@ public class DataStructures {
 		public ArrayList<String> movies;
 		public String groupcode;
 		
-		
-		
+		public void setName(String name) {
+			
+		}
+		public void setSurnames(ArrayList<String> surnames) {
+			
+		}
+		public void setBirthdate(String birthdate) {
+			
+		}
+		public void setBirthplace(String birthplace) {
+			
+		}
+		public void setHome(String home) {
+			
+		}
+		public void setStudiedat(ArrayList<String> studiedat) {
+			
+		}
+		public void setWorkedat(ArrayList<String> workedat) {
+			
+		}
+		public void setMovies(ArrayList<String> movies) {
+			
+		}
+		public void setGroupcode(String groupcode) {
+			
+		}
 		/*
 		 * Constructor
 		 */
-		public Person(String _id, String _name, ArrayList<String> _surnames,
-				String _birthdate, String _birthplace, String _home, 
-				ArrayList<String> _studiedat, ArrayList<String> _workedat,
-				ArrayList<String> _movies, String _groupcode) {
-			
-			
-				id = _id;
-				name = _name;
-				surnames = _surnames;
-				birthdate = _birthdate;
-				birthplace = _birthplace;
-				home = _home;
-				studiedat = _studiedat;
-				workedat = _workedat;
-				movies = _movies;
-				groupcode = _groupcode;
-			
-			
+		public Person(String _id) {
+			id = _id;			
 		}
 		@Override
 		public boolean equals(Object o) {

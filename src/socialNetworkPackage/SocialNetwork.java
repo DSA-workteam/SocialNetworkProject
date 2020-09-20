@@ -7,34 +7,56 @@ import java.util.Scanner;
 
 import socialNetworkPackage.DataStructures.PeopleBlock;
 import socialNetworkPackage.DataStructures.Person;
+import socialNetworkPackage.DataStructures.StringBlock;
 
 public class SocialNetwork {
 
 	// The variable where all the data from the social network is going to be
 	private static PeopleBlock[] people;
+	private static StringBlock names;
 	private final static int ARRAYSIZE = 1024;
 	
 	
-	
+	public static StringBlock getStaticStringBlock(String name) {
+		switch(name) {
+		case "names":
+			break;
+			default:
+				break;
+		}
+		return null;
+	}
 	public static void addPeopleToSocialNetwork(Person p) {
 		people[encoder(p.id)].addPerson(p);
 	}
 	
 	private static int encoder(String s) {
 		int r = 0;
-		for (int i = 0; i < s.length(); i++) {
+		
+		for (int i = 0; i < s.length(); i++) 
 			r += (int)s.charAt(i)*i;
-		}
-		
-		
+				
 		return r % ARRAYSIZE;
 	}
 	
 	
+	
+	private static StringBlock createAlphabeticalSeparation() {
+		StringBlock ret = new StringBlock("M");
+		ret.getBlock("G");
+		ret.getBlock("B");
+		ret.getBlock("J");
+		ret.getBlock("U");
+		ret.getBlock("Q");
+		ret.getBlock("W");
+		return ret;
+	}
 	public static void main(String[] args) {
 		// Initializes the array list
 		
 		people = new PeopleBlock[ARRAYSIZE];
+		names = createAlphabeticalSeparation();
+		
 		
 		
 		// Menu constants
