@@ -72,40 +72,56 @@ public class DataStructures {
 		public String id;
 		public StringBlock name;
 		public ArrayList<StringBlock> surnames;
-		public String birthdate;
-		public String birthplace;
-		public String home;
-		public ArrayList<String> studiedat;
-		public ArrayList<String> workedat;
-		public ArrayList<String> movies;
-		public String groupcode;
+		public StringBlock birthdate;
+		public StringBlock birthplace;
+		public StringBlock home;
+		public ArrayList<StringBlock> studiedat;
+		public ArrayList<StringBlock> workedat;
+		public ArrayList<StringBlock> movies;
+		public StringBlock groupcode;
 		
 		public void setName(String _name) {
 			name = SocialNetwork.getStaticStringBlock(SocialNetwork.NAME).getBlock(_name);
 		}
-		public void setSurnames(ArrayList<String> surnames) {
+		
+		public void setSurnames(ArrayList<String> _surnames) {
+			for (String s : _surnames) {
+				surnames.add(SocialNetwork.getStaticStringBlock(SocialNetwork.SURNAME).getBlock(s));
+	
+			}
 			
 		}
-		public void setBirthdate(String birthdate) {
-			
+		public void setBirthdate(String _birthdate) {
+			birthdate = SocialNetwork.getStaticStringBlock(SocialNetwork.BIRTHDATE).getBlock(_birthdate);
 		}
-		public void setBirthplace(String birthplace) {
-			
+		public void setBirthplace(String _birthplace) {
+			birthplace = SocialNetwork.getStaticStringBlock(SocialNetwork.BIRTHPLACE).getBlock(_birthplace);
+
 		}
-		public void setHome(String home) {
-			
+		public void setHome(String _home) {
+			home = SocialNetwork.getStaticStringBlock(SocialNetwork.HOME).getBlock(_home);
+
 		}
-		public void setStudiedat(ArrayList<String> studiedat) {
-			
+		public void setStudiedat(ArrayList<String> _studiedat) {
+			for (String s : _studiedat) {
+				studiedat.add(SocialNetwork.getStaticStringBlock(SocialNetwork.STUDIEDAT).getBlock(s));
+	
+			}
 		}
-		public void setWorkedat(ArrayList<String> workedat) {
-			
+		public void setWorkedat(ArrayList<String> _workedat) {
+			for (String s : _workedat) {
+				workedat.add(SocialNetwork.getStaticStringBlock(SocialNetwork.WORKEDAT).getBlock(s));
+	
+			}
 		}
-		public void setMovies(ArrayList<String> movies) {
-			
+		public void setMovies(ArrayList<String> _movies) {
+			for (String s : _movies) {
+				movies.add(SocialNetwork.getStaticStringBlock(SocialNetwork.MOVIES).getBlock(s));
+	
+			}
 		}
-		public void setGroupcode(String groupcode) {
-			
+		public void setGroupcode(String _groupcode) {
+			groupcode = SocialNetwork.getStaticStringBlock(SocialNetwork.GROUPCODE).getBlock(_groupcode);
 		}
 		/*
 		 * Constructor
