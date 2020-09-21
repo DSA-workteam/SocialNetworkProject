@@ -9,22 +9,42 @@ import socialNetworkPackage.DataStructures.PeopleBlock;
 import socialNetworkPackage.DataStructures.Person;
 import socialNetworkPackage.DataStructures.StringBlock;
 
+
 public class SocialNetwork {
 
 	// The variable where all the data from the social network is going to be
 	private static PeopleBlock[] people;
 	private static StringBlock names;
 	private final static int ARRAYSIZE = 1024;
+	public final static int NAME =0, SURNAME = 1, BIRTHDATE = 2, BIRTHPLACE = 3, HOME = 4,STUDIEDAT = 5,
+			WORKEDAT =6, MOVIES = 7, GROUPCODE = 8;
 	
-	
-	public static StringBlock getStaticStringBlock(String name) {
-		switch(name) {
-		case "names":
+	public static StringBlock getStaticStringBlock(int var) {
+		StringBlock ret = null;
+		switch(var) {
+		case NAME:
+			ret = names;
+			break;
+		case SURNAME:
+			break;
+		case BIRTHDATE:
+			break;
+		case BIRTHPLACE:
+			break;
+		case HOME:
+			break;
+		case STUDIEDAT:
+			break;
+		case WORKEDAT:
+			break;
+		case MOVIES:
+			break;
+		case GROUPCODE:
 			break;
 			default:
 				break;
 		}
-		return null;
+		return ret;
 	}
 	public static void addPeopleToSocialNetwork(Person p) {
 		people[encoder(p.id)].addPerson(p);

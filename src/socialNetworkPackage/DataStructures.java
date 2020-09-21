@@ -71,7 +71,7 @@ public class DataStructures {
 	public class Person {
 		public String id;
 		public StringBlock name;
-		public ArrayList<String> surnames;
+		public ArrayList<StringBlock> surnames;
 		public String birthdate;
 		public String birthplace;
 		public String home;
@@ -80,8 +80,8 @@ public class DataStructures {
 		public ArrayList<String> movies;
 		public String groupcode;
 		
-		public void setName(String name) {
-			
+		public void setName(String _name) {
+			name = SocialNetwork.getStaticStringBlock(SocialNetwork.NAME).getBlock(_name);
 		}
 		public void setSurnames(ArrayList<String> surnames) {
 			
