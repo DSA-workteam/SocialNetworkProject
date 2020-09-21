@@ -14,42 +14,34 @@ public class SocialNetwork {
 
 	// The variable where all the data from the social network is going to be
 	private static PeopleBlock[] people;
-	private static StringBlock names;
+	private static StringBlock[] mainStringBlocks;
+	
+	private final static int NPARAMETERS = 9;
+	
 	private final static int ARRAYSIZE = 1024;
 	public final static int NAME =0, SURNAME = 1, BIRTHDATE = 2, BIRTHPLACE = 3, HOME = 4,STUDIEDAT = 5,
 			WORKEDAT =6, MOVIES = 7, GROUPCODE = 8;
 	
-	public static StringBlock getStaticStringBlock(int var) {
-		StringBlock ret = null;
-		switch(var) {
-		case NAME:
-			ret = names;
-			break;
-		case SURNAME:
-			break;
-		case BIRTHDATE:
-			break;
-		case BIRTHPLACE:
-			break;
-		case HOME:
-			break;
-		case STUDIEDAT:
-			break;
-		case WORKEDAT:
-			break;
-		case MOVIES:
-			break;
-		case GROUPCODE:
-			break;
-			default:
-				break;
-		}
-		return ret;
+	/**
+	 * Gets the root of the binary tree of StringBlock
+	 * @param var int - Data parameter type
+	 * @return The root of the asked parameter
+	 */
+	public static StringBlock getStaticStringBlock(int var) {		
+		return mainStringBlocks[var];
 	}
+	
+	/**
+	 * Adds people to the social network and saves the person by hashing it's id
+	 * @param p - Person
+	 */
 	public static void addPeopleToSocialNetwork(Person p) {
 		people[encoder(p.id)].addPerson(p);
 	}
 	
+	public static void removePeopleFromSocialNetwork(Person p) {
+		people[encoder(p.id)].removePerson(p);
+	}
 	private static int encoder(String s) {
 		int r = 0;
 		
@@ -72,11 +64,13 @@ public class SocialNetwork {
 		return ret;
 	}
 	public static void main(String[] args) {
-		// Initializes the array list
+		// Initializes the data structure
 		
 		people = new PeopleBlock[ARRAYSIZE];
-		names = createAlphabeticalSeparation();
-		
+		mainStringBlocks = new StringBlock[NPARAMETERS];
+		// Creates an alphabetical order in each StringBlock
+		for(int i = 0; i<NPARAMETERS;i++)
+			mainStringBlocks[i] = createAlphabeticalSeparation();
 		
 		
 		// Menu constants

@@ -15,8 +15,17 @@ public class DataStructures {
 			peopleInNode.add(p);
 		}
 		
-		public Person getPeople(String id) {
-			return null;
+		public void removePerson(Person p) {
+			
+			peopleInNode.remove(p);
+			// Could be possible not to find the people
+		}
+		public Person getPeople(String _id) {
+			Person ret = null;
+			for(Person p: peopleInNode)
+				if(p.equals(_id))
+					ret = p;
+			return ret;
 		}
 		
 	}
@@ -24,17 +33,26 @@ public class DataStructures {
 	public static class StringBlock{
 			public ArrayList<String> ids;
 			public String data;
-			
+			public StringBlock parent;
 			public StringBlock less,more;
+			
 			public StringBlock(String _data) {
 				data = _data;
 				ids = new ArrayList<String>(2);
 				
 			}
+			public void removeId(String _id) {
+				ids.remove(_id);
+				if(ids.size() == 0) {
+					removeStringBlock();
+				}
+			}
+			private void removeStringBlock() {
+				
+			}
 			
-			
-			public void addId(String id) {				
-					ids.add(id);
+			public void addId(String _id) {				
+					ids.add(_id);
 			}
 			public ArrayList<String> getIds(){
 				return ids;
@@ -70,6 +88,7 @@ public class DataStructures {
 	
 	public class Person {
 		public String id;
+		private StringBlock[][] personInfo;
 		public StringBlock name;
 		public ArrayList<StringBlock> surnames;
 		public StringBlock birthdate;
@@ -105,19 +124,16 @@ public class DataStructures {
 		public void setStudiedat(ArrayList<String> _studiedat) {
 			for (String s : _studiedat) {
 				studiedat.add(SocialNetwork.getStaticStringBlock(SocialNetwork.STUDIEDAT).getBlock(s));
-	
 			}
 		}
 		public void setWorkedat(ArrayList<String> _workedat) {
 			for (String s : _workedat) {
 				workedat.add(SocialNetwork.getStaticStringBlock(SocialNetwork.WORKEDAT).getBlock(s));
-	
 			}
 		}
 		public void setMovies(ArrayList<String> _movies) {
 			for (String s : _movies) {
 				movies.add(SocialNetwork.getStaticStringBlock(SocialNetwork.MOVIES).getBlock(s));
-	
 			}
 		}
 		public void setGroupcode(String _groupcode) {
@@ -129,16 +145,27 @@ public class DataStructures {
 		public Person(String _id) {
 			id = _id;			
 		}
+		
+		public void freeData() {
+			name.
+		}
+		
 		@Override
 		public boolean equals(Object o) {
-			if(o instanceof Person) {
-				Person other = (Person)o;
-				if(id.equals(other.id))
-					return true;
-				else return false;
-			}else return false;
+			boolean ret = false;
+			
+			if( o != null) {
+				if(o instanceof Person) {
+					Person other = (Person)o;
+					if(id.equals(other.id))
+						ret = true;
+					else ret = false;
+				}else ret = false;
+			}else ret = false;
+			
+			return ret;
+		
 		}
 	}
-	
 	
 }
