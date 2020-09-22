@@ -16,10 +16,10 @@ public class SocialNetwork {
 	private static PeopleBlock[] people;
 	private static StringBlock[] mainStringBlocks;
 	
-	private final static int NPARAMETERS = 9;
+	public final static int NPARAMETERS = 9;
 	
 	private final static int ARRAYSIZE = 1024;
-	public final static int NAME =0, SURNAME = 1, BIRTHDATE = 2, BIRTHPLACE = 3, HOME = 4,STUDIEDAT = 5,
+	public final static int ID = -1, NAME =0, SURNAME = 1, BIRTHDATE = 2, BIRTHPLACE = 3, HOME = 4,STUDIEDAT = 5,
 			WORKEDAT =6, MOVIES = 7, GROUPCODE = 8;
 	
 	/**
@@ -51,22 +51,35 @@ public class SocialNetwork {
 		return r % ARRAYSIZE;
 	}
 	
-	
+	private static void searchBy(int key, String value) {
+		
+	}
+	private static void testAddingPeople() {
+		Person p = new Person("Lmao");
+		String[] s = {"Donostia"};
+		p.setParameter(HOME, s);
+		String[] s2 = {"Donramon","Pokemon"};
+		p.setParameter(MOVIES, s2);
+		p.print();
+		addPeopleToSocialNetwork(p);
+	}
 	
 	private static StringBlock createAlphabeticalSeparation() {
 		StringBlock ret = new StringBlock("M");
-		ret.getBlock("G");
-		ret.getBlock("B");
-		ret.getBlock("J");
-		ret.getBlock("U");
-		ret.getBlock("Q");
-		ret.getBlock("W");
+		ret.getBlock("G",true);
+		ret.getBlock("B",true);
+		ret.getBlock("J",true);
+		ret.getBlock("U",true);
+		ret.getBlock("Q",true);
+		ret.getBlock("W",true);
 		return ret;
 	}
 	public static void main(String[] args) {
 		// Initializes the data structure
 		
 		people = new PeopleBlock[ARRAYSIZE];
+		for(int i = 0; i < ARRAYSIZE;i++)
+			people[i] = new PeopleBlock();
 		mainStringBlocks = new StringBlock[NPARAMETERS];
 		// Creates an alphabetical order in each StringBlock
 		for(int i = 0; i<NPARAMETERS;i++)
@@ -75,6 +88,8 @@ public class SocialNetwork {
 		
 		// Menu constants
 		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
+		
+		testAddingPeople();
 		
 		// Console input 
 		FileInputStream fis = new FileInputStream(FileDescriptor.in);

@@ -2,10 +2,12 @@ package socialNetworkPackage;
 
 import java.util.ArrayList;
 
+import socialNetworkPackage.DataStructures.StringBlock;
+
 public class DataStructures {
 
 	
-	public class PeopleBlock{
+	public static class PeopleBlock{
 		public ArrayList<Person> peopleInNode;
 		
 		public PeopleBlock() {
@@ -29,7 +31,7 @@ public class DataStructures {
 		}
 		
 	}
-	
+								
 	public static class StringBlock{
 			public ArrayList<String> ids;
 			public String data;
@@ -43,14 +45,36 @@ public class DataStructures {
 			}
 			public void removeId(String _id) {
 				ids.remove(_id);
-				if(ids.size() == 0) {
-					removeStringBlock();
-				}
-			}
-			private void removeStringBlock() {
 				
 			}
+			/*
+			private void removeStringBlock() {
+				String otherData = parent.data;
+				int comparation = data.toUpperCase().compareTo(parent.data);
+				StringBlock replacement = null;
+				
+				if(comparation < 0) {
+					if(less != null) {
+						replacement = less;
+					}else if(more != null){
+						replacement = more;
+					}
+					parent.less = replacement;
+					
+				}else {
+					if(more != null) {
+						replacement = more;
+					}else if(less != null) {
+						replacement = less;
+					}
+					parent.more = replacement;
+				}				
+					
+				if(replacement != null)
+					replacement.parent = parent;
 			
+			}
+			*/
 			public void addId(String _id) {				
 					ids.add(_id);
 			}
@@ -58,7 +82,7 @@ public class DataStructures {
 				return ids;
 			}
 			
-			public StringBlock getBlock(String otherData) {
+			public StringBlock getBlock(String otherData, boolean createBlock) {
 				StringBlock ret = null;
 				
 					
@@ -67,16 +91,17 @@ public class DataStructures {
 					ret = this;
 				}else if(comparation < 0) {
 					if(less != null)
-						ret = less.getBlock(otherData);	
-					else {
+						ret = less.getBlock(otherData,createBlock);	
+					else if(createBlock){
+						
 						less = new StringBlock(otherData);
 						ret = less;
 					}
 				
 				}else {
 					if(more != null)
-						ret = more.getBlock(otherData);
-					else {
+						ret = more.getBlock(otherData,createBlock);
+					else if(createBlock){
 						more = new StringBlock(otherData);
 						ret = more;
 					}
@@ -86,68 +111,68 @@ public class DataStructures {
 	}
 	
 	
-	public class Person {
+	public static class Person {
 		public String id;
 		private StringBlock[][] personInfo;
-		public StringBlock name;
-		public ArrayList<StringBlock> surnames;
-		public StringBlock birthdate;
-		public StringBlock birthplace;
-		public StringBlock home;
-		public ArrayList<StringBlock> studiedat;
-		public ArrayList<StringBlock> workedat;
-		public ArrayList<StringBlock> movies;
-		public StringBlock groupcode;
 		
-		public void setName(String _name) {
-			name = SocialNetwork.getStaticStringBlock(SocialNetwork.NAME).getBlock(_name);
+		
+		
+		
+		public void setParameter(int key, String[] p) {
+			int sLength = p.length;
+			personInfo[key] = new StringBlock[sLength];
+			for(int i = 0; i < sLength;i++) {
+				personInfo[key][i] = SocialNetwork.getStaticStringBlock(key).getBlock(p[i],true);
+				personInfo[key][i].addId(id);
+			}
 		}
 		
-		public void setSurnames(ArrayList<String> _surnames) {
-			for (String s : _surnames) {
-				surnames.add(SocialNetwork.getStaticStringBlock(SocialNetwork.SURNAME).getBlock(s));
-	
-			}
+		public String[] getParameter(int key) {
+			String[] ret = null;
+ 			if(personInfo[key] != null) {
+ 				int lenght = personInfo[key].length;
+ 				ret = new String[lenght];
+ 				for(int i = 0; i < lenght;i++)
+ 					ret[i] = personInfo[key][i].data;
+ 				
+ 			}
+ 			return ret;
 			
 		}
-		public void setBirthdate(String _birthdate) {
-			birthdate = SocialNetwork.getStaticStringBlock(SocialNetwork.BIRTHDATE).getBlock(_birthdate);
-		}
-		public void setBirthplace(String _birthplace) {
-			birthplace = SocialNetwork.getStaticStringBlock(SocialNetwork.BIRTHPLACE).getBlock(_birthplace);
-
-		}
-		public void setHome(String _home) {
-			home = SocialNetwork.getStaticStringBlock(SocialNetwork.HOME).getBlock(_home);
-
-		}
-		public void setStudiedat(ArrayList<String> _studiedat) {
-			for (String s : _studiedat) {
-				studiedat.add(SocialNetwork.getStaticStringBlock(SocialNetwork.STUDIEDAT).getBlock(s));
-			}
-		}
-		public void setWorkedat(ArrayList<String> _workedat) {
-			for (String s : _workedat) {
-				workedat.add(SocialNetwork.getStaticStringBlock(SocialNetwork.WORKEDAT).getBlock(s));
-			}
-		}
-		public void setMovies(ArrayList<String> _movies) {
-			for (String s : _movies) {
-				movies.add(SocialNetwork.getStaticStringBlock(SocialNetwork.MOVIES).getBlock(s));
-			}
-		}
-		public void setGroupcode(String _groupcode) {
-			groupcode = SocialNetwork.getStaticStringBlock(SocialNetwork.GROUPCODE).getBlock(_groupcode);
-		}
+		
 		/*
 		 * Constructor
 		 */
 		public Person(String _id) {
-			id = _id;			
+			id = _id;	
+			personInfo = new StringBlock[SocialNetwork.NPARAMETERS][];
 		}
 		
 		public void freeData() {
-			name.
+			for(int i = 0; i < SocialNetwork.NPARAMETERS;i++) {
+				if(personInfo[i] != null)
+					for(int j = 0; j < personInfo[i].length;j++)
+						if(personInfo[i][j] != null)
+							personInfo[i][j].removeId(id);
+			}
+		}
+		
+		
+		
+		public void print() {
+			String s = id + "; ";
+			for(int i = 0; i < SocialNetwork.NPARAMETERS;i++) {
+				if(personInfo[i] != null) {
+					for(int j = 0; j < personInfo[i].length;j++)
+						if(personInfo[i][j] != null) {
+							s += personInfo[i][j].data;
+							if( j !=personInfo[i].length-1 )
+								s+= ", ";
+						}
+					s+= "; ";
+				}
+			}
+				System.out.println(s);
 		}
 		
 		@Override
