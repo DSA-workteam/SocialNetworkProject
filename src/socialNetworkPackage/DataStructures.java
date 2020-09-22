@@ -118,12 +118,13 @@ public class DataStructures {
 		
 		
 		
-		public void setParameter(int key, String[] p) {
-			int sLength = p.length;
+		public void setParameter(int key, String p) {
+			String[] separatedByCommas = p.split(",");
+			int sLength = separatedByCommas.length;
 			personInfo[key] = new StringBlock[sLength];
 			for(int i = 0; i < sLength;i++) {
-				System.out.println("parameter set!" +  p[i]);
-				personInfo[key][i] = SocialNetwork.getStaticStringBlock(key).getBlock(p[i],true);
+				System.out.println("parameter set!" + separatedByCommas[i]);
+				personInfo[key][i] = SocialNetwork.getStaticStringBlock(key).getBlock(separatedByCommas[i],true);
 				personInfo[key][i].addId(this);
 			}
 		}

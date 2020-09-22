@@ -71,6 +71,8 @@ public class SocialNetwork {
 		}
 		return p;
 	}
+	
+	/*
 	private static void testAddingPeople() {
 		Person p = new Person("Lmao");
 		String[] s = {"Donostia"};
@@ -90,7 +92,7 @@ public class SocialNetwork {
 		p.print();
 		addPeopleToSocialNetwork(p);
 	}
-	
+	*/
 	private static StringBlock createAlphabeticalSeparation() {
 		StringBlock ret = new StringBlock("M");
 		ret.getBlock("G",true);
@@ -116,8 +118,8 @@ public class SocialNetwork {
 		// Menu constants
 		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
 		
-		testAddingPeople();
-		testAddingPeople2();
+		//testAddingPeople();
+		//testAddingPeople2();
 		
 		//System.out.println(searchPersonBy(-1, "Lmao")[0].getParameter(HOME)[0]);
 		
