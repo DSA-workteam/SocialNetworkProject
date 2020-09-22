@@ -37,6 +37,7 @@ public class SocialNetwork {
 	 */
 	public static void addPeopleToSocialNetwork(Person p) {
 		people[encoder(p.id)].addPerson(p);
+		System.out.println("Person added: " + p.id);
 	}
 	
 	public static void removePeopleFromSocialNetwork(Person p) {
@@ -51,14 +52,40 @@ public class SocialNetwork {
 		return r % ARRAYSIZE;
 	}
 	
-	private static void searchBy(int key, String value) {
-		
+	private static Person[] searchPersonBy(int key, String value) {
+		Person[] p = null;
+		if(key == -1) {
+			 p = new Person[1];
+			p[0] =people[encoder(value)].getPerson(value);
+		}else {
+			StringBlock sb = mainStringBlocks[key].getBlock(value, false);
+			
+			if(sb != null) {
+				int size = sb.ids.size();
+				p = new Person[size];
+				for(int i = 0; i < size;i++)
+					p[i] = sb.ids.get(i);
+					
+				
+			}
+		}
+		return p;
 	}
 	private static void testAddingPeople() {
 		Person p = new Person("Lmao");
 		String[] s = {"Donostia"};
 		p.setParameter(HOME, s);
 		String[] s2 = {"Donramon","Pokemon"};
+		p.setParameter(MOVIES, s2);
+		p.print();
+		addPeopleToSocialNetwork(p);
+	}
+	
+	private static void testAddingPeople2() {
+		Person p = new Person("NobitaNobi");
+		String[] s = {"Tokio"};
+		p.setParameter(HOME, s);
+		String[] s2 = {"Digimon","Donramon"};
 		p.setParameter(MOVIES, s2);
 		p.print();
 		addPeopleToSocialNetwork(p);
@@ -90,7 +117,16 @@ public class SocialNetwork {
 		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
 		
 		testAddingPeople();
+		testAddingPeople2();
 		
+		//System.out.println(searchPersonBy(-1, "Lmao")[0].getParameter(HOME)[0]);
+		
+		//System.out.println(searchPersonBy(HOME, "Donostia")[0].id);
+		
+		System.out.println(searchPersonBy(MOVIES, "Donramon")[0].id);
+		System.out.println(searchPersonBy(MOVIES, "Donramon")[1].id);
+
+
 		// Console input 
 		FileInputStream fis = new FileInputStream(FileDescriptor.in);
 		Scanner scanner = new Scanner(fis);

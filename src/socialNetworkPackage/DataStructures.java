@@ -22,10 +22,10 @@ public class DataStructures {
 			peopleInNode.remove(p);
 			// Could be possible not to find the people
 		}
-		public Person getPeople(String _id) {
+		public Person getPerson(String _id) {
 			Person ret = null;
 			for(Person p: peopleInNode)
-				if(p.equals(_id))
+				if(p.id.equals(_id))
 					ret = p;
 			return ret;
 		}
@@ -33,14 +33,14 @@ public class DataStructures {
 	}
 								
 	public static class StringBlock{
-			public ArrayList<String> ids;
+			public ArrayList<Person> ids;
 			public String data;
 			public StringBlock parent;
 			public StringBlock less,more;
 			
 			public StringBlock(String _data) {
 				data = _data;
-				ids = new ArrayList<String>(2);
+				ids = new ArrayList<Person>(2);
 				
 			}
 			public void removeId(String _id) {
@@ -75,10 +75,10 @@ public class DataStructures {
 			
 			}
 			*/
-			public void addId(String _id) {				
-					ids.add(_id);
+			public void addId(Person _p) {				
+					ids.add(_p);
 			}
-			public ArrayList<String> getIds(){
+			public ArrayList<Person> getIds(){
 				return ids;
 			}
 			
@@ -122,8 +122,9 @@ public class DataStructures {
 			int sLength = p.length;
 			personInfo[key] = new StringBlock[sLength];
 			for(int i = 0; i < sLength;i++) {
+				System.out.println("parameter set!" +  p[i]);
 				personInfo[key][i] = SocialNetwork.getStaticStringBlock(key).getBlock(p[i],true);
-				personInfo[key][i].addId(id);
+				personInfo[key][i].addId(this);
 			}
 		}
 		
