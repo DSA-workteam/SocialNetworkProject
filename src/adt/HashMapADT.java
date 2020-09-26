@@ -1,6 +1,8 @@
 package adt;
 
-public interface HashMapADT<T,K> {
+import java.util.Collection;
+
+public interface HashMapADT<T, K> {
 
 	/**
 	 * Adds the given element into the hash map
@@ -14,7 +16,11 @@ public interface HashMapADT<T,K> {
 	 * @param K key - Searches element with key
 	 * @return Returns T element binded with K key
 	 */
-	public T get(K key);
+	public Collection<T> get(K key);
+	
+	public boolean remove(K key, T element);
+	
+	public boolean isIn(K key, T element);
 	
 	/**
 	 * Gets the size of the collection
