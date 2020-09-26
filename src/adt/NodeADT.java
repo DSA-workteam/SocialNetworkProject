@@ -28,7 +28,7 @@ public interface NodeADT<T> {
 	 * Unlinks with given node
 	 * @param node - Node to unlink to
 	 */
-	public void unlink(NodeADT<T> node);
+	public boolean unlink(NodeADT<T> node);
 	
 	public String toString();
 }
