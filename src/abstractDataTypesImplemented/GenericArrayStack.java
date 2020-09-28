@@ -1,4 +1,4 @@
-package dataStructuresImplemented;
+package abstractDataTypesImplemented;
 
 import adt.StackADT;
 import exceptions.EmptyCollectionException;

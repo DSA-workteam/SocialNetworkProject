@@ -2,11 +2,13 @@ package socialNetworkPackage;
 
 import java.util.ArrayList;
 
-import socialNetworkPackage.DataStructures.StringBlock;
 
+/*
+
+import socialNetworkPackage.DataStructures.StringBlock;
 public class DataStructures {
 
-	
+
 	public static class PeopleBlock{
 		public ArrayList<Person> peopleInNode;
 		
@@ -74,7 +76,7 @@ public class DataStructures {
 					replacement.parent = parent;
 			
 			}
-			*/
+			
 			public void addId(Person _p) {				
 					ids.add(_p);
 			}
@@ -144,7 +146,7 @@ public class DataStructures {
 		
 		/*
 		 * Constructor
-		 */
+		 
 		public Person(String _id) {
 			id = _id;	
 			personInfo = new StringBlock[SocialNetwork.NPARAMETERS][];
@@ -194,5 +196,7 @@ public class DataStructures {
 		
 		}
 	}
+
 	
 }
+	*/

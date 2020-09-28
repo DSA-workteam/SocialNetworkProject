@@ -1,4 +1,4 @@
-package dataStructuresImplemented;
+package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
 import java.util.Collection;
