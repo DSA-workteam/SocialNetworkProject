@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import socialNetworkPackage.DataStructures.Person;
 
 public class DataLoader {
 	
@@ -29,12 +28,12 @@ public class DataLoader {
 	 */
 	public void loadPerson(String data) {
 		String[] separatedData = data.split(";");
-		Person p = new Person(separatedData[0]);
+	//	Person p = new Person(separatedData[0]);
 		for(int i =1;i < separatedData.length;i++) {
-			p.setParameter(i, separatedData[i]);
+		//	p.setParameter(i, separatedData[i]);
 		}
-		SocialNetwork.addPeopleToSocialNetwork(p);
-		p.print();	
+	//	SocialNetwork.addPeopleToSocialNetwork(p);
+		//p.print();	
 	}
 	
 	
