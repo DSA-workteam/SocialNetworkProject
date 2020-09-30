@@ -13,11 +13,12 @@ public class ArrayListDataBlock<T,K extends Comparable<K>> implements DataBlockA
 	private int N;
 	
 	
-	public ArrayListDataBlock() {
+	
+	public ArrayListDataBlock(K key) {
 		N = 0;
 		list = new ArrayList<T>();
+		this.key = key; 
 	}
-	
 	
 	@Override
 	public K getKey() {

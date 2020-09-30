@@ -1,15 +1,13 @@
 package dataStructuresImplemented;
 
-import java.lang.ref.Reference;
+
+import socialNetworkPackage.DataHolder;
+import socialNetworkPackage.DataHolder.StringDataBlock;
 
 public class Person {
 	
 	// Attributes
-	public class StringDataBlock extends ArrayListDataBlock<String,String>{
-		public StringDataBlock() {
-			
-		}
-	}
+	
 	
 	private ArrayListDataBlock<String, String>[][] attributes;
 	
@@ -24,8 +22,8 @@ public class Person {
 			String[] attributesData = separatedData[i].split(";");
 			attributes[i] = new StringDataBlock[attributesData.length];
 			for(int j = 0; j < attributesData.length;j++) {
-				attributes[i][j] = null;
-
+				attributes[i][j] = DataHolder.constructorUseDataBlock(i, attributesData[j]);
+				
 			}
 			
 		}

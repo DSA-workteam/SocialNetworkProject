@@ -19,6 +19,7 @@ public class SocialNetwork {
 	public final static int ID = -1, NAME =0, SURNAME = 1, BIRTHDATE = 2, BIRTHPLACE = 3, HOME = 4,STUDIEDAT = 5,
 			WORKEDAT =6, MOVIES = 7, GROUPCODE = 8;
 	
+	
 	/**
 	 * Gets the root of the binary tree of StringBlock
 	 * @param var int - Data parameter type
