@@ -5,16 +5,13 @@ import java.io.FileInputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import socialNetworkPackage.DataStructures.PeopleBlock;
-import socialNetworkPackage.DataStructures.Person;
-import socialNetworkPackage.DataStructures.StringBlock;
 
 
 public class SocialNetwork {
 
 	// The variable where all the data from the social network is going to be
-	private static PeopleBlock[] people;
-	private static StringBlock[] mainStringBlocks;
+	//private static PeopleBlock[] people;
+	//private static StringBlock[] mainStringBlocks;
 	
 	public final static int NPARAMETERS = 9;
 	
@@ -27,22 +24,22 @@ public class SocialNetwork {
 	 * @param var int - Data parameter type
 	 * @return The root of the asked parameter
 	 */
-	public static StringBlock getStaticStringBlock(int var) {		
-		return mainStringBlocks[var];
-	}
+	//public static StringBlock getStaticStringBlock(int var) {		
+//		return mainStringBlocks[var];
+	///}
 	
 	/**
 	 * Adds people to the social network and saves the person by hashing it's id
 	 * @param p - Person
 	 */
-	public static void addPeopleToSocialNetwork(Person p) {
-		people[encoder(p.id)].addPerson(p);
-		System.out.println("Person added: " + p.id);
-	}
+//	public static void addPeopleToSocialNetwork(Person p) {
+	//	people[encoder(p.id)].addPerson(p);
+		//System.out.println("Person added: " + p.id);
+	//}
 	
-	public static void removePeopleFromSocialNetwork(Person p) {
-		people[encoder(p.id)].removePerson(p);
-	}
+	//public static void removePeopleFromSocialNetwork(Person p) {
+//		people[encoder(p.id)].removePerson(p);
+//	}
 	private static int encoder(String s) {
 		int r = 0;
 		
@@ -51,7 +48,7 @@ public class SocialNetwork {
 				
 		return r % ARRAYSIZE;
 	}
-	
+	/*
 	private static Person[] searchPersonBy(int key, String value) {
 		Person[] p = null;
 		if(key == -1) {
@@ -71,7 +68,7 @@ public class SocialNetwork {
 		}
 		return p;
 	}
-	
+	*/
 	/*
 	private static void testAddingPeople() {
 		Person p = new Person("Lmao");
@@ -93,27 +90,11 @@ public class SocialNetwork {
 		addPeopleToSocialNetwork(p);
 	}
 	*/
-	private static StringBlock createAlphabeticalSeparation() {
-		StringBlock ret = new StringBlock("M");
-		ret.getBlock("G",true);
-		ret.getBlock("B",true);
-		ret.getBlock("J",true);
-		ret.getBlock("U",true);
-		ret.getBlock("Q",true);
-		ret.getBlock("W",true);
-		return ret;
-	}
+
 	public static void main(String[] args) {
 		// Initializes the data structure
 		
-		people = new PeopleBlock[ARRAYSIZE];
-		for(int i = 0; i < ARRAYSIZE;i++)
-			people[i] = new PeopleBlock();
-		mainStringBlocks = new StringBlock[NPARAMETERS];
-		// Creates an alphabetical order in each StringBlock
-		for(int i = 0; i<NPARAMETERS;i++)
-			mainStringBlocks[i] = createAlphabeticalSeparation();
-		
+	
 		
 		// Menu constants
 		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
@@ -121,12 +102,7 @@ public class SocialNetwork {
 		//testAddingPeople();
 		//testAddingPeople2();
 		
-		//System.out.println(searchPersonBy(-1, "Lmao")[0].getParameter(HOME)[0]);
-		
-		//System.out.println(searchPersonBy(HOME, "Donostia")[0].id);
-		
-		System.out.println(searchPersonBy(MOVIES, "Donramon")[0].id);
-		System.out.println(searchPersonBy(MOVIES, "Donramon")[1].id);
+	
 
 
 		// Console input 
