@@ -1,5 +1,6 @@
 package abstractDataTypesImplemented;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import adt.HashMapADT;
@@ -22,7 +23,7 @@ public class GenericArrayListHashMap<T,K> implements HashMapADT<T, K> {
 	
 	@SuppressWarnings("unchecked")
 	public GenericArrayListHashMap(int initial_size_map, int initial_size_ArrayList) {
-		hashMap =  (ArrayList<T>[])(new Object[initial_size_map]);
+		hashMap =  (ArrayList<T>[])(Array.newInstance(ArrayList.class, initial_size_map));
 		mapSize = initial_size_map;
 		N = 0;
 		for(int i = 0; i < initial_size_map;i++) {
@@ -34,26 +35,29 @@ public class GenericArrayListHashMap<T,K> implements HashMapADT<T, K> {
 	public void put(K key, T element) {		
 		
 		if(!isIn(key, element)) {
-			hashMap[key.hashCode()% mapSize].add(element);
+			hashMap[hashCode(key)].add(element);
 			N++;
 		}
 		
 	}
 	@Override
 	public boolean isIn(K key, T element) {
-		return hashMap[key.hashCode()% mapSize].contains(element);
+		return hashMap[hashCode(key)].contains(element);
 	}
 	
 	@Override
 	public boolean remove(K key, T element) {
-			return hashMap[key.hashCode()% mapSize].remove(element);
+			return hashMap[hashCode(key)].remove(element);
 	}
 	
 	@Override
 	public ArrayList<T> get(K key) {
-		return hashMap[key.hashCode() % mapSize];
+		return hashMap[hashCode(key)];
 	}
 
+	private int hashCode(K key) {
+		return Math.abs(key.hashCode() % mapSize);
+	}
 	@Override
 	public int size() {
 		

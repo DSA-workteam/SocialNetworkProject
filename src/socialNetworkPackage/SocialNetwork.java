@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import adt.DataBlockADT;
 import dataStructuresImplemented.Person;
+import exceptions.ImpulsoryAttributeRequiredException;
 
 
 
@@ -32,31 +34,58 @@ public class SocialNetwork {
 	}
 	
 	
+	private static DataHolder dh;
 	
 	
-	/*
 	private static void testAddingPeople() {
-		Person p = new Person("Lmao");
-		String[] s = {"Donostia"};
-		p.setParameter(HOME, s);
-		String[] s2 = {"Donramon","Pokemon"};
-		p.setParameter(MOVIES, s2);
-		p.print();
-		addPeopleToSocialNetwork(p);
+		Person p = null;
+		try {
+			p = new Person("Silvia3,Silvia,Ruiz,20-06-2001,Madrid,Donostia,Madrid;Donostia,-,Cadena Perpetua;Your voice,G25527");
+			System.out.println(p.toString());
+			
+		} catch (ImpulsoryAttributeRequiredException e) {
+			e.printStackTrace();
+		}
+		//addPeopleToSocialNetwork(p);
+		dh.addPersonToNetwork(p);
+		
+		
+		//System.out.println(p.getAttributesRelatedDataBlocks(NAME));
+		//System.out.println(DataHolder.getPersonByID("Silvia3").toString());
+	}
+	private static void testAddingPeople2() {
+		Person p = null;
+		try {
+			p = new Person("Pepe77,Don Pepe,Balloon,3-10-2003,Los Angeles,San Francisco,San Francisco,New York,Tiana;Cadena Perpetua,G77371");
+			System.out.println(p.toString());
+			
+		} catch (ImpulsoryAttributeRequiredException e) {
+			e.printStackTrace();
+		}
+		//addPeopleToSocialNetwork(p);
+		dh.addPersonToNetwork(p);
+		
+		
+		System.out.println(p.getAttributesRelatedDataBlocks(MOVIES)[1].getKey());
+		System.out.println(p.getAttributesRelatedDataBlocks(MOVIES)[1].getCollection());
+		DataBlockADT<String,String> db = p.getAttributesRelatedDataBlocks(MOVIES)[1];
+		dh.removePersonFromNetwork(p);
+		System.out.println(db.getCollection());
+		//System.out.println(DataHolder.getPersonByID("Silvia3").toString());
 	}
 	
-	*/
+	
 
 	public static void main(String[] args) {
 		// Initializes the data structure
 		
 	
-		
+		dh = new DataHolder(100);
 		// Menu constants
 		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
 		
-		//testAddingPeople();
-		
+		testAddingPeople();
+		testAddingPeople2();
 		
 	
 

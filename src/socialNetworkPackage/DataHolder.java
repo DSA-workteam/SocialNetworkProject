@@ -1,5 +1,6 @@
 package socialNetworkPackage;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -23,7 +24,10 @@ public class DataHolder{
 	
 	public DataHolder(int hashMapsSize) {
 		personHashMap = new GenericArrayListHashMap<Person, String>(hashMapsSize);
-		for(int i = 0; i < SocialNetwork.NPARAMETERS;i++)
+		
+		stringHashMaps = (HashMapADT<DataBlockADT<String, String>, String>[]) Array.newInstance(GenericArrayListHashMap.class, SocialNetwork.NPARAMETERS-1);
+		
+		for(int i = 0; i < SocialNetwork.NPARAMETERS-1;i++)
 			stringHashMaps[i] = new GenericArrayListHashMap<DataBlockADT<String, String>, String>(hashMapsSize);
 	}
 	
@@ -53,6 +57,7 @@ public class DataHolder{
 			ret = new StringDataBlock(key);
 			stringHashMaps[attribute].put(key, ret);		
 		}
+		
 		return ret;
 	}
 	
@@ -64,7 +69,7 @@ public class DataHolder{
 	
 	
 	public void addPersonToNetwork(Person p) {
-		String id = p.getAttribute(SocialNetwork.ID);
+		String id = p.getAttribute(SocialNetwork.ID)[0];
 		if(!personHashMap.isIn(id, p)) {
 			
 			// Put the person in the Person Hash map
@@ -74,9 +79,11 @@ public class DataHolder{
 			DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
 			
 			for(int i = 0; i < attributes.length; i++)
-				for(int j = 0; j < attributes[i].length;j++)
+				if(attributes[i] != null)
+				for(int j = 0; j < attributes[i].length;j++) {
 					attributes[i][j] = constructorUseDataBlock(i, attributes[i][j].getKey());
-			
+					attributes[i][j].add(id);
+				}
 			
 		}else {
 			// Already on the network, duplicated
@@ -85,18 +92,21 @@ public class DataHolder{
 	}	
 	
 	public boolean removePersonFromNetwork(Person p) {
-		String id = null;
+		String id = p.getAttribute(SocialNetwork.ID)[0];
 		
 		
 		DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
-		
 		for(int i = 0; i < attributes.length; i++)
+			if(attributes[i] != null)
 			for(int j = 0; j < attributes[i].length;j++) {
 				DataBlockADT<String, String> dataBlock = attributes[i][j];
 				
 				// If the collection of datablock is empty, removes that datablock from the hashmap
-				if(dataBlock.remove(id) == 0)
+				String key = dataBlock.getKey();
+
+				if(attributes[i][j].remove(id) == 0) {
 					stringHashMaps[i].remove(dataBlock.getKey(), dataBlock);
+				}
 			}
 				
 		
@@ -106,7 +116,14 @@ public class DataHolder{
 	
 	
 	public static Person getPersonByID(String id) {
-		return null;
+		Collection<Person> people = personHashMap.get(id);
+		Person ret = null;
+		for(Person p : people) {
+			if(id.equals(p.getAttribute(SocialNetwork.ID)[0])) {
+				ret = p;
+			}
+		}
+		return ret;
 	}
 	public static Person[] searchPeopleByAttribute(int attribute, String value) {
 		return null;
