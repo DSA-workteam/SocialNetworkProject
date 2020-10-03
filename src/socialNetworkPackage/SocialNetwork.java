@@ -5,71 +5,35 @@ import java.io.FileInputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import dataStructuresImplemented.Person;
+
 
 
 public class SocialNetwork {
 
-	// The variable where all the data from the social network is going to be
-	//private static PeopleBlock[] people;
-	//private static StringBlock[] mainStringBlocks;
 	
-	public final static int NPARAMETERS = 9;
 	
-	private final static int ARRAYSIZE = 1024;
+	public final static int NPARAMETERS = 10;
+	
 	public final static int ID = -1, NAME =0, SURNAME = 1, BIRTHDATE = 2, BIRTHPLACE = 3, HOME = 4,STUDIEDAT = 5,
 			WORKEDAT =6, MOVIES = 7, GROUPCODE = 8;
 	
 	
 	/**
-	 * Gets the root of the binary tree of StringBlock
-	 * @param var int - Data parameter type
-	 * @return The root of the asked parameter
-	 */
-	//public static StringBlock getStaticStringBlock(int var) {		
-//		return mainStringBlocks[var];
-	///}
-	
-	/**
 	 * Adds people to the social network and saves the person by hashing it's id
 	 * @param p - Person
 	 */
-//	public static void addPeopleToSocialNetwork(Person p) {
-	//	people[encoder(p.id)].addPerson(p);
-		//System.out.println("Person added: " + p.id);
-	//}
+	public static void addPeopleToSocialNetwork(Person p) {
 	
-	//public static void removePeopleFromSocialNetwork(Person p) {
-//		people[encoder(p.id)].removePerson(p);
-//	}
-	private static int encoder(String s) {
-		int r = 0;
-		
-		for (int i = 0; i < s.length(); i++) 
-			r += (int)s.charAt(i)*i;
-				
-		return r % ARRAYSIZE;
 	}
-	/*
-	private static Person[] searchPersonBy(int key, String value) {
-		Person[] p = null;
-		if(key == -1) {
-			 p = new Person[1];
-			p[0] =people[encoder(value)].getPerson(value);
-		}else {
-			StringBlock sb = mainStringBlocks[key].getBlock(value, false);
-			
-			if(sb != null) {
-				int size = sb.ids.size();
-				p = new Person[size];
-				for(int i = 0; i < size;i++)
-					p[i] = sb.ids.get(i);
-					
-				
-			}
-		}
-		return p;
+	
+	public static void removePeopleFromSocialNetwork(Person p) {
+		//people[encoder(p.id)].removePerson(p);
 	}
-	*/
+	
+	
+	
+	
 	/*
 	private static void testAddingPeople() {
 		Person p = new Person("Lmao");
@@ -81,15 +45,6 @@ public class SocialNetwork {
 		addPeopleToSocialNetwork(p);
 	}
 	
-	private static void testAddingPeople2() {
-		Person p = new Person("NobitaNobi");
-		String[] s = {"Tokio"};
-		p.setParameter(HOME, s);
-		String[] s2 = {"Digimon","Donramon"};
-		p.setParameter(MOVIES, s2);
-		p.print();
-		addPeopleToSocialNetwork(p);
-	}
 	*/
 
 	public static void main(String[] args) {
@@ -101,7 +56,7 @@ public class SocialNetwork {
 		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
 		
 		//testAddingPeople();
-		//testAddingPeople2();
+		
 		
 	
 
