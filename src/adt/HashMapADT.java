@@ -20,6 +20,9 @@ public interface HashMapADT<T, K> {
 	
 	public boolean remove(K key, T element);
 	
+	
+	public Collection<T> getAllElements();
+	
 	public boolean isIn(K key, T element);
 	
 	/**

@@ -88,7 +88,7 @@ public class Person {
 				}
 		}
 		
-		return ret;
+		return ret+"\n";
 	}
 	
 }

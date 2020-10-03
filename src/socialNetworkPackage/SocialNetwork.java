@@ -81,12 +81,14 @@ public class SocialNetwork {
 		
 	
 		dh = new DataHolder(100);
+		//dh.loadFile("people.txt");
 		// Menu constants
 		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
 		
-		testAddingPeople();
-		testAddingPeople2();
+		//testAddingPeople();
+		//testAddingPeople2();
 		
+		//
 	
 
 
@@ -118,10 +120,12 @@ public class SocialNetwork {
 					showMenu();
 					break;
 				case LOADP:
+					dh.loadFile("people.txt");
 					break;
 				case LOADR:
 					break;
 				case PRINT:
+					dh.printIntoFile("Rpeople");
 					break;
 				case SEARCH:
 					break;

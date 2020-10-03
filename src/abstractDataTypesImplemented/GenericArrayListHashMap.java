@@ -2,6 +2,7 @@ package abstractDataTypesImplemented;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import adt.HashMapADT;
 
@@ -62,6 +63,16 @@ public class GenericArrayListHashMap<T,K> implements HashMapADT<T, K> {
 	public int size() {
 		
 		return N;
+	}
+
+	@Override
+	public ArrayList<T> getAllElements() {
+		ArrayList<T> listOfAllElements = new ArrayList<T>();
+		for(int i = 0; i < mapSize;i++) {
+			for(T element: hashMap[i])
+				listOfAllElements.add(element);
+		}
+		return listOfAllElements;
 	}
 
 }

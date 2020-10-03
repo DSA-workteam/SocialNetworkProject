@@ -1,8 +1,11 @@
 package socialNetworkPackage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Scanner;
 
 import abstractDataTypesImplemented.GenericArrayListHashMap;
 import adt.DataBlockADT;
@@ -10,6 +13,7 @@ import adt.HashMapADT;
 import dataStructuresImplemented.ArrayListDataBlock;
 import dataStructuresImplemented.Person;
 import exceptions.ElementNotFound;
+import exceptions.ImpulsoryAttributeRequiredException;
 
 public class DataHolder{
 	public static class StringDataBlock extends ArrayListDataBlock<String,String>{
@@ -22,6 +26,7 @@ public class DataHolder{
 	private static HashMapADT<Person, String> personHashMap;
 	
 	
+	@SuppressWarnings("unchecked")
 	public DataHolder(int hashMapsSize) {
 		personHashMap = new GenericArrayListHashMap<Person, String>(hashMapsSize);
 		
@@ -68,7 +73,7 @@ public class DataHolder{
 	
 	
 	
-	public void addPersonToNetwork(Person p) {
+	protected void addPersonToNetwork(Person p) {
 		String id = p.getAttribute(SocialNetwork.ID)[0];
 		if(!personHashMap.isIn(id, p)) {
 			
@@ -102,7 +107,7 @@ public class DataHolder{
 				DataBlockADT<String, String> dataBlock = attributes[i][j];
 				
 				// If the collection of datablock is empty, removes that datablock from the hashmap
-				String key = dataBlock.getKey();
+				//String key = dataBlock.getKey();
 
 				if(attributes[i][j].remove(id) == 0) {
 					stringHashMaps[i].remove(dataBlock.getKey(), dataBlock);
@@ -128,6 +133,67 @@ public class DataHolder{
 	public static Person[] searchPeopleByAttribute(int attribute, String value) {
 		return null;
 	}
+	
+	
+	
+	
+	
+
+	public void loadFile(String fileName) {
+		String path = System.getProperty("user.dir") +"\\res\\"+ fileName;
+		File f = new File(path);
+		try {
+			Scanner s = new Scanner(f);
+			s.useDelimiter("\n");
+			while(s.hasNext())
+				loadPerson(s.next());
+			s.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("You introduced an invalid filename.");
+		}
+		
+		System.out.println("All people loaded");
+		
+	}
+	
+	
+	/**
+	 * Takes the input and 
+	 * @param data String - csv format
+	 */
+	private void loadPerson(String data) {
+		System.out.println(data);
+		try {
+			addPersonToNetwork(new Person(data));
+		} catch (ImpulsoryAttributeRequiredException e) {			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	public void printIntoFile(String fileName) {
+		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
+		File writeFile = new File(path);
+		try {
+			PrintWriter writerPrinter = new PrintWriter(writeFile);
+			Collection<Person> col = personHashMap.getAllElements();
+			for(Person p: col) {
+			
+				writerPrinter.print(p.toString());
+			}
+			writerPrinter.close();
+			System.out.println("Done");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
 	
 }
 
