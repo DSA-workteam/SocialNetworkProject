@@ -40,10 +40,10 @@ public class ArrayListDataBlock<T,K extends Comparable<K>> implements DataBlockA
 	}
 
 	@Override
-	public void remove(T element) {
+	public int remove(T element) {
 		if(list.remove(element))
 			N--;
-		
+		return N;
 	}
 
 

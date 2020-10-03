@@ -10,7 +10,7 @@ public interface DataBlockADT<T,K extends Comparable<K>>{
 	
 	public void add(T element);
 	
-	public void remove(T element);
+	public int remove(T element);
 	
 	public int size();
 	
