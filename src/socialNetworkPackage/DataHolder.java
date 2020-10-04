@@ -104,13 +104,13 @@ public class DataHolder{
 		for(int i = 0; i < attributes.length; i++)
 			if(attributes[i] != null)
 			for(int j = 0; j < attributes[i].length;j++) {
-				DataBlockADT<String, String> dataBlock = attributes[i][j];
 				
+				DataBlockADT<String, String> dataBlock = attributes[i][j];				
 				// If the collection of datablock is empty, removes that datablock from the hashmap
-				//String key = dataBlock.getKey();
-
-				if(attributes[i][j].remove(id) == 0) {
-					stringHashMaps[i].remove(dataBlock.getKey(), dataBlock);
+				
+				if(attributes[i][j].remove(id) ) {
+					if(attributes[i][j].size() == 0 )
+						stringHashMaps[i].remove(dataBlock.getKey(), dataBlock);
 				}
 			}
 				
