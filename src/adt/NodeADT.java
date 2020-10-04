@@ -1,8 +1,8 @@
 package adt;
 /**
- * 
+ * This is a node abstract data type, this will have connections to other nodes.
  * @author Borja Moralejo Tobajas
- * This is a node abstract data type, this will have connections to other nodes
+ * 
  * @param <T> - Generic type
  */
 public interface NodeADT<T> {

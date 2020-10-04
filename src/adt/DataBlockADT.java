@@ -3,9 +3,9 @@ package adt;
 import java.util.Collection;
 
 /**
- * 
+ * This abstract data type is an congregation of T type elements which share a K type key. Its mainly use is inside hash maps.
  * @author Borja Moralejo Tobajas
- * This abstract data type is an congregation of T type elements which share a K type key
+ * 
  * @param <T> Elements that are going to share the same K type key
  * @param <K> Key type 
  */

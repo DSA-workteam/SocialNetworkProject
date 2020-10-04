@@ -12,30 +12,7 @@ import exceptions.ImpulsoryAttributeRequiredException;
 
 
 public class SocialNetwork {
-
-	
-	
-	public final static int NPARAMETERS = 10;
-	
-	public final static int ID = -1, NAME =0, SURNAME = 1, BIRTHDATE = 2, BIRTHPLACE = 3, HOME = 4,STUDIEDAT = 5,
-			WORKEDAT =6, MOVIES = 7, GROUPCODE = 8;
-	
-	
-	/**
-	 * Adds people to the social network and saves the person by hashing it's id
-	 * @param p - Person
-	 */
-	public static void addPeopleToSocialNetwork(Person p) {
-	
-	}
-	
-	public static void removePeopleFromSocialNetwork(Person p) {
-		//people[encoder(p.id)].removePerson(p);
-	}
-	
-	
-	private static DataHolder dh;
-	
+	/* Test function
 	
 	private static void testAddingPeople() {
 		Person p = null;
@@ -46,51 +23,30 @@ public class SocialNetwork {
 		} catch (ImpulsoryAttributeRequiredException e) {
 			e.printStackTrace();
 		}
-		//addPeopleToSocialNetwork(p);
 		dh.addPersonToNetwork(p);
 		
-		
-		//System.out.println(p.getAttributesRelatedDataBlocks(NAME));
-		//System.out.println(DataHolder.getPersonByID("Silvia3").toString());
 	}
-	private static void testAddingPeople2() {
-		Person p = null;
-		try {
-			p = new Person("Pepe77,Don Pepe,Balloon,3-10-2003,Los Angeles,San Francisco,San Francisco,New York,Tiana;Cadena Perpetua,G77371");
-			System.out.println(p.toString());
-			
-		} catch (ImpulsoryAttributeRequiredException e) {
-			e.printStackTrace();
-		}
-		//addPeopleToSocialNetwork(p);
-		dh.addPersonToNetwork(p);
-		
-		
-		System.out.println(p.getAttributesRelatedDataBlocks(MOVIES)[1].getKey());
-		System.out.println(p.getAttributesRelatedDataBlocks(MOVIES)[1].getCollection());
-		DataBlockADT<String,String> db = p.getAttributesRelatedDataBlocks(MOVIES)[1];
-		dh.removePersonFromNetwork(p);
-		System.out.println(db.getCollection());
-		//System.out.println(DataHolder.getPersonByID("Silvia3").toString());
-	}
+	*/
 	
 	
+	// Attributes
+	private static DataHolder dh;	
 
 	public static void main(String[] args) {
-		// Initializes the data structure
 		
-	
+		// Initializes the data structure holder	
 		dh = new DataHolder(100);
-		//dh.loadFile("people.txt");
+		
+		
+		
+		
+		
+		// The following code is for the menu, TEMPORAL
+		
+		// TEMPORAL, IMOKE needs to remake this in a better way, using Enums or whatever
+		
 		// Menu constants
 		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
-		
-		//testAddingPeople();
-		//testAddingPeople2();
-		
-		//
-	
-
 
 		// Console input 
 		FileInputStream fis = new FileInputStream(FileDescriptor.in);
@@ -109,7 +65,7 @@ public class SocialNetwork {
 				try {
 					selection = scanner.nextInt();
 				}catch(InputMismatchException e) {
-					selection = -2;
+					selection = -2; // or selection = UNKNOWN and then do something in the switch case
 				}
 				
 				switch(selection) {
@@ -144,7 +100,7 @@ public class SocialNetwork {
 	}
 	
 	/**
-	 * 
+	 * Obvious thing
 	 */
 	private static void showMenu() {
 		System.out.println("1. Load people into the network");

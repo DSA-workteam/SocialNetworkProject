@@ -2,9 +2,9 @@ package adt;
 
 import java.util.Collection;
 /**
- * 
- * @author Borja Moralejo Tobajas
  * This is the Hash Map abstract data type interface. The hash map gets an element with a key and stores it hashing the key, it transforms the key into an index.
+ * @author Borja Moralejo Tobajas
+ * 
  * @param <T> Elements to store
  * @param <K> Key
  */

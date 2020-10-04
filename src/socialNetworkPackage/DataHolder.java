@@ -16,11 +16,7 @@ import exceptions.ElementNotFound;
 import exceptions.ImpulsoryAttributeRequiredException;
 
 public class DataHolder{
-	public static class StringDataBlock extends ArrayListDataBlock<String,String>{
-		public StringDataBlock(String key) {
-			super(key);
-		}
-	}
+
 	
 	private static HashMapADT<DataBlockADT<String,String>, String>[] stringHashMaps;	
 	private static HashMapADT<Person, String> personHashMap;
@@ -30,9 +26,9 @@ public class DataHolder{
 	public DataHolder(int hashMapsSize) {
 		personHashMap = new GenericArrayListHashMap<Person, String>(hashMapsSize);
 		
-		stringHashMaps = (HashMapADT<DataBlockADT<String, String>, String>[]) Array.newInstance(GenericArrayListHashMap.class, SocialNetwork.NPARAMETERS-1);
+		stringHashMaps = (HashMapADT<DataBlockADT<String, String>, String>[]) Array.newInstance(GenericArrayListHashMap.class, Person.NPARAMETERS-1);
 		
-		for(int i = 0; i < SocialNetwork.NPARAMETERS-1;i++)
+		for(int i = 0; i < Person.NPARAMETERS-1;i++)
 			stringHashMaps[i] = new GenericArrayListHashMap<DataBlockADT<String, String>, String>(hashMapsSize);
 	}
 	
@@ -59,7 +55,7 @@ public class DataHolder{
 		try {
 		ret = getDataBlockOf(attribute, key);
 		}catch(ElementNotFound e) {
-			ret = new StringDataBlock(key);
+			ret = new ArrayListDataBlock<String, String>(key);
 			stringHashMaps[attribute].put(key, ret);		
 		}
 		
@@ -74,7 +70,7 @@ public class DataHolder{
 	
 	
 	protected void addPersonToNetwork(Person p) {
-		String id = p.getAttribute(SocialNetwork.ID)[0];
+		String id = p.getAttribute(Person.ID)[0];
 		if(!personHashMap.isIn(id, p)) {
 			
 			// Put the person in the Person Hash map
@@ -97,7 +93,7 @@ public class DataHolder{
 	}	
 	
 	public boolean removePersonFromNetwork(Person p) {
-		String id = p.getAttribute(SocialNetwork.ID)[0];
+		String id = p.getAttribute(Person.ID)[0];
 		
 		
 		DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
@@ -124,7 +120,7 @@ public class DataHolder{
 		Collection<Person> people = personHashMap.get(id);
 		Person ret = null;
 		for(Person p : people) {
-			if(id.equals(p.getAttribute(SocialNetwork.ID)[0])) {
+			if(id.equals(p.getAttribute(Person.ID)[0])) {
 				ret = p;
 			}
 		}
