@@ -8,7 +8,7 @@ import java.util.Collection;
  * @param <T> Elements to store
  * @param <K> Key
  */
-public interface HashMapADT<T, K> {
+public interface HashMapADT<T, K> extends Iterable<T>{
 
 	/**
 	 * Adds the given element into the hash map.
@@ -32,11 +32,7 @@ public interface HashMapADT<T, K> {
 	 */
 	public boolean remove(K key, T element);
 	
-	/**
-	 * Puts all elements from the HashMap into a Collection<T> and returns it.
-	 * @return Collection<T> - All elements.
-	 */
-	public Collection<T> getAllElements();
+	
 	
 	
 	/**

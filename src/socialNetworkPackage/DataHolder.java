@@ -177,11 +177,8 @@ public class DataHolder{
 		File writeFile = new File(path);
 		try {
 			PrintWriter writerPrinter = new PrintWriter(writeFile);
-			Collection<Person> col = personHashMap.getAllElements();
-			for(Person p: col) {
-			
-				writerPrinter.print(p.toString());
-			}
+			personHashMap.iterator().forEachRemaining(person -> {writerPrinter.print(person.toString());});;
+		
 			writerPrinter.close();
 			System.out.println("Done");
 		} catch (FileNotFoundException e) {

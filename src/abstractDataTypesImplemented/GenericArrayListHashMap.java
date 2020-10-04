@@ -2,10 +2,12 @@ package abstractDataTypesImplemented;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import adt.HashMapADT;
 
-public class GenericArrayListHashMap<T,K> implements HashMapADT<T, K> {
+public class GenericArrayListHashMap<T,K> implements HashMapADT<T, K>{
 
 	private ArrayList<T>[] hashMap;
 	private final static int DEFAULT_SIZE = 128, DEFAULT_ARRAYLIST_SIZE = 16;
@@ -64,8 +66,11 @@ public class GenericArrayListHashMap<T,K> implements HashMapADT<T, K> {
 		return N;
 	}
 
-	@Override
-	public ArrayList<T> getAllElements() {
+	/**
+	 * Puts all elements from the HashMap into a Collection<T> and returns it.
+	 * @return Collection<T> - All elements.
+	 */
+	private Collection<T> getAllElements() {
 		ArrayList<T> listOfAllElements = new ArrayList<T>();
 		for(int i = 0; i < mapSize;i++) {
 			for(T element: hashMap[i])
@@ -73,5 +78,12 @@ public class GenericArrayListHashMap<T,K> implements HashMapADT<T, K> {
 		}
 		return listOfAllElements;
 	}
+
+	@Override
+	public Iterator<T> iterator() {		
+		return getAllElements().iterator();
+	}
+	
+	
 
 }
