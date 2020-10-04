@@ -1,10 +1,15 @@
 package adt;
-
+/**
+ * 
+ * @author Borja Moralejo Tobajas
+ * This is an Stack abstract data type interface. You can only put elements ontop of the stack and get the top element from it.
+ * @param <T> Generic type
+ */
 public interface StackADT<T> {
 
 	/**
 	 * Pushes given element into the stack
-	 * @param T element - This element goes on top of the stack 
+	 * @param element - T element. This element goes on top of the stack 
 	 */
 	public void push(T element);
 	
@@ -33,6 +38,5 @@ public interface StackADT<T> {
 	 */
 	public boolean isEmpty();
 	
-	public String toString();
 	
 }

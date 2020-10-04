@@ -25,13 +25,13 @@ public interface DataBlockADT<T,K extends Comparable<K>>{
 	
 	/**
 	 * Given element it's added into the Collection<T> but you must need to compare their keys before adding it because this doens't do that
-	 * @param T - element to add
+	 * @param element - T to add
 	 */
 	public void add(T element);
 	
 	/**
 	 * Given a T type element tries to remove it and returns if it's removed or not
-	 * @param T - element to remove
+	 * @param element - T element to remove
 	 * @return boolean - whether is or not removed from the Collection<T>
 	 */
 	public boolean remove(T element);

@@ -1,5 +1,10 @@
 package adt;
-
+/**
+ * 
+ * @author Borja Moralejo Tobajas
+ * This is a node abstract data type, this will have connections to other nodes
+ * @param <T> - Generic type
+ */
 public interface NodeADT<T> {
 
 	
@@ -12,7 +17,7 @@ public interface NodeADT<T> {
 	
 	/**
 	 * Creates a link between given node and current node in reciprocal mode	
-	 * @param node - Link to target
+	 * @param node - NodeADT<T>. Link to target
 	 */
 	public void link(NodeADT<T> node);
 	
@@ -26,9 +31,8 @@ public interface NodeADT<T> {
 	
 	/**
 	 * Unlinks with given node
-	 * @param node - Node to unlink to
+	 * @param node - NodeADT<T> to unlink to
 	 */
 	public boolean unlink(NodeADT<T> node);
 	
-	public String toString();
 }
