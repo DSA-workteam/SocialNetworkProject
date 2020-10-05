@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import adt.NodeADT;
-
+// TODO imoke
 public class GenericArrayListNode<T> implements NodeADT<T>{
 
 	private T content;

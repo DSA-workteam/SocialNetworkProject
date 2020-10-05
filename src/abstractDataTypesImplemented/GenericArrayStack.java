@@ -49,6 +49,8 @@ public class GenericArrayStack <T> implements StackADT<T>,Iterable<T>{
 
 	@Override
 	public Iterator<T> iterator() { return new GenericArrayStackIterator();	}
+	
+	
 	/**
 	 * Private Iterator class of GenericArrayStack. Implements Iterator<T>
 	 * @author Borja Moralejo Tobajas

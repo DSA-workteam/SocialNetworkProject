@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import adt.BinaryTreeADT;
-
+/**
+ * Implementation made with ArrayList of BinaryTreeADT.
+ * @author Borja Moralejo Tobajas
+ *
+ * @param <T> Element.
+ * @param <K> Key. <K> type must extend Comparable<K>
+ */
 public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implements BinaryTreeADT<T, K>{
 
 	
@@ -13,17 +19,19 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 	private ArrayList<T> elements;
 	private int N;
 	
-
-	public GenericArrayListBinaryTree(){
-		elements = new ArrayList<T>();
-		N = 0;
-	}
+	/**
+	 * Constructor
+	 * @param element
+	 * @param key
+	 */
 	public GenericArrayListBinaryTree(T element, K key){
 		super();
 		this.key = key;
 		elements.add(element);
 	}
 
+	
+	
 	@Override
 	public Collection<T> getElemets(K searchKey) {
 		int comparation = key.compareTo(searchKey);
@@ -38,6 +46,8 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 		return ret;
 	}
 
+	
+	
 	@Override
 	public void addElement(T element, K addKey) {
 		int comparation = key.compareTo(addKey);
@@ -46,11 +56,11 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 		}else if(comparation > 0) {
 			if(less != null)
 				less.addElement(element,addKey);
-			else less = new GenericArrayListBinaryTree<T, K>();
+			else less = new GenericArrayListBinaryTree<T, K>(element, addKey);
 		}else {
 			if(more != null)
 				more.addElement(element, addKey);
-			else more = new GenericArrayListBinaryTree<T, K>();
+			else more = new GenericArrayListBinaryTree<T, K>(element, addKey);
 		}
 		
 	}
@@ -60,6 +70,7 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 		return N;
 	}
 
+	@Override
 	public int allTreeSize() {
 		int ret = N;
 		if(less != null)
