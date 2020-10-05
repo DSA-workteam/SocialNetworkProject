@@ -10,7 +10,11 @@ import dataStructuresImplemented.Person;
 import exceptions.ImpulsoryAttributeRequiredException;
 
 
-
+/**
+ * Main class of the project.
+ * @author Borja Moralejo Tobajas
+ *
+ */
 public class SocialNetwork {
 	/* Test function
 	
