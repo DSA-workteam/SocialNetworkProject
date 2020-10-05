@@ -8,5 +8,4 @@ public class RelationshipStructure {
 	public RelationshipStructure() {
 		nodos = new GenericArrayListNode<String>();
 	}
-	
 }
