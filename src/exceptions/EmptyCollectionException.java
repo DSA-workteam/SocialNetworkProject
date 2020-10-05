@@ -1,18 +1,20 @@
-/**
- * @author Lewis and Chase
- *
- *  Represents the situation in which a collection is empty.
- */
 package exceptions;
 
-public class EmptyCollectionException extends RuntimeException
-{
+/**
+ * Exception that is thrown when you try to get an element from an empty collection.
+ * @author Borja Moralejo Tobajas
+ *
+ */
+@SuppressWarnings("serial")
+public class EmptyCollectionException extends Exception{
+	
   /**
-   * Sets up this exception with an appropriate message.
-   * @param collection String representing the name of the collection
+   * Shows which collection is empty. 
+   * @param collection - String. The collection in string.
    */
-  public EmptyCollectionException (String collection)
-  {
+  public EmptyCollectionException (String collection){
     super ("The " + collection + " is empty.");
   }
+  
+  
 }
