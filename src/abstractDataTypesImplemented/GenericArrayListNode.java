@@ -17,6 +17,11 @@ public class GenericArrayListNode<T> implements NodeADT<T>{
 	}
 	
 	
+	public GenericArrayListNode() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	@Override
 	public T getContent() {
 		return content;

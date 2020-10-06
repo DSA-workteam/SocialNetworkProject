@@ -1,5 +1,6 @@
 package dataStructuresImplemented;
 
+import abstractDataTypesImplemented.GenericArrayListNode;
 import adt.NodeADT;
 
 public class RelationshipStructure {
