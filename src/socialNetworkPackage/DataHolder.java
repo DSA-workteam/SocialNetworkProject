@@ -208,7 +208,7 @@ public class DataHolder{
 			System.out.println("You introduced an invalid filename.");
 		}
 		
-		System.out.println("All people loaded");
+		System.out.println("All people loaded perfectly");
 		
 	}
 	
