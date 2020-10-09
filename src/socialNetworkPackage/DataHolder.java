@@ -196,7 +196,7 @@ public class DataHolder{
 	 * @param fileName - String.
 	 */
 	public void loadFile(String fileName) {
-		String path = System.getProperty("user.dir") +"\\res\\"+ fileName;
+		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
 		File f = new File(path);
 		try {
 			Scanner s = new Scanner(f);
@@ -204,11 +204,12 @@ public class DataHolder{
 			while(s.hasNext())
 				loadPerson(s.next());
 			s.close();
+			System.out.println("All people loaded perfectly");
+
 		} catch (FileNotFoundException e) {
 			System.out.println("You introduced an invalid filename.");
 		}
 		
-		System.out.println("All people loaded perfectly");
 		
 	}
 	

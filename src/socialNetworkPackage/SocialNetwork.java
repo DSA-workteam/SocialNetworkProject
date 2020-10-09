@@ -2,6 +2,7 @@ package socialNetworkPackage;
 
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ import exceptions.ImpulsoryAttributeRequiredException;
 
 /**
  * Main class of the project.
- * @author Borja Moralejo Tobajas
+ * @author Borja Moralejo Tobajas and Imanol Maraña Hurtado
  *
  */
 public class SocialNetwork {
@@ -63,7 +64,7 @@ public class SocialNetwork {
 		while(onMenu) {
 			
 			if(scanner.hasNext()) {
-				
+				System.out.println("Inloop");
 				int selection;
 				
 				try {
@@ -80,16 +81,17 @@ public class SocialNetwork {
 					showMenu();
 					break;
 				case LOADP:
-					scanner.nextLine();
+				
 					System.out.println("Please, insert the name of the file from which you wish to load the data");
-					dh.loadFile(scanner.nextLine());
+					if(scanner.hasNext())
+						dh.loadFile(scanner.next());
 					break;
 				case LOADR:
 					break;
 				case PRINT:
-					scanner.nextLine();
 					System.out.println("Please, insert the name of the file which you will create to print the data in");
-					dh.printIntoFile(scanner.nextLine());
+					if(scanner.hasNext())
+						dh.printIntoFile(scanner.next());
 					break;
 				case SEARCH:
 					break;
@@ -98,6 +100,7 @@ public class SocialNetwork {
 						
 				
 				}
+
 			}
 			
 			
