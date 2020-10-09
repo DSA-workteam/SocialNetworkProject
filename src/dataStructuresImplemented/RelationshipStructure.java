@@ -3,10 +3,19 @@ package dataStructuresImplemented;
 import abstractDataTypesImplemented.GenericArrayListNode;
 import adt.NodeADT;
 
+/**
+ * This is the clas that 
+ * @author IMANOL
+ *
+ */
 public class RelationshipStructure {
 	
-	private NodeADT<String> nodos;
+	private NodeADT<String> nodes;
+	
+	/**
+	 * Constructor of the class
+	 */
 	public RelationshipStructure() {
-		nodos = new GenericArrayListNode<String>();
+		nodes = new GenericArrayListNode<String>();
 	}
 }

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import abstractDataTypesImplemented.GenericArrayListHashMap;
@@ -51,24 +52,22 @@ public class DataHolder{
 	 */
 	private static DataBlockADT<String, String> getDataBlockOf(int attribute, String key) throws ElementNotFoundException{
 		// Searches inside the conflicts inside the hash map
-		DataBlockADT<String, String>[] resultsFromHashMap = (DataBlockADT<String, String>[]) stringHashMaps[attribute].get(key).toArray();
-		
-		DataBlockADT<String, String> ret = null;
-		boolean found = false;
-		int i = resultsFromHashMap.length;
-		// Searches inside the collection the data block
-		while(!found && i != 0) {
-			i--;
-			if(key.equals(resultsFromHashMap[i].getKey())) {
-				ret = resultsFromHashMap[i];
-				found = true;
-			}			
-		}
-		
-		if(!found) 
-			throw new ElementNotFoundException("There's not such stringdatablock");
-			
-		return ret;
+		Iterator<DataBlockADT<String, String>> resultsFromHashMap = stringHashMaps[attribute].get(key).iterator();
+        DataBlockADT<String, String> ret = null;        
+        
+        boolean found = false;
+        // Searches inside the collection the data block
+        while(!found && resultsFromHashMap.hasNext()) {
+            ret = resultsFromHashMap.next();
+            if(key.equals(ret.getKey())) {
+                found = true;
+            }            
+        }
+        
+        if(!found) 
+            throw new ElementNotFoundException("There's not such stringdatablock");
+            
+        return ret;
 	}
 	
 	
@@ -183,6 +182,7 @@ public class DataHolder{
 	public static Person[] searchPeopleByAttribute(int attribute, String value) throws ElementNotFoundException{
 		
 		// TODO
+		boolean found = false;
 		return null;
 		
 	}

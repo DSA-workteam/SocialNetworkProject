@@ -80,12 +80,16 @@ public class SocialNetwork {
 					showMenu();
 					break;
 				case LOADP:
-					dh.loadFile("people.txt");
+					scanner.nextLine();
+					System.out.println("Please, insert the name of the file from which you wish to load the data");
+					dh.loadFile(scanner.nextLine());
 					break;
 				case LOADR:
 					break;
 				case PRINT:
-					dh.printIntoFile("Rpeople");
+					scanner.nextLine();
+					System.out.println("Please, insert the name of the file which you will create to print the data in");
+					dh.printIntoFile(scanner.nextLine());
 					break;
 				case SEARCH:
 					break;
