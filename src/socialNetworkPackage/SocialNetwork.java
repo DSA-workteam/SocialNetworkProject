@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import adt.DataBlockADT;
 import dataStructuresImplemented.Person;
+import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 
 
@@ -60,15 +61,26 @@ public class SocialNetwork {
 		// To end the process when exited
 		boolean onMenu = true;
 		
-		showMenu();
+		
 		while(onMenu) {
 			
+			showMenu();
 			if(scanner.hasNext()) {
-				System.out.println("Inloop");
+				
 				int selection;
+				int attribute;
+				String value;
+				Person[] output;
+				
 				
 				try {
 					selection = scanner.nextInt();
+					if(selection == -1) {
+						System.out.println("Closing program...");
+					}
+					else {
+						System.out.println("Inloop");
+					}
 				}catch(InputMismatchException e) {
 					selection = -2; // or selection = UNKNOWN and then do something in the switch case
 				}
@@ -78,10 +90,9 @@ public class SocialNetwork {
 					onMenu = false;
 					break;
 				case HELP:
-					showMenu();
 					break;
 				case LOADP:
-				
+					System.out.println();
 					System.out.println("Please, insert the name of the file from which you wish to load the data");
 					if(scanner.hasNext())
 						dh.loadFile(scanner.next());
@@ -89,18 +100,53 @@ public class SocialNetwork {
 				case LOADR:
 					break;
 				case PRINT:
+					System.out.println();
 					System.out.println("Please, insert the name of the file which you will create to print the data in");
 					if(scanner.hasNext())
 						dh.printIntoFile(scanner.next());
 					break;
 				case SEARCH:
+					System.out.println();
+					System.out.println("Please, enter a number for searching:");
+					showOptions();
+					if(scanner.hasNext()) {
+						attribute = scanner.nextInt();
+						while(attribute != 0 && attribute != 1 && attribute != 2 && attribute != 3 && attribute != 4 && attribute != 5 && attribute != 6 && attribute != 7 && attribute != 8 && attribute != 9 && attribute != 10){
+							System.out.println();
+							System.out.println("The input you have introduced is not valid, please try again");
+							System.out.println();
+							showOptions();
+							if(scanner.hasNext()) {
+								attribute = scanner.nextInt();
+							}
+						}
+						if(attribute == 0) {
+						}
+						else{
+							System.out.println();
+							System.out.println("Please, insert the value with which you want to search");
+							if(scanner.hasNext()) {
+								value = scanner.next();
+								try {
+									output = dh.searchPeopleByAttribute(attribute - 2,value);
+									System.out.println();
+									System.out.println("The person has been found, here is the output:");
+									for (int i = 0; i < output.length; i++) {
+										System.out.println();
+										System.out.println(output[i].toString());
+									}
+								} catch (ElementNotFoundException e) {
+									System.out.println();
+									System.out.println("The person you tried to find is not in the data base");
+									System.out.println();
+								}
+							}
+						}
+					}
 					break;
 				default:
 					break;
-						
-				
 				}
-
 			}
 			
 			
@@ -122,7 +168,19 @@ public class SocialNetwork {
 		System.out.println("-1. Log out");
 	}
 
-	
+	private static void showOptions() {
+		System.out.println("	0.Go back");
+		System.out.println("	1.ID");
+		System.out.println("	2.Name");
+		System.out.println("	3.Surname");
+		System.out.println("	4.Birth date");
+		System.out.println("	5.Birth place");
+		System.out.println("	6.Home");
+		System.out.println("	7.Studied at");
+		System.out.println("	8.Worked at");
+		System.out.println("	9.Movies");
+		System.out.println("	10.Groupcode");
+	}
 	
 	
 	

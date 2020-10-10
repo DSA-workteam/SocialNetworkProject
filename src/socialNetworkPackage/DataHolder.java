@@ -180,10 +180,17 @@ public class DataHolder{
 	 * @throws ElementNotFoundException
 	 */
 	public static Person[] searchPeopleByAttribute(int attribute, String value) throws ElementNotFoundException{
-		
 		// TODO
 		boolean found = false;
-		return null;
+		Person[] ret = null;
+		
+		if(attribute == -1) {
+			ret = new Person[1];
+			ret[0] = getPersonByID(value);
+		}
+		else {
+		}
+		return ret;
 		
 	}
 	
@@ -205,9 +212,10 @@ public class DataHolder{
 				loadPerson(s.next());
 			s.close();
 			System.out.println("All people loaded perfectly");
-
+			System.out.println();
 		} catch (FileNotFoundException e) {
 			System.out.println("You introduced an invalid filename.");
+			System.out.println();
 		}
 		
 		
