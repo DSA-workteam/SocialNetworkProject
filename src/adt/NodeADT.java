@@ -1,7 +1,10 @@
 package adt;
+
+import exceptions.*;
+
 /**
  * This is a node abstract data type, this will have connections to other nodes.
- * @author Borja Moralejo Tobajas
+ * @author Imanol Maraña Hurtado & Borja Moralejo Tobajas
  * 
  * @param <T> - Generic type
  */
@@ -23,6 +26,13 @@ public interface NodeADT<T> {
 	
 	
 	/**
+	 * Gets the content of all the nodes linked to this node
+	 * @return List with the content of the linked nodes
+	 */
+	public T[] getLinkedNodes();
+	
+	
+	/**
 	 * Gets the number of current links that the node has
 	 * @return int - Number of links
 	 */
@@ -32,7 +42,8 @@ public interface NodeADT<T> {
 	/**
 	 * Unlinks with given node
 	 * @param node - NodeADT<T> to unlink to
+	 * @throws ElementNotFoundException
 	 */
-	public boolean unlink(NodeADT<T> node);
+	public boolean unlink(NodeADT<T> node) throws ElementNotFoundException;
 	
 }

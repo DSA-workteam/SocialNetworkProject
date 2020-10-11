@@ -201,21 +201,51 @@ public class DataHolder{
 	/**
 	 * Loads file and then loads people that is stored inside.
 	 * @param fileName - String.
+	 * @param option - Indicates if this method will load people or load relationships
 	 */
-	public void loadFile(String fileName) {
+	public void loadFile(String fileName, int option) {
 		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
 		File f = new File(path);
 		try {
 			Scanner s = new Scanner(f);
 			s.useDelimiter("\n");
-			while(s.hasNext())
-				loadPerson(s.next());
+			if (option == 0)
+				while(s.hasNext())
+					loadPerson(s.nextLine());
+			else {
+				s.nextLine();
+				while (s.hasNext())
+					loadRelationship(s.nextLine());
+			}
 			s.close();
 			System.out.println("All people loaded perfectly");
 			System.out.println();
 		} catch (FileNotFoundException e) {
 			System.out.println("You introduced an invalid filename.");
 			System.out.println();
+		}
+		
+		
+	}
+	
+	/**
+	 * Takes the input and links the nodes of the 2 given ID, separated by ","
+	 * @param data 2 String separated by ","
+	 */
+	public void loadRelationship(String data) {
+		Person person1;
+		Person person2;
+		
+		System.out.println(data);
+		String[] separatedID = data.split(",");
+		try {
+			person1 = getPersonByID(separatedID[0]);
+			person2 = getPersonByID(separatedID[1]);
+			person1.getNode().link(person2.getNode());
+			person2.getNode().link(person1.getNode());
+		}
+		catch(ElementNotFoundException e) {
+			System.out.println("At least one of the ID introduced to make the relationship with doesn't exist");
 		}
 		
 		

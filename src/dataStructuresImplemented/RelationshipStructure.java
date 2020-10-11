@@ -4,7 +4,7 @@ import abstractDataTypesImplemented.GenericArrayListNode;
 import adt.NodeADT;
 
 /**
- * This is the clas that 
+ * This is the class that 
  * @author IMANOL
  *
  */

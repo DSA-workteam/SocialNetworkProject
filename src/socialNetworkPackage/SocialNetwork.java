@@ -95,9 +95,24 @@ public class SocialNetwork {
 					System.out.println();
 					System.out.println("Please, insert the name of the file from which you wish to load the data");
 					if(scanner.hasNext())
-						dh.loadFile(scanner.next());
+						dh.loadFile(scanner.next(), 0);
 					break;
 				case LOADR:
+					System.out.println();
+					System.out.println("Please, insert the name of the file from which you wish to load the relationships");
+					if(scanner.hasNext())
+						dh.loadFile(scanner.next(), 1);
+/*					try {
+						System.out.println(dh.getPersonByID("Ainhoa34").getLinkedNumber());
+						System.out.println(dh.getPersonByID("Ainhoa34").getLinkedNodes()[3]);
+						System.out.println(dh.getPersonByID("Ane52").getLinkedNumber());
+						System.out.println(dh.getPersonByID("Ane52").getLinkedNodes()[2]);
+						System.out.println(dh.getPersonByID("Silvia3").getLinkedNumber());
+						System.out.println(dh.getPersonByID("Silvia3").getLinkedNodes()[0]);
+					}
+					catch(ElementNotFoundException e){
+						System.out.println("Algo ha ido mal");
+					}*/
 					break;
 				case PRINT:
 					System.out.println();

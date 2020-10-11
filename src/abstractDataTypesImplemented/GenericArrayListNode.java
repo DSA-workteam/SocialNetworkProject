@@ -4,19 +4,35 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import adt.NodeADT;
-// TODO imoke
+import exceptions.ElementNotFoundException;
+
+/**
+ * 
+ * @author Imanol Maraña Hurtado
+ *
+ * @param <T> Generic type
+ */
 public class GenericArrayListNode<T> implements NodeADT<T>{
 
 	private T content;
 	private int count;
 	private ArrayList<NodeADT<T>> nodes;
 	
+	
+	/**
+	 * Main constructor of the class
+	 * @param element Element of the node
+	 */
 	public GenericArrayListNode(T element) {
 		content = element;
 		count = 0;
+		nodes = new ArrayList<NodeADT<T>>();
 	}
 	
 	
+	/**
+	 * Constructor of the class without parameters
+	 */
 	public GenericArrayListNode() {
 		// TODO Auto-generated constructor stub
 	}
@@ -36,7 +52,6 @@ public class GenericArrayListNode<T> implements NodeADT<T>{
 		while(i < count && !found) {
 			if(content.equals(nodes.get(i).getContent()))
 				found = true;
-			
 			i++;
 		}
 			if(!found) {
@@ -45,6 +60,17 @@ public class GenericArrayListNode<T> implements NodeADT<T>{
 			}
 		
 	}
+	
+	@Override
+	public T[] getLinkedNodes() {
+		T[] nodesInfo = (T[]) new String[getLinkNumber()];
+		
+		for(int i = 0; i < getLinkNumber(); i++) {
+			nodesInfo[i] = nodes.get(i).getContent();
+		}
+		
+		return nodesInfo;
+	}
 
 	@Override
 	public int getLinkNumber() {
@@ -52,7 +78,7 @@ public class GenericArrayListNode<T> implements NodeADT<T>{
 	}
 
 	@Override
-	public boolean unlink(NodeADT<T> node) {
+	public boolean unlink(NodeADT<T> node) throws ElementNotFoundException{
 		
 		int i = 0;		
 		boolean found = false;
@@ -65,6 +91,9 @@ public class GenericArrayListNode<T> implements NodeADT<T>{
 			}			
 			i++;
 		}
+		
+		if(!found)
+			throw new ElementNotFoundException("There isn't a link with that node");
 		
 		return found;
 		

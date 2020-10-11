@@ -3,11 +3,13 @@ package dataStructuresImplemented;
 
 import java.lang.reflect.Array;
 
+import abstractDataTypesImplemented.GenericArrayListNode;
 import adt.DataBlockADT;
+import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**
  * This class is the main data object that our project uses.
- * @author Borja Moralejo Tobajas
+ * @author Imanol Maraña Hurtado & Borja Moralejo Tobajas
  *
  */
 public class Person {
@@ -18,6 +20,7 @@ public class Person {
 	
 	private DataBlockADT<String, String>[][] attributes;
 	private String id;
+	private GenericArrayListNode<String> personalNode;
 	
 	/**
 	 * Constructor of Person class. It uses unchecked casting.
@@ -51,6 +54,9 @@ public class Person {
 				attributes[i-1][j] = new ArrayListDataBlock<String, String>(attributesData[j]);
 			
 		}
+		
+		personalNode = new GenericArrayListNode<String>(id);
+		
 	}
 	
 	/**
@@ -100,6 +106,16 @@ public class Person {
 		
 		return ret;
 	}
+	
+	
+	/**
+	 * Gets the node of this person
+	 * @return The node of this person
+	 */
+	public GenericArrayListNode<String> getNode() {
+		return personalNode;
+	}
+	
 	
 	@Override
 	public String toString(){
