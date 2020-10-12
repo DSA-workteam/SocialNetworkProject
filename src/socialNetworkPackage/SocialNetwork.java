@@ -102,17 +102,20 @@ public class SocialNetwork {
 					System.out.println("Please, insert the name of the file from which you wish to load the relationships");
 					if(scanner.hasNext())
 						dh.loadFile(scanner.next(), 1);
-/*					try {
-						System.out.println(dh.getPersonByID("Ainhoa34").getLinkedNumber());
-						System.out.println(dh.getPersonByID("Ainhoa34").getLinkedNodes()[3]);
-						System.out.println(dh.getPersonByID("Ane52").getLinkedNumber());
-						System.out.println(dh.getPersonByID("Ane52").getLinkedNodes()[2]);
-						System.out.println(dh.getPersonByID("Silvia3").getLinkedNumber());
-						System.out.println(dh.getPersonByID("Silvia3").getLinkedNodes()[0]);
+					try {
+						System.out.println(dh.getPersonByID("Iker6199").getNode().getLinkNumber());
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[0]);
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[1]);
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[2]);
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[3]);
+						System.out.println(dh.getPersonByID("Ane52").getNode().getLinkNumber());
+						System.out.println(dh.getPersonByID("Ane52").getNode().getLinkedNodes()[2]);
+						System.out.println(dh.getPersonByID("Ainhoa34").getNode().getLinkNumber());
+						System.out.println(dh.getPersonByID("Silvia3").getNode().getLinkedNodes()[0]);
 					}
 					catch(ElementNotFoundException e){
 						System.out.println("Algo ha ido mal");
-					}*/
+					}
 					break;
 				case PRINT:
 					System.out.println();
