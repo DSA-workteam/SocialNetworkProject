@@ -70,6 +70,7 @@ public class GenericArrayListNode<T> implements NodeADT<T>{
 			while(max - min > 2 && !found) {
 				if(nodes.get(i).getContent().equals(node.getContent())) {
 					found = true;
+					nodes.add(i,node);
 				}
 				else if( 0 > nodes.get(i).getContent().toString().compareTo(node.getContent().toString())) {
 					min = i;
@@ -115,20 +116,50 @@ public class GenericArrayListNode<T> implements NodeADT<T>{
 	@Override
 	public boolean unlink(NodeADT<T> node) throws ElementNotFoundException{
 		
-		int i = 0;		
 		boolean found = false;
+		int i = 0;
 		
-		while(i < count && !found) {
-			if(content.equals(nodes.get(i).getContent())) {
+		if(count == 1) {
+			if(nodes.get(0).getContent().equals(node.getContent())) {
 				found = true;
-				nodes.remove(i);
-				count--;
-			}			
-			i++;
+			}
+		}
+		else if(count > 1) {
+			int min = 0;
+			int max = count;
+			i = count/2;
+			while(max - min > 2 && !found) {
+				if(nodes.get(i).getContent().equals(node.getContent())) {
+					found = true;
+				}
+				else if(0 > nodes.get(i).getContent().toString().compareTo(node.getContent().toString())) {
+					min = i;
+					i += (max-min)/2;
+				}
+				else {
+					max = i;
+					i -= (max-min)/2;
+				}
+			}
+			if(!found)
+				if(nodes.get(i).getContent().equals(node.getContent())) {
+					found = true;
+				}
+				else if(nodes.get(i-1).getContent().equals(node.getContent())){
+					found = true;
+					i = i-1;
+				}
+				else if(nodes.get(i+1).getContent().equals(node.getContent())) {
+					found = true;
+					i = i+1;
+				}
 		}
 		
-		if(!found)
-			throw new ElementNotFoundException("There isn't a link with that node");
+		if (!found)
+			throw new ElementNotFoundException("That node is not between the linked nodes");
+		else
+			nodes.remove(i);
+			count--;
 		
 		return found;
 		

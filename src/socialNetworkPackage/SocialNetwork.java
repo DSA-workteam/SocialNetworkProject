@@ -103,15 +103,16 @@ public class SocialNetwork {
 					if(scanner.hasNext())
 						dh.loadFile(scanner.next(), 1);
 					try {
-						System.out.println(dh.getPersonByID("Iker6199").getNode().getLinkNumber());
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkNumber());
 						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[0]);
 						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[1]);
 						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[2]);
 						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[3]);
-						System.out.println(dh.getPersonByID("Ane52").getNode().getLinkNumber());
-						System.out.println(dh.getPersonByID("Ane52").getNode().getLinkedNodes()[2]);
-						System.out.println(dh.getPersonByID("Ainhoa34").getNode().getLinkNumber());
-						System.out.println(dh.getPersonByID("Silvia3").getNode().getLinkedNodes()[0]);
+						dh.getPersonByID("Peru57").getNode().unlink(dh.getPersonByID("Ainhoa34").getNode());
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkNumber());
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[0]);
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[1]);
+						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[2]);
 					}
 					catch(ElementNotFoundException e){
 						System.out.println("Algo ha ido mal");
