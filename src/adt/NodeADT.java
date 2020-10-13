@@ -44,6 +44,6 @@ public interface NodeADT<T> {
 	 * @param node - NodeADT<T> to unlink to
 	 * @throws ElementNotFoundException
 	 */
-	public boolean unlink(NodeADT<T> node) throws ElementNotFoundException;
+	public void unlink(NodeADT<T> node) throws ElementNotFoundException;
 	
 }

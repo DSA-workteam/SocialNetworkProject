@@ -20,7 +20,7 @@ import exceptions.ImpulsoryAttributeRequiredException;
 
 /**
  * This is the main class which contains the data while in runtime. The data is stored in hash maps. The only thing that is not stored here is the friends relationships. They are stored in Person class, inside one of their attributes.
- * @author Borja Moralejo Tobajas
+ * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
  *
  */
 public class DataHolder{
@@ -132,6 +132,11 @@ public class DataHolder{
 	public void removePersonFromNetwork(Person p) throws ElementNotFoundException{
 		String id = p.getAttribute(Person.ID)[0];
 		if(personHashMap.remove(id, p)){
+			
+			//Unlinks all the nodes that were attached to this node
+			for(int i = 0; i < p.getNode().getLinkNumber(); i++) 
+				getPersonByID(p.getNode().getLinkedNodes()[i]).getNode().unlink(p.getNode());
+			
 			DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null)
@@ -180,16 +185,33 @@ public class DataHolder{
 	 * @throws ElementNotFoundException
 	 */
 	public static Person[] searchPeopleByAttribute(int attribute, String value) throws ElementNotFoundException{
-		// TODO
+		
 		boolean found = false;
+		Collection<Person> people = personHashMap.get(value);
 		Person[] ret = null;
 		
+		//Checks if the attribute selected is ID and uses the getPersonByID method
 		if(attribute == -1) {
 			ret = new Person[1];
 			ret[0] = getPersonByID(value);
 		}
+		
+		//If the selected attribute is not ID, searches for the output by other way
 		else {
+			Person[] preRet = new Person[people.size()];
+			int count = 0;
+			for(Person p : people) {
+				for(int i = 0; i < p.getAttribute(attribute).length; i++)
+					if(value.equals(p.getAttribute(attribute)[i])) {
+						preRet[count] = p;
+						count++;
+					}
+			}
+			ret = new Person[count];
 		}
+		
+		if (ret == null)
+			throw new ElementNotFoundException("There is no element with those values");
 		return ret;
 		
 	}

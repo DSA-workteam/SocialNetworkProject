@@ -61,7 +61,7 @@ public class SocialNetwork {
 		// To end the process when exited
 		boolean onMenu = true;
 		
-		
+		// Starts the main loop
 		while(onMenu) {
 			
 			showMenu();
@@ -86,51 +86,43 @@ public class SocialNetwork {
 				}
 				
 				switch(selection) {
+				// Ends the program
 				case END:
 					onMenu = false;
 					break;
+				// Shows the menu again	
 				case HELP:
 					break;
+				// Loads people into the data holder from a given file
 				case LOADP:
 					System.out.println();
 					System.out.println("Please, insert the name of the file from which you wish to load the data");
 					if(scanner.hasNext())
 						dh.loadFile(scanner.next(), 0);
 					break;
+				// Loads relationships into the data holder from a given file
 				case LOADR:
 					System.out.println();
 					System.out.println("Please, insert the name of the file from which you wish to load the relationships");
 					if(scanner.hasNext())
 						dh.loadFile(scanner.next(), 1);
-					try {
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkNumber());
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[0]);
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[1]);
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[2]);
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[3]);
-						dh.getPersonByID("Peru57").getNode().unlink(dh.getPersonByID("Ainhoa34").getNode());
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkNumber());
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[0]);
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[1]);
-						System.out.println(dh.getPersonByID("Peru57").getNode().getLinkedNodes()[2]);
-					}
-					catch(ElementNotFoundException e){
-						System.out.println("Algo ha ido mal");
-					}
 					break;
+				// Creates a file with a given name where appears the people from the data holder's data 
 				case PRINT:
 					System.out.println();
 					System.out.println("Please, insert the name of the file which you will create to print the data in");
 					if(scanner.hasNext())
 						dh.printIntoFile(scanner.next());
 					break;
+				// Searchs people inside the data holder with 2 keys, the first one to know the attribute and the second one to know the key used to search
 				case SEARCH:
 					System.out.println();
 					System.out.println("Please, enter a number for searching:");
 					showOptions();
 					if(scanner.hasNext()) {
 						attribute = scanner.nextInt();
-						while(attribute != 0 && attribute != 1 && attribute != 2 && attribute != 3 && attribute != 4 && attribute != 5 && attribute != 6 && attribute != 7 && attribute != 8 && attribute != 9 && attribute != 10){
+						// Checks if the given number for the first key is valid and if not, asks for a new number
+						while(attribute < 0 && attribute > 10){
 							System.out.println();
 							System.out.println("The input you have introduced is not valid, please try again");
 							System.out.println();
@@ -139,6 +131,7 @@ public class SocialNetwork {
 								attribute = scanner.nextInt();
 							}
 						}
+						// Makes nothing, or what's the same, goes back to the main loop
 						if(attribute == 0) {
 						}
 						else{
@@ -146,10 +139,11 @@ public class SocialNetwork {
 							System.out.println("Please, insert the value with which you want to search");
 							if(scanner.hasNext()) {
 								value = scanner.next();
+								// Tryes to search for at least one person with the given keys, and if there is none, it throws an error
 								try {
 									output = dh.searchPeopleByAttribute(attribute - 2,value);
 									System.out.println();
-									System.out.println("The person has been found, here is the output:");
+									System.out.println("At least one person has been found, here is the output:");
 									for (int i = 0; i < output.length; i++) {
 										System.out.println();
 										System.out.println(output[i].toString());
@@ -187,6 +181,9 @@ public class SocialNetwork {
 		System.out.println("-1. Log out");
 	}
 
+	/**
+	 * Obvious thing
+	 */
 	private static void showOptions() {
 		System.out.println("	0.Go back");
 		System.out.println("	1.ID");
