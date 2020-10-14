@@ -146,8 +146,9 @@ public class SocialNetwork {
 									System.out.println("At least one person has been found, here is the output:");
 									for (int i = 0; i < output.length; i++) {
 										System.out.println();
-										System.out.println(output[i].toString());
+										System.out.print(output[i].toString());
 									}
+									System.out.println();
 								} catch (ElementNotFoundException e) {
 									System.out.println();
 									System.out.println("The person you tried to find is not in the data base");

@@ -1,5 +1,7 @@
 package adt;
 
+import java.util.Collection;
+
 import exceptions.*;
 
 /**
@@ -8,7 +10,7 @@ import exceptions.*;
  * 
  * @param <T> - Generic type
  */
-public interface NodeADT<T> {
+public interface NodeADT<T extends Comparable<T> > {
 
 	
 	/**
@@ -29,7 +31,7 @@ public interface NodeADT<T> {
 	 * Gets the content of all the nodes linked to this node
 	 * @return List with the content of the linked nodes
 	 */
-	public T[] getLinkedNodes();
+	public Collection<NodeADT<T>> getLinkedNodes();
 	
 	
 	/**

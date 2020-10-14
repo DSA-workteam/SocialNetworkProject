@@ -11,6 +11,7 @@ import java.util.Scanner;
 import abstractDataTypesImplemented.GenericArrayListHashMap;
 import adt.DataBlockADT;
 import adt.HashMapADT;
+import adt.NodeADT;
 import dataStructuresImplemented.ArrayListDataBlock;
 import dataStructuresImplemented.Person;
 import exceptions.ElementNotFoundException;
@@ -134,8 +135,13 @@ public class DataHolder{
 		if(personHashMap.remove(id, p)){
 			
 			//Unlinks all the nodes that were attached to this node
-			for(int i = 0; i < p.getNode().getLinkNumber(); i++) 
-				getPersonByID(p.getNode().getLinkedNodes()[i]).getNode().unlink(p.getNode());
+			Iterator<NodeADT<String>> it = p.getNode().getLinkedNodes().iterator();
+			NodeADT<String> node;
+			while(it.hasNext()) {
+				node = it.next();
+				p.getNode().unlink(node);
+				node.unlink(p.getNode());
+			}
 			
 			DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
 			for(int i = 0; i < attributes.length; i++)
@@ -198,16 +204,13 @@ public class DataHolder{
 		
 		//If the selected attribute is not ID, searches for the output by other way
 		else {
-			Person[] preRet = new Person[people.size()];
-			int count = 0;
-			for(Person p : people) {
-				for(int i = 0; i < p.getAttribute(attribute).length; i++)
-					if(value.equals(p.getAttribute(attribute)[i])) {
-						preRet[count] = p;
-						count++;
-					}
+			Collection<String> IDs = getDataBlockOf(attribute, value).getCollection();
+			ret = new Person[IDs.size()];
+			Iterator<String> it = IDs.iterator();
+			int i = 0;
+			while(it.hasNext()) {
+				ret[i++] = getPersonByID(it.next());
 			}
-			ret = new Person[count];
 		}
 		
 		if (ret == null)
