@@ -100,8 +100,10 @@ public class DataHolder{
 	/**
 	 * Adds person into the network data base, it takes the related data blocks and adds Person p's id into it.
 	 * @param p - Person.
+	 * @return boolean - Indicates if the person was already in the network
 	 */
-	public void addPersonToNetwork(Person p) {
+	public boolean addPersonToNetwork(Person p) {
+		boolean found = false;
 		String id = p.getAttribute(Person.ID)[0];
 		if(!personHashMap.isIn(id, p)) {
 			
@@ -119,9 +121,9 @@ public class DataHolder{
 				}
 			
 		}else {
-			// Already on the network, duplicated
+			found = true;
 		}
-		
+		return found;
 	}	
 	
 	
