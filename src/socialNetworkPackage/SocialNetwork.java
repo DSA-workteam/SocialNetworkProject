@@ -52,7 +52,7 @@ public class SocialNetwork {
 		// TEMPORAL, IMOKE needs to remake this in a better way, using Enums or whatever
 		
 		// Menu constants
-		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4;
+		final int END = -1, HELP = 0, LOADP = 1, LOADR = 2, PRINT = 3, SEARCH = 4, ADD = 5, REMOVEPERSON = 6;
 
 		// Console input 
 		FileInputStream fis = new FileInputStream(FileDescriptor.in);
@@ -158,7 +158,43 @@ public class SocialNetwork {
 						}
 					}
 					break;
+				case ADD:
+					Person nPerson;
+					boolean alreadyInNetwork;
+					System.out.println("Type a persons details using ONLY THE INDICATED METHOD in a SINGLE LINE.");
+					System.out.println("Only obligatory info, ID.");
+					System.out.println("For null values, don't let any space between ','.");
+					System.out.println("For more than one value in a field, type ';' between values. Only not accepted field with various values: ID");
+					System.out.println("ID,NAME,SURNAME,BIRTHDATE(dd/mm/yyyy),BIRTHPLACE,HOME,STUDIEDAT,WORKEDAT,FILMS,GROUPCODE");
+					if(scanner.hasNext())
+						try {
+							nPerson = new Person(scanner.next());
+							alreadyInNetwork = dh.addPersonToNetwork(nPerson);
+							if (alreadyInNetwork)
+								System.out.println("This ID was already selected, please chose a new one");
+							else
+								System.out.println("Your (player) person has been (created) loaded succesfully");
+						} catch (ImpulsoryAttributeRequiredException e) {
+							System.out.println("You haven't typed any ID.");
+						}
+					break;
+				case REMOVEPERSON:
+					String id;
+					System.out.println("Type the ID of the person you want to delete");
+					if(scanner.hasNext())
+						try {
+							id = scanner.next();
+							dh.removePersonFromNetwork(dh.getPersonByID(id));
+							System.out.println("The person has been removed succesfully");
+						}
+						catch(ElementNotFoundException e) {
+							System.out.println("The person you wanted to delete hasn't been found");
+						}
+					break;
 				default:
+					System.out.println("That value is not a valid operation, please select a new operation");
+					System.out.println("Type anything to continue");
+					if(scanner.hasNext())
 					break;
 				}
 			}
