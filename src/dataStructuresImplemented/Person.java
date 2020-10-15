@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 
 import abstractDataTypesImplemented.GenericArrayListNode;
 import adt.DataBlockADT;
+import adt.NodeADT;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**
@@ -20,7 +21,7 @@ public class Person {
 	
 	private DataBlockADT<String, String>[][] attributes;
 	private String id;
-	private GenericArrayListNode<String> personalNode;
+	private NodeADT<String> personalNode;
 	
 	/**
 	 * Constructor of Person class. It uses unchecked casting.
@@ -112,7 +113,7 @@ public class Person {
 	 * Gets the node of this person
 	 * @return The node of this person
 	 */
-	public GenericArrayListNode<String> getNode() {
+	public NodeADT<String> getNode() {
 		return personalNode;
 	}
 	
