@@ -65,7 +65,7 @@ public class SocialNetwork {
 		while(onMenu) {
 			
 			showMenu();
-			if(scanner.hasNext()) {
+			if(scanner.hasNextInt()) {
 				
 				int selection;
 				int attribute;
@@ -119,7 +119,7 @@ public class SocialNetwork {
 					System.out.println();
 					System.out.println("Please, enter a number for searching:");
 					showOptions();
-					if(scanner.hasNext()) {
+					if(scanner.hasNextInt()) {
 						attribute = scanner.nextInt();
 						// Checks if the given number for the first key is valid and if not, asks for a new number
 						while(attribute < 0 && attribute > 10){
@@ -156,6 +156,12 @@ public class SocialNetwork {
 								}
 							}
 						}
+					}
+					else {
+						scanner.nextLine();
+						System.out.println("You haven't introduced a valid operation, please try again");
+						System.out.println("Press enter to continue");
+						scanner.nextLine();
 					}
 					break;
 				case ADD:
@@ -198,7 +204,12 @@ public class SocialNetwork {
 					break;
 				}
 			}
-			
+			else {
+				scanner.nextLine();
+				System.out.println("You haven't introduced an integer, please try again.");
+				System.out.println("Press enter to continue:");
+				scanner.nextLine();
+			}
 			
 		}// While loop
 		
@@ -212,10 +223,11 @@ public class SocialNetwork {
 	private static void showMenu() {
 		System.out.println("1. Load people into the network");
 		System.out.println("2. Load relationships of the people");
-		System.out.println("3. Print people");
+		System.out.println("3. Print people into a file");
 		System.out.println("4. Search people by:");
-		System.out.println("5. Add person");
-		System.out.println("-1. Log out");
+		System.out.println("5. Add person into the network");
+		System.out.println("6. Remove person by ID");
+		System.out.println("-1. Log out form the program");
 	}
 
 	/**
@@ -234,7 +246,6 @@ public class SocialNetwork {
 		System.out.println("	9.Movies");
 		System.out.println("	10.Groupcode");
 	}
-	
 	
 	
 }

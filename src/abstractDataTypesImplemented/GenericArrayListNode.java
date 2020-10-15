@@ -65,7 +65,7 @@ public class GenericArrayListNode<T extends Comparable<T>> implements NodeADT<T>
 					i = 1;
 					found = true;
 				}
-				System.out.println(nodes.get(0).getContent().compareTo(nodes.get(1).getContent()));
+				//System.out.println(nodes.get(0).getContent().compareTo(nodes.get(1).getContent()));
 			}
 		}
 		// If the length is 2 or bigger

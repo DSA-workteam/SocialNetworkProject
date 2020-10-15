@@ -28,8 +28,8 @@ public interface NodeADT<T extends Comparable<T> > {
 	
 	
 	/**
-	 * Gets the content of all the nodes linked to this node
-	 * @return List with the content of the linked nodes
+	 * Gets all the nodes linked to this node
+	 * @return Collection with the linked nodes
 	 */
 	public Collection<NodeADT<T>> getLinkedNodes();
 	

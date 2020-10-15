@@ -14,9 +14,9 @@ import exceptions.ImpulsoryAttributeRequiredException;
  */
 public class Person {
 	
-	public final static int NPARAMETERS = 10;	
-	public final static int ID = -1, NAME =0, SURNAME = 1, BIRTHDATE = 2, BIRTHPLACE = 3, HOME = 4,STUDIEDAT = 5,
-			WORKEDAT =6, MOVIES = 7, GROUPCODE = 8;
+	public final static int NPARAMETERS = 11;	
+	public final static int ID = -1, NAME =0, SURNAME = 1, BIRTHDATE = 2, GENDER = 3, BIRTHPLACE = 4, HOME = 5,STUDIEDAT = 6,
+			WORKEDAT =7, MOVIES = 8, GROUPCODE = 9;
 	
 	private DataBlockADT<String, String>[][] attributes;
 	private String id;
