@@ -78,9 +78,6 @@ public class SocialNetwork {
 					if(selection == -1) {
 						System.out.println("Closing program...");
 					}
-					else {
-						System.out.println("Inloop");
-					}
 				}catch(InputMismatchException e) {
 					selection = -2; // or selection = UNKNOWN and then do something in the switch case
 				}

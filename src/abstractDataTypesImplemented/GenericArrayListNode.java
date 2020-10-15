@@ -57,7 +57,6 @@ public class GenericArrayListNode<T extends Comparable<T>> implements NodeADT<T>
 		// Checks if the length is 1 to take different ways to act
 		else if(count == 1) {
 			if(!nodes.get(0).getContent().equals(node.getContent())) {
-				System.out.println(nodes.get(0).getContent().compareTo(node.getContent()));
 				if(0 < nodes.get(0).getContent().compareTo(node.getContent())) {
 					found = true;
 				}
