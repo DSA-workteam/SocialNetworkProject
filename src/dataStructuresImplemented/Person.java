@@ -125,12 +125,12 @@ public class Person {
 				Person p = (Person) obj;
 				if(id.equals(p.getAttribute(ID)[0])) {
 					ret = true;
-					int i = NPARAMETERS-1; 
-					while(i > 0 && ret) {
-						i--;
-						if(!getAttribute(i).equals(p.getAttribute(i)))
-							ret = false;
-					}
+				//	int i = NPARAMETERS-1; 
+					//while(i > 0 && ret) {
+						//i--;
+						//if(!getAttribute(i).equals(p.getAttribute(i)))
+						//	ret = false;
+					//}
 					
 				}
 			
@@ -155,7 +155,7 @@ public class Person {
 					
 				}
 		}		
-		return ret+"\n";
+		return ret;
 	}
 	
 }

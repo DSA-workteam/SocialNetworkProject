@@ -106,7 +106,7 @@ public class DataHolder{
 		boolean found = false;
 		String id = p.getAttribute(Person.ID)[0];
 		if(!personHashMap.isIn(id, p)) {
-			
+			System.out.println(p.toString());
 			// Put the person in the Person Hash map
 			personHashMap.put(id, p);		
 			
@@ -171,7 +171,7 @@ public class DataHolder{
 	 * @return Person - Person with the given id.
 	 * @throws ElementNotFoundException
 	 */
-	public static Person getPersonByID(String id) throws ElementNotFoundException{
+	public Person getPersonByID(String id) throws ElementNotFoundException{
 		Collection<Person> people = personHashMap.get(id);
 		Person ret = null;
 		for(Person p : people) {
@@ -192,7 +192,7 @@ public class DataHolder{
 	 * @return Person[] group of people that matches the search.
 	 * @throws ElementNotFoundException
 	 */
-	public static Person[] searchPeopleByAttribute(int attribute, String value) throws ElementNotFoundException{
+	public Person[] searchPeopleByAttribute(int attribute, String value) throws ElementNotFoundException{
 		
 		boolean found = false;
 		Collection<Person> people = personHashMap.get(value);
@@ -236,19 +236,20 @@ public class DataHolder{
 		try {
 			Scanner s = new Scanner(f);
 			s.useDelimiter("\n");
+			s.nextLine();
+
 			if (option == 0)
 				while(s.hasNext())
 					loadPerson(s.nextLine());
 			else {
-				s.nextLine();
 				while (s.hasNext())
 					loadRelationship(s.nextLine());
 			}
 			s.close();
-			System.out.println("All people loaded perfectly");
+			System.out.println("Load process finished");
 			System.out.println();
 		} catch (FileNotFoundException e) {
-			System.out.println("You introduced an invalid filename.");
+			System.out.println("File not found: " + path);
 			System.out.println();
 		}
 		
@@ -284,7 +285,6 @@ public class DataHolder{
 	 * @param data String - csv format.
 	 */
 	private void loadPerson(String data) {
-		System.out.println(data);
 		try {
 			addPersonToNetwork(new Person(data));
 		} catch (ImpulsoryAttributeRequiredException e) {			

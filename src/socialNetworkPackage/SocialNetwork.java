@@ -60,17 +60,17 @@ public class SocialNetwork {
 		
 		// To end the process when exited
 		boolean onMenu = true;
-		
+		int selection;
+		int attribute;
+		String value;
+		Person[] output;
 		// Starts the main loop
 		while(onMenu) {
 			
 			showMenu();
 			if(scanner.hasNextInt()) {
 				
-				int selection;
-				int attribute;
-				String value;
-				Person[] output;
+				
 				
 				
 				try {
@@ -187,8 +187,10 @@ public class SocialNetwork {
 					if(scanner.hasNext())
 						try {
 							id = scanner.next();
-							dh.removePersonFromNetwork(dh.getPersonByID(id));
+							Person p = dh.getPersonByID(id);
+							dh.removePersonFromNetwork(p);
 							System.out.println("The person has been removed succesfully");
+							System.out.println(p);
 						}
 						catch(ElementNotFoundException e) {
 							System.out.println("The person you wanted to delete hasn't been found");
