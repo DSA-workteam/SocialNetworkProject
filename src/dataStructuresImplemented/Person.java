@@ -117,6 +117,28 @@ public class Person {
 		return personalNode;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		boolean ret = false;
+		if(obj != null) {
+			if(obj instanceof Person ) {
+				Person p = (Person) obj;
+				if(id.equals(p.getAttribute(ID)[0])) {
+					ret = true;
+					int i = NPARAMETERS-1; 
+					while(i > 0 && ret) {
+						i--;
+						if(!getAttribute(i).equals(p.getAttribute(i)))
+							ret = false;
+					}
+					
+				}
+			
+			
+			}
+		}
+			return ret;
+	}
 	
 	@Override
 	public String toString(){
