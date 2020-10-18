@@ -87,7 +87,7 @@ public class GenericArrayListNode<T extends Comparable<T>> implements NodeADT<T>
 			
 			// If the element wasn't in the list and the while has ended
 			if(!found) {
-				if(!nodes.get(i).getContent().equals(node.getContent())) {
+				if(!nodes.get(i).getContent().equals(node.getContent()) && !nodes.get(i-1).getContent().equals(node.getContent())) {
 					// Checks if the correct position is the previous one
 					if(0 < nodes.get(i-1).getContent().compareTo(node.getContent()) && 0 < nodes.get(i).getContent().compareTo(node.getContent())) {
 						i = i-1;
