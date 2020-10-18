@@ -194,8 +194,6 @@ public class DataHolder{
 	 */
 	public Person[] searchPeopleByAttribute(int attribute, String value) throws ElementNotFoundException{
 		
-		boolean found = false;
-		Collection<Person> people = personHashMap.get(value);
 		Person[] ret = null;
 		
 		//Checks if the attribute selected is ID and uses the getPersonByID method
@@ -215,7 +213,7 @@ public class DataHolder{
 			}
 		}
 		
-		if (ret == null)
+		if (ret.length == 0)
 			throw new ElementNotFoundException("There is no element with those values");
 		return ret;
 		

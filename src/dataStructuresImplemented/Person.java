@@ -6,7 +6,6 @@ import java.lang.reflect.Array;
 import abstractDataTypesImplemented.GenericArrayListNode;
 import adt.DataBlockADT;
 import adt.NodeADT;
-import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**
  * This class is the main data object that our project uses.

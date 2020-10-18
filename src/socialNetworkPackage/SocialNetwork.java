@@ -2,11 +2,9 @@ package socialNetworkPackage;
 
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import adt.DataBlockADT;
 import dataStructuresImplemented.Person;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
@@ -164,7 +162,6 @@ public class SocialNetwork {
 					break;
 				case ADD:
 					Person nPerson;
-					boolean alreadyInNetwork;
 					System.out.println("Type a persons details using ONLY THE INDICATED METHOD in a SINGLE LINE.");
 					System.out.println("Only obligatory info, ID.");
 					System.out.println("For null values, don't let any space between ','.");

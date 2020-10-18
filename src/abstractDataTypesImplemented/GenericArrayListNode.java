@@ -2,7 +2,6 @@ package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import adt.NodeADT;
 import exceptions.ElementNotFoundException;
