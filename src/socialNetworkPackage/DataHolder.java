@@ -142,6 +142,7 @@ public class DataHolder{
 			NodeADT<String> node;
 			while(it.hasNext()) {
 				node = it.next();
+				System.out.println(node.getContent() +" unlinked of "+p.getNode().getContent()  );
 				node.unlink(p.getNode());
 			}
 			DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
@@ -263,13 +264,14 @@ public class DataHolder{
 		Person person1;
 		Person person2;
 		
-		System.out.println(data);
 		String[] separatedID = data.split(",");
 		try {
 			person1 = getPersonByID(separatedID[0]);
 			person2 = getPersonByID(separatedID[1]);
 			person1.getNode().link(person2.getNode());
 			person2.getNode().link(person1.getNode());
+			
+
 		}
 		catch(ElementNotFoundException e) {
 			System.out.println("At least one of the ID introduced to make the relationship with doesn't exist");

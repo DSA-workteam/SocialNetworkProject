@@ -109,6 +109,7 @@ public class GenericArrayListNode<T extends Comparable<T>> implements NodeADT<T>
 		}
 		// Checks if the appropiate position has been found, then adds the element to that position and increases the number of links counter
 		if (found) {
+			System.out.println(content + " linked with "+ node.getContent());
 			nodes.add(i, node);
 			count++;
 		}
