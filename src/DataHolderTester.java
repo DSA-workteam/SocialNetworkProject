@@ -75,5 +75,29 @@ class DataHolderTester {
 		
 		
 	}
+	
+	@Test
+	void relatedElementsViaDataHolder() throws ImpulsoryAttributeRequiredException, AlreadyOnTheCollectionException, ElementNotFoundException {
+		String data = "Pepe77,Don Pepe,Balloon,3-10-2003,male,Los Angeles,San Francisco,San Francisco,New York,Tiana,G77371";
+		Person p = new Person(data);	
+		data = "Pipo,PinPin,PonPon,4-2-2003,male,Los Angeles,San Francisco,San Francisco,Los Angeles,Pipo,G777";
+		Person p2 = new Person(data);	
+		// Add element
+		dh.addPersonToNetwork(p);
+		dh.addPersonToNetwork(p2);
+		// Search them
+		assertEquals(p, dh.searchPeopleByAttribute(Person.BIRTHPLACE,"Los Angeles")[0]);
+		assertEquals(p2, dh.searchPeopleByAttribute(Person.GROUPCODE, "G777")[0]);
+		
+
+		
+	}
+	
+	@Test 
+	void removePersonThatIsntInNetwork() throws ImpulsoryAttributeRequiredException {
+		String data = "Pepe77,Don Pepe,Balloon,3-10-2003,male,Los Angeles,San Francisco,San Francisco,New York,Tiana,G77371";
+		Person p = new Person(data);	
+		assertThrows(ElementNotFoundException.class, () -> dh.removePersonFromNetwork(p));
+	}
 
 }

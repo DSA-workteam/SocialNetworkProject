@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collection;
@@ -29,13 +30,31 @@ class FileManagerTest {
 		Person p = new Person(data);	
 		// load file that contains that person and compare all attributes
 		dh.loadFile("peopleJUnit", 0);
-		
-		
+		// File not found
+		dh.loadFile("A", 0);
 		
 		Assertions.assertEquals(p, dh.getPersonByID("Pepe77"));
-		
+		Assertions.assertEquals(p, dh.searchPeopleByAttribute(Person.ID, "Pepe77")[0]);
+
 	}
 	
+	@Test
+	void testLoadRelationshipsWithoutPeople() {
+		dh.loadFile("friendsJUnit", 1);
+	}
+	
+	@Test
+	void testDuplicated() {
+		//Load file
+		dh.loadFile("peopleJUnit", 0);
+		int nOfPeople = dh.getNumberOfPeople();
+		
+		//Load again same file, it shouldn't increase the number of people
+		dh.loadFile("peopleJUnit", 0);
+		assertEquals(nOfPeople, dh.getNumberOfPeople());
+		
+		
+	}
 	
 	@Test
 	void printIntoFile() {

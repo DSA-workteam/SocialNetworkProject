@@ -41,8 +41,14 @@ class PeopleLoaderTester {
 		assertThrows(ImpulsoryAttributeRequiredException.class, () -> {new Person(data);});
 		
 	}
-	
-			
+	@Test
+	void getAttributeFromPerson() throws ImpulsoryAttributeRequiredException {
+		String data = "Pepe66,Don Pepe,Balloon,3-10-2003,male,Los Angeles,San Francisco,San Francisco,New York,Tiana,G77371";
+		Person p = new Person(data);
+		assertEquals("Pepe66",p.getAttribute(Person.ID)[0]);
+		assertEquals("Balloon",p.getAttribute(Person.SURNAME)[0]);
+
+	}
 	
 	void multipleInputsInAttributes() {
 		

@@ -24,9 +24,9 @@ class RelationshipsTesting {
 	void createRelationships() throws ImpulsoryAttributeRequiredException {
 		
 		// Add two friends
-		String data = "Pepe77,Don Pepe,Balloon,3-10-2003,Los Angeles,San Francisco,San Francisco,New York,Tiana,G77371\n";
+		String data = "Pepe77,Don Pepe,Balloon,3-10-2003,Los Angeles,San Francisco,San Francisco,New York,Tiana,G77371";
 		Person p = new Person(data);	
-		data = "Silvia3,Silvia,Ruiz,20-06-2001,Madrid,Donostia,Madrid;Donostia,,Cadena Perpetua;Your voice,G25527\n";
+		data = "Silvia3,Silvia,Ruiz,20-06-2001,Madrid,Donostia,Madrid;Donostia,,Cadena Perpetua;Your voice,G25527";
 		Person p2 = new Person(data);	
 		
 		p.getNode().link(p2.getNode());
@@ -44,9 +44,9 @@ class RelationshipsTesting {
 		
 		// Add two friends
 		// Add two friends
-		String data = "Pepe77,Don Pepe,Balloon,3-10-2003,Los Angeles,San Francisco,San Francisco,New York,Tiana,G77371\n";
+		String data = "Pepe77,Don Pepe,Balloon,3-10-2003,Los Angeles,San Francisco,San Francisco,New York,Tiana,G77371";
 		Person p = new Person(data);	
-		data = "Silvia3,Silvia,Ruiz,20-06-2001,Madrid,Donostia,Madrid;Donostia,,Cadena Perpetua;Your voice,G25527\n";
+		data = "Silvia3,Silvia,Ruiz,20-06-2001,Madrid,Donostia,Madrid;Donostia,,Cadena Perpetua;Your voice,G25527";
 		Person p2 = new Person(data);	
 		
 		p.getNode().link(p2.getNode());

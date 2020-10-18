@@ -309,17 +309,25 @@ public class DataHolder{
 			writerPrinter.close();
 			System.out.println("Done");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
 		
 	}
 	
-	
+	/**
+	 * Gets all the people of the network and returns the collection
+	 * @return Collection<Person>
+	 */
 	public Collection<Person> getPeople(){
 		return personHashMap.getAllElements();
 	}
 	
-	
+	/**
+	 * Returns number of people in the network
+	 * @return int
+	 */
+	public int getNumberOfPeople() {
+		return personHashMap.size();
+	}
 	
 }
 
