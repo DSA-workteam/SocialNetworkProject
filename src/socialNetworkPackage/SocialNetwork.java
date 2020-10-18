@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import adt.DataBlockADT;
 import dataStructuresImplemented.Person;
+import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 
@@ -172,13 +173,13 @@ public class SocialNetwork {
 					if(scanner.hasNext())
 						try {
 							nPerson = new Person(scanner.next());
-							alreadyInNetwork = dh.addPersonToNetwork(nPerson);
-							if (alreadyInNetwork)
-								System.out.println("This ID was already selected, please chose a new one");
-							else
-								System.out.println("Your (player) person has been (created) loaded succesfully");
+							dh.addPersonToNetwork(nPerson);							
+							System.out.println("This ID was already selected, please chose a new one");							
 						} catch (ImpulsoryAttributeRequiredException e) {
 							System.out.println("You haven't typed any ID.");
+						} catch(AlreadyOnTheCollectionException e) {
+							System.out.println("Your person has been loaded succesfully");
+
 						}
 					break;
 				case REMOVEPERSON:

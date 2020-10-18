@@ -38,7 +38,7 @@ public class Person {
 		String[] separatedData = combinedData.split(",");
 		
 		// Checks if id is empty or not
-		if(separatedData[0] != "")
+		if(!separatedData[0].equals(""))
 			id = separatedData[0];
 		else throw new ImpulsoryAttributeRequiredException("Id required");
 		
@@ -124,15 +124,10 @@ public class Person {
 			if(obj instanceof Person ) {
 				Person p = (Person) obj;
 				if(id.equals(p.getAttribute(ID)[0])) {
-					ret = true;
-				//	int i = NPARAMETERS-1; 
-					//while(i > 0 && ret) {
-						//i--;
-						//if(!getAttribute(i).equals(p.getAttribute(i)))
-						//	ret = false;
-					//}
+					ret = true;				
+					}
 					
-				}
+				
 			
 			
 			}

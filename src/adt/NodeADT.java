@@ -21,7 +21,7 @@ public interface NodeADT<T extends Comparable<T> > {
 	
 	
 	/**
-	 * Creates a link between given node and current node in reciprocal mode	
+	 * Creates a link between given node and current node in only one direction	
 	 * @param node - NodeADT<T>. Link to target
 	 */
 	public void link(NodeADT<T> node);

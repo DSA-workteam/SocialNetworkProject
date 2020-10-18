@@ -49,6 +49,7 @@ public interface HashMapADT<T, K> extends Iterable<T>{
 	 */
 	public int size();
 	
+	public Collection<T> getAllElements();
 	
 	public String toString();
 	

@@ -88,7 +88,7 @@ public class GenericArrayListHashMap<T,K> implements HashMapADT<T, K>{
 	 * Puts all elements from the HashMap into a Collection<T> and returns it.
 	 * @return Collection<T> - All elements.
 	 */
-	private Collection<T> getAllElements() {
+	public Collection<T> getAllElements() {
 		ArrayList<T> listOfAllElements = new ArrayList<T>();
 		for(int i = 0; i < mapSize;i++) {
 			for(T element: hashMap[i])

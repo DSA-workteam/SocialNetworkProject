@@ -14,6 +14,7 @@ import adt.HashMapADT;
 import adt.NodeADT;
 import dataStructuresImplemented.ArrayListDataBlock;
 import dataStructuresImplemented.Person;
+import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 
@@ -102,8 +103,7 @@ public class DataHolder{
 	 * @param p - Person.
 	 * @return boolean - Indicates if the person was already in the network
 	 */
-	public boolean addPersonToNetwork(Person p) {
-		boolean found = false;
+	public void addPersonToNetwork(Person p) throws AlreadyOnTheCollectionException{
 		String id = p.getAttribute(Person.ID)[0];
 		if(!personHashMap.isIn(id, p)) {
 			System.out.println(p.toString());
@@ -121,9 +121,9 @@ public class DataHolder{
 				}
 			
 		}else {
-			found = true;
+			throw new AlreadyOnTheCollectionException(p.toString()); 
 		}
-		return found;
+		
 	}	
 	
 	
@@ -137,14 +137,13 @@ public class DataHolder{
 		if(personHashMap.remove(id, p)){
 			
 			//Unlinks all the nodes that were attached to this node
+			p.getNode().getLinkedNodes().toArray();
 			Iterator<NodeADT<String>> it = p.getNode().getLinkedNodes().iterator();
 			NodeADT<String> node;
 			while(it.hasNext()) {
 				node = it.next();
-				p.getNode().unlink(node);
 				node.unlink(p.getNode());
 			}
-			
 			DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null)
@@ -289,6 +288,8 @@ public class DataHolder{
 			addPersonToNetwork(new Person(data));
 		} catch (ImpulsoryAttributeRequiredException e) {			
 			e.printStackTrace();
+		} catch(AlreadyOnTheCollectionException e) {
+			
 		}
 		
 	}
@@ -314,7 +315,9 @@ public class DataHolder{
 	}
 	
 	
-	
+	public Collection<Person> getPeople(){
+		return personHashMap.getAllElements();
+	}
 	
 	
 	
