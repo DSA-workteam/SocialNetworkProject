@@ -29,16 +29,8 @@ public class GenericArrayListNode<T extends Comparable<T>> implements NodeADT<T>
 		count = 0;
 		nodes = new ArrayList<NodeADT<T>>();
 	}
-	
-	
-	/**
-	 * Constructor of the class without parameters
-	 */
-	public GenericArrayListNode() {
-		// TODO Auto-generated constructor stub
-	}
 
-
+	
 	@Override
 	public T getContent() {
 		return content;
