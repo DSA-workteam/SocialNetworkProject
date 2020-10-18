@@ -19,12 +19,12 @@ public interface DataBlockADT<T,K extends Comparable<K>>{
 	
 	/**
 	 * Gets the collection that have the same key
-	 * @return Collection<T> - All T type elements that share the same key
+	 * @return Collection&lt;T&gt; - All T type elements that share the same key
 	 */
 	public Collection<T> getCollection();
 	
 	/**
-	 * Given element it's added into the Collection<T> but you must need to compare their keys before adding it because this doens't do that
+	 * Given element it's added into the Collection&lt;T&gt; but you must need to compare their keys before adding it because this doens't do that
 	 * @param element - T to add
 	 */
 	public void add(T element);
@@ -32,14 +32,14 @@ public interface DataBlockADT<T,K extends Comparable<K>>{
 	/**
 	 * Given a T type element tries to remove it and returns if it's removed or not
 	 * @param element - T element to remove
-	 * @return boolean - whether is or not removed from the Collection<T>
+	 * @return boolean - whether is or not removed from the Collection&lt;T&gt;
 	 */
 	public boolean remove(T element);
 	
 	
 	/**
-	 * Returns size of the Collection<T>
-	 * @return int - size of Collection<T>
+	 * Returns size of the Collection&lt;T&gt;
+	 * @return int - size of Collection&lt;T&gt;
 	 */
 	public int size();
 	

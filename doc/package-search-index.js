@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"abstractDataTypesImplemented"},{"l":"adt"},{"l":"All Packages","url":"allpackages-index.html"},{"l":"dataStructuresImplemented"},{"l":"exceptions"},{"l":"socialNetworkPackage"},{"l":"test"}]

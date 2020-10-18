@@ -22,7 +22,7 @@ import exceptions.ImpulsoryAttributeRequiredException;
 
 /**
  * This is the main class which contains the data while in runtime. The data is stored in hash maps. The only thing that is not stored here is the friends relationships. They are stored in Person class, inside one of their attributes.
- * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
+ * @author Borja Moralejo Tobajas and Imanol Maraña Hurtado
  *
  */
 public class DataHolder{
@@ -101,7 +101,7 @@ public class DataHolder{
 	/**
 	 * Adds person into the network data base, it takes the related data blocks and adds Person p's id into it.
 	 * @param p - Person.
-	 * @return boolean - Indicates if the person was already in the network
+	 * @throws AlreadyOnTheCollectionException - If the person that was trying to add was already on the collection
 	 */
 	public void addPersonToNetwork(Person p) throws AlreadyOnTheCollectionException{
 		String id = p.getAttribute(Person.ID)[0];
@@ -130,7 +130,7 @@ public class DataHolder{
 	/**
 	 * Removes person from the network data and if the person's data block is left empty, it removes the data block from the hash map.
 	 * @param p - Person.
-	 * @throws ElementNotFoundException. Throws this exception if the Person p isn't in the network data.
+	 * @throws ElementNotFoundException - Throws this exception if the Person p isn't in the network data.
 	 */
 	public void removePersonFromNetwork(Person p) throws ElementNotFoundException{
 		String id = p.getAttribute(Person.ID)[0];
@@ -168,7 +168,7 @@ public class DataHolder{
 	 * Gets person by its id.
 	 * @param id - String.
 	 * @return Person - Person with the given id.
-	 * @throws ElementNotFoundException
+	 * @throws ElementNotFoundException - There's no one with that ID
 	 */
 	public Person getPersonByID(String id) throws ElementNotFoundException{
 		Collection<Person> people = personHashMap.get(id);
@@ -189,7 +189,7 @@ public class DataHolder{
 	 * @param attribute - int. Use Person class' public static final ints for this.
 	 * @param value - String search value.
 	 * @return Person[] group of people that matches the search.
-	 * @throws ElementNotFoundException
+	 * @throws ElementNotFoundException - There's nobody with that attribute
 	 */
 	public Person[] searchPeopleByAttribute(int attribute, String value) throws ElementNotFoundException{
 		
@@ -315,7 +315,7 @@ public class DataHolder{
 	
 	/**
 	 * Gets all the people of the network and returns the collection
-	 * @return Collection<Person>
+	 * @return Collection&lt;Person&gt;
 	 */
 	public Collection<Person> getPeople(){
 		return personHashMap.getAllElements();

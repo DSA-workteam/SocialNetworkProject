@@ -10,7 +10,7 @@ import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**
  * This class is the main data object that our project uses.
- * @author Imanol Maraña Hurtado & Borja Moralejo Tobajas
+ * @author Imanol Maraña Hurtado and Borja Moralejo Tobajas
  *
  */
 public class Person {
@@ -61,18 +61,18 @@ public class Person {
 	}
 	
 	/**
-	 * Returns all the collection of DataBlockADT<String, String>[][] type. Inside of it there is all the information about that person.
+	 * Returns all the collection of DataBlockADT&lt;String, String&gt;[][] type. Inside of it there is all the information about that person.
 	 * It's mainly use is for removing the person from the DataBlocks and then if the DataBlocks are left empty, they are removed from the main HashMap 
-	 * @return attributes - DataBlock<String, String>[][]
+	 * @return attributes - DataBlock&lt;String, String&gt;[][]
 	 */
 	public DataBlockADT<String, String>[][] getDataBlocks(){
 		return attributes;
 	}
 	
 	/**
-	 * It only returns the array of DataBlockADT<String, String> of the given attribute. This can be used to search for data neighbors. 
+	 * It only returns the array of DataBlockADT&lt;String, String&gt; of the given attribute. This can be used to search for data neighbors. 
 	 * @param attribute - int. This is used for selecting which attribute do we want. The Person class has public static constants for this.
-	 * @return DataBlockADT<String, String>[]
+	 * @return DataBlockADT&lt;String, String&gt;[]
 	 */
 	public DataBlockADT<String, String>[] getAttributesRelatedDataBlocks(int attribute){
 		return attributes[attribute];

@@ -9,7 +9,7 @@ import adt.BinaryTreeADT;
  * @author Borja Moralejo Tobajas
  *
  * @param <T> Element.
- * @param <K> Key. <K> type must extend Comparable<K>
+ * @param <K> Key. K type must extend ComparableK
  */
 public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implements BinaryTreeADT<T, K>{
 
@@ -19,11 +19,7 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 	private ArrayList<T> elements;
 	private int N;
 	
-	/**
-	 * Constructor
-	 * @param element
-	 * @param key
-	 */
+
 	public GenericArrayListBinaryTree(T element, K key){
 		super();
 		this.key = key;

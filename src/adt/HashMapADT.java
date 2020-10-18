@@ -12,20 +12,20 @@ public interface HashMapADT<T, K> extends Iterable<T>{
 
 	/**
 	 * Adds the given element into the hash map.
-	 * @param K key - Key for storing element in hash map .
-	 * @param T element - Element which is going to be added into the hash map.
+	 * @param key - Key for storing element in hash map .
+	 * @param element - Element which is going to be added into the hash map.
 	 */
 	public void put(K key, T element);
 	
 	/**
 	 * Gets element with given key.
-	 * @param K key - Searches element with key.
+	 * @param key - Searches element with key.
 	 * @return Returns T element binded with K key.
 	 */
 	public Collection<T> get(K key);
 	
 	/**
-	 * Tries to remove the given element from the Collection<T> and returns whether or not has removed it.
+	 * Tries to remove the given element from the CollectionT and returns whether or not has removed it.
 	 * @param key - K type. Key to search with.
 	 * @param element - T type. Element that is going to be removed.
 	 * @return boolean - Whether or not has been removed.

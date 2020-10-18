@@ -6,7 +6,7 @@ import exceptions.*;
 
 /**
  * This is a node abstract data type, this will have connections to other nodes.
- * @author Imanol Maraña Hurtado & Borja Moralejo Tobajas
+ * @author Imanol Maraña Hurtado and Borja Moralejo Tobajas
  * 
  * @param <T> - Generic type
  */
@@ -22,7 +22,7 @@ public interface NodeADT<T extends Comparable<T> > {
 	
 	/**
 	 * Creates a link between given node and current node in only one direction	
-	 * @param node - NodeADT<T>. Link to target
+	 * @param node - NodeADT&lt;T&gt;. Link to target
 	 */
 	public void link(NodeADT<T> node);
 	
@@ -43,8 +43,8 @@ public interface NodeADT<T extends Comparable<T> > {
 	
 	/**
 	 * Unlinks with given node
-	 * @param node - NodeADT<T> to unlink to
-	 * @throws ElementNotFoundException
+	 * @param node - NodeADT&lt;T&gt; to unlink to
+	 * @throws ElementNotFoundException - Unlink element was not found
 	 */
 	public void unlink(NodeADT<T> node) throws ElementNotFoundException;
 	

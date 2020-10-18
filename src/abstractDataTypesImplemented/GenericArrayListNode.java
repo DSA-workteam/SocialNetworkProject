@@ -9,7 +9,7 @@ import exceptions.ElementNotFoundException;
 
 /**
  * 
- * @author Imanol Maraña Hurtado & Borja Moralejo Tobajas
+ * @author Imanol Maraña Hurtado and Borja Moralejo Tobajas
  *
  * @param <T> Generic type
  */
