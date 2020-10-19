@@ -304,7 +304,8 @@ public class DataHolder{
 		File writeFile = new File(path);
 		try {
 			PrintWriter writerPrinter = new PrintWriter(writeFile);
-			personHashMap.iterator().forEachRemaining(person -> {writerPrinter.print(person.toString());});;
+			writerPrinter.println("id"+",".repeat(Person.NPARAMETERS-1));
+			personHashMap.iterator().forEachRemaining(person -> {writerPrinter.println(person.toString());});;
 		
 			writerPrinter.close();
 			System.out.println("Done");

@@ -236,12 +236,13 @@ public class SocialNetwork {
 		System.out.println("	2.Name");
 		System.out.println("	3.Surname");
 		System.out.println("	4.Birth date");
-		System.out.println("	5.Birth place");
-		System.out.println("	6.Home");
-		System.out.println("	7.Studied at");
-		System.out.println("	8.Worked at");
-		System.out.println("	9.Movies");
-		System.out.println("	10.Groupcode");
+		System.out.println("	5.Gender");
+		System.out.println("	6.Birth place");
+		System.out.println("	7.Home");
+		System.out.println("	8.Studied at");
+		System.out.println("	9.Worked at");
+		System.out.println("	10.Movies");
+		System.out.println("	11.Groupcode");
 	}
 	
 	
