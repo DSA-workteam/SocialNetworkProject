@@ -6,6 +6,8 @@ import java.lang.reflect.Array;
 import abstractDataTypesImplemented.GenericArrayListNode;
 import adt.DataBlockADT;
 import adt.NodeADT;
+import enums.PersonAttributesEnum;
+import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**
  * This class is the main data object that our project uses.
@@ -14,9 +16,6 @@ import exceptions.ImpulsoryAttributeRequiredException;
  */
 public class Person {
 	
-	public final static int NPARAMETERS = 11;	
-	public final static int ID = -1, NAME =0, SURNAME = 1, BIRTHDATE = 2, GENDER = 3, BIRTHPLACE = 4, HOME = 5,STUDIEDAT = 6,
-			WORKEDAT =7, MOVIES = 8, GROUPCODE = 9;
 	
 	private DataBlockADT<String, String>[][] attributes;
 	private String id;
@@ -24,13 +23,13 @@ public class Person {
 	
 	/**
 	 * Constructor of Person class. It uses unchecked casting.
-	 * @param combinedData - String. Input format: idperson,name,lastname,birthdate,birthplace,home,studiedat,workplaces,films,groupcode. If an attribute needs multiple inputs, just add ";" to separate them.
+	 * @param combinedData - String. Input format: idperson,name,lastname,birthdate,gender,birthplace,home,studiedat,workplaces,films,groupcode. If an attribute needs multiple inputs, just add ";" to separate them.
 	 * @throws ImpulsoryAttributeRequiredException - Id is the only obligatory attribute.
 	 */
 	@SuppressWarnings("unchecked")
 	public Person(String combinedData) throws ImpulsoryAttributeRequiredException{
 		// Initializing the DataBlockADT[][] 
-		attributes = (DataBlockADT<String, String>[][]) Array.newInstance(DataBlockADT[].class, NPARAMETERS-1);
+		attributes = (DataBlockADT<String, String>[][]) Array.newInstance(DataBlockADT[].class, PersonAttributesEnum.values().length-1);
 		
 		
 		// Separating the input parameter in arrays of attributes
@@ -70,32 +69,34 @@ public class Person {
 	
 	/**
 	 * It only returns the array of DataBlockADT&lt;String, String&gt; of the given attribute. This can be used to search for data neighbors. 
-	 * @param attribute - int. This is used for selecting which attribute do we want. The Person class has public static constants for this.
-	 * @return DataBlockADT&lt;String, String&gt;[]
+	 * @param attribute - {@link PersonAttributesEnum}. This is used for selecting which attribute do we want. Use the enumerator for selecting the attribute.
+	 * @return {@link DataBlockADT}[]
 	 */
-	public DataBlockADT<String, String>[] getAttributesRelatedDataBlocks(int attribute){
-		return attributes[attribute];
+	public DataBlockADT<String, String>[] getAttributesRelatedDataBlocks(PersonAttributesEnum attribute){
+		if(attribute == PersonAttributesEnum.ID)
+			return null;
+		return attributes[attribute.ordinal()-1];
 	}
 	
 	
 	/**
 	 * Returns the collection of the asked attribute.
-	 * @param attribute - int. Asked attribute
+	 * @param attribute - {@link PersonAttributesEnum}. Asked attribute
 	 * @return String[] - Varying size.
 	 */
-	public String[] getAttribute(int attribute) {
+	public String[] getAttribute(PersonAttributesEnum attribute) {
 		String[] ret = null;
 		
 		
-		if(attribute != Person.ID) {	
-			
-			if(attributes[attribute] != null) {
+		if(attribute != PersonAttributesEnum.ID) {	
+			int index = attribute.ordinal()-1;
+			if(attributes[index] != null) {
 				// Creates a string array
-				int size = attributes[attribute].length;
+				int size = attributes[index].length;
 				ret = new String[size];
 				
 				for(int i = 0; i < size;i++)
-					ret[i] = attributes[attribute][i].getKey();
+					ret[i] = attributes[index][i].getKey();
 			}
 			
 		}else {
@@ -122,7 +123,7 @@ public class Person {
 		if(obj != null) {
 			if(obj instanceof Person ) {
 				Person p = (Person) obj;
-				if(id.equals(p.getAttribute(ID)[0])) {
+				if(id.equals(p.getAttribute(PersonAttributesEnum.ID)[0])) {
 					ret = true;				
 					}
 					

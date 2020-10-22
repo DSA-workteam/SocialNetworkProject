@@ -14,6 +14,7 @@ import adt.HashMapADT;
 import adt.NodeADT;
 import dataStructuresImplemented.ArrayListDataBlock;
 import dataStructuresImplemented.Person;
+import enums.PersonAttributesEnum;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
@@ -30,7 +31,7 @@ public class DataHolder{
 	
 	private static HashMapADT<DataBlockADT<String,String>, String>[] stringHashMaps;	
 	private static HashMapADT<Person, String> personHashMap;
-	
+	private static HashMapADT<DataBlockADT<Person,String>, String> dates; 
 	/**
 	 * Constructor of the class. Input the desired initial size of the hash maps.
 	 * @param hashMapsSize - int. Desired size.
@@ -39,22 +40,27 @@ public class DataHolder{
 	public DataHolder(int hashMapsSize) {
 		personHashMap = new GenericArrayListHashMap<Person, String>(hashMapsSize);
 		
-		stringHashMaps = (HashMapADT<DataBlockADT<String, String>, String>[]) Array.newInstance(GenericArrayListHashMap.class, Person.NPARAMETERS-1);
+		stringHashMaps = (HashMapADT<DataBlockADT<String, String>, String>[]) Array.newInstance(GenericArrayListHashMap.class, PersonAttributesEnum.values().length-1);
 		
-		for(int i = 0; i < Person.NPARAMETERS-1;i++)
+		dates = new GenericArrayListHashMap<DataBlockADT<Person,String>, String>(hashMapsSize);
+		
+		for(int i = 0; i < PersonAttributesEnum.values().length-1;i++)
 			stringHashMaps[i] = new GenericArrayListHashMap<DataBlockADT<String, String>, String>(hashMapsSize);
 	}
 	
 	/**
-	 * Gets the attribute's data block with the given key, if there isn't any, it throws ElementNotFoundException.
-	 * @param attribute - int. Person's public static constant ints are used here.
+	 * Gets the attribute's data block with the given key, if there isn't any, it throws {@link ElementNotFoundException}.
+	 * @param attribute - {@link PersonAttributesEnum}.
 	 * @param key - String. Wanted key inside of the data block.
-	 * @return datablock - DataBlockADT<String, String>.
+	 * @return datablock - {@link DataBlockADT}.
 	 * @throws ElementNotFoundException
 	 */
-	private static DataBlockADT<String, String> getDataBlockOf(int attribute, String key) throws ElementNotFoundException{
+	private static DataBlockADT<String, String> getDataBlockOf(PersonAttributesEnum attribute, String key) throws ElementNotFoundException{
 		// Searches inside the conflicts inside the hash map
-		Iterator<DataBlockADT<String, String>> resultsFromHashMap = stringHashMaps[attribute].get(key).iterator();
+		if(attribute == PersonAttributesEnum.ID)
+            throw new ElementNotFoundException("id datablock");
+
+		Iterator<DataBlockADT<String, String>> resultsFromHashMap = stringHashMaps[attribute.ordinal()-1].get(key).iterator();
         DataBlockADT<String, String> ret = null;        
         
         boolean found = false;
@@ -67,7 +73,7 @@ public class DataHolder{
         }
         
         if(!found) 
-            throw new ElementNotFoundException("There's not such stringdatablock");
+            throw new ElementNotFoundException("key "+key.toString() + " datablock");
             
         return ret;
 	}
@@ -76,17 +82,17 @@ public class DataHolder{
 	
 	/**
 	 * This private function returns a data block with the requested key and requested attribute, if an ElementNotFoundException is thrown, it creates a new one, adds it into the hash map and returns that.
-	 * @param attribute - int. Requested attribute. Use Person's public static final ints for this.
+	 * @param attribute - {@link PersonAttributesEnum}. Requested attribute.
 	 * @param key - String. Wanted key.
-	 * @return DataBlockADT<String, String>. It returns an object, it could be recently created or from the hash map created.
+	 * @return DataBlockADT<String, String>. {@link DataBlockADT} It returns an object, it could be recently created or from the hash map created.
 	 */
-	private DataBlockADT<String, String> constructorUseDataBlock(int attribute, String key) {
+	private DataBlockADT<String, String> constructorUseDataBlock(PersonAttributesEnum attribute, String key) {
 		DataBlockADT<String, String> ret;
 		try {
 		ret = getDataBlockOf(attribute, key);
 		}catch(ElementNotFoundException e) {
 			ret = new ArrayListDataBlock<String, String>(key);
-			stringHashMaps[attribute].put(key, ret);		
+			stringHashMaps[attribute.ordinal()-1].put(key, ret);		
 		}
 		
 		return ret;
@@ -94,17 +100,23 @@ public class DataHolder{
 	
 	
 	
-	
-	
+	/**
+	 * Returns the collection of all the elements in the network. For example, if you request all the name attribute, this will return the collection of all the names in the network.
+	 * @param attribute - {@link PersonAttributesEnum}.
+	 * @return {@link Collection} {@link DataBlockADT}
+	 */
+	public Collection<DataBlockADT<String, String>> getCollectionOfAttribute(PersonAttributesEnum attribute){
+		return stringHashMaps[attribute.ordinal()-1].getAllElements();
+	}
 	
 	
 	/**
 	 * Adds person into the network data base, it takes the related data blocks and adds Person p's id into it.
-	 * @param p - Person.
-	 * @throws AlreadyOnTheCollectionException - If the person that was trying to add was already on the collection
+	 * @param p - {@link Person}.
+	 * @throws AlreadyOnTheCollectionException - {@link AlreadyOnTheCollectionException} If the person that was trying to add was already on the collection.
 	 */
 	public void addPersonToNetwork(Person p) throws AlreadyOnTheCollectionException{
-		String id = p.getAttribute(Person.ID)[0];
+		String id = p.getAttribute(PersonAttributesEnum.ID)[0];
 		if(!personHashMap.isIn(id, p)) {
 			System.out.println(p.toString());
 			// Put the person in the Person Hash map
@@ -116,7 +128,7 @@ public class DataHolder{
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null)
 				for(int j = 0; j < attributes[i].length;j++) {
-					attributes[i][j] = constructorUseDataBlock(i, attributes[i][j].getKey());
+					attributes[i][j] = constructorUseDataBlock(PersonAttributesEnum.values()[i+1], attributes[i][j].getKey());
 					attributes[i][j].add(id);
 				}
 			
@@ -129,11 +141,11 @@ public class DataHolder{
 	
 	/**
 	 * Removes person from the network data and if the person's data block is left empty, it removes the data block from the hash map.
-	 * @param p - Person.
-	 * @throws ElementNotFoundException - Throws this exception if the Person p isn't in the network data.
+	 * @param p - {@link Person}.
+	 * @throws ElementNotFoundException - {@link ElementNotFoundException}. Throws this exception if the Person p isn't in the network data.
 	 */
 	public void removePersonFromNetwork(Person p) throws ElementNotFoundException{
-		String id = p.getAttribute(Person.ID)[0];
+		String id = p.getAttribute(PersonAttributesEnum.ID)[0];
 		if(personHashMap.remove(id, p)){
 			
 			//Unlinks all the nodes that were attached to this node
@@ -168,14 +180,14 @@ public class DataHolder{
 	/**
 	 * Gets person by its id.
 	 * @param id - String.
-	 * @return Person - Person with the given id.
-	 * @throws ElementNotFoundException - There's no one with that ID
+	 * @return Person - {@link Person}. Person with the given id.
+	 * @throws ElementNotFoundException - {@link ElementNotFoundException}. If there's no one with that ID.
 	 */
 	public Person getPersonByID(String id) throws ElementNotFoundException{
 		Collection<Person> people = personHashMap.get(id);
 		Person ret = null;
 		for(Person p : people) {
-			if(id.equals(p.getAttribute(Person.ID)[0])) {
+			if(id.equals(p.getAttribute(PersonAttributesEnum.ID)[0])) {
 				ret = p;
 			}
 		}
@@ -187,17 +199,17 @@ public class DataHolder{
 	
 	/**
 	 * Searches people by the given attribute. It returns the group that matches the search.
-	 * @param attribute - int. Use Person class' public static final ints for this.
+	 * @param attribute - {@link PersonAttributesEnum}. 
 	 * @param value - String search value.
-	 * @return Person[] group of people that matches the search.
-	 * @throws ElementNotFoundException - There's nobody with that attribute
+	 * @return Person[] {@link Person} group of people that matches the search.
+	 * @throws ElementNotFoundException - {@link ElementNotFoundException}. There's nobody with that attribute
 	 */
-	public Person[] searchPeopleByAttribute(int attribute, String value) throws ElementNotFoundException{
+	public Person[] searchPeopleByAttribute(PersonAttributesEnum attribute, String value) throws ElementNotFoundException{
 		
 		Person[] ret = null;
 		
 		//Checks if the attribute selected is ID and uses the getPersonByID method
-		if(attribute == -1) {
+		if(attribute == PersonAttributesEnum.ID) {
 			ret = new Person[1];
 			ret[0] = getPersonByID(value);
 		}
@@ -226,7 +238,7 @@ public class DataHolder{
 	/**
 	 * Loads file and then loads people that is stored inside.
 	 * @param fileName - String.
-	 * @param option - Indicates if this method will load people or load relationships
+	 * @param option - 0 = load people; 1 = load relationships.
 	 */
 	public void loadFile(String fileName, int option) {
 		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
@@ -304,7 +316,7 @@ public class DataHolder{
 		File writeFile = new File(path);
 		try {
 			PrintWriter writerPrinter = new PrintWriter(writeFile);
-			writerPrinter.println("id"+",".repeat(Person.NPARAMETERS-1));
+			writerPrinter.println("id"+",".repeat(PersonAttributesEnum.values().length-1));
 			personHashMap.iterator().forEachRemaining(person -> {writerPrinter.println(person.toString());});;
 		
 			writerPrinter.close();
@@ -323,7 +335,7 @@ public class DataHolder{
 	}
 	
 	/**
-	 * Returns number of people in the network
+	 * Returns number of people in the network.
 	 * @return int
 	 */
 	public int getNumberOfPeople() {
