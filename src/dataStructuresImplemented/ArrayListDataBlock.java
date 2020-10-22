@@ -55,4 +55,12 @@ public class ArrayListDataBlock<T,K extends Comparable<K>> implements DataBlockA
 		return N;
 	}
 
+	@Override
+	public String toString() {
+		String ret = "DataBlock holding "+key.toString() +"\n";
+		for(T t: list)
+			ret+= t.toString() + "\n";
+			
+		return ret;
+	}
 }
