@@ -1,4 +1,4 @@
-package adt;
+package abstractDataTypesPackage;
 
 import java.util.Collection;
 /**

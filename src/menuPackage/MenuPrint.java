@@ -1,11 +1,12 @@
-package socialNetworkPackage;
+package menuPackage;
 
 import java.util.Iterator;
 
-import adt.DataBlockADT;
+import abstractDataTypesPackage.DataBlockADT;
 import enums.MenuEnum;
 import enums.PersonAttributesEnum;
-import socialNetworkPackage.MenuManager.StateMachineAttributes;
+import menuPackage.MenuManager.StateMachineAttributes;
+import socialNetworkPackage.DataHolder;
 
 
 /**
@@ -19,12 +20,12 @@ public class MenuPrint {
 		
 	/**
 	 * Prints in console the information to the user according to the state machine's state.
-	 * @param dh - DataHolder{@link DataHolder} from the main method.
+	 * @param DataHolder.getInstance() - DataHolder{@link DataHolder} from the main method.
 	 * @param sma - {@link StateMachineAttributes} from the state machine of the MenuManager
 	 */
-	public void showMenu(DataHolder dh, StateMachineAttributes sma) {
+	public void showMenu(StateMachineAttributes sma) {
 		if( sma.state != MenuEnum.MAIN) {
-			showActionMenu(dh, sma);
+			showActionMenu(sma);
 		}else if(sma.state == MenuEnum.MAIN) {
 			switch(sma.substate) {
 			case 1:
@@ -115,9 +116,9 @@ public class MenuPrint {
 	
 	/**
 	 * Shows current state's functionalities menu to the user by printing it in the console
-	 * @param dh
+	 * @param DataHolder.getInstance()
 	 */
-	public void showActionMenu(DataHolder dh, StateMachineAttributes sma) {
+	public void showActionMenu(StateMachineAttributes sma) {
 		switch(sma.state) {
 		case ADD:
 			System.out.println("Type a persons details using ONLY THE INDICATED METHOD in a SINGLE LINE.");
@@ -134,7 +135,7 @@ public class MenuPrint {
 			System.out.println("People that have the same profile: ");
 			System.out.println();
 			
-			Iterator<DataBlockADT<String, String>> it = dh.getCollectionOfAttribute(PersonAttributesEnum.MOVIES).iterator();
+			Iterator<DataBlockADT<String, String>> it = DataHolder.getInstance().getCollectionOfAttribute(PersonAttributesEnum.MOVIES).iterator();
 			while(it.hasNext()) {
 				System.out.println(it.next().toString());
 			}

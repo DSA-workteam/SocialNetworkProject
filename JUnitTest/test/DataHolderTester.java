@@ -16,7 +16,8 @@ class DataHolderTester {
 	DataHolder dh;
 	@BeforeEach
 	void setupDH() {
-		dh = new DataHolder(128);
+		DataHolder.instantiate(100);
+		dh = DataHolder.getInstance();
 	}
 	
 	

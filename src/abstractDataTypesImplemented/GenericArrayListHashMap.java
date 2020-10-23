@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import adt.HashMapADT;
+import abstractDataTypesPackage.HashMapADT;
 import jdk.jfr.Experimental;
 /**
  * Implementation of HashMapADT made with ArrayList. This uses an ArrayList inside of the hash map to fix collisions. Experimental version.

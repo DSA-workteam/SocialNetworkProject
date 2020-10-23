@@ -1,12 +1,13 @@
-package socialNetworkPackage;
+package menuPackage;
 
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
-import adt.DataBlockADT;
+import abstractDataTypesPackage.DataBlockADT;
 import enums.MenuEnum;
 import exceptions.MenuClosedException;
+import socialNetworkPackage.SocialNetwork;
 
 
 /**
@@ -41,7 +42,7 @@ public class MenuManager {
 	 * Main program's menu loop. It uses {@link FileInputStream} for the scanner, so it can be reopened.
 	 * @param dh - {@link DataBlockADT}. Referenced from the main method in {@link SocialNetwork}.
 	 */
-	public void run(DataHolder dh) {
+	public void run() {
 				// Console input 
 				FileInputStream fis = new FileInputStream(FileDescriptor.in);
 				Scanner scanner = new Scanner(fis);
@@ -54,7 +55,7 @@ public class MenuManager {
 				// Main loop of the menu
 				while(onMenu) {
 					
-					mp.showMenu(dh, sma);
+					mp.showMenu(sma);
 					
 					// Gets input one by one, so it reduces the probability of having errors
 					if(scanner.hasNext())
@@ -62,7 +63,7 @@ public class MenuManager {
 					
 					try {
 						// Gives the input to the function that the user has selected.
-						mf.useInput(input,dh, sma);
+						mf.useInput(input, sma);
 					} catch (MenuClosedException e) {
 						onMenu = false;
 					}

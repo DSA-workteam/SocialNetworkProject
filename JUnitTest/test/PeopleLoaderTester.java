@@ -18,7 +18,8 @@ class PeopleLoaderTester {
 	
 	@BeforeEach
 	void createEmptyDataHolder() {
-		dh = new DataHolder(128);
+		DataHolder.instantiate(100);
+		dh = DataHolder.getInstance();
 		
 	}
 	@Test

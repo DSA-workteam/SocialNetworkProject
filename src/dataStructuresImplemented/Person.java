@@ -4,8 +4,8 @@ package dataStructuresImplemented;
 import java.lang.reflect.Array;
 
 import abstractDataTypesImplemented.GenericArrayListNode;
-import adt.DataBlockADT;
-import adt.NodeADT;
+import abstractDataTypesPackage.DataBlockADT;
+import abstractDataTypesPackage.NodeADT;
 import enums.PersonAttributesEnum;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**

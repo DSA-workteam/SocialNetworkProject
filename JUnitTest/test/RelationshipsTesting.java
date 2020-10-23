@@ -8,18 +8,20 @@ import java.util.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import adt.NodeADT;
+import abstractDataTypesPackage.NodeADT;
 import dataStructuresImplemented.Person;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 import socialNetworkPackage.DataHolder;
+import socialNetworkPackage.DataManager;
 
 class RelationshipsTesting {
 	DataHolder dh;
 	
 	@BeforeEach
 	void setupDH() {
-		dh = new DataHolder(128);
+		DataHolder.instantiate(100);
+		dh = DataHolder.getInstance();
 	}
 	
 	@Test
@@ -67,8 +69,8 @@ class RelationshipsTesting {
 	@Test
 	void removeAPersonFromNetwork() throws ElementNotFoundException {
 		// Load test social network
-		dh.loadFile("peopleJUnit", 0);
-		dh.loadFile("friendsJUnit", 1);
+		DataManager.getInstance().loadFile("peopleJUnit", 0);
+		DataManager.getInstance().loadFile("friendsJUnit", 1);
 		// Check their relationships
 		NodeADT<String> peruNode = dh.getPersonByID("Peru57").getNode();
 		Collection<NodeADT<String>> c = peruNode.getLinkedNodes();

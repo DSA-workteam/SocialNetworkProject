@@ -1,4 +1,4 @@
-package socialNetworkPackage;
+package menuPackage;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +11,9 @@ import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 import exceptions.MenuClosedException;
-import socialNetworkPackage.MenuManager.StateMachineAttributes;
+import menuPackage.MenuManager.StateMachineAttributes;
+import socialNetworkPackage.DataHolder;
+import socialNetworkPackage.DataManager;
 
 public class MenuFunctions {
 	
@@ -21,17 +23,16 @@ public class MenuFunctions {
 	/**
 	 * This method is a collection of functions of the menu. In this method near all the functionality of the menu options are implemented.
 	 * @param input - String. It takes the input from the main menu loop.
-	 * @param dh DataHolder - {@link DataHolder}.
 	 * @param sma - {@link StateMachineAttributes} from MenuManager
 	 * @throws MenuClosedException - {@link MenuClosedException}. If this is thrown, the main loop of the menu will stop and the program terminates.
 	 */
-	public void useInput(String input, DataHolder dh,StateMachineAttributes sma) throws MenuClosedException{
+	public void useInput(String input,StateMachineAttributes sma) throws MenuClosedException{
 		switch(sma.state) {
 		case ADD: // Extra function added by us
 			
 			try {
 				Person nPerson = new Person(input);
-				dh.addPersonToNetwork(nPerson);			
+				DataHolder.getInstance().addPersonToNetwork(nPerson);			
 				System.out.println("Your person has been loaded successfully");
 			} catch (ImpulsoryAttributeRequiredException e) {
 				System.out.println("You haven't typed any ID.");
@@ -77,7 +78,7 @@ public class MenuFunctions {
 				}
 				for(int i = y1; i < y2;i++)				
 					try {
-						Person[] peopleSorted = sortPersonArray(dh.getYearOfBirth(i +"").getCollection());
+						Person[] peopleSorted = sortPersonArray(DataHolder.getInstance().getYearOfBirth(i +"").getCollection());
 						System.out.println();
 						
 						
@@ -95,13 +96,13 @@ public class MenuFunctions {
 			
 			break;
 		case LOADP: // Point 2 or 3 of the programming project //TODO check this
-			dh.loadFile(input, 0);
+			DataManager.getInstance().loadFile(input, 0);
 			
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 1;
 			break;
 		case LOADR: // Point 5 of the programming project
-			dh.loadFile(input, 1);
+			DataManager.getInstance().loadFile(input, 1);
 			
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 1;
@@ -204,7 +205,7 @@ public class MenuFunctions {
 						sma.state = MenuEnum.RANDOM;
 						break;
 					case 7:
-						System.out.println("Number of people in the network " + dh.getNumberOfPeople());
+						System.out.println("Number of people in the network " + DataHolder.getInstance().getNumberOfPeople());
 						
 						sma.substate = 3;			
 						sma.state = MenuEnum.MAIN;
@@ -221,7 +222,7 @@ public class MenuFunctions {
 			
 			break;
 		case PRINTP: // Point 4 of the programming project // TODO check this
-			dh.printIntoFile(input);
+			DataManager.getInstance().printIntoFile(input);
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 1;
 			break;
@@ -236,7 +237,7 @@ public class MenuFunctions {
 				int intCast = Integer.parseInt(input);
 				for(int i = 0; i < intCast;i++)
 					try {
-						dh.addPersonToNetwork(RandomPeopleGenerator.getInstance().generateRandomPerson());
+						DataHolder.getInstance().addPersonToNetwork(RandomPeopleGenerator.getInstance().generateRandomPerson());
 					} catch (AlreadyOnTheCollectionException e) {
 						
 					}
@@ -250,8 +251,8 @@ public class MenuFunctions {
 		case REMOVEPERSON: // Extra function added by us
 
 			try {
-				Person p = dh.getPersonByID(input);
-				dh.removePersonFromNetwork(p);
+				Person p = DataHolder.getInstance().getPersonByID(input);
+				DataHolder.getInstance().removePersonFromNetwork(p);
 				System.out.println("The person has been removed succesfully");
 				System.out.println(p);
 				System.out.println();
@@ -288,7 +289,7 @@ public class MenuFunctions {
 			}else { // Searching for people that fulfill the have the requested attribute with the given value
 				
 				try {
-					Person[] output = dh.searchPeopleByAttribute(PersonAttributesEnum.values()[sma.parsedOption - 1],input);
+					Person[] output = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.values()[sma.parsedOption - 1],input);
 					System.out.println();
 					System.out.println("At least one person has been found, here is the output:");
 					for (int i = 0; i < output.length; i++) {

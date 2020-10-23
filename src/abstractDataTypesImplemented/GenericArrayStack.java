@@ -2,7 +2,7 @@ package abstractDataTypesImplemented;
 
 import java.util.Iterator;
 
-import adt.StackADT;
+import abstractDataTypesPackage.StackADT;
 /**
  * Implementation of Stack abstract data type. This is the class for the stack of type T implemented with an array.
  * @author Borja Moralejo Tobajas

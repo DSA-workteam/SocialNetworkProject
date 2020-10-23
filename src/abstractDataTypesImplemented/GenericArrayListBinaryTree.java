@@ -3,7 +3,7 @@ package abstractDataTypesImplemented;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import adt.BinaryTreeADT;
+import abstractDataTypesPackage.BinaryTreeADT;
 /**
  * Implementation made with ArrayList of BinaryTreeADT.
  * @author Borja Moralejo Tobajas

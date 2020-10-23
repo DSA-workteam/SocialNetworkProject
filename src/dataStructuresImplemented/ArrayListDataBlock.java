@@ -3,7 +3,7 @@ package dataStructuresImplemented;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import adt.DataBlockADT;
+import abstractDataTypesPackage.DataBlockADT;
 
 public class ArrayListDataBlock<T,K extends Comparable<K>> implements DataBlockADT<T,K>{
 

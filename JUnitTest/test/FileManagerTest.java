@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collection;
@@ -14,13 +13,16 @@ import enums.PersonAttributesEnum;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 import socialNetworkPackage.DataHolder;
+import socialNetworkPackage.DataManager;
 
 class FileManagerTest {
 
 	
 	@BeforeEach
 	void setupDH() {
-		dh = new DataHolder(128);
+		DataHolder.instantiate(100);
+		dh = DataHolder.getInstance();
+		
 	}
 	
 	DataHolder dh;
@@ -32,9 +34,9 @@ class FileManagerTest {
 		
 		Person p = new Person(data);	
 		// load file that contains that person and compare all attributes
-		dh.loadFile("peopleJUnit", 0);
+		DataManager.getInstance().loadFile("peopleJUnit", 0);
 		// File not found
-		dh.loadFile("A", 0);
+		DataManager.getInstance().loadFile("A", 0);
 		
 		Assertions.assertEquals(p, dh.getPersonByID("Pepe77"));
 		Assertions.assertEquals(p, dh.searchPeopleByAttribute(PersonAttributesEnum.ID, "Pepe77")[0]);
@@ -43,17 +45,17 @@ class FileManagerTest {
 	
 	@Test
 	void testLoadRelationshipsWithoutPeople() {
-		dh.loadFile("friendsJUnit", 1);
+		DataManager.getInstance().loadFile("friendsJUnit", 1);
 	}
 	
 	@Test
 	void testDuplicated() {
 		//Load file
-		dh.loadFile("peopleJUnit", 0);
+		DataManager.getInstance().loadFile("peopleJUnit", 0);
 		int nOfPeople = dh.getNumberOfPeople();
 		
 		//Load again same file, it shouldn't increase the number of people
-		dh.loadFile("peopleJUnit", 0);
+		DataManager.getInstance().loadFile("peopleJUnit", 0);
 		assertEquals(nOfPeople, dh.getNumberOfPeople());
 		
 		
@@ -63,16 +65,16 @@ class FileManagerTest {
 	void printIntoFile() {
 		
 		//Load file
-		dh.loadFile("peopleJUnit", 0);
+		DataManager.getInstance().loadFile("peopleJUnit", 0);
 
 		Collection<Person> people = dh.getPeople();
 		//Print file
-		dh.printIntoFile("peopleJUnitPrintTest");
+		DataManager.getInstance().printIntoFile("peopleJUnitPrintTest");
 		
 		//Create another network
-		dh = new DataHolder(128);
+		DataHolder.instantiate(100);
 		//Load new file and compare both people collections
-		dh.loadFile("peopleJUnitPrintTest", 0);
+		DataManager.getInstance().loadFile("peopleJUnitPrintTest", 0);
 		
 		Assertions.assertTrue(people.containsAll(dh.getPeople()));
 		

@@ -1,4 +1,4 @@
-package socialNetworkPackage;
+package menuPackage;
 
 import java.io.File;
 import java.io.FileNotFoundException;

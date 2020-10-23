@@ -1,6 +1,6 @@
 package socialNetworkPackage;
 
-
+import menuPackage.MenuManager;
 
 /**
  * Main class of the project.
@@ -15,12 +15,12 @@ public class SocialNetwork {
 	public static void main(String[] args) {	
 
 		// Initializes the data structure holder	
-		DataHolder dh = new DataHolder(100);
+		DataHolder.instantiate(128);
 
 		
 		// IMOKE needed to remake this in a better way, using Enums or whatever. Turns out Borja did that.
 		MenuManager mm = new MenuManager();
-		mm.run(dh);
+		mm.run();
 
 		
 	}

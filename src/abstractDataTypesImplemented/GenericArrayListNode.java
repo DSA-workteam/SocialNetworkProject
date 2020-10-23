@@ -3,7 +3,7 @@ package abstractDataTypesImplemented;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import adt.NodeADT;
+import abstractDataTypesPackage.NodeADT;
 import exceptions.ElementNotFoundException;
 
 /**

@@ -9,9 +9,9 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import abstractDataTypesImplemented.GenericArrayListHashMap;
-import adt.DataBlockADT;
-import adt.HashMapADT;
-import adt.NodeADT;
+import abstractDataTypesPackage.DataBlockADT;
+import abstractDataTypesPackage.HashMapADT;
+import abstractDataTypesPackage.NodeADT;
 import dataStructuresImplemented.ArrayListDataBlock;
 import dataStructuresImplemented.Person;
 import enums.PersonAttributesEnum;
@@ -34,8 +34,25 @@ public class DataHolder{
 	private static HashMapADT<DataBlockADT<Person,String>, String> dates; 
 	
 	
-	// TODO SINGLETON
+	// Singleton
 	
+	private static DataHolder instance;
+	
+	/**
+	 * Singleton's instance getter
+	 * @return {@link DataHolder}
+	 */
+	public static DataHolder getInstance() {
+		return instance;
+	}
+	
+	/**
+	 * Singleton's instance initiliarizers
+	 * @param hashmapsize - int.
+	 */
+	public static void instantiate(int hashmapsize) {
+		instance = new DataHolder(hashmapsize);
+	}
 	
 	
 	
@@ -46,7 +63,7 @@ public class DataHolder{
 	 * @param hashMapsSize - int. Desired size.
 	 */
 	@SuppressWarnings("unchecked")
-	public DataHolder(int hashMapsSize) {
+	private DataHolder(int hashMapsSize) {
 		personHashMap = new GenericArrayListHashMap<Person, String>(hashMapsSize);
 		
 		stringHashMaps = (HashMapADT<DataBlockADT<String, String>, String>[]) Array.newInstance(GenericArrayListHashMap.class, PersonAttributesEnum.values().length-1);
@@ -302,99 +319,6 @@ public class DataHolder{
 	
 	
 	
-	/**
-	 * Loads file and then loads people that is stored inside.
-	 * @param fileName - String.
-	 * @param option - 0 = load people; 1 = load relationships.
-	 */
-	public void loadFile(String fileName, int option) {
-		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
-		Stopwatch stopwatch = new Stopwatch();
-		File f = new File(path);
-		try {
-			Scanner s = new Scanner(f);
-			s.useDelimiter("\n");
-			s.nextLine();
-
-			if (option == 0)
-				while(s.hasNext())
-					loadPerson(s.nextLine());
-			else {
-				while (s.hasNext())
-					loadRelationship(s.nextLine());
-			}
-			s.close();
-			System.out.println();
-			System.out.println("Elapsed time loading the file: "+ stopwatch.elapsedTime());
-			System.out.println("Load process finished");
-			System.out.println();
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found: " + path);
-			System.out.println();
-		}
-		
-		
-	}
-	
-	/**
-	 * Takes the input and links the nodes of the 2 given ID, separated by ","
-	 * @param data 2 String separated by ","
-	 */
-	public void loadRelationship(String data) {
-		Person person1;
-		Person person2;
-		
-		String[] separatedID = data.split(",");
-		try {
-			person1 = getPersonByID(separatedID[0]);
-			person2 = getPersonByID(separatedID[1]);
-			person1.getNode().link(person2.getNode());
-			person2.getNode().link(person1.getNode());
-			
-
-		}
-		catch(ElementNotFoundException e) {
-			System.out.println("At least one of the ID introduced to make the relationship with doesn't exist");
-		}
-		
-		
-	}
-	
-	
-	/**
-	 * Takes the input and converts it into a Person object.
-	 * @param data String - csv format.
-	 */
-	private void loadPerson(String data) {
-		try {
-			addPersonToNetwork(new Person(data));
-		} catch (ImpulsoryAttributeRequiredException e) {			
-			e.printStackTrace();
-		} catch(AlreadyOnTheCollectionException e) {
-			
-		}
-		
-	}
-	
-	
-	/**
-	 * Prints all people in the network into the given file.
-	 * @param fileName - String. Wanted file name.
-	 */
-	public void printIntoFile(String fileName) {
-		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
-		File writeFile = new File(path);
-		try {
-			PrintWriter writerPrinter = new PrintWriter(writeFile);
-			writerPrinter.println("id"+",".repeat(PersonAttributesEnum.values().length-1));
-			personHashMap.iterator().forEachRemaining(person -> {writerPrinter.println(person.toString());});;
-		
-			writerPrinter.close();
-			System.out.println("Done");
-		} catch (FileNotFoundException e) {
-		}
-		
-	}
 	
 	/**
 	 * Gets all the people of the network and returns the collection
