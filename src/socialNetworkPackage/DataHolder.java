@@ -110,6 +110,59 @@ public class DataHolder{
 	}
 	
 	
+	
+	/**
+	 * Joins elements by birth date
+	 * @param key - String. Birth date of Person p
+	 * @param p - {@link Person}
+	 */
+	private void datesAgrupator(String key, Person p) {
+		String year = "";
+		try {
+		year = key.split("-")[2];
+		}catch(ArrayIndexOutOfBoundsException e) {
+			System.err.println("Wrong date format introduced");
+		}
+		
+		if(year != "") {
+			DataBlockADT<Person, String> db;
+			try {
+				getYearOfBirth(year).add(p);
+			}catch(ElementNotFoundException e) {
+			
+				db = new ArrayListDataBlock<Person, String>(year);
+				db.add(p);
+				dates.put(year, db);			
+			}
+		}
+	}
+	
+	
+	
+	/**
+	 * Get the datablock of the year of birth given by the user
+	 * @param year - String
+	 * @return {@link DataBlockADT}
+	 * @throws ElementNotFoundException - {@link ElementNotFoundException}
+	 */
+	public DataBlockADT<Person, String> getYearOfBirth(String year) throws ElementNotFoundException{
+		DataBlockADT<Person, String> ret = null;
+		Iterator<DataBlockADT<Person, String>> itDB = dates.get(year).iterator();
+		boolean found = false;
+		DataBlockADT<Person, String> db;
+		while(itDB.hasNext()) {
+			 db = itDB.next();
+			if(db.getKey().equals(year)) {
+				found = true;
+				ret = db;
+			}
+		}
+		if(!found)
+			throw new ElementNotFoundException("datablock of year "+year );
+		return ret;
+	}
+	
+	
 	/**
 	 * Adds person into the network data base, it takes the related data blocks and adds Person p's id into it.
 	 * @param p - {@link Person}.
@@ -126,10 +179,15 @@ public class DataHolder{
 			DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
 			
 			for(int i = 0; i < attributes.length; i++)
-				if(attributes[i] != null)
-				for(int j = 0; j < attributes[i].length;j++) {
-					attributes[i][j] = constructorUseDataBlock(PersonAttributesEnum.values()[i+1], attributes[i][j].getKey());
-					attributes[i][j].add(id);
+				if(attributes[i] != null) {
+					for(int j = 0; j < attributes[i].length;j++) {
+						attributes[i][j] = constructorUseDataBlock(PersonAttributesEnum.values()[i+1], attributes[i][j].getKey());
+						attributes[i][j].add(id);
+						
+					}
+					if(PersonAttributesEnum.values()[i+1] == PersonAttributesEnum.BIRTHDATE) {
+						datesAgrupator(attributes[i][0].getKey(),p);
+					}
 				}
 			
 		}else {

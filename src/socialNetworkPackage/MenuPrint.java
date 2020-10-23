@@ -137,14 +137,21 @@ public class MenuPrint {
 			while(it.hasNext()) {
 				System.out.println(it.next().toString());
 			}
-			
+			System.out.println("Enter anything to continue:");
+
 
 			break;
 		case DATES:
 			
-			System.out.println();
-			System.out.println("People that have the same profile: ");
-			System.out.println();
+			if(sma.substate == 0) {
+				System.out.println();
+				System.out.println("Enter D1, the year of birth of the people that you want to search for: ");
+				System.out.println();
+			}else {
+				System.out.println();
+				System.out.println("Enter another year:");
+				System.out.println();
+			}
 			
 			break;
 		

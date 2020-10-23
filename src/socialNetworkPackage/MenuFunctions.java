@@ -1,5 +1,9 @@
 package socialNetworkPackage;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import dataStructuresImplemented.Person;
 import enums.MenuEnum;
 import enums.PersonAttributesEnum;
@@ -43,7 +47,6 @@ public class MenuFunctions {
 			sma.state = MenuEnum.MAIN;
 			break;
 		case BUILDPROFILES:	// Point 10 of the programming project
-			System.out.println("Press enter to continue:");
 			sma.substate = 2;
 			sma.state = MenuEnum.MAIN;
 			break;
@@ -51,13 +54,40 @@ public class MenuFunctions {
 			if(sma.substate == 0) {
 				s1 = input;
 				sma.substate = 1;
-				System.out.println("Enter another year:");
+				
 			}else {
 				s2 = input;			
 				
-				s1 = s2 = s1;//nada, ignoralo es para el warning borralo
-				s1 = s2;
-				//TODO borja
+				int y1 = 0,y2 = 0;
+				try {
+					y1 = Integer.parseInt(s1);
+				}catch(NumberFormatException e) {
+					System.err.println("First input wasn't a year!");
+				}
+				
+				try {
+					y2 = Integer.parseInt(s2);
+				}catch(NumberFormatException e) {
+						System.err.println("Second input wasn't a year!");
+				}
+				if(y1 > y2) {
+					int temp = y2;
+					y2 = y1;
+					y1 = temp;
+				}
+				for(int i = y1; i < y2;i++)				
+					try {
+						Person[] peopleSorted = sortPersonArray(dh.getYearOfBirth(i +"").getCollection());
+						System.out.println();
+						
+						
+						System.out.println("People born in the year "+ i+ " sorted by birthplace, surnames and names: ");
+						for(int j = 0; j < peopleSorted.length; j++) {
+							System.out.println(peopleSorted[j].toString());
+						}
+						System.out.println();
+					} catch (ElementNotFoundException e) {
+					}
 				
 				sma.substate = 2;
 				sma.state = MenuEnum.MAIN;				
@@ -266,7 +296,126 @@ public class MenuFunctions {
 		}
 	}
 	
+	/**
+	 * Recursive sorting function for the point 8 of the Programming Project.
+	 * @param sorting - PersonAttributesEnum {@link PersonAttributesEnum} attribute type that is being compared.
+	 * @param p1 - Person {@link Person}. 
+	 * @param p2 - Person {@link Person}.
+	 * @param depth - int. If the Person objects have more than one attribute of one type, we need to compare all of them, and this parameter is for that.
+	 * @return boolean. Whether or not the first person is "lighter" than the second person passed by parameters. With this the selection sorting algorithm decides to swap the "bigger" person.
+	 */
+	private boolean getFirstPerson(PersonAttributesEnum sorting, Person p1, Person p2, int depth){
+		boolean ret = false;
+		int comp = 0;
+		
+		
+		// this makes the comparison between p1 and p2, if any or both of the Person objects doesn't have an attribute, the one with attribute has preference, and if both haven't attribute, it checks the next attribute
+		try {
+		 comp = p1.getAttribute(sorting)[depth].compareTo(p2.getAttribute(sorting)[depth]);
+		}catch(NullPointerException e) {
+			if(p1.getAttribute(sorting) == null && p2.getAttribute(sorting) == null)
+				comp = 0;
+			else if(p1.getAttribute(sorting) == null)
+				comp = 1;
+			else 
+				comp = -1;
+		}
+		
+		if(comp > 0) {
+			ret = false;
+		}else if(comp < 0) {
+			ret = true;
+		}else {
+			boolean b1,b2;
+			// Recursion sorting order
+			switch(sorting) {
+			case BIRTHPLACE:
+				ret = getFirstPerson(PersonAttributesEnum.SURNAME, p1, p2, 0); // Continues recursion 
+				break;
+			case SURNAME:
+				
+				// Checks if the Person objects have more attributes of the sorting type, if they do, the recursion increases in depth.
+				b1 = p1.getAttribute(PersonAttributesEnum.SURNAME).length <= depth+1;
+				b2 = p2.getAttribute(PersonAttributesEnum.SURNAME).length <= depth+1;
+				if(b1 && b2 ) {
+					ret = getFirstPerson(PersonAttributesEnum.NAME, p1, p2, 0); // Continues recursion 
+				}else if(b1 ){
+					ret = false;
+				}else if(b2){
+					ret = true;
+				}else {
+					ret = getFirstPerson(PersonAttributesEnum.SURNAME, p1, p2, depth+1); // Continues recursion, comparing the same attribute type but increasing depth
+				}
+				
+				
+				break;
+			case NAME:
+				
+				// Checks if the Person objects have more attributes of the sorting type, if they do, the recursion increases in depth.
+				b1 = p1.getAttribute(PersonAttributesEnum.NAME).length <= depth+1;
+				b2 = p2.getAttribute(PersonAttributesEnum.NAME).length <= depth+1;
+				if(b1 && b2 ) {
+					ret = false;
+				}else if(b1 ){
+					ret = false;
+				}else if(b2){
+					ret = true;
+				}else {
+					ret = getFirstPerson(PersonAttributesEnum.NAME, p1, p2, depth+1); // Continues recursion, comparing the same attribute type but increasing depth
+
+				}
+				
+				
+				break;
+			default:
+				break;
+			}
+		}
+		
+		
+		
+		return ret;
+	}
 	
 	
+	/**
+	 * Sorting function for the Point 8 of the programming project. It uses selection sorting algorithm O(n2) recursively. It sorts by birthplace, surnames and names.
+	 * @param people - Collection {@link Collection} of people to be sorted
+	 * @return Person {@link Person}[] sorted
+	 */
+	private Person[] sortPersonArray(Collection<Person> people){
+		
+		// Creating unordered array of Person. Casting collection.toArray() doesn't work.
+		Person[] ret = new Person[people.size()];
+		int sum = 0;
+		Iterator<Person> it = people.iterator();
+		while(it.hasNext())
+			ret[sum++] = it.next();
+		
+		int size = people.size();
+		Person p;
+		int index = -1;
+		
+		// Sort by selection order of the attributes sorted lexicographically birthplace, surname, name
+		for(int i = 0; i < size-1; i++) {
+			p = ret[i];
+			index = -1;
+			for(int j = i+1; j < size; j++) {
+				if(getFirstPerson(PersonAttributesEnum.BIRTHPLACE, ret[j], p, 0)) {
+					p = ret[j];
+					index = j;
+				}
+			}
+			if(index != -1) {
+				ret[index] = ret[i];
+				ret[i] = p;
+			}
+		}
+		
+		// TODO use a better sorting algorithm
+		
+		
+		return ret;
+	}
 	
 }
