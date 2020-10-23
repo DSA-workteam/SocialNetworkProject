@@ -7,7 +7,6 @@ import abstractDataTypesImplemented.GenericArrayListNode;
 import adt.DataBlockADT;
 import adt.NodeADT;
 import enums.PersonAttributesEnum;
-import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**
  * This class is the main data object that our project uses.
