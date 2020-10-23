@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dataStructuresImplemented.Person;
+import enums.PersonAttributesEnum;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
@@ -73,7 +74,7 @@ class DataHolderTester {
 		dh.addPersonToNetwork(p);
 		dh.addPersonToNetwork(p2);
 		// Check if p2 is inside the related data block of birthplace
-		assertEquals(p.getAttributesRelatedDataBlocks(Person.BIRTHPLACE)[0], p2.getAttributesRelatedDataBlocks(Person.BIRTHPLACE)[0]);
+		assertEquals(p.getAttributesRelatedDataBlocks(PersonAttributesEnum.BIRTHPLACE)[0], p2.getAttributesRelatedDataBlocks(PersonAttributesEnum.BIRTHPLACE)[0]);
 		
 		
 	}
@@ -88,8 +89,8 @@ class DataHolderTester {
 		dh.addPersonToNetwork(p);
 		dh.addPersonToNetwork(p2);
 		// Search them
-		assertEquals(p, dh.searchPeopleByAttribute(Person.BIRTHPLACE,"Los Angeles")[0]);
-		assertEquals(p2, dh.searchPeopleByAttribute(Person.GROUPCODE, "G777")[0]);
+		assertEquals(p, dh.searchPeopleByAttribute(PersonAttributesEnum.BIRTHPLACE,"Los Angeles")[0]);
+		assertEquals(p2, dh.searchPeopleByAttribute(PersonAttributesEnum.GROUPCODE, "G777")[0]);
 		
 
 		

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dataStructuresImplemented.Person;
+import enums.PersonAttributesEnum;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 import socialNetworkPackage.DataHolder;
@@ -36,7 +37,7 @@ class FileManagerTest {
 		dh.loadFile("A", 0);
 		
 		Assertions.assertEquals(p, dh.getPersonByID("Pepe77"));
-		Assertions.assertEquals(p, dh.searchPeopleByAttribute(Person.ID, "Pepe77")[0]);
+		Assertions.assertEquals(p, dh.searchPeopleByAttribute(PersonAttributesEnum.ID, "Pepe77")[0]);
 
 	}
 	

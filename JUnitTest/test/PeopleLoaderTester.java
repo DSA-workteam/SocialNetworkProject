@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dataStructuresImplemented.Person;
+import enums.PersonAttributesEnum;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
@@ -47,8 +48,8 @@ class PeopleLoaderTester {
 	void getAttributeFromPerson() throws ImpulsoryAttributeRequiredException {
 		String data = "Pepe66,Don Pepe,Balloon,3-10-2003,male,Los Angeles,San Francisco,San Francisco,New York,Tiana,G77371";
 		Person p = new Person(data);
-		assertEquals("Pepe66",p.getAttribute(Person.ID)[0]);
-		assertEquals("Balloon",p.getAttribute(Person.SURNAME)[0]);
+		assertEquals("Pepe66",p.getAttribute(PersonAttributesEnum.ID)[0]);
+		assertEquals("Balloon",p.getAttribute(PersonAttributesEnum.SURNAME)[0]);
 
 	}
 	
