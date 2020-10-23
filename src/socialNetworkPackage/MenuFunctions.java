@@ -167,6 +167,7 @@ public class MenuFunctions {
 						sma.substate = 0;
 						sma.state = MenuEnum.BUILDPROFILES;
 						break;
+				
 					default:
 						System.err.println("That sma.state doesn't exist");
 						break;
@@ -197,6 +198,17 @@ public class MenuFunctions {
 					case 5:
 						sma.substate = 0;
 						sma.state = MenuEnum.SHOWFRIENDS;
+						break;
+					case 6:
+						sma.substate = 0;			
+						sma.state = MenuEnum.RANDOM;
+						break;
+					case 7:
+						System.out.println("Number of people in the network " + dh.getNumberOfPeople());
+						
+						sma.substate = 3;			
+						sma.state = MenuEnum.MAIN;
+						break;
 					default:
 						System.err.println("That sma.state doesn't exist");
 						break;
@@ -215,6 +227,22 @@ public class MenuFunctions {
 			break;
 		case PRINTR: // Extra function added by us
 			// TODO print relationships
+			
+			sma.state = MenuEnum.MAIN;
+			sma.substate = 3;
+			break;
+		case RANDOM:
+			try {
+				int intCast = Integer.parseInt(input);
+				for(int i = 0; i < intCast;i++)
+					try {
+						dh.addPersonToNetwork(RandomPeopleGenerator.getInstance().generateRandomPerson());
+					} catch (AlreadyOnTheCollectionException e) {
+						
+					}
+			}catch(NumberFormatException e) {
+				System.err.println("That's not a number!");	
+			}
 			
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 3;
@@ -368,6 +396,7 @@ public class MenuFunctions {
 				
 				break;
 			default:
+				System.err.println("Not implemented in menu functions");
 				break;
 			}
 		}

@@ -94,7 +94,8 @@ public class MenuPrint {
 		System.out.println("	3. Add person into the network");
 		System.out.println("	4. Remove person by ID");
 		System.out.println("	5. Show friends of the given id");
-
+		System.out.println("	6. Generate random people");
+		System.out.println("	7. Show number of people in network");
 		System.out.println("0. Back");
 
 	}
@@ -175,6 +176,11 @@ public class MenuPrint {
 			System.out.println("Please, insert the name of the file which you will create to print the relationships data in");
 			System.out.println();
 			break;
+		case RANDOM:
+			System.out.println();
+			System.out.println("Please, input the number of random people that you want to generate and add into the network: ");
+			System.out.println();
+			break;
 		case REMOVEPERSON:
 			System.out.println();
 			System.out.println("Type the ID of the person you want to delete");
@@ -209,6 +215,7 @@ public class MenuPrint {
 		case MAIN:
 			break;
 		default:
+			System.err.println("Not implemented");
 			break;
 		}
 	}

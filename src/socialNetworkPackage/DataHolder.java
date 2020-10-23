@@ -32,6 +32,15 @@ public class DataHolder{
 	private static HashMapADT<DataBlockADT<String,String>, String>[] stringHashMaps;	
 	private static HashMapADT<Person, String> personHashMap;
 	private static HashMapADT<DataBlockADT<Person,String>, String> dates; 
+	
+	
+	// TODO SINGLETON
+	
+	
+	
+	
+	
+	
 	/**
 	 * Constructor of the class. Input the desired initial size of the hash maps.
 	 * @param hashMapsSize - int. Desired size.
@@ -119,9 +128,9 @@ public class DataHolder{
 	private void datesAgrupator(String key, Person p) {
 		String year = "";
 		try {
-		year = key.split("-")[2];
+			year = key.split("-")[2];
 		}catch(ArrayIndexOutOfBoundsException e) {
-			System.err.println("Wrong date format introduced");
+			year = "";
 		}
 		
 		if(year != "") {
@@ -300,6 +309,7 @@ public class DataHolder{
 	 */
 	public void loadFile(String fileName, int option) {
 		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
+		Stopwatch stopwatch = new Stopwatch();
 		File f = new File(path);
 		try {
 			Scanner s = new Scanner(f);
@@ -314,6 +324,8 @@ public class DataHolder{
 					loadRelationship(s.nextLine());
 			}
 			s.close();
+			System.out.println();
+			System.out.println("Elapsed time loading the file: "+ stopwatch.elapsedTime());
 			System.out.println("Load process finished");
 			System.out.println();
 		} catch (FileNotFoundException e) {
