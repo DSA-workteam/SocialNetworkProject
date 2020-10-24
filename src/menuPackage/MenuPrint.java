@@ -67,6 +67,7 @@ public class MenuPrint {
 		System.out.println("	1. Load people from a file");
 		System.out.println("	2. Load relationships from a file");
 		System.out.println("	3. Print people into a file");
+		System.out.println("	4. Print relationships into a file (Extra)");
 		System.out.println("0. Back");
 
 	}
@@ -90,13 +91,11 @@ public class MenuPrint {
 	 * Shows our extra features menu to the user by printing it in the console
 	 */
 	public void showExtraFeatures() {		
-		System.out.println("	1. Print relationships into a file");
-		System.out.println("	2. Search people by:");
-		System.out.println("	3. Add person into the network");
-		System.out.println("	4. Remove person by ID");
-		System.out.println("	5. Show friends of the given id");
-		System.out.println("	6. Generate random people");
-		System.out.println("	7. Show number of people in network");
+		System.out.println("	1. Search people by attribute en masse:");
+		System.out.println("	2. Work with single Person");
+		System.out.println("	3. Generate random people");
+		System.out.println("	4. Show number of people in network");
+		
 		System.out.println("0. Back");
 
 	}
@@ -119,21 +118,14 @@ public class MenuPrint {
 	 * @param DataHolder.getInstance()
 	 */
 	public void showActionMenu(StateMachineAttributes sma) {
+		System.out.println();
+
 		switch(sma.state) {
-		case ADD:
-			System.out.println("Type a persons details using ONLY THE INDICATED METHOD in a SINGLE LINE.");
-			System.out.println("Only obligatory info, ID.");
-			System.out.println("For null values, don't let any space between ','.");
-			System.out.println("For more than one value in a field, type ';' between values. Only not accepted field with various values: ID");
-			System.out.println("ID,NAME,SURNAME,BIRTHDATE(dd/mm/yyyy),GENDER,BIRTHPLACE,HOME,STUDIEDAT,WORKEDAT,FILMS,GROUPCODE");
-			break;
 		case BORNPEOPLE:
 			// TODO Borja
 			break;
 		case BUILDPROFILES:
-			System.out.println();
 			System.out.println("People that have the same profile: ");
-			System.out.println();
 			
 			Iterator<DataBlockADT<String, String>> it = DataHolder.getInstance().getCollectionOfAttribute(PersonAttributesEnum.MOVIES).iterator();
 			while(it.hasNext()) {
@@ -146,72 +138,84 @@ public class MenuPrint {
 		case DATES:
 			
 			if(sma.substate == 0) {
-				System.out.println();
 				System.out.println("Enter D1, the year of birth of the people that you want to search for: ");
-				System.out.println();
 			}else {
-				System.out.println();
 				System.out.println("Enter another year:");
-				System.out.println();
+			}
+			
+			break;
+		case IDFUNCTIONALITIES:
+			switch(sma.substate) {
+			case 0:
+				System.out.println("Select the funtionality that you want to use:");
+				System.out.println("	1. Add person into the network");
+				System.out.println("	2. Remove person by ID");
+				System.out.println("	3. Show friends of the given ID");
+				System.out.println("0. Back");
+
+				break;
+			case 1:
+				System.out.println("Type a persons details using ONLY THE INDICATED METHOD in a SINGLE LINE.");
+				System.out.println("Only obligatory info, ID.");
+				System.out.println("For null values, don't let any space between ','.");
+				System.out.println("For more than one value in a field, type ';' between values. Only not accepted field with various values: ID");
+				System.out.println("ID,NAME,SURNAME,BIRTHDATE(dd-mm-yyyy),GENDER,BIRTHPLACE,HOME,STUDIEDAT,WORKEDAT,FILMS,GROUPCODE");
+				break;
+			case 2:
+				System.out.println("Type the ID of the person you want to delete");
+				break;
+			case 3:
+				System.out.println("Please, input the id of the person that you want to show up its friends");
+				break;
+				
+			}
+			
+			break;
+		case LOADP:
+			System.out.println("Please, insert the name of the file from which you wish to load the data");
+			break;
+		case LOADR:
+			System.out.println("Please, insert the name of the file from which you wish to load the relationships");
+			break;
+		case PRINTP:
+			System.out.println("Please, insert the name of the file which you will create to print the people data in");
+			break;
+		case PRINTR:
+			System.out.println("Please, insert the name of the file which you will create to print the relationships data in");
+			break;
+		case RANDOM:
+			switch(sma.substate) {
+			case 0:
+				System.out.println("	1. Create and add random people into the network");
+				System.out.println("	2. Create random relationships in the network");
+				System.out.println("0. Back");
+				break;
+			case 1:
+				System.out.println("Please, input the number of random people that you want to generate and add into the network: ");
+				break;
+			case 2:
+				System.out.println("Please, input the number of random relationships that you want to generate: ");
+				break;
 			}
 			
 			break;
 		
-		case LOADP:
-			System.out.println();
-			System.out.println("Please, insert the name of the file from which you wish to load the data");
-			System.out.println();
-			break;
-		case LOADR:
-			System.out.println();
-			System.out.println("Please, insert the name of the file from which you wish to load the relationships");
-			System.out.println();
-			break;
-		case PRINTP:
-			System.out.println();
-			System.out.println("Please, insert the name of the file which you will create to print the people data in");
-			System.out.println();
-			break;
-		case PRINTR:
-			System.out.println();
-			System.out.println("Please, insert the name of the file which you will create to print the relationships data in");
-			System.out.println();
-			break;
-		case RANDOM:
-			System.out.println();
-			System.out.println("Please, input the number of random people that you want to generate and add into the network: ");
-			System.out.println();
-			break;
-		case REMOVEPERSON:
-			System.out.println();
-			System.out.println("Type the ID of the person you want to delete");
-			System.out.println();
-			break;
 		case RESIDENTIAL:
 			// TODO Imoke
 
 			 break;
 		case SEARCH:
 			if(sma.substate == 0) {
-				System.out.println();
 				showSearchOptions();
 				System.out.println("Please, enter an option:");
-				System.out.println();
 			}else {
-				System.out.println();
 				System.out.println("You are searching by "+PersonAttributesEnum.values()[sma.parsedOption-1].toString());
 				System.out.println("Please, insert the value with which you want to search");
-				System.out.println();
 
 			}
 			break;
 		case SEARCHFRIENDS:
 			// TODO Imoke
-			break;
-		case SHOWFRIENDS: 
-			System.out.println();
-			System.out.println("Please, input the id of the person that you want to show up its friends");
-			System.out.println();
 			break;
 		case MAIN:
 			break;
@@ -219,5 +223,7 @@ public class MenuPrint {
 			System.err.println("Not implemented");
 			break;
 		}
+		System.out.println();
+
 	}
 }

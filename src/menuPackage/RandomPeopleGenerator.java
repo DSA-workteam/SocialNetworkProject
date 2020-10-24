@@ -2,11 +2,13 @@ package menuPackage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.Random;
 import java.util.Scanner;
 
 import dataStructuresImplemented.Person;
 import exceptions.ImpulsoryAttributeRequiredException;
+import socialNetworkPackage.DataHolder;
 
 /**
  * This class is a singleton and generates random Person objects from a sample of names, surnames, genders, cities and movies list.
@@ -165,6 +167,20 @@ public class RandomPeopleGenerator {
 			System.out.println();
 		}
 		return ret;
+	}
+	
+	/**
+	 * Creates a single random relationship between to people, it could be that the relationships was already created and this doesn't do anything then.
+	 */
+	public void createRandomRelationship() {
+		int size = DataHolder.getInstance().getNumberOfPeople();
+		Collection<Person> c = DataHolder.getInstance().getPeople();
+		
+		Person p1 = (Person) c.toArray()[random.nextInt(size)];
+		Person p2 = (Person) c.toArray()[random.nextInt(size)];
+		if(p1 != p2)
+			p1.createRelationshipWith(p2);
+
 	}
 	
 }

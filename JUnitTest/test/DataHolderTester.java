@@ -49,7 +49,6 @@ class DataHolderTester {
 		try {
 			p = new Person(data);
 		} catch (ImpulsoryAttributeRequiredException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

@@ -8,6 +8,7 @@ import abstractDataTypesPackage.DataBlockADT;
 import abstractDataTypesPackage.NodeADT;
 import enums.PersonAttributesEnum;
 import exceptions.ImpulsoryAttributeRequiredException;
+import socialNetworkPackage.DataHolder;
 /**
  * This class is the main data object that our project uses.
  * @author Imanol Maraña Hurtado and Borja Moralejo Tobajas
@@ -78,6 +79,17 @@ public class Person {
 		personalNode = new GenericArrayListNode<String>(id);
 		
 	}
+	
+	/**
+	 * Creates a reciprocal link between the person and the given person
+	 * @param p - {@link Person}
+	 */
+	public void createRelationshipWith(Person p) {
+		
+		personalNode.link(p.getNode());
+		p.getNode().link(personalNode);
+	}
+	
 	
 	/**
 	 * Returns all the collection of DataBlockADT&lt;String, String&gt;[][] type. Inside of it there is all the information about that person.

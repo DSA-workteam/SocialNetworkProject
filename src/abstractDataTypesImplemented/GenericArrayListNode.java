@@ -2,6 +2,7 @@ package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import abstractDataTypesPackage.NodeADT;
 import exceptions.ElementNotFoundException;
@@ -188,6 +189,14 @@ public class GenericArrayListNode<T extends Comparable<T>> implements NodeADT<T>
 			nodes.remove(i);
 			count--;
 		
+	}
+	@Override
+	public String toString() {
+		String ret = "";
+		Iterator<NodeADT<T>> it = nodes.iterator();
+		while(it.hasNext())
+			ret+= content.toString() +","+it.next().getContent().toString()+"\n";
+		return ret;
 	}
 
 }

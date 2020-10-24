@@ -232,15 +232,9 @@ public class DataHolder{
 		String id = p.getAttribute(PersonAttributesEnum.ID)[0];
 		if(personHashMap.remove(id, p)){
 			
-			//Unlinks all the nodes that were attached to this node
-			p.getNode().getLinkedNodes().toArray();
-			Iterator<NodeADT<String>> it = p.getNode().getLinkedNodes().iterator();
-			NodeADT<String> node;
-			while(it.hasNext()) {
-				node = it.next();
-				System.out.println(node.getContent() +" unlinked of "+p.getNode().getContent()  );
-				node.unlink(p.getNode());
-			}
+			removeRelationshipsOfPerson(p);			
+			
+			//Removes the person's attribute from the database so it's unrelated again from it			
 			DataBlockADT<String, String>[][] attributes = p.getDataBlocks();
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null)
@@ -259,6 +253,23 @@ public class DataHolder{
 			throw new ElementNotFoundException(p.toString());	
 		}
 		
+	}
+	
+	/**
+	 * Removes given person from the relationships of the network
+	 * @param p - {@link Person}
+	 * @throws ElementNotFoundException - {@link ElementNotFoundException}
+	 */
+	public void removeRelationshipsOfPerson(Person p) throws ElementNotFoundException {
+		//Unlinks all the nodes that were attached to this node
+		p.getNode().getLinkedNodes().toArray();
+		Iterator<NodeADT<String>> it = p.getNode().getLinkedNodes().iterator();
+		NodeADT<String> node;
+		while(it.hasNext()) {
+			node = it.next();
+			System.out.println(node.getContent() +" unlinked of "+p.getNode().getContent()  );
+			node.unlink(p.getNode());
+		}
 	}
 	
 	/**

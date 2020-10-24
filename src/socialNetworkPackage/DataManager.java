@@ -82,8 +82,7 @@ public class DataManager {
 		try {
 			person1 = DataHolder.getInstance().getPersonByID(separatedID[0]);
 			person2 = DataHolder.getInstance().getPersonByID(separatedID[1]);
-			person1.getNode().link(person2.getNode());
-			person2.getNode().link(person1.getNode());
+			person1.createRelationshipWith(person2);
 			
 
 		}
@@ -120,6 +119,7 @@ public class DataManager {
 		File writeFile = new File(path);
 		try {
 			PrintWriter writerPrinter = new PrintWriter(writeFile);
+			//TODO put this with actual attributes you lazy
 			writerPrinter.println("id"+",".repeat(PersonAttributesEnum.values().length-1));
 			DataHolder.getInstance().getPeople().iterator().forEachRemaining(person -> {writerPrinter.println(person.toString());});;
 		
@@ -129,4 +129,38 @@ public class DataManager {
 		}
 		
 	}
+	
+	
+	/**
+	 * Prints all relationships in the network into the given file.
+	 * @param fileName - String. Wanted file name.
+	 */
+	public void printRelationshipsIntoFile(String fileName) {
+		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
+		File writeFile = new File(path);
+		try {
+			PrintWriter writerPrinter = new PrintWriter(writeFile);
+			writerPrinter.println("Id1,Id2");
+			DataHolder.getInstance().getPeople().iterator().forEachRemaining(person -> {
+				writerPrinter.print(person.getNode().toString());
+				try {
+					DataHolder.getInstance().removeRelationshipsOfPerson(person);
+				} catch (ElementNotFoundException e) {					
+					e.printStackTrace(); // Should not give this error
+				}
+				
+				
+			});;
+		
+			writerPrinter.close();
+			System.out.println("Reloading relationships");
+			System.out.println("Done printing relationships");
+			DataManager.getInstance().loadFile(fileName,1);
+		} catch (FileNotFoundException e) {
+		}
+		
+	}
+	
+	
+	
 }

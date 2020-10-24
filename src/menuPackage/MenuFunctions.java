@@ -28,20 +28,7 @@ public class MenuFunctions {
 	 */
 	public void useInput(String input,StateMachineAttributes sma) throws MenuClosedException{
 		switch(sma.state) {
-		case ADD: // Extra function added by us
-			
-			try {
-				Person nPerson = new Person(input);
-				DataHolder.getInstance().addPersonToNetwork(nPerson);			
-				System.out.println("Your person has been loaded successfully");
-			} catch (ImpulsoryAttributeRequiredException e) {
-				System.out.println("You haven't typed any ID.");
-			} catch(AlreadyOnTheCollectionException e) {
-				System.out.println("This ID was already selected, please chose a new one");		
-			}
-			sma.substate = 3;
-			sma.state = MenuEnum.MAIN;
-			break;
+		
 		case BORNPEOPLE: // Point 7 of the programming project
 			// TODO Borja search friends by surname
 			sma.substate = 2;
@@ -95,7 +82,67 @@ public class MenuFunctions {
 			}
 			
 			break;
-		case LOADP: // Point 2 or 3 of the programming project //TODO check this
+		case IDFUNCTIONALITIES:
+			switch(sma.substate) {
+			case 0:
+				int intCast = -1;
+				try {
+					intCast = Integer.parseInt(input);
+				}catch(NumberFormatException e) {
+					System.err.println("That's not a number!");
+					intCast = -1;
+				}finally {
+					if(intCast == 0) {
+						sma.state = MenuEnum.MAIN;
+						sma.substate = 3;
+					}else if(intCast >= 0&& intCast <= 3){
+						sma.substate = intCast;
+					}
+					
+				}
+				break;
+			case 1:// Extra function added by us ADD person
+				try {
+					Person nPerson = new Person(input);
+					DataHolder.getInstance().addPersonToNetwork(nPerson);			
+					System.out.println("Your person has been loaded successfully");
+				} catch (ImpulsoryAttributeRequiredException e) {
+					System.out.println("You haven't typed any ID.");
+				} catch(AlreadyOnTheCollectionException e) {
+					System.out.println("This ID was already selected, please chose a new one");		
+				}
+				sma.substate = 0;
+				sma.state = MenuEnum.IDFUNCTIONALITIES;
+				break;
+			case 2:  // Extra function added by us REMOVE person
+				try {
+					Person p = DataHolder.getInstance().getPersonByID(input);
+					DataHolder.getInstance().removePersonFromNetwork(p);
+					System.out.println("The person has been removed succesfully");
+					System.out.println(p);
+					System.out.println();
+				}catch(ElementNotFoundException e) {
+					System.out.println("The person you wanted to delete hasn't been found");
+				}
+				
+				
+				sma.state = MenuEnum.IDFUNCTIONALITIES;
+				sma.substate = 0;
+				break;
+			case 3: // Extra function by us, this shows the friends of the given id
+				
+				try {
+					System.out.println(DataHolder.getInstance().getPersonByID(input).getNode().toString());
+				} catch (ElementNotFoundException e) {				
+					System.err.println("There's not such person with that id");
+				}
+				
+				sma.state = MenuEnum.IDFUNCTIONALITIES;
+				sma.substate = 0;
+				break;
+			}
+			break;
+		case LOADP: // Point 3 of the programming project 
 			DataManager.getInstance().loadFile(input, 0);
 			
 			sma.state = MenuEnum.MAIN;
@@ -108,6 +155,7 @@ public class MenuFunctions {
 			sma.substate = 1;
 			break;
 		case MAIN: // Point 1 of the programming project and it used for navigating in the main menu
+			
 			try {
 				int intCast = Integer.parseInt(input);
 				switch(sma.substate) {
@@ -136,6 +184,10 @@ public class MenuFunctions {
 					case 3:
 						sma.substate = 0;
 						sma.state = MenuEnum.PRINTP;
+						break;
+					case 4:
+						sma.substate = 0;
+						sma.state = MenuEnum.PRINTR;
 						break;
 					default:
 						System.err.println("That sma.state doesn't exist");
@@ -180,31 +232,20 @@ public class MenuFunctions {
 					case 0:
 						sma.substate = 0;
 						break;
+					
 					case 1:
-						sma.substate = 0;
-						sma.state = MenuEnum.PRINTR;
-						break;
-					case 2:
 						sma.substate = 0;
 						sma.state = MenuEnum.SEARCH;
 						break;
-					case 3:
+					case 2:
 						sma.substate = 0;
-						sma.state = MenuEnum.ADD;
+						sma.state = MenuEnum.IDFUNCTIONALITIES;
 						break; 
-					case 4:
-						sma.substate = 0;
-						sma.state = MenuEnum.REMOVEPERSON;
-						break;
-					case 5:
-						sma.substate = 0;
-						sma.state = MenuEnum.SHOWFRIENDS;
-						break;
-					case 6:
+					case 3:
 						sma.substate = 0;			
 						sma.state = MenuEnum.RANDOM;
 						break;
-					case 7:
+					case 4:
 						System.out.println("Number of people in the network " + DataHolder.getInstance().getNumberOfPeople());
 						
 						sma.substate = 3;			
@@ -221,56 +262,73 @@ public class MenuFunctions {
 			}
 			
 			break;
-		case PRINTP: // Point 4 of the programming project // TODO check this
+		case PRINTP: // Point 4 of the programming project
 			DataManager.getInstance().printIntoFile(input);
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 1;
 			break;
 		case PRINTR: // Extra function added by us
-			// TODO print relationships
 			
+			DataManager.getInstance().printRelationshipsIntoFile(input);
+			
+			System.out.println();
+			System.out.println("Done printing relationships");
+			System.out.println();
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 3;
 			break;
 		case RANDOM:
+			
 			try {
-				int intCast = Integer.parseInt(input);
-				for(int i = 0; i < intCast;i++)
-					try {
-						DataHolder.getInstance().addPersonToNetwork(RandomPeopleGenerator.getInstance().generateRandomPerson());
-					} catch (AlreadyOnTheCollectionException e) {
-						
-					}
+			int intCast = Integer.parseInt(input);
+			switch(sma.substate) {
+				case 0:				
+				
+					if(intCast == 0) {
+						sma.state = MenuEnum.MAIN;
+						sma.substate = 3;
+					}else if(intCast >= 0&& intCast <= 2){
+						sma.substate = intCast;
+					}						
+					
+					break;
+				case 1:
+					
+					for(int i = 0; i < intCast;i++)
+						try {
+							DataHolder.getInstance().addPersonToNetwork(RandomPeopleGenerator.getInstance().generateRandomPerson());
+						} catch (AlreadyOnTheCollectionException e) {
+							
+						}
+					
+					sma.state = MenuEnum.RANDOM;
+					sma.substate = 0;
+					break;
+				case 2:
+					
+					for(int i = 0; i < intCast;i++)							
+						RandomPeopleGenerator.getInstance().createRandomRelationship();
+					
+					sma.state = MenuEnum.RANDOM;
+					sma.substate = 0;
+					break;
+			}
+			
 			}catch(NumberFormatException e) {
 				System.err.println("That's not a number!");	
 			}
 			
-			sma.state = MenuEnum.MAIN;
-			sma.substate = 3;
-			break;
-		case REMOVEPERSON: // Extra function added by us
-
-			try {
-				Person p = DataHolder.getInstance().getPersonByID(input);
-				DataHolder.getInstance().removePersonFromNetwork(p);
-				System.out.println("The person has been removed succesfully");
-				System.out.println(p);
-				System.out.println();
-			}catch(ElementNotFoundException e) {
-				System.out.println("The person you wanted to delete hasn't been found");
-			}
 			
 			
-			sma.state = MenuEnum.MAIN;
-			sma.substate = 3;
 			break;
+	
 		case RESIDENTIAL: // Point 9 of the programming project
 			// TODO residential
 			
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 2;
 			break;
-		case SEARCH: // Point ? of the programming project // TODO check this?
+		case SEARCH: // Extra feature
 			
 			
 			if(sma.substate == 0) { // Choosing the attribute to search for
@@ -312,13 +370,7 @@ public class MenuFunctions {
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 2;
 			break;
-		case SHOWFRIENDS: // Extra function by us, this shows the friends of the given id
-			// TODO show friends of input
-			
-			sma.state = MenuEnum.MAIN;
-			sma.substate = 3;
-			
-			break;
+		
 		default:
 			break;
 			
