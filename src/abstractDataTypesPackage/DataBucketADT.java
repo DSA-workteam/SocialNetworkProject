@@ -9,7 +9,7 @@ import java.util.Collection;
  * @param <T> Elements that are going to share the same K type key
  * @param <K> Key type 
  */
-public interface DataBlockADT<T,K extends Comparable<K>>{
+public interface DataBucketADT<T,K extends Comparable<K>>{
 	
 	/**
 	 * Gets the K type key used in the DataBlock

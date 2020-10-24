@@ -9,11 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import abstractDataTypesPackage.NodeADT;
+import dataStructuresImplemented.DataHolder;
+import dataStructuresImplemented.DataManager;
 import dataStructuresImplemented.Person;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
-import socialNetworkPackage.DataHolder;
-import socialNetworkPackage.DataManager;
 
 class RelationshipsTesting {
 	DataHolder dh;

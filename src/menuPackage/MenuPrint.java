@@ -2,11 +2,11 @@ package menuPackage;
 
 import java.util.Iterator;
 
-import abstractDataTypesPackage.DataBlockADT;
+import abstractDataTypesPackage.DataBucketADT;
+import dataStructuresImplemented.DataHolder;
 import enums.MenuEnum;
 import enums.PersonAttributesEnum;
 import menuPackage.MenuManager.StateMachineAttributes;
-import socialNetworkPackage.DataHolder;
 
 
 /**
@@ -127,7 +127,7 @@ public class MenuPrint {
 		case BUILDPROFILES:
 			System.out.println("People that have the same profile: ");
 			
-			Iterator<DataBlockADT<String, String>> it = DataHolder.getInstance().getCollectionOfAttribute(PersonAttributesEnum.MOVIES).iterator();
+			Iterator<DataBucketADT<String, String>> it = DataHolder.getInstance().getCollectionOfAttribute(PersonAttributesEnum.MOVIES).iterator();
 			while(it.hasNext()) {
 				System.out.println(it.next().toString());
 			}

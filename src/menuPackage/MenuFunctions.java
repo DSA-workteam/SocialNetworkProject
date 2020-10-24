@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import dataStructuresImplemented.DataHolder;
+import dataStructuresImplemented.DataManager;
 import dataStructuresImplemented.Person;
 import enums.MenuEnum;
 import enums.PersonAttributesEnum;
@@ -12,8 +14,6 @@ import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 import exceptions.MenuClosedException;
 import menuPackage.MenuManager.StateMachineAttributes;
-import socialNetworkPackage.DataHolder;
-import socialNetworkPackage.DataManager;
 
 public class MenuFunctions {
 	

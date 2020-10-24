@@ -6,9 +6,9 @@ import java.util.Collection;
 import java.util.Random;
 import java.util.Scanner;
 
+import dataStructuresImplemented.DataHolder;
 import dataStructuresImplemented.Person;
 import exceptions.ImpulsoryAttributeRequiredException;
-import socialNetworkPackage.DataHolder;
 
 /**
  * This class is a singleton and generates random Person objects from a sample of names, surnames, genders, cities and movies list.

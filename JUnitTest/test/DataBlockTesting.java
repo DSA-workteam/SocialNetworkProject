@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import abstractDataTypesPackage.DataBlockADT;
-import dataStructuresImplemented.ArrayListDataBlock;
+import abstractDataTypesImplemented.ArrayListDataBucket;
+import abstractDataTypesPackage.DataBucketADT;
 
 class DataBlockTesting {
 
@@ -13,7 +13,7 @@ class DataBlockTesting {
 	void createDatablock() {
 		
 		// Create datablock
-		DataBlockADT<String, Integer> DB = new ArrayListDataBlock<String, Integer>(7);
+		DataBucketADT<String, Integer> DB = new ArrayListDataBucket<String, Integer>(7);
 		// Check if has the key correctly
 		assertEquals(7,DB.getKey());
 		
@@ -22,7 +22,7 @@ class DataBlockTesting {
 	void addIntoDataBlock() {
 		
 		// Create datablock
-		DataBlockADT<String, Integer> DB = new ArrayListDataBlock<String, Integer>(7);
+		DataBucketADT<String, Integer> DB = new ArrayListDataBucket<String, Integer>(7);
 		// Add element into datablock
 		DB.add("Pepe");
 		// Check if the element is in the collection
@@ -39,7 +39,7 @@ class DataBlockTesting {
 	void removeFromDataBlock() {
 		
 		// Have a datablock with various elements, then check if the element is in the collection
-		DataBlockADT<String, Integer> DB = new ArrayListDataBlock<String, Integer>(7);
+		DataBucketADT<String, Integer> DB = new ArrayListDataBucket<String, Integer>(7);
 		DB.add("Pepe");
 		assertTrue(DB.getCollection().contains("Pepe"));
 

@@ -3,12 +3,12 @@ package dataStructuresImplemented;
 
 import java.lang.reflect.Array;
 
+import abstractDataTypesImplemented.ArrayListDataBucket;
 import abstractDataTypesImplemented.GenericArrayListNode;
-import abstractDataTypesPackage.DataBlockADT;
+import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.NodeADT;
 import enums.PersonAttributesEnum;
 import exceptions.ImpulsoryAttributeRequiredException;
-import socialNetworkPackage.DataHolder;
 /**
  * This class is the main data object that our project uses.
  * @author Imanol Maraña Hurtado and Borja Moralejo Tobajas
@@ -17,7 +17,7 @@ import socialNetworkPackage.DataHolder;
 public class Person {
 	
 	
-	private DataBlockADT<String, String>[][] attributes;
+	private DataBucketADT<String, String>[][] attributes;
 	private String id;
 	private NodeADT<String> personalNode;
 	
@@ -28,8 +28,8 @@ public class Person {
 	 */
 	@SuppressWarnings("unchecked")
 	public Person(String combinedData) throws ImpulsoryAttributeRequiredException{
-		// Initializing the DataBlockADT[][] 
-		attributes = (DataBlockADT<String, String>[][]) Array.newInstance(DataBlockADT[].class, PersonAttributesEnum.values().length-1);
+		// Initializing the DataBucketADT[][] 
+		attributes = (DataBucketADT<String, String>[][]) Array.newInstance(DataBucketADT[].class, PersonAttributesEnum.values().length-1);
 		
 		
 		// Separating the input parameter in arrays of attributes
@@ -67,13 +67,13 @@ public class Person {
 				}
 				
 				// Initializing the array with the same size as different attribute choices are
-				attributes[i-1] = (DataBlockADT<String, String>[]) Array.newInstance(DataBlockADT.class,nOfAttributes);
+				attributes[i-1] = (DataBucketADT<String, String>[]) Array.newInstance(DataBucketADT.class,nOfAttributes);
 				
 				
 				
 				// This loop assigns each attribute into each array position
 				for(int j = 0; j < nOfAttributes;j++)						
-					attributes[i-1][j] = new ArrayListDataBlock<String, String>(attributesData[j]);
+					attributes[i-1][j] = new ArrayListDataBucket<String, String>(attributesData[j]);
 			}
 		
 		
@@ -93,20 +93,20 @@ public class Person {
 	
 	
 	/**
-	 * Returns all the collection of DataBlockADT&lt;String, String&gt;[][] type. Inside of it there is all the information about that person.
+	 * Returns all the collection of DataBucketADT&lt;String, String&gt;[][] type. Inside of it there is all the information about that person.
 	 * It's mainly use is for removing the person from the DataBlocks and then if the DataBlocks are left empty, they are removed from the main HashMap 
 	 * @return attributes - DataBlock&lt;String, String&gt;[][]
 	 */
-	public DataBlockADT<String, String>[][] getDataBlocks(){
+	public DataBucketADT<String, String>[][] getDataBlocks(){
 		return attributes;
 	}
 	
 	/**
-	 * It only returns the array of DataBlockADT&lt;String, String&gt; of the given attribute. This can be used to search for data neighbors. 
+	 * It only returns the array of DataBucketADT&lt;String, String&gt; of the given attribute. This can be used to search for data neighbors. 
 	 * @param attribute - {@link PersonAttributesEnum}. This is used for selecting which attribute do we want. Use the enumerator for selecting the attribute.
-	 * @return {@link DataBlockADT}[]
+	 * @return {@link DataBucketADT}[]
 	 */
-	public DataBlockADT<String, String>[] getAttributesRelatedDataBlocks(PersonAttributesEnum attribute){
+	public DataBucketADT<String, String>[] getAttributesRelatedDataBlocks(PersonAttributesEnum attribute){
 		if(attribute == PersonAttributesEnum.ID)
 			return null;
 		return attributes[attribute.ordinal()-1];

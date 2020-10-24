@@ -4,7 +4,7 @@ import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
-import abstractDataTypesPackage.DataBlockADT;
+import abstractDataTypesPackage.DataBucketADT;
 import enums.MenuEnum;
 import exceptions.MenuClosedException;
 import socialNetworkPackage.SocialNetwork;
@@ -40,7 +40,7 @@ public class MenuManager {
 	
 	/**
 	 * Main program's menu loop. It uses {@link FileInputStream} for the scanner, so it can be reopened.
-	 * @param dh - {@link DataBlockADT}. Referenced from the main method in {@link SocialNetwork}.
+	 * @param dh - {@link DataBucketADT}. Referenced from the main method in {@link SocialNetwork}.
 	 */
 	public void run() {
 				// Console input 
