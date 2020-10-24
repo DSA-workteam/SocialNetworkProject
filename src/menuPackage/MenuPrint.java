@@ -122,7 +122,7 @@ public class MenuPrint {
 
 		switch(sma.state) {
 		case BORNPEOPLE:
-			// TODO Borja
+			System.out.println("Enter a city name: ");
 			break;
 		case BUILDPROFILES:
 			System.out.println("People that have the same profile: ");

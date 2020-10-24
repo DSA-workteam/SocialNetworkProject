@@ -42,39 +42,40 @@ public class Person {
 		
 		// Main loop for setting all attributes
 		for(int i =1;i < separatedData.length;i++) {
-			// Separating each individual attribute in the multiple inputs. For example, multiple favorite movies
-			String[] attributesData = separatedData[i].split(";");
 			
-			// Limiting number of attributes
-			int nOfAttributes = attributesData.length;
-			switch(PersonAttributesEnum.values()[i]) {
-			case BIRTHDATE:
-				if(nOfAttributes > 1)
-					nOfAttributes = 1;
-				break;
-			case BIRTHPLACE:
-				if(nOfAttributes > 1)
-					nOfAttributes = 1;
-				break;
-			case GENDER:
-				if(nOfAttributes > 1)
-					nOfAttributes = 1;
-				break;
+				// Separating each individual attribute in the multiple inputs. For example, multiple favorite movies
+				String[] attributesData = separatedData[i].split(";");
 				
-			default:
-				break;
+				// Limiting number of attributes
+				int nOfAttributes = attributesData.length;
+				switch(PersonAttributesEnum.values()[i]) {
+				case BIRTHDATE:
+					if(nOfAttributes > 1)
+						nOfAttributes = 1;
+					break;
+				case BIRTHPLACE:
+					if(nOfAttributes > 1)
+						nOfAttributes = 1;
+					break;
+				case GENDER:
+					if(nOfAttributes > 1)
+						nOfAttributes = 1;
+					break;
+					
+				default:
+					break;
+				}
+				
+				// Initializing the array with the same size as different attribute choices are
+				attributes[i-1] = (DataBlockADT<String, String>[]) Array.newInstance(DataBlockADT.class,nOfAttributes);
+				
+				
+				
+				// This loop assigns each attribute into each array position
+				for(int j = 0; j < nOfAttributes;j++)						
+					attributes[i-1][j] = new ArrayListDataBlock<String, String>(attributesData[j]);
 			}
-			
-			// Initializing the array with the same size as different attribute choices are
-			attributes[i-1] = (DataBlockADT<String, String>[]) Array.newInstance(DataBlockADT.class,nOfAttributes);
-			
-			
-			
-			// This loop assigns each attribute into each array position
-			for(int j = 0; j < nOfAttributes;j++)						
-				attributes[i-1][j] = new ArrayListDataBlock<String, String>(attributesData[j]);
-			
-		}
+		
 		
 		personalNode = new GenericArrayListNode<String>(id);
 		

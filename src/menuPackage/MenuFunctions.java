@@ -30,7 +30,28 @@ public class MenuFunctions {
 		switch(sma.state) {
 		
 		case BORNPEOPLE: // Point 7 of the programming project
-			// TODO Borja search friends by surname
+			System.out.println("This is the list of all the people that were born in "+input +":");
+			try {
+				Person[] people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.BIRTHPLACE, input);
+				int l = people.length;
+				String[] surnames;
+				for(int i = 0; i < l;i++) {
+					System.out.print("Person id: "+people[i].getAttribute(PersonAttributesEnum.ID)[0]);
+					surnames = people[i].getAttribute(PersonAttributesEnum.SURNAME);
+					
+						System.out.print(" Surname(s): ");
+					for(int j = 0; j < surnames.length;j++)
+						System.out.print(surnames[j] + " ");
+					System.out.println();
+
+				}
+				System.out.println();
+
+			} catch (ElementNotFoundException e1) {
+				System.err.println("No one was born in that city");
+			}
+			
+			
 			sma.substate = 2;
 			sma.state = MenuEnum.MAIN;
 			break;

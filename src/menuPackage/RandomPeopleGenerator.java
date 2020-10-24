@@ -175,11 +175,12 @@ public class RandomPeopleGenerator {
 	public void createRandomRelationship() {
 		int size = DataHolder.getInstance().getNumberOfPeople();
 		Collection<Person> c = DataHolder.getInstance().getPeople();
-		
-		Person p1 = (Person) c.toArray()[random.nextInt(size)];
-		Person p2 = (Person) c.toArray()[random.nextInt(size)];
-		if(p1 != p2)
-			p1.createRelationshipWith(p2);
+		if(size != 0) {
+			Person p1 = (Person) c.toArray()[random.nextInt(size)];
+			Person p2 = (Person) c.toArray()[random.nextInt(size)];
+			if(p1 != p2)
+				p1.createRelationshipWith(p2);
+		}
 
 	}
 	

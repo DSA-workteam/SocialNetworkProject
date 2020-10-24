@@ -4,7 +4,7 @@ Chiaramonte
 Froot
 Kunes
 Cody-valdez
-De looze
+De-looze
 Sozanski
 Macgilvray
 Yamashita
@@ -98,7 +98,7 @@ Nimmo
 Ho
 Ganong
 Marchant
-Mc clure
+Mc-clure
 Kilson
 Vasquez
 Stroud
@@ -179,7 +179,7 @@ Habbal
 Bernardo
 Chasalow
 Braney
-San miguel
+San-miguel
 Glenister
 Linardos
 Terzis
@@ -187,7 +187,7 @@ Balding
 Baise
 Parnes
 Kuosmanen
-De lima
+De-lima
 Tenney
 Davol
 Warren
