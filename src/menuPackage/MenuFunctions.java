@@ -413,14 +413,18 @@ public class MenuFunctions {
 		
 		// this makes the comparison between p1 and p2, if any or both of the Person objects doesn't have an attribute, the one with attribute has preference, and if both haven't attribute, it checks the next attribute
 		try {
-		 comp = p1.getAttribute(sorting)[depth].compareTo(p2.getAttribute(sorting)[depth]);
-		}catch(NullPointerException e) {
-			if(p1.getAttribute(sorting) == null && p2.getAttribute(sorting) == null)
+			comp = p1.getAttribute(sorting)[depth].compareTo(p2.getAttribute(sorting)[depth]);
+		 if(p1.getAttribute(sorting)[depth].equals("") || p2.getAttribute(sorting)[depth].equals("")) {
+			 if(p1.getAttribute(sorting)[depth].equals("") && p2.getAttribute(sorting)[depth].equals(""))
 				comp = 0;
-			else if(p1.getAttribute(sorting) == null)
+			else if(p1.getAttribute(sorting)[depth].equals("") )
 				comp = 1;
-			else 
+			else if(p2.getAttribute(sorting)[depth].equals("") )
 				comp = -1;
+		 }
+
+		}catch(NullPointerException e) {
+			
 		}
 		
 		if(comp > 0) {
@@ -438,7 +442,7 @@ public class MenuFunctions {
 				
 				// Checks if the Person objects have more attributes of the sorting type, if they do, the recursion increases in depth.
 				b1 = p1.getAttribute(PersonAttributesEnum.SURNAME).length <= depth+1;
-				b2 = p2.getAttribute(PersonAttributesEnum.SURNAME).length <= depth+1;
+				b2 =  p2.getAttribute(PersonAttributesEnum.SURNAME).length <= depth+1;
 				if(b1 && b2 ) {
 					ret = getFirstPerson(PersonAttributesEnum.NAME, p1, p2, 0); // Continues recursion 
 				}else if(b1 ){
