@@ -74,7 +74,7 @@ class DataHolderTester {
 		dh.addPersonToNetwork(p);
 		dh.addPersonToNetwork(p2);
 		// Check if p2 is inside the related data block of birthplace
-		assertEquals(p.getAttributesRelatedDataBlocks(PersonAttributesEnum.BIRTHPLACE)[0], p2.getAttributesRelatedDataBlocks(PersonAttributesEnum.BIRTHPLACE)[0]);
+		assertEquals(p.getAttributesRelatedDataBuckets(PersonAttributesEnum.BIRTHPLACE)[0], p2.getAttributesRelatedDataBuckets(PersonAttributesEnum.BIRTHPLACE)[0]);
 		
 		
 	}

@@ -14,7 +14,7 @@
  *  by Robert Sedgewick and Kevin Wayne.
  */
 
-package socialNetworkPackage;
+package dataStructuresImplemented;
 
 public class Stopwatch { 
 

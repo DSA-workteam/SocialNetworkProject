@@ -6,7 +6,6 @@ import abstractDataTypesPackage.DataBucketADT;
 import dataStructuresImplemented.DataHolder;
 import enums.MenuEnum;
 import enums.PersonAttributesEnum;
-import menuPackage.MenuManager.StateMachineAttributes;
 
 
 /**
@@ -14,7 +13,7 @@ import menuPackage.MenuManager.StateMachineAttributes;
  * @author Borja Moralejo Tobajas
  *
  */
-public class MenuPrint {
+public class MenuPrint extends MenuFunctions{
 	
 	
 		
@@ -23,7 +22,7 @@ public class MenuPrint {
 	 * @param DataHolder.getInstance() - DataHolder{@link DataHolder} from the main method.
 	 * @param sma - {@link StateMachineAttributes} from the state machine of the MenuManager
 	 */
-	public void showMenu(StateMachineAttributes sma) {
+	protected void showMenu() {
 		if( sma.state != MenuEnum.MAIN) {
 			showActionMenu(sma);
 		}else if(sma.state == MenuEnum.MAIN) {
@@ -49,7 +48,7 @@ public class MenuPrint {
 	/**
 	 * Shows main menu to the user by printing it in the console
 	 */
-	public static void showMainMenu() {
+	private void showMainMenu() {
 		
 		
 		System.out.println("1. Show First Milestone Menu");
@@ -63,7 +62,7 @@ public class MenuPrint {
 	/**
 	 * Shows First Milestone menu to the user by printing it in the console
 	 */
-	public void showFirstMilestoneMenu() {
+	private void showFirstMilestoneMenu() {
 		System.out.println("	1. Load people from a file");
 		System.out.println("	2. Load relationships from a file");
 		System.out.println("	3. Print people into a file");
@@ -74,7 +73,7 @@ public class MenuPrint {
 	/**
 	 * Shows Second Milestone menu to the user by printing it in the console
 	 */
-	public void showSecondMilestoneMenu() {
+	private void showSecondMilestoneMenu() {
 		System.out.println("	1. Search friends by surname (point 6)");
 		System.out.println("	2. Get people born in (point 7)");
 		System.out.println("	3. Get people born between D1 and D2 (point 8)");
@@ -90,7 +89,7 @@ public class MenuPrint {
 	/**
 	 * Shows our extra features menu to the user by printing it in the console
 	 */
-	public void showExtraFeatures() {		
+	private void showExtraFeatures() {		
 		System.out.println("	1. Search people by attribute en masse:");
 		System.out.println("	2. Work with single Person");
 		System.out.println("	3. Generate random people");
@@ -103,7 +102,7 @@ public class MenuPrint {
 	/**
 	 * Shows search's functionality menu to the user by printing it in the console
 	 */
-	public static void showSearchOptions() {
+	private void showSearchOptions() {
 		System.out.println("	Search using: ");
 		for(int i = 0; i < PersonAttributesEnum.values().length; i++) {
 			System.out.println("		"+(i+1)+". "+PersonAttributesEnum.values()[i].toString());
@@ -117,7 +116,7 @@ public class MenuPrint {
 	 * Shows current state's functionalities menu to the user by printing it in the console
 	 * @param DataHolder.getInstance()
 	 */
-	public void showActionMenu(StateMachineAttributes sma) {
+	private void showActionMenu(StateMachineAttributes sma) {
 		System.out.println();
 
 		switch(sma.state) {

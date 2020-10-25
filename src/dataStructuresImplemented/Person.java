@@ -3,7 +3,7 @@ package dataStructuresImplemented;
 
 import java.lang.reflect.Array;
 
-import abstractDataTypesImplemented.ArrayListDataBucket;
+import abstractDataTypesImplemented.GenericArrayListDataBucket;
 import abstractDataTypesImplemented.GenericArrayListNode;
 import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.NodeADT;
@@ -73,7 +73,7 @@ public class Person {
 				
 				// This loop assigns each attribute into each array position
 				for(int j = 0; j < nOfAttributes;j++)						
-					attributes[i-1][j] = new ArrayListDataBucket<String, String>(attributesData[j]);
+					attributes[i-1][j] = new GenericArrayListDataBucket<String, String>(attributesData[j]);
 			}
 		
 		
@@ -94,10 +94,10 @@ public class Person {
 	
 	/**
 	 * Returns all the collection of DataBucketADT&lt;String, String&gt;[][] type. Inside of it there is all the information about that person.
-	 * It's mainly use is for removing the person from the DataBlocks and then if the DataBlocks are left empty, they are removed from the main HashMap 
-	 * @return attributes - DataBlock&lt;String, String&gt;[][]
+	 * It's mainly use is for removing the person from the DataBuckets and then if the DataBuckets are left empty, they are removed from the main HashMap 
+	 * @return attributes - DataBucket&lt;String, String&gt;[][]
 	 */
-	public DataBucketADT<String, String>[][] getDataBlocks(){
+	public DataBucketADT<String, String>[][] getDataBuckets(){
 		return attributes;
 	}
 	
@@ -106,7 +106,7 @@ public class Person {
 	 * @param attribute - {@link PersonAttributesEnum}. This is used for selecting which attribute do we want. Use the enumerator for selecting the attribute.
 	 * @return {@link DataBucketADT}[]
 	 */
-	public DataBucketADT<String, String>[] getAttributesRelatedDataBlocks(PersonAttributesEnum attribute){
+	public DataBucketADT<String, String>[] getAttributesRelatedDataBuckets(PersonAttributesEnum attribute){
 		if(attribute == PersonAttributesEnum.ID)
 			return null;
 		return attributes[attribute.ordinal()-1];

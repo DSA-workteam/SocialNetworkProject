@@ -12,7 +12,7 @@ import abstractDataTypesPackage.DataBucketADT;
  * @param <Value>
  * @param <Key>
  */
-public class ArrayListDataBucket<Value,Key extends Comparable<Key>> implements DataBucketADT<Value,Key>{
+public class GenericArrayListDataBucket<Value,Key extends Comparable<Key>> implements DataBucketADT<Value,Key>{
 
 	
 	private Key key;
@@ -24,7 +24,7 @@ public class ArrayListDataBucket<Value,Key extends Comparable<Key>> implements D
 	 * Constructor
 	 * @param key 
 	 */
-	public ArrayListDataBucket(Key key) {
+	public GenericArrayListDataBucket(Key key) {
 		N = 0;
 		list = new ArrayList<Value>();
 		this.key = key; 
@@ -67,7 +67,7 @@ public class ArrayListDataBucket<Value,Key extends Comparable<Key>> implements D
 
 	@Override
 	public String toString() {
-		String ret = "DataBlock holding "+key.toString() +"\n";
+		String ret = "DataBucket holding "+key.toString() +"\n";
 		for(Value t: list)
 			ret+= t.toString() + "\n";
 			

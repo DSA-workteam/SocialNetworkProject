@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import abstractDataTypesImplemented.ArrayListDataBucket;
+import abstractDataTypesImplemented.GenericArrayListDataBucket;
 import abstractDataTypesImplemented.GenericArrayListHashMap;
 import abstractDataTypesImplemented.GenericArrayListHashTable;
 import abstractDataTypesPackage.DataBucketADT;
@@ -30,7 +30,7 @@ import exceptions.ImpulsoryAttributeRequiredException;
 public class DataHolder{
 
 	
-	private static HashMapADT<String, String>[] stringHashMaps;	
+	private static HashMapADT<String, String>[] attributesHashMaps;	
 	private static HashTableADT<Person, String> personLookTable;
 	private static HashMapADT<Person, String> dates; 
 	
@@ -67,46 +67,46 @@ public class DataHolder{
 	private DataHolder(int hashMapsSize) {
 		personLookTable = new GenericArrayListHashTable<Person, String>(hashMapsSize);
 		
-		stringHashMaps = (HashMapADT<String, String>[]) Array.newInstance(GenericArrayListHashMap.class, PersonAttributesEnum.values().length-1);
+		attributesHashMaps = (HashMapADT<String, String>[]) Array.newInstance(GenericArrayListHashMap.class, PersonAttributesEnum.values().length-1);
 		
 		dates = new GenericArrayListHashMap<Person, String>(hashMapsSize);
 		
 		for(int i = 0; i < PersonAttributesEnum.values().length-1;i++)
-			stringHashMaps[i] = new GenericArrayListHashMap<String, String>(hashMapsSize);
+			attributesHashMaps[i] = new GenericArrayListHashMap<String, String>(hashMapsSize);
 	}
 	
 	/**
-	 * Gets the attribute's data block with the given key, if there isn't any, it throws {@link ElementNotFoundException}.
+	 * Gets the attribute's data bucket with the given key, if there isn't any, it throws {@link ElementNotFoundException}.
 	 * @param attribute - {@link PersonAttributesEnum}.
-	 * @param key - String. Wanted key inside of the data block.
-	 * @return datablock - {@link DataBucketADT}.
+	 * @param key - String. Wanted key inside of the data bucket.
+	 * @return databucket - {@link DataBucketADT}.
 	 * @throws ElementNotFoundException
 	 */
-	private static DataBucketADT<String, String> getDataBlockOf(PersonAttributesEnum attribute, String key) throws ElementNotFoundException{
+	private DataBucketADT<String, String> getDataBucketOf(PersonAttributesEnum attribute, String key) throws ElementNotFoundException{
 		// Searches inside the conflicts inside the hash map
 		if(attribute == PersonAttributesEnum.ID)
-            throw new ElementNotFoundException("id datablock");
+            throw new ElementNotFoundException("id databucket");
 
-		return stringHashMaps[attribute.ordinal()-1].getBucket(key);       
+		return attributesHashMaps[attribute.ordinal()-1].getBucket(key);       
       
 	}
 	
 	
 	
 	/**
-	 * This private function returns a data block with the requested key and requested attribute, if an ElementNotFoundException is thrown, it creates a new one, adds it into the hash map and returns that.
+	 * This private function returns a data bucket with the requested key and requested attribute, if an ElementNotFoundException is thrown, it creates a new one, adds it into the hash map and returns that.
 	 * @param attribute - {@link PersonAttributesEnum}. Requested attribute.
 	 * @param key - String. Wanted key.
 	 * @return DataBucketADT<String, String>. {@link DataBucketADT} It returns an object, it could be recently created or from the hash map created.
 	 */
-	private DataBucketADT<String, String> constructorUseDataBlock(PersonAttributesEnum attribute, String key, String value) {
+	private DataBucketADT<String, String> constructorUseDataBucket(PersonAttributesEnum attribute, String key, String value) {
 		DataBucketADT<String, String> ret;
 		try {
-			ret = getDataBlockOf(attribute, key);
+			ret = getDataBucketOf(attribute, key);
 			ret.add(value);
 		 }catch(ElementNotFoundException e) {	
-			ret = stringHashMaps[attribute.ordinal()-1].createBucket(value, key);		
-			stringHashMaps[attribute.ordinal()-1].put(ret);
+			ret = attributesHashMaps[attribute.ordinal()-1].createBucket(value, key);		
+			attributesHashMaps[attribute.ordinal()-1].put(ret);
 		}
 		return ret;
 	}
@@ -119,7 +119,7 @@ public class DataHolder{
 	 * @return {@link Collection} {@link DataBucketADT}
 	 */
 	public Collection<DataBucketADT<String, String>> getCollectionOfAttribute(PersonAttributesEnum attribute){
-		return stringHashMaps[attribute.ordinal()-1].getAllBuckets();
+		return attributesHashMaps[attribute.ordinal()-1].getAllBuckets();
 	}
 	
 	
@@ -160,7 +160,7 @@ public class DataHolder{
 	
 	
 	/**
-	 * Adds person into the network data base, it takes the related data blocks and adds Person p's id into it.
+	 * Adds person into the network data base, it takes the related data buckets and adds Person p's id into it.
 	 * @param p - {@link Person}.
 	 * @throws AlreadyOnTheCollectionException - {@link AlreadyOnTheCollectionException} If the person that was trying to add was already on the collection.
 	 */
@@ -171,12 +171,12 @@ public class DataHolder{
 			// Put the person in the Person Hash map
 			personLookTable.put(p ,id);		
 			
-			// Put the person's attributes in the corresponding StringDataBlock
-			DataBucketADT<String, String>[][] attributes = p.getDataBlocks();
+			// Put the person's attributes in the corresponding StringDataBucket
+			DataBucketADT<String, String>[][] attributes = p.getDataBuckets();
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null) {
 					for(int j = 0; j < attributes[i].length;j++) {
-						attributes[i][j] = constructorUseDataBlock(PersonAttributesEnum.values()[i+1], attributes[i][j].getKey(), id);
+						attributes[i][j] = constructorUseDataBucket(PersonAttributesEnum.values()[i+1], attributes[i][j].getKey(), id);
 						
 					}
 					if(PersonAttributesEnum.values()[i+1] == PersonAttributesEnum.BIRTHDATE) {
@@ -192,7 +192,7 @@ public class DataHolder{
 	
 	
 	/**
-	 * Removes person from the network data and if the person's data block is left empty, it removes the data block from the hash map.
+	 * Removes person from the network data and if the person's data bucket is left empty, it removes the data bucket from the hash map.
 	 * @param p - {@link Person}.
 	 * @throws ElementNotFoundException - {@link ElementNotFoundException}. Throws this exception if the Person p isn't in the network data.
 	 */
@@ -203,17 +203,17 @@ public class DataHolder{
 			removeRelationshipsOfPerson(p);			
 			
 			//Removes the person's attribute from the database so it's unrelated again from it			
-			DataBucketADT<String, String>[][] attributes = p.getDataBlocks();
+			DataBucketADT<String, String>[][] attributes = p.getDataBuckets();
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null)
 				for(int j = 0; j < attributes[i].length;j++) {
 					
-					DataBucketADT<String, String> dataBlock = attributes[i][j];				
-					// If the collection of datablock is empty, removes that datablock from the hashmap
+					DataBucketADT<String, String> dataBucket = attributes[i][j];				
+					// If the collection of databucket is empty, removes that databucket from the hashmap
 					
 					if(attributes[i][j].remove(id) ) {
 						if(attributes[i][j].size() == 0 )
-							stringHashMaps[i].remove(id, dataBlock.getKey());
+							attributesHashMaps[i].remove(id, dataBucket.getKey());
 					}
 				}
 			
@@ -267,7 +267,7 @@ public class DataHolder{
 			ret = new Person[1];
 			ret[0] = getPersonByID(value);
 		}else { //If the selected attribute is not ID, searches for the output by other way
-			Collection<String> IDs = getDataBlockOf(attribute, value).getCollection();
+			Collection<String> IDs = getDataBucketOf(attribute, value).getCollection();
 			ret = new Person[IDs.size()];
 			Iterator<String> it = IDs.iterator();
 			System.out.println(IDs.size());

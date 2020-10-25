@@ -19,7 +19,7 @@ public class RandomPeopleGenerator {
 	private Random random;
 	private String[] names, surnames, genders, cities, movies;
 	
-	public RandomPeopleGenerator() {
+	private RandomPeopleGenerator() {
 		names = loadSampleTextsFromFile("Names", 200);
 		surnames = loadSampleTextsFromFile("Surnames", 200);
 		cities = loadSampleTextsFromFile("Cities", 100);

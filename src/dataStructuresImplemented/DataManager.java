@@ -9,7 +9,6 @@ import enums.PersonAttributesEnum;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
-import socialNetworkPackage.Stopwatch;
 
 /**
  * This class loads/prints data from/to files. 
@@ -33,7 +32,9 @@ public class DataManager {
 			return instance;
 		}
 		
-	
+		private DataManager() {
+			
+		}
 	
 
 	/**

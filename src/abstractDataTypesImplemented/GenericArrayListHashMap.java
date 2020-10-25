@@ -63,7 +63,7 @@ public class GenericArrayListHashMap<Value,Key extends Comparable<Key>> implemen
 				
 			}
 		}catch(ElementNotFoundException e) {
-			bucket = new ArrayListDataBucket<Value, Key>(key);
+			bucket = new GenericArrayListDataBucket<Value, Key>(key);
 			bucket.add(element);
 			hashMap[hashCode(key)].add(bucket);
 		}finally {
@@ -187,7 +187,7 @@ public class GenericArrayListHashMap<Value,Key extends Comparable<Key>> implemen
 
 	@Override
 	public DataBucketADT<Value, Key> createBucket(Value val, Key key){
-		 DataBucketADT<Value, Key> ret = new ArrayListDataBucket<Value, Key>(key);
+		 DataBucketADT<Value, Key> ret = new GenericArrayListDataBucket<Value, Key>(key);
 		 ret.add(val);
 		 return ret ;
 				

@@ -1,6 +1,5 @@
 package menuPackage;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -13,20 +12,47 @@ import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 import exceptions.MenuClosedException;
-import menuPackage.MenuManager.StateMachineAttributes;
 
-public class MenuFunctions {
+/**
+ * This class has all the functionalities of the menu.
+ * @author Borja Moralejo Tobajas
+ *
+ */
+public class MenuFunctions{
 	
+	/**
+	 * It holds and stores the state machines attributes. Because java doesn't have the option to give as reference an integer, I made this.
+	 * @author Borja Moralejo Tobajas
+	 *
+	 */
+	protected class StateMachineAttributes {
+		public MenuEnum state;
+		public int substate;
+		public int parsedOption;
+		
+	}
+	// Attributes for the state machine
+	protected StateMachineAttributes sma;
 	
 	private String s1, s2; // Strings saved for later use in the functions
 
+	/**
+	 * Initializes the state machine of the menu
+	 */
+	public MenuFunctions() {
+		sma = new StateMachineAttributes();
+		sma.state = MenuEnum.MAIN;
+		sma.substate = 0;
+		sma.parsedOption = 0;		
+	}
+	
 	/**
 	 * This method is a collection of functions of the menu. In this method near all the functionality of the menu options are implemented.
 	 * @param input - String. It takes the input from the main menu loop.
 	 * @param sma - {@link StateMachineAttributes} from MenuManager
 	 * @throws MenuClosedException - {@link MenuClosedException}. If this is thrown, the main loop of the menu will stop and the program terminates.
 	 */
-	public void useInput(String input,StateMachineAttributes sma) throws MenuClosedException{
+	protected void useInput(String input) throws MenuClosedException{
 		switch(sma.state) {
 		
 		case BORNPEOPLE: // Point 7 of the programming project

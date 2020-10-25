@@ -15,26 +15,11 @@ import socialNetworkPackage.SocialNetwork;
  * @author Borja Moralejo Tobajas
  *
  */
-public class MenuManager {
+public class MenuManager extends MenuPrint{
 
-	// Attributes for the state machine
-	private MenuPrint mp;
-	private MenuFunctions mf;
-	private StateMachineAttributes sma;
-	
-	
-	
-	
-	/**
-	 * Initializes the state machine of the menu
-	 */
 	public MenuManager() {
-		sma = new StateMachineAttributes();
-		sma.state = MenuEnum.MAIN;
-		sma.substate = 0;
-		sma.parsedOption = 0;
-		mp = new MenuPrint();
-		mf = new MenuFunctions();
+		super();
+		run();		
 	}
 	
 	
@@ -42,7 +27,7 @@ public class MenuManager {
 	 * Main program's menu loop. It uses {@link FileInputStream} for the scanner, so it can be reopened.
 	 * @param dh - {@link DataBucketADT}. Referenced from the main method in {@link SocialNetwork}.
 	 */
-	public void run() {
+	private void run() {
 				// Console input 
 				FileInputStream fis = new FileInputStream(FileDescriptor.in);
 				Scanner scanner = new Scanner(fis);
@@ -55,7 +40,7 @@ public class MenuManager {
 				// Main loop of the menu
 				while(onMenu) {
 					
-					mp.showMenu(sma);
+					showMenu();
 					
 					// Gets input one by one, so it reduces the probability of having errors
 					if(scanner.hasNext())
@@ -63,7 +48,7 @@ public class MenuManager {
 					
 					try {
 						// Gives the input to the function that the user has selected.
-						mf.useInput(input, sma);
+						useInput(input);
 					} catch (MenuClosedException e) {
 						onMenu = false;
 					}
@@ -74,17 +59,7 @@ public class MenuManager {
 	}
 	
 	
-	/**
-	 * It holds and stores the state machines attributes. Because java doesn't have the option to give as reference an integer, I made this.
-	 * @author Borja Moralejo Tobajas
-	 *
-	 */
-	public class StateMachineAttributes {
-		public MenuEnum state;
-		public int substate;
-		public int parsedOption;
-		
-	}
+	
 	
 	
 }

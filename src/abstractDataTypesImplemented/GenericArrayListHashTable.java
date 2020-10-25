@@ -28,6 +28,8 @@ public class GenericArrayListHashTable<Value, Key extends Comparable<Key>> imple
 	 *
 	 */
 	private class Node{
+		public Value v;
+		public Key k;
 		
 		public Node(Value v, Key k) {
 			this.v = v;
@@ -42,8 +44,6 @@ public class GenericArrayListHashTable<Value, Key extends Comparable<Key>> imple
 			else return false;
 		}
 		
-		public Value v;
-		public Key k;
 		
 	}
 	

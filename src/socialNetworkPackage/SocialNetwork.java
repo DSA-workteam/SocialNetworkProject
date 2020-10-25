@@ -21,9 +21,9 @@ public class SocialNetwork {
 
 		
 		// IMOKE needed to remake this in a better way, using Enums or whatever. Turns out Borja did that.
-		MenuManager mm = new MenuManager();
+		new MenuManager();
 		
-		mm.run();
+		
 
 		
 		
