@@ -3,6 +3,7 @@ package menuPackage;
 import java.util.Collection;
 import java.util.Iterator;
 
+import abstractDataTypesPackage.NodeADT;
 import dataStructuresImplemented.DataHolder;
 import dataStructuresImplemented.DataManager;
 import dataStructuresImplemented.Person;
@@ -370,7 +371,7 @@ public class MenuFunctions{
 			break;
 	
 		case RESIDENTIAL: // Point 9 of the programming project
-			// TODO residential
+			DataManager.getInstance().loadFile(input, 2);
 			
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 2;
@@ -412,7 +413,21 @@ public class MenuFunctions{
 			}			
 			break;
 		case SEARCHFRIENDS: // Point 6 of the programming project
-			// TODO IMOKE
+			try {
+				Person[] people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.values()[2], input);
+				for (Person person: people) {
+					System.out.println(person.getAttribute(PersonAttributesEnum.values()[1]).toString() + "'s friends:");
+					System.out.println();
+					Iterator<NodeADT<String>> it = person.getNode().getLinkedNodes().iterator();
+					while(it.hasNext())
+						System.out.println(DataHolder.getInstance().getPersonByID(it.next().getContent()));
+					System.out.println();
+				}
+			} catch (ElementNotFoundException e) {
+				System.out.println();
+				System.out.println("There's no one in the system saved with that surname right now");
+				System.out.println();
+			}
 			
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 2;

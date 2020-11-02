@@ -77,7 +77,7 @@ public class MenuPrint extends MenuFunctions{
 		System.out.println("	1. Search friends by surname (point 6)");
 		System.out.println("	2. Get people born in (point 7)");
 		System.out.println("	3. Get people born between D1 and D2 (point 8)");
-		System.out.println("	4. Residential, change this (point 9)");
+		System.out.println("	4. Residential (point 9)");
 		System.out.println("	5. Build profiles (point 10)");
 		System.out.println("0. Back");
 
@@ -200,8 +200,7 @@ public class MenuPrint extends MenuFunctions{
 			break;
 		
 		case RESIDENTIAL:
-			// TODO Imoke
-
+			System.out.println("Type the name of the file from which you wish to read the hometown");
 			 break;
 		case SEARCH:
 			if(sma.substate == 0) {
@@ -214,7 +213,7 @@ public class MenuPrint extends MenuFunctions{
 			}
 			break;
 		case SEARCHFRIENDS:
-			// TODO Imoke
+			System.out.println("Introduce the surname of the people you want to get the friends from");
 			break;
 		case MAIN:
 			break;

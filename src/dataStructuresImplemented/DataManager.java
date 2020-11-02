@@ -54,10 +54,12 @@ public class DataManager {
 			if (option == 0)
 				while(s.hasNext())
 					loadPerson(s.nextLine());
-			else {
+			else if (option == 1)
 				while (s.hasNext())
 					loadRelationship(s.nextLine());
-			}
+			else
+				while (s.hasNext())
+					leadResidential(s.nextLine());
 			s.close();
 			System.out.println();
 			System.out.println("Elapsed time loading the file: "+ stopwatch.elapsedTime());
@@ -92,6 +94,20 @@ public class DataManager {
 		}
 		
 		
+	}
+	
+	
+	public void leadResidential(String data) {
+		System.out.println();
+		System.out.println("People that live in " + data);
+		System.out.println();
+		try {
+			Person[] people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.values()[6], data);
+			for (Person person : people) 
+				System.out.println(person.toString());
+		} catch (ElementNotFoundException e) {
+			System.out.println("There's no one living there right now");
+		}
 	}
 	
 	
