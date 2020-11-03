@@ -214,7 +214,24 @@ public class MenuPrint extends MenuFunctions{
 			}
 			break;
 		case SEARCHFRIENDS:
-			System.out.println("Introduce the surname of the people you want to get the friends from");
+			switch (sma.substate){
+				case 0:
+					System.out.println("Introduce the surname of the people you want to get the friends from");
+					break;
+				case 1:
+					System.out.println("Select the print format:");
+					System.out.println("	0. Go back");
+					System.out.println("	1. To console");
+					System.out.println("	2. To file with custom name");
+					System.out.println("	3. To file with default name");
+					break;
+				case 2:
+					System.out.println("Select the name for the new file");
+					break;
+				case 3:
+					System.out.println("Enter anything to continue");
+					break;
+			}
 			break;
 		case MAIN:
 			break;

@@ -214,9 +214,9 @@ public class DataManager {
 			while (it.hasNext()) {
 				Iterator<Person> itF = it.next().iterator();
 				writerPrinter.println();
-				writerPrinter.println(itF.next() + "'s friends:");
+				writerPrinter.println(itF.next().getAttribute(PersonAttributesEnum.ID)[0] + "'s friends:");
 				writerPrinter.println();
-				while (it.hasNext())
+				while (itF.hasNext())
 					writerPrinter.println("   " + itF.next().toString());
 			}
 			writerPrinter.close();
