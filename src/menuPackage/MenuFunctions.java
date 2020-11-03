@@ -1,5 +1,6 @@
 package menuPackage;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -413,16 +414,62 @@ public class MenuFunctions{
 			}			
 			break;
 		case SEARCHFRIENDS: // Point 6 of the programming project
+			Collection<Person> friends = new ArrayList<Person>();
+			Collection<NodeADT<String>> friendsNode = null;
+			Iterator<NodeADT<String>> it = null;
+			Collection<Collection<Person>> friendsCollection = new ArrayList<Collection<Person>>();
 			try {
-				Person[] people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.values()[2], input);
+				// Loads all the people that have the given surname and iterates over them
+				s1 = input;
+				Person[] people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.SURNAME, s1);
 				for (Person person: people) {
-					System.out.println(person.getAttribute(PersonAttributesEnum.values()[1]).toString() + "'s friends:");
-					System.out.println();
-					Iterator<NodeADT<String>> it = person.getNode().getLinkedNodes().iterator();
-					while(it.hasNext())
-						System.out.println(DataHolder.getInstance().getPersonByID(it.next().getContent()));
-					System.out.println();
+					friends.add(person);
+					friendsNode = person.getNode().getLinkedNodes();
+					it = friendsNode.iterator();
+					//Iterates over the friends that the selected person has and adds them to the overall friends list
+					while(it.hasNext()) {
+						friends.add(DataHolder.getInstance().getPersonByID(it.next().getContent()));
+					}
+					friendsCollection.add(friends);
+					friends = new ArrayList<Person>();
 				}
+				//3 printing options, to console, to file with default name, or to file with custom name. It will loop over and over again until selecting the going back to menu option. If no correct option selected, gives option to try again 
+				showPrintOptions();
+				boolean choosen = false;
+				while (!choosen){
+					sma.parsedOption = Integer.parseInt(input);
+					switch (sma.parsedOption) {
+						case 0: //Go back to menu
+							choosen = true;
+							break;
+						case 1: //Print to console
+							Iterator<Collection<Person>> itFC = friendsCollection.iterator();
+							while(itFC.hasNext()) {
+								Iterator<Person> itF = itFC.next().iterator();
+								System.out.println();
+								System.out.println(itF.next().getAttribute(PersonAttributesEnum.ID) + "'s friends:");
+								System.out.println();
+								while (itF.hasNext())
+									System.out.println(itF.next().toString());
+							}
+							System.out.println("All friends printed succesfully");
+							System.out.println();
+							break;
+						case 2: //Print to file with custom name
+							System.out.println("Introduce the name of the file where you are going to print the friends list");
+							DataManager.getInstance().printPeoplesFriendsIntoFile(input, friendsCollection);
+							break;
+						case 3: //Print to file with default name
+							DataManager.getInstance().printPeoplesFriendsIntoFile("FRIENDS OF " + s1, friendsCollection);
+							break;
+						default:
+							System.out.println("You haven't chosen a valid option, please try again.");
+							break;
+					}
+					if (!choosen)
+						showPrintOptions();
+				}
+				
 			} catch (ElementNotFoundException e) {
 				System.out.println();
 				System.out.println("There's no one in the system saved with that surname right now");
@@ -564,6 +611,18 @@ public class MenuFunctions{
 		
 		
 		return ret;
+	}
+	
+	
+	/**
+	 * Printing options, shown in the case that the user selects search friends with surname option in the menu
+	 */
+	private void showPrintOptions() {
+		System.out.println("Select the print format:");
+		System.out.println("	0. Go back");
+		System.out.println("	1. To console");
+		System.out.println("	2. To file with custom name");
+		System.out.println("	3. To file with default name");
 	}
 	
 }

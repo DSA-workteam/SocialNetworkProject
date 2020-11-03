@@ -3,6 +3,8 @@ package dataStructuresImplemented;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import enums.PersonAttributesEnum;
@@ -40,7 +42,7 @@ public class DataManager {
 	/**
 	 * Loads file and then loads people that is stored inside.
 	 * @param fileName - String.
-	 * @param option - 0 = load people; 1 = load relationships.
+	 * @param option - 0 = load people; 1 = load relationships; 2 = load residence.
 	 */
 	public void loadFile(String fileName, int option) {
 		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
@@ -59,7 +61,7 @@ public class DataManager {
 					loadRelationship(s.nextLine());
 			else
 				while (s.hasNext())
-					leadResidential(s.nextLine());
+					loadResidential(s.nextLine());
 			s.close();
 			System.out.println();
 			System.out.println("Elapsed time loading the file: "+ stopwatch.elapsedTime());
@@ -97,17 +99,35 @@ public class DataManager {
 	}
 	
 	
-	public void leadResidential(String data) {
-		System.out.println();
-		System.out.println("People that live in " + data);
+	/**
+	 * Given an ID, prints all the people who where born in the same place as where the person with the given ID lives. Only prints name, surname, birthplace and where they studied
+	 * @param data Given ID
+	 */
+	public void loadResidential(String data) {
+		Person person;
+		String home[];
+		Person[] people;
 		System.out.println();
 		try {
-			Person[] people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.values()[6], data);
-			for (Person person : people) 
-				System.out.println(person.toString());
+			// Gets the person and defines the variable home for easier manipulation
+			person = DataHolder.getInstance().getPersonByID(data);
+			home = person.getAttribute(PersonAttributesEnum.HOME);
+			// Iterates with all the homes that the person with the given ID has
+			for (String birthplace: home) {
+				System.out.println("People that live in " + birthplace);
+				System.out.println();
+				people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.BIRTHPLACE, birthplace);
+				// Iterates through all the people that have the correct birthplace and prints their name, surname, birthplace and study location
+				for (Person rPerson: people)
+					System.out.println(rPerson.getAttribute(PersonAttributesEnum.NAME) + ", " + rPerson.getAttribute(PersonAttributesEnum.SURNAME) + ", " + rPerson.getAttribute(PersonAttributesEnum.BIRTHPLACE) + ", " + rPerson.getAttribute(PersonAttributesEnum.STUDIEDAT));
+			}
+		//There's no one with the given ID
 		} catch (ElementNotFoundException e) {
-			System.out.println("There's no one living there right now");
+			System.out.println();
+			System.out.println("There's no one with the given ID inside our Data base");
+			System.out.println();
 		}
+		System.out.println();
 	}
 	
 	
@@ -178,6 +198,33 @@ public class DataManager {
 		
 	}
 	
+	
+	/**
+	 * Prints given people into a new file, which name is a given name
+	 * @param filename Name of the file
+	 * @param people People to print into the file
+	 */
+	public void printPeoplesFriendsIntoFile(String fileName, Collection<Collection<Person>> friendsCollection) {
+		String path = System.getProperty("user.dir") +"\\res\\"+ fileName +".txt";
+		File writeFile = new File(path);
+		try {
+			PrintWriter writerPrinter = new PrintWriter(writeFile);
+			writerPrinter.println("id"+",".repeat(PersonAttributesEnum.values().length-1));
+			Iterator<Collection<Person>> it = friendsCollection.iterator();
+			while (it.hasNext()) {
+				Iterator<Person> itF = it.next().iterator();
+				writerPrinter.println();
+				writerPrinter.println(itF.next() + "'s friends:");
+				writerPrinter.println();
+				while (it.hasNext())
+					writerPrinter.println("   " + itF.next().toString());
+			}
+			writerPrinter.close();
+			System.out.println("The printing process has been completed succesfully");
+		}
+		catch (FileNotFoundException e) {
+		}
+	}
 	
 	
 }

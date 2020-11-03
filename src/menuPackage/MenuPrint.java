@@ -99,6 +99,7 @@ public class MenuPrint extends MenuFunctions{
 
 	}
 
+	
 	/**
 	 * Shows search's functionality menu to the user by printing it in the console
 	 */
