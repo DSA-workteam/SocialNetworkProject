@@ -103,29 +103,33 @@ public class DataManager {
 	 * Given an ID, prints all the people who where born in the same place as where the person with the given ID lives. Only prints name, surname, birthplace and where they studied
 	 * @param data Given ID
 	 */
-	public void loadResidential(String data) {
+	private void loadResidential(String data) {
 		Person person;
-		String home[];
+		String birthplace[];
 		Person[] people;
 		System.out.println();
 		try {
 			// Gets the person and defines the variable home for easier manipulation
 			person = DataHolder.getInstance().getPersonByID(data);
-			home = person.getAttribute(PersonAttributesEnum.HOME);
+			birthplace = person.getAttribute(PersonAttributesEnum.BIRTHPLACE);
 			// Iterates with all the homes that the person with the given ID has
-			for (String birthplace: home) {
-				System.out.println("People that live in " + birthplace);
+			for (String home: birthplace) {
 				System.out.println();
-				people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.BIRTHPLACE, birthplace);
-				// Iterates through all the people that have the correct birthplace and prints their name, surname, birthplace and study location
-				for (Person rPerson: people)
-					System.out.println(rPerson.getAttribute(PersonAttributesEnum.NAME) + ", " + rPerson.getAttribute(PersonAttributesEnum.SURNAME) + ", " + rPerson.getAttribute(PersonAttributesEnum.BIRTHPLACE) + ", " + rPerson.getAttribute(PersonAttributesEnum.STUDIEDAT));
+				System.out.println("People that live in " + home);
+				System.out.println();
+				try {
+					people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.HOME, home);
+					// Iterates through all the people that have the correct birthplace and prints their name, surname, birthplace and study location
+					for (Person rPerson: people)
+						System.out.println(rPerson.attributeToString(PersonAttributesEnum.NAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.SURNAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.BIRTHPLACE) + ", " + rPerson.attributeToString(PersonAttributesEnum.STUDIEDAT));
+				}
+				catch (ElementNotFoundException e){
+					System.err.println("No one lives in the given place/places");
+				}
 			}
 		//There's no one with the given ID
 		} catch (ElementNotFoundException e) {
-			System.out.println();
-			System.out.println("There's no one with the given ID inside our Data base");
-			System.out.println();
+			System.err.println("There's no one with the given ID inside our Data base");
 		}
 		System.out.println();
 	}
@@ -207,17 +211,19 @@ public class DataManager {
 	public void printPeoplesFriendsIntoFile(String fileName, Collection<Collection<Person>> friendsCollection) {
 		String path = System.getProperty("user.dir") +"\\res\\"+ fileName +".txt";
 		File writeFile = new File(path);
+		Person personToPrint = null;
 		try {
 			PrintWriter writerPrinter = new PrintWriter(writeFile);
 			writerPrinter.println("id"+",".repeat(PersonAttributesEnum.values().length-1));
 			Iterator<Collection<Person>> it = friendsCollection.iterator();
-			while (it.hasNext()) {
+			while (it.hasNext()) { // Iterates over all the people with the same surname
 				Iterator<Person> itF = it.next().iterator();
 				writerPrinter.println();
 				writerPrinter.println(itF.next().getAttribute(PersonAttributesEnum.ID)[0] + "'s friends:");
 				writerPrinter.println();
-				while (itF.hasNext())
-					writerPrinter.println("   " + itF.next().toString());
+				while (itF.hasNext()) // Iterates over all the friends
+					personToPrint = itF.next();
+					writerPrinter.println("   " + personToPrint.attributeToString(PersonAttributesEnum.ID) + ", " + personToPrint.attributeToString(PersonAttributesEnum.SURNAME));
 			}
 			writerPrinter.close();
 			System.out.println("The printing process has been completed succesfully");

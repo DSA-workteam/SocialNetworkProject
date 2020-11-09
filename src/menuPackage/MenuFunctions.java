@@ -37,6 +37,7 @@ public class MenuFunctions{
 	protected StateMachineAttributes sma;
 	
 	private String s1, s2; // Strings saved for later use in the functions
+	private Person[] pA1; // Array of person saved for later use in the functions 
 
 	/**
 	 * Initializes the state machine of the menu
@@ -382,13 +383,12 @@ public class MenuFunctions{
 			
 			if(sma.substate == 0) { // Choosing the attribute to search for
 				try{
-				sma.parsedOption = Integer.parseInt(input);
-				
-				if(sma.parsedOption == 0) {
-					sma.state = MenuEnum.MAIN;
-					sma.substate = 3;
-				}else if(sma.parsedOption > 0 && sma.parsedOption <= 11)
-				sma.substate = 1;
+					sma.parsedOption = Integer.parseInt(input);
+					if(sma.parsedOption == 0) {
+						sma.state = MenuEnum.MAIN;
+						sma.substate = 3;
+					}else if(sma.parsedOption > 0 && sma.parsedOption <= 11)
+						sma.substate = 1;
 				}catch(NumberFormatException e) {
 					System.err.println("That's not a number!");	
 				}
@@ -415,53 +415,75 @@ public class MenuFunctions{
 			break;
 		case SEARCHFRIENDS: // Point 6 of the programming project
 			switch (sma.substate) {
-				case 0:
-					s1 = input;
-					sma.substate = 1;
-					break;
-				case 1:
-					sma.parsedOption = Integer.parseInt(input);
-					if(sma.parsedOption == 2)
+				case 0: // Choosing the surname
+					try {
+						s1 = input;
+						// Loads all the people that have the given surname and iterates over them
+						pA1 = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.SURNAME, s1);
+						sma.substate = 1;
+					} catch (ElementNotFoundException e) {
+						System.out.println();
+						System.out.println("There's no one in the system saved with that surname right now");
+						System.out.println();
+						sma.state = MenuEnum.MAIN;
 						sma.substate = 2;
-					else
-						sma.substate = 3;
+					}
 					break;
-				case 2:
+				case 1: // Choosing the operation
+					try {
+						sma.parsedOption = Integer.parseInt(input);
+						if(sma.parsedOption == 2)
+							sma.substate = 2;
+						else if (sma.parsedOption == 0) {
+							sma.state = MenuEnum.MAIN;
+							sma.substate = 2;
+						}
+						else
+							sma.substate = 3;
+					}
+					catch(NumberFormatException e) {
+						System.err.println("That's not a number!");
+					}
+					break;
+				case 2: // Input of the name of the custom file
 					s2 = input;
 				case 3:
 					Collection<Person> friends = new ArrayList<Person>();
 					Collection<NodeADT<String>> friendsNode = null;
 					Iterator<NodeADT<String>> it = null;
 					Collection<Collection<Person>> friendsCollection = new ArrayList<Collection<Person>>();
-					try {
-						// Loads all the people that have the given surname and iterates over them
-						Person[] people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.SURNAME, s1);
-						for (Person person: people) {
+					Person personToPrint = null;
+						for (Person person: pA1) {
+							boolean error = false;
 							friends.add(person);
 							friendsNode = person.getNode().getLinkedNodes();
 							it = friendsNode.iterator();
 							//Iterates over the friends that the selected person has and adds them to the overall friends list
 							while(it.hasNext()) {
-								friends.add(DataHolder.getInstance().getPersonByID(it.next().getContent()));
+								try {
+									friends.add(DataHolder.getInstance().getPersonByID(it.next().getContent()));
+								} catch (ElementNotFoundException e) {
+									error = true;
+								}
 							}
+							if(error)
+								System.err.println("At least one of the friends' ID doesn't exist");
 							friendsCollection.add(friends);
 							friends = new ArrayList<Person>();
 						}
 						//3 printing options, to console, to file with default name, or to file with custom name. It will loop over and over again until selecting the going back to menu option. If no correct option selected, gives option to try again
-						boolean choosen = false;
 						switch (sma.parsedOption) {
-							case 0: //Go back to menu
-								choosen = true;
-								break;
 							case 1: //Print to console
 								Iterator<Collection<Person>> itFC = friendsCollection.iterator();
-								while(itFC.hasNext()) {
+								while(itFC.hasNext()) { // Iterates over all the people with the given surname
 									Iterator<Person> itF = itFC.next().iterator();
 									System.out.println();
 									System.out.println(itF.next().getAttribute(PersonAttributesEnum.ID)[0] + "'s friends:");
 									System.out.println();
-									while (itF.hasNext())
-										System.out.println(itF.next().toString());
+									while (itF.hasNext()) { // Iterates over all the friends of the selected person
+										personToPrint = itF.next();
+										System.out.println(personToPrint.attributeToString(PersonAttributesEnum.ID) + ", " + personToPrint.attributeToString(PersonAttributesEnum.SURNAME));
+									}
 								}
 								System.out.println();
 								System.out.println("All friends printed succesfully");
@@ -476,17 +498,6 @@ public class MenuFunctions{
 							default:
 						}
 						sma.substate = 1;
-						if (choosen) {
-							sma.state = MenuEnum.MAIN;
-							sma.substate = 2;
-						}
-					} catch (ElementNotFoundException e) {
-						System.out.println();
-						System.out.println("There's no one in the system saved with that surname right now");
-						System.out.println();
-						sma.state = MenuEnum.MAIN;
-						sma.substate = 2;
-					}
 					break;
 			}
 			break;

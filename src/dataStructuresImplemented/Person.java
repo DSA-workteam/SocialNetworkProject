@@ -169,6 +169,26 @@ public class Person {
 			return ret;
 	}
 	
+	
+	/**
+	 * Given an attribute, returns a string with all the parameters of that attribute
+	 * @param attribute Attribute wanted to print parameters from
+	 * @return String with all the parameters of the attribute in String form
+	 */
+	public String attributeToString(PersonAttributesEnum attribute) {
+		String ret;
+		String[] selAttribute = getAttribute(attribute);
+		if (selAttribute.length == 0){ // If the attribute is null
+			ret = "-";
+		}
+		else // If the attribute is not null
+			ret = selAttribute[0]; 
+			for (int i = 0; i < selAttribute.length - 1; i++)
+				ret += ", " + selAttribute[i + 1];
+		return (ret);
+	}
+	
+	
 	@Override
 	public String toString(){
 		String ret = id;
