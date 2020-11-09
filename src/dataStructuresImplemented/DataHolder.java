@@ -259,7 +259,6 @@ public class DataHolder{
 	 * @throws ElementNotFoundException - {@link ElementNotFoundException}. There's nobody with that attribute
 	 */
 	public Person[] searchPeopleByAttribute(PersonAttributesEnum attribute, String value) throws ElementNotFoundException{
-		System.out.println("Hey");
 		Person[] ret = null;
 		
 		//Checks if the attribute selected is ID and uses the getPersonByID method
@@ -270,7 +269,6 @@ public class DataHolder{
 			Collection<String> IDs = getDataBucketOf(attribute, value).getCollection();
 			ret = new Person[IDs.size()];
 			Iterator<String> it = IDs.iterator();
-			System.out.println(IDs.size());
 			int i = 0;
 			while(it.hasNext()) {
 				ret[i++] = getPersonByID(it.next());
