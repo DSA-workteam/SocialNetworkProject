@@ -44,7 +44,7 @@ public class MenuManager extends MenuPrint{
 					
 					// Gets input one by one, so it reduces the probability of having errors
 					if(scanner.hasNext())
-						input = scanner.next();
+						input = scanner.nextLine();
 					
 					try {
 						// Gives the input to the function that the user has selected.

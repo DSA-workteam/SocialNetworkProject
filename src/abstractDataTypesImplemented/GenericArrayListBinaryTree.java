@@ -2,6 +2,7 @@ package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import abstractDataTypesPackage.BinaryTreeADT;
 import exceptions.ElementNotFoundException;
@@ -15,15 +16,17 @@ import exceptions.ElementNotFoundException;
 public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implements BinaryTreeADT<T, K>{
 
 	
-	private GenericArrayListBinaryTree<T, K> less,more;
+	public GenericArrayListBinaryTree<T, K> less,more,root;
 	private K key;
 	private ArrayList<T> elements;
 	private int N;
 	
-
+	public K getKey() {return key;}
 	public GenericArrayListBinaryTree(T element, K key){
+		elements = new ArrayList<T>();
 		less = null;
 		more = null;
+		root = this;
 		this.key = key;
 		elements.add(element);
 		N = 0;
@@ -57,9 +60,10 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 		boolean added = true;
 		
 		int comparation = key.compareTo(addKey);
-		if(comparation == 0) 
+		if(comparation == 0) {
+			elements.add(element);
 			added = false;
-		else if(comparation > 0) {
+		}else if(comparation > 0) {
 			if(less != null)
 				added = less.addElement(element,addKey);
 			else {
@@ -185,4 +189,7 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 		return Math.min(dL, dM) + 1;
 	}
 
+
+
+	
 }

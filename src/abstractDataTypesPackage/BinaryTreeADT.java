@@ -23,6 +23,8 @@ public interface BinaryTreeADT< T, K extends Comparable<K> >  {
 	public Collection<T> getElemets(K searchKey);
 	
 	
+	public K getKey();
+	
 	/**
 	 * Given a T element and a K key, adds a new node with the starting T element on it in it's correct position, if there is't already in the tree.
 	 * @param element Starting element of the node of the tree

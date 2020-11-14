@@ -7,6 +7,7 @@ import abstractDataTypesImplemented.GenericArrayListDataBucket;
 import abstractDataTypesImplemented.GenericArrayListNode;
 import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.NodeADT;
+import comparator.PersonComparators;
 import enums.PersonAttributesEnum;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**
@@ -14,7 +15,7 @@ import exceptions.ImpulsoryAttributeRequiredException;
  * @author Imanol Maraña Hurtado and Borja Moralejo Tobajas
  *
  */
-public class Person {
+public class Person implements Comparable<Person>{
 	
 	
 	private DataBucketADT<String, String>[][] attributes;
@@ -42,7 +43,7 @@ public class Person {
 		
 		// Main loop for setting all attributes
 		for(int i =1;i < separatedData.length;i++) {
-			
+			if(!separatedData[i].equals("")) {
 				// Separating each individual attribute in the multiple inputs. For example, multiple favorite movies
 				String[] attributesData = separatedData[i].split(";");
 				
@@ -67,14 +68,18 @@ public class Person {
 				}
 				
 				// Initializing the array with the same size as different attribute choices are
-				attributes[i-1] = (DataBucketADT<String, String>[]) Array.newInstance(DataBucketADT.class,nOfAttributes);
+				if(nOfAttributes != 0) {
 				
-				
-				
-				// This loop assigns each attribute into each array position
-				for(int j = 0; j < nOfAttributes;j++)						
-					attributes[i-1][j] = new GenericArrayListDataBucket<String, String>(attributesData[j]);
+					attributes[i-1] = (DataBucketADT<String, String>[]) Array.newInstance(DataBucketADT.class,nOfAttributes);
+					
+					
+					
+					// This loop assigns each attribute into each array position
+					for(int j = 0; j < nOfAttributes;j++)						
+						attributes[i-1][j] = new GenericArrayListDataBucket<String, String>(attributesData[j]);
+				}
 			}
+		}
 		
 		
 		personalNode = new GenericArrayListNode<String>(id);
@@ -205,6 +210,12 @@ public class Person {
 				}
 		}		
 		return ret;
+	}
+
+	@Override
+	public int compareTo(Person o) {
+		
+		return new PersonComparators.ByBirthdateSurnameAndName().compare(this, o);
 	}
 	
 }

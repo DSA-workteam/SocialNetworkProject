@@ -1,7 +1,9 @@
 package socialNetworkPackage;
 
 
+import comparator.PersonComparators;
 import dataStructuresImplemented.DataHolder;
+import dataStructuresImplemented.Person;
 import menuPackage.MenuManager;
 
 /**
@@ -18,7 +20,6 @@ public class SocialNetwork {
 
 		// Initializes the data structure holder	
 		DataHolder.instantiate(128);
-
 		
 		// IMOKE needed to remake this in a better way, using Enums or whatever. Turns out Borja did that.
 		new MenuManager();
