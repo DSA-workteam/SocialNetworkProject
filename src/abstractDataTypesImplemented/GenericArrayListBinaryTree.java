@@ -10,156 +10,171 @@ import exceptions.ElementNotFoundException;
  * Implementation made with ArrayList of BinaryTreeADT.
  * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
  *
- * @param <T> Element.
- * @param <K> Key. K type must extend ComparableK
+ * @param <T> Element. T type must extend ComparableT
  */
-public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implements BinaryTreeADT<T, K>{
+public class GenericArrayListBinaryTree<T extends Comparable<T>> implements BinaryTreeADT<T>{
 
 	
-	public GenericArrayListBinaryTree<T, K> less,more,root;
-	private K key;
-	private ArrayList<T> elements;
-	private int N;
+
+	private GenericArrayListBinaryTree<T> left,right;
+	private T element;
 	
-	public K getKey() {return key;}
-	public GenericArrayListBinaryTree(T element, K key){
-		elements = new ArrayList<T>();
-		less = null;
-		more = null;
-		root = this;
-		this.key = key;
-		elements.add(element);
-		N = 0;
+
+	public GenericArrayListBinaryTree(){
+		left = null;
+		right = null;
+		element = null;
 	}
-
+	
+	
+	public GenericArrayListBinaryTree(T element){
+		left = null;
+		right = null;
+		this.element = element;
+	}
+	
 	
 	
 	@Override
-	public Collection<T> getElemets(K searchKey) {
-		int comparation = key.compareTo(searchKey);
-		Collection<T> ret = null;
-		if(comparation == 0) {
-			ret = elements;
-		}
-		else 
-			if(less != null)
-				if(comparation > 0) {
-					ret = less.getElemets(searchKey);
-				}
-			else if (more != null)
-				if(comparation < 0)
-					ret = more.getElemets(searchKey);
-		
+	public Collection<T> getAllElemets(GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException
+	{
+		Collection<T> ret = new ArrayList<T>();
+		inOrder(tree, ret);
 		return ret;
 	}
+	
+	
+	
+	/**
+	 * Getter for the GenericArrayListBinaryTree<T> type parameter Left.
+	 * @return Left
+	 */
+	public GenericArrayListBinaryTree<T> getLeft(){
+		return left;
+	}
+	
+	
+	
+	/**
+	 * Getter for the GenericArrayListBinaryTree<T> type parameter Right.
+	 * @return Right
+	 */
+	public GenericArrayListBinaryTree<T> getRight(){
+		return right;
+	}
+	
+	
+	
+	@Override
+	public T getKeyElement() {
+		return element;
+	}
 
 	
 	
 	@Override
-	public boolean addElement(T element, K addKey) {
+	public boolean addElement(T element) {
 		boolean added = true;
-		
-		int comparation = key.compareTo(addKey);
-		if(comparation == 0) {
-			elements.add(element);
+		int comparation = this.element.compareTo(element);
+		if(comparation == 0) 
 			added = false;
-		}else if(comparation > 0) {
-			if(less != null)
-				added = less.addElement(element,addKey);
+		else if(comparation > 0) {
+			if(left != null)
+				added = left.addElement(element);
 			else {
-				less = new GenericArrayListBinaryTree<T, K>(element, addKey);
-				N++;
+				left = new GenericArrayListBinaryTree<T>(element);
 			}
 		}else {
-			if(more != null)
-				added = more.addElement(element, addKey);
+			if(right != null)
+				added = right.addElement(element);
 			else {
-				more = new GenericArrayListBinaryTree<T, K>(element, addKey);
-				N++;
+				right = new GenericArrayListBinaryTree<T>(element);
 			}
 		}
 		return added;
 		
 	}
 
-	@Override
-	public int numberOfElements() {
-		return N;
-	}
 	
 	
 	@Override
-	public int depth(K key) {
-		int comparation = key.compareTo(key);
+	public int depthOfElement(T element) {
+		int comparation = this.element.compareTo(element);
 		int ret = 0;
 		if(comparation == 0) {
 			ret = 1;
 		}
 		else 
-			if(less != null)
+			if(left != null)
 				if(comparation > 0) {
-					ret = 1 + less.depth(key);
+					ret = 1 + left.depthOfElement(element);
 				}
-			else if (more != null)
+			else if (right != null)
 				if(comparation < 0)
-					ret = 1 + more.depth(key);
+					ret = 1 + right.depthOfElement(element);
 		
 		return ret;
 	}
 
 
 	@Override
-	public void removeElement(K remKey) throws ElementNotFoundException{
+	public void removeElement(T remElement) throws ElementNotFoundException{
 		// TODO
-		int lessComparation = less.key.compareTo(remKey);
-		int moreComparation = more.key.compareTo(remKey);
-		GenericArrayListBinaryTree<T, K> aux1;
-		GenericArrayListBinaryTree<T, K> aux2;
-		if(lessComparation == 0) {
-			if (less.less == null && less.more == null)
-				less = null;
-			else if(less.less == null)
-				less = less.more;
-			else if(less.more == null)
-				less = less.less;
-			else {
-				aux1 = less.less;
-				less = less.more;
-				aux2 = less;
-				while (aux2.less != null)
-					aux2 = aux2.less;
-				aux2.less = aux1;
+		GenericArrayListBinaryTree<T> aux1;
+		GenericArrayListBinaryTree<T> aux2;
+		boolean tracker1 = left == null;
+		boolean tracker2 = right == null;
+		if(right == null && left == null)
+			throw new ElementNotFoundException("There's no node with such key");
+		if(right != null) {
+			T tracker4 = right.element;
+			int moreComparation = right.element.compareTo(remElement);
+			if (moreComparation == 0) {
+				if (right.left == null && right.right == null)
+					right = null;
+				else if(right.left == null)
+					right = right.right;
+				else if(right.right == null)
+					right = right.left;
+				else {
+					aux1 = right.right;
+					right = right.left;
+					aux2 = right;
+					while (aux2.right != null)
+						aux2 = aux2.right;
+					aux2.right = aux1;
+				}
 			}
+			else if(moreComparation < 0)
+				right.removeElement(remElement);
+			else
+				if(left != null)
+					left.removeElement(remElement);
 		}
-		else if (moreComparation == 0) {
-			if (more.less == null && more.more == null)
-				more = null;
-			else if(more.less == null)
-				more= more.more;
-			else if(more.more == null)
-				more = more.less;
-			else {
-				aux1 = more.more;
-				more = more.less;
-				aux2 = more;
-				while (aux2.more != null)
-					aux2 = aux2.more;
-				aux2.more = aux1;
+		if(left != null) {
+			T tracker3 = left.element;
+			int lessComparation = left.element.compareTo(remElement);
+			if(lessComparation == 0) {
+				if (left.left == null && left.right == null)
+					left = null;
+				else if(left.left == null)
+					left = left.right;
+				else if(left.right == null)
+					left = left.left;
+				else {
+					aux1 = left.left;
+					left = left.right;
+					aux2 = left;
+					while (aux2.left != null)
+						aux2 = aux2.left;
+					aux2.left = aux1;
+				}
 			}
-		}
-		else {
-			if(moreComparation < 0) {
-				if(more != null)
-					more.removeElement(remKey);
-				else
-					throw new ElementNotFoundException("There's no node with such key");
-			}
-			else {
-				if(less != null)
-					less.removeElement(remKey);
-				else
-					throw new ElementNotFoundException("There's no node with such key");
-			}
+			else if(lessComparation > 0)
+				left.removeElement(remElement);
+			else
+				if (right != null)
+					right.removeElement(remElement);
 		}
 	}
 
@@ -168,10 +183,10 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 	@Override
 	public int longestDepth() {
 		int dL = 0,dM = 0;
-		if(less != null )
-			dL = less.longestDepth();
-		if(more != null)
-			dM = more.longestDepth();
+		if(left != null )
+			dL = left.longestDepth();
+		if(right != null)
+			dM = right.longestDepth();
 		
 		return Math.max(dL, dM) + 1;
 	}
@@ -181,15 +196,94 @@ public class GenericArrayListBinaryTree< T, K extends Comparable<K> >  implement
 	@Override
 	public int shortestDepth() {
 		int dL = 0,dM = 0;
-		if(less != null )
-			dL = less.shortestDepth();
-		if(more != null)
-			dM = more.shortestDepth();
+		if(left != null )
+			dL = left.shortestDepth();
+		if(right != null)
+			dM = right.shortestDepth();
 		
 		return Math.min(dL, dM) + 1;
 	}
 
 
+	
+	@Override
+	public Iterator<T> iteratorInOrder(GenericArrayListBinaryTree<T> tree) {
+		Collection<T> list = new ArrayList<T>();
+		inOrder(tree, list);
+		
+		return list.iterator();
+	}
+
+
+
+	@Override
+	public Iterator<T> iteratorPreOrder(GenericArrayListBinaryTree<T> tree) {
+		Collection<T> list = new ArrayList<T>();
+		preOrder(tree, list);
+		
+		return list.iterator();
+	}
+
+
+
+	@Override
+	public Iterator<T> iteratorPostOrder(GenericArrayListBinaryTree<T> tree) {
+		Collection<T> list = new ArrayList<T>();
+		postOrder(tree, list);
+		
+		return list.iterator();
+	}
+
+
+
+	@Override
+	public Iterator<T> iteratorLevelOrder() {
+		// TODO
+		return null;
+	}
+	
 
 	
+	/**
+	 * Given a tree node, starting from it's root, and a list, may it be empty or not, adds the key element of each of the nodes that the given tree has to the list in in-order form 
+	 * @param node tree node
+	 * @param list list
+	 */
+	private void inOrder(GenericArrayListBinaryTree<T> node, Collection<T> list) {
+		if(node != null) {
+			inOrder(node.left, list);
+			list.add(node.element);
+			inOrder(node.right, list);
+		}
+	}
+	
+	
+	
+	/**
+	 * Given a tree node, starting from it's root, and a list, may it be empty or not, adds the key element of each of the nodes that the given tree has to the list in pre-order form 
+	 * @param node tree node
+	 * @param list list
+	 */
+	private void preOrder(GenericArrayListBinaryTree<T> node, Collection<T> list) {
+		if(node != null) {
+			list.add(node.element);
+			preOrder(node.left, list);
+			preOrder(node.right, list);
+		}
+	}
+	
+	
+	
+	/**
+	 * Given a tree node, starting from it's root, and a list, may it be empty or not, adds the key element of each of the nodes that the given tree has to the list in post-order form 
+	 * @param node tree node
+	 * @param list list
+	 */
+	private void postOrder(GenericArrayListBinaryTree<T> node, Collection<T> list) {
+		if(node != null) {
+			inOrder(node.left, list);
+			inOrder(node.right, list);
+			list.add(node.element);
+		}
+	}
 }

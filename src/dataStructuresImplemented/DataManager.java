@@ -121,7 +121,7 @@ public class DataManager {
 					people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.HOME, home);
 					// Iterates through all the people that have the correct birthplace and prints their name, surname, birthplace and study location
 					for (Person rPerson: people)
-						System.out.println(rPerson.attributeToString(PersonAttributesEnum.NAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.SURNAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.BIRTHPLACE) + ", " + rPerson.attributeToString(PersonAttributesEnum.STUDIEDAT));
+						System.out.println(rPerson.attributeToString(PersonAttributesEnum.NAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.SURNAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.HOME) + ", " + rPerson.attributeToString(PersonAttributesEnum.STUDIEDAT));
 				}
 				catch (ElementNotFoundException e){
 					System.err.println("No one lives in the given place/places");

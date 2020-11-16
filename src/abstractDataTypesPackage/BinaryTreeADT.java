@@ -1,7 +1,9 @@
 package abstractDataTypesPackage;
 
 import java.util.Collection;
+import java.util.Iterator;
 
+import abstractDataTypesImplemented.GenericArrayListBinaryTree;
 import exceptions.ElementNotFoundException;
 
 
@@ -10,35 +12,30 @@ import exceptions.ElementNotFoundException;
  * @author Imanol Maraña Hurtado
  *
  * @param <T> Element
- * @param <K> Key. K type must extend ComparableK
  */
-public interface BinaryTreeADT< T, K extends Comparable<K> >  {
+public interface BinaryTreeADT<T extends Comparable<T>>  {
 	
 	
 	/**
-	 * Given a key, returns the information located in a node that matches with the given key, if there is.
-	 * @param searchKey A key to search for the correct node
-	 * @return A collection with all the information saved in the node with the given key
+	 * Given a key, returns the elements of all the nodes linked to the root. The collection of items will have an inorder form, being the first item the one of lower alphabetical value
+	 * @return A collection with all the elements linked to this node.
 	 */
-	public Collection<T> getElemets(K searchKey);
+	public Collection<T> getAllElemets(GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException;
 	
 	
-	public K getKey();
+	/**
+	 * Returns the key element of the current node
+	 * @return Key element
+	 */
+	public T getKeyElement();
+	
 	
 	/**
 	 * Given a T element and a K key, adds a new node with the starting T element on it in it's correct position, if there is't already in the tree.
-	 * @param element Starting element of the node of the tree
-	 * @param addKey Key with which find the correct position and then assigned to it
+	 * @param element Key with which find the correct position and then assigned to it
 	 * @return a boolean that indicates if the node was created or already existed
 	 */
-	public boolean addElement(T element, K addKey);
-	
-	
-	/**
-	 * Returns the amount of nodes that the binary tree has
-	 * @return Int with the number of existing nodes
-	 */
-	public int numberOfElements();
+	public boolean addElement(T element);
 	
 	
 	/**
@@ -47,12 +44,13 @@ public interface BinaryTreeADT< T, K extends Comparable<K> >  {
 	 */
 	public int longestDepth();
 	
+	
 	/**
 	 * Returns the depth at which a node whose key matches the given key is located
-	 * @param key Given key to compare to that of the existing nodes
+	 * @param element Given key to compare to that of the existing nodes
 	 * @return Int with the depth of the node whose key matches that of the given key
 	 */
-	public int depth(K key);
+	public int depthOfElement(T element);
 	
 	
 	/**
@@ -61,6 +59,49 @@ public interface BinaryTreeADT< T, K extends Comparable<K> >  {
 	 */
 	public int shortestDepth();
 	
-	public void removeElement(K remKey) throws ElementNotFoundException;
+	public void removeElement(T remElem) throws ElementNotFoundException;
+	
+	
+	/**  
+	* Returns the string representation of the binary tree.
+	*
+	* @return  a string representation of the binary tree
+	*/
+	public String toString();
+	
+	
+	/**  
+	* Performs an inorder traversal on this binary tree by calling an 
+	* overloaded, recursive inorder method that starts with the root. 
+	*
+	* @return  an iterator over the elements of this binary tree
+	*/
+	public Iterator<T> iteratorInOrder(GenericArrayListBinaryTree<T> tree);
+	
+	
+	/**  
+	* Performs a preorder traversal on this binary tree by calling an 
+	* overloaded, recursive preorder method that starts with the root. 
+	*
+	* @return  an iterator over the elements of this binary tree
+	*/
+	public Iterator<T> iteratorPreOrder(GenericArrayListBinaryTree<T> tree);
+
+	
+	/**  
+	* Performs a postorder traversal on this binary tree by calling an 
+	* overloaded, recursive postorder method that starts with the root. 
+	*
+	* @return  an iterator over the elements of this binary tree
+	*/
+	public Iterator<T> iteratorPostOrder(GenericArrayListBinaryTree<T> tree);
+
+	
+	/**  
+	* Performs a levelorder traversal on the binary tree, using a queue.
+	*
+	* @return  an iterator over the elements of this binary tree
+	*/
+	public Iterator<T> iteratorLevelOrder();
 	
 }

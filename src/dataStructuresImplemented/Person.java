@@ -5,8 +5,10 @@ import java.lang.reflect.Array;
 
 import abstractDataTypesImplemented.GenericArrayListDataBucket;
 import abstractDataTypesImplemented.GenericArrayListNode;
+import abstractDataTypesImplemented.GenericBinaryTreeNode;
 import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.NodeADT;
+import abstractDataTypesPackage.NodeADT2;
 import comparator.PersonComparators;
 import enums.PersonAttributesEnum;
 import exceptions.ImpulsoryAttributeRequiredException;
@@ -20,7 +22,7 @@ public class Person implements Comparable<Person>{
 	
 	private DataBucketADT<String, String>[][] attributes;
 	private String id;
-	private NodeADT<String> personalNode;
+	private NodeADT2<String> personalNode;
 	
 	/**
 	 * Constructor of Person class. It uses unchecked casting.
@@ -82,7 +84,7 @@ public class Person implements Comparable<Person>{
 		}
 		
 		
-		personalNode = new GenericArrayListNode<String>(id);
+		personalNode = new GenericBinaryTreeNode<String>(id);
 		
 	}
 	
@@ -92,8 +94,8 @@ public class Person implements Comparable<Person>{
 	 */
 	public void createRelationshipWith(Person p) {
 		
-		personalNode.link(p.getNode());
-		p.getNode().link(personalNode);
+		personalNode.link(p.getAttribute(PersonAttributesEnum.ID)[0]);
+		p.getNode().link(id);
 	}
 	
 	
@@ -152,7 +154,7 @@ public class Person implements Comparable<Person>{
 	 * Gets the node of this person
 	 * @return The node of this person
 	 */
-	public NodeADT<String> getNode() {
+	public NodeADT2<String> getNode() {
 		return personalNode;
 	}
 	
@@ -189,7 +191,7 @@ public class Person implements Comparable<Person>{
 		else // If the attribute is not null
 			ret = selAttribute[0]; 
 			for (int i = 0; i < selAttribute.length - 1; i++)
-				ret += ", " + selAttribute[i + 1];
+				ret += "; " + selAttribute[i + 1];
 		return (ret);
 	}
 	
