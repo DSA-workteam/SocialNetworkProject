@@ -237,9 +237,23 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 
 	@Override
-	public Iterator<T> iteratorLevelOrder() {
-		// TODO
-		return null;
+	public Iterator<T> iteratorLevelOrder(GenericArrayListBinaryTree<T> tree) {
+		ArrayList<T> list = new ArrayList<T>();
+		ArrayList<GenericArrayListBinaryTree<T>> queue = new ArrayList<GenericArrayListBinaryTree<T>>();
+		list.add(tree.element);
+		queue.add(tree);
+		
+		while (queue.size() > 0) {
+			if(queue.get(0).left != null)
+				queue.add(queue.get(0).left);
+			if(queue.get(0).right != null)
+				queue.add(queue.get(0).right);
+			queue.remove(0);
+			if (queue.size() != 0)
+				list.add(queue.get(0).element);
+		}
+		
+		return list.iterator();
 	}
 	
 

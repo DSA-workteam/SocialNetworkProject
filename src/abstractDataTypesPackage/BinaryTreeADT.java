@@ -102,6 +102,6 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	*
 	* @return  an iterator over the elements of this binary tree
 	*/
-	public Iterator<T> iteratorLevelOrder();
+	public Iterator<T> iteratorLevelOrder(GenericArrayListBinaryTree<T> tree);
 	
 }
