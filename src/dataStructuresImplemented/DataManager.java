@@ -224,9 +224,12 @@ public class DataManager {
 				writerPrinter.println();
 				writerPrinter.println(itF.next().getAttribute(PersonAttributesEnum.ID)[0] + "'s friends:");
 				writerPrinter.println();
-				while (itF.hasNext()) // Iterates over all the friends
+				while (itF.hasNext()) { // Iterates over all the friends
 					personToPrint = itF.next();
 					writerPrinter.println("   " + personToPrint.attributeToString(PersonAttributesEnum.ID) + ", " + personToPrint.attributeToString(PersonAttributesEnum.SURNAME));
+				}
+				if(personToPrint == null)
+					writerPrinter.println("He has no friends at the moment...");
 			}
 			writerPrinter.close();
 			System.out.println("The printing process has been completed succesfully");

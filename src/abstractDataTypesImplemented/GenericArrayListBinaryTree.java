@@ -18,6 +18,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 	private GenericArrayListBinaryTree<T> left,right;
 	private T element;
+	private GenericArrayListBinaryTree<T> root;
 	
 
 	public GenericArrayListBinaryTree(){
@@ -31,6 +32,8 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 		left = null;
 		right = null;
 		this.element = element;
+		root = new GenericArrayListBinaryTree<T>();
+		root.element = element;
 	}
 	
 	
@@ -118,63 +121,36 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 
 	@Override
-	public void removeElement(T remElement) throws ElementNotFoundException{
+	public void removeElement(T remElement, GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException{
 		// TODO
-		GenericArrayListBinaryTree<T> aux1;
-		GenericArrayListBinaryTree<T> aux2;
-		boolean tracker1 = left == null;
-		boolean tracker2 = right == null;
-		if(right == null && left == null)
-			throw new ElementNotFoundException("There's no node with such key");
-		if(right != null) {
-			T tracker4 = right.element;
-			int moreComparation = right.element.compareTo(remElement);
-			if (moreComparation == 0) {
-				if (right.left == null && right.right == null)
-					right = null;
-				else if(right.left == null)
-					right = right.right;
-				else if(right.right == null)
-					right = right.left;
-				else {
-					aux1 = right.right;
-					right = right.left;
-					aux2 = right;
-					while (aux2.right != null)
-						aux2 = aux2.right;
-					aux2.right = aux1;
+		if(root != null) {
+			int comparation = root.element.compareTo(remElement);
+			if(comparation == 0) {
+				GenericArrayListBinaryTree<T> aux1;
+				GenericArrayListBinaryTree<T> aux2;
+				if(root.left == null && root.right == null)
+					root = null;
+				else if(root.left == null || root.right == null) {
+					if(root.left == null)
+						root = root.right;
+					else
+						root = root.left;
 				}
-			}
-			else if(moreComparation < 0)
-				right.removeElement(remElement);
-			else
-				if(left != null)
-					left.removeElement(remElement);
-		}
-		if(left != null) {
-			T tracker3 = left.element;
-			int lessComparation = left.element.compareTo(remElement);
-			if(lessComparation == 0) {
-				if (left.left == null && left.right == null)
-					left = null;
-				else if(left.left == null)
-					left = left.right;
-				else if(left.right == null)
-					left = left.left;
 				else {
-					aux1 = left.left;
-					left = left.right;
-					aux2 = left;
-					while (aux2.left != null)
+					aux1 = root.left;
+					root = root.right;
+					aux2 = root;
+					while (root.right != null)
 						aux2 = aux2.left;
 					aux2.left = aux1;
 				}
 			}
-			else if(lessComparation > 0)
-				left.removeElement(remElement);
-			else
-				if (right != null)
-					right.removeElement(remElement);
+			else {
+				if(comparation < 0)
+					removeElement(remElement, tree);
+				else
+					removeElement(remElement, tree);
+			}
 		}
 	}
 

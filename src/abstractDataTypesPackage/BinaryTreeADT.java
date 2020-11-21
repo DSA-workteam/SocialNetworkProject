@@ -59,7 +59,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	 */
 	public int shortestDepth();
 	
-	public void removeElement(T remElem) throws ElementNotFoundException;
+	public void removeElement(T remElem, GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException;
 	
 	
 	/**  

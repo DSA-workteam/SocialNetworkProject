@@ -42,6 +42,7 @@ public class GenericBinaryTreeNode<T extends Comparable<T>> implements NodeADT2<
 	public Collection<T> getLinkedNodes() {
 		Collection<T> ret = new ArrayList<T>();
 		try {
+			unlink((T)"Ane52");
 			ret = root.getAllElemets(root);
 		} catch (ElementNotFoundException e) {
 			System.err.println("There is no elements in the root");
@@ -57,7 +58,8 @@ public class GenericBinaryTreeNode<T extends Comparable<T>> implements NodeADT2<
 
 	@Override
 	public void unlink(T node) throws ElementNotFoundException{
-		root.removeElement(node);
+		root.removeElement(node, root);
+		count--;
 	}
 	
 //	@Override
