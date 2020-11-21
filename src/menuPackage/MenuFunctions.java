@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import abstractDataTypesPackage.NodeADT;
-import abstractDataTypesPackage.NodeADT2;
 import comparator.PersonComparators;
 import dataStructuresImplemented.DataHolder;
 import dataStructuresImplemented.DataManager;
@@ -320,8 +319,7 @@ public class MenuFunctions{
 			
 			DataManager.getInstance().printRelationshipsIntoFile(input);
 			
-			System.out.println();
-			System.out.println("Done printing relationships");
+		
 			System.out.println();
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 3;

@@ -8,7 +8,7 @@ import abstractDataTypesPackage.BinaryTreeADT;
 import exceptions.ElementNotFoundException;
 /**
  * Implementation made with ArrayList of BinaryTreeADT.
- * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
+ * @author Borja Moralejo Tobajas and Imanol Maraña Hurtado
  *
  * @param <T> Element. T type must extend ComparableT
  */
@@ -49,7 +49,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	
 	
 	/**
-	 * Getter for the GenericArrayListBinaryTree<T> type parameter Left.
+	 * Getter for the GenericArrayListBinaryTree&lt;T&gt; type parameter Left.
 	 * @return Left
 	 */
 	public GenericArrayListBinaryTree<T> getLeft(){
@@ -59,7 +59,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	
 	
 	/**
-	 * Getter for the GenericArrayListBinaryTree<T> type parameter Right.
+	 * Getter for the GenericArrayListBinaryTree&lt;T&gt; type parameter Right.
 	 * @return Right
 	 */
 	public GenericArrayListBinaryTree<T> getRight(){

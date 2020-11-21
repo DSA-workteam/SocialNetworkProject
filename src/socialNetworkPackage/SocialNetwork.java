@@ -3,14 +3,8 @@ package socialNetworkPackage;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Iterator;
 
-import abstractDataTypesImplemented.GenericArrayListBinaryTree;
-import comparator.PersonComparators;
 import dataStructuresImplemented.DataHolder;
-import dataStructuresImplemented.Person;
-import exceptions.ElementNotFoundException;
-import exceptions.ImpulsoryAttributeRequiredException;
 import menuPackage.MenuManager;
 
 /**

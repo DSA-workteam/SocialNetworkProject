@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 import dataStructuresImplemented.DataHolder;
 import dataStructuresImplemented.Person;
-import enums.PersonAttributesEnum;
 
 public class W7BorjaMoralejo {
 

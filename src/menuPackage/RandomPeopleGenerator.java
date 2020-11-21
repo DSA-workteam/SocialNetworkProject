@@ -34,7 +34,7 @@ public class RandomPeopleGenerator {
 	private static RandomPeopleGenerator instance;
 	/**
 	 * Singleton's instance getter
-	 * @return
+	 * @return singleton's instance
 	 */
 	public static RandomPeopleGenerator getInstance() {
 		if(instance == null) instance = new RandomPeopleGenerator();

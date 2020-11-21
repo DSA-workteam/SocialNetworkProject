@@ -1,25 +1,18 @@
 package dataStructuresImplemented;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Scanner;
 
-import abstractDataTypesImplemented.GenericArrayListDataBucket;
 import abstractDataTypesImplemented.GenericArrayListHashMap;
 import abstractDataTypesImplemented.GenericArrayListHashTable;
 import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.HashMapADT;
 import abstractDataTypesPackage.HashTableADT;
 import abstractDataTypesPackage.NodeADT;
-import abstractDataTypesPackage.NodeADT2;
 import enums.PersonAttributesEnum;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
-import exceptions.ImpulsoryAttributeRequiredException;
 
 
 

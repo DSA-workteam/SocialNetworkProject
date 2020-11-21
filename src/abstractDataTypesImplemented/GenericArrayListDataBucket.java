@@ -9,8 +9,8 @@ import abstractDataTypesPackage.DataBucketADT;
  * Implementation of DataBucketADT made with arraylist
  * @author Borja Moralejo Tobajas
  *
- * @param <Value>
- * @param <Key>
+ * @param <Value> Value type that databucket is going to store
+ * @param <Key> Key that databucket is going to use to store or not the element
  */
 public class GenericArrayListDataBucket<Value,Key extends Comparable<Key>> implements DataBucketADT<Value,Key>{
 
@@ -22,7 +22,7 @@ public class GenericArrayListDataBucket<Value,Key extends Comparable<Key>> imple
 	
 	/**
 	 * Constructor
-	 * @param key 
+	 * @param key - key that databucket is going to keep
 	 */
 	public GenericArrayListDataBucket(Key key) {
 		N = 0;

@@ -13,7 +13,7 @@ public class GenericArrayStack <T> implements StackADT<T>,Iterable<T>{
 
 	private T[] collection;
 	private static final int DEFAULT_SIZE = 256;
-	private int top, actualSize;
+	private int top;
 	
 	/**
 	 * Default constructor
@@ -24,10 +24,10 @@ public class GenericArrayStack <T> implements StackADT<T>,Iterable<T>{
 	 * Constructor with size parameter
 	 * @param size - int. Initial and/or final size of the array
 	 */
+	@SuppressWarnings("unchecked")
 	public GenericArrayStack(int size) {
 		collection = (T[]) (new Object[size]);
 		top = 0;
-		actualSize = size;
 	}
 	
 	@Override

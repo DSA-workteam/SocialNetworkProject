@@ -2,11 +2,8 @@ package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
-import abstractDataTypesPackage.NodeADT;
 import abstractDataTypesPackage.NodeADT2;
-import abstractDataTypesImplemented.GenericArrayListBinaryTree;
 import exceptions.ElementNotFoundException;
 
 public class GenericBinaryTreeNode<T extends Comparable<T>> implements NodeADT2<T>{
@@ -38,6 +35,7 @@ public class GenericBinaryTreeNode<T extends Comparable<T>> implements NodeADT2<
 		count++;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<T> getLinkedNodes() {
 		Collection<T> ret = new ArrayList<T>();

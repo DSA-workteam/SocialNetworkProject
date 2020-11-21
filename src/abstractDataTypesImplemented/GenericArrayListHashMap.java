@@ -147,7 +147,7 @@ public class GenericArrayListHashMap<Value,Key extends Comparable<Key>> implemen
 	}
 
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	private void expandHashMap() {
 		Iterator<DataBucketADT<Value, Key>> it= getAllBuckets().iterator();
 		mapSize = (int) (mapSize*1.5);

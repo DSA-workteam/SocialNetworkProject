@@ -16,7 +16,7 @@ public interface HashMapADT<Value, Key extends Comparable<Key>> extends Iterable
 	/**
 	 * Adds the given element into the hash map.
 	 * @param v - Element which is going to be added into the hash map.
-	 * @param key - Key for storing element in hash map .
+	 * @param k - Key for storing element in hash map .
 	 */
 	public void put(Value v, Key k);
 	
@@ -30,7 +30,7 @@ public interface HashMapADT<Value, Key extends Comparable<Key>> extends Iterable
 	 * Gets element with given key.
 	 * @param key - Searches element with key.
 	 * @return Returns Value element binded with Key key.
-	 * @throws ElementNotFoundException 
+	 * @throws ElementNotFoundException {@link ElementNotFoundException}
 	 */
 	public Collection<Value> get(Key key) throws ElementNotFoundException;
 	
@@ -45,8 +45,8 @@ public interface HashMapADT<Value, Key extends Comparable<Key>> extends Iterable
 	
 	/**
 	 * Tries to remove the given element from the CollectionT and returns whether or not has removed it.
-	 * @param key - Key type. Key to search with.
-	 * @param element - Value type. Element that is going to be removed.
+	 * @param k - Key type. Key to search with.
+	 * @param v - Value type. Element that is going to be removed.
 	 * @return boolean - Whether or not has been removed.
 	 */
 	public boolean remove(Value v, Key k);
@@ -56,8 +56,8 @@ public interface HashMapADT<Value, Key extends Comparable<Key>> extends Iterable
 	
 	/**
 	 * Whether or not the given element is in the HashMap.
-	 * @param key - Key type. 
-	 * @param element - Value type.
+	 * @param k - Key type. 
+	 * @param v - Value type.
 	 * @return boolean
 	 */
 	public boolean isIn(Value v, Key k);
@@ -68,6 +68,12 @@ public interface HashMapADT<Value, Key extends Comparable<Key>> extends Iterable
 	 */
 	public int size();
 	
+	/**
+	 * Creates a databucket with the given value and key
+	 * @param val - Value that the databucket is going to store
+	 * @param key - Key element that the databucket is going to keep for keying
+	 * @return {@link DataBucketADT} returns created databucked
+	 */
 	public DataBucketADT<Value, Key> createBucket(Value val, Key key);
 	
 	/**

@@ -207,9 +207,10 @@ public class DataManager {
 	
 	
 	/**
+	 * 
 	 * Prints given people into a new file, which name is a given name
-	 * @param filename Name of the file
-	 * @param people People to print into the file
+	 * @param fileName - String Name of the file
+	 * @param friendsCollection -People to print into the file
 	 */
 	public void printPeoplesFriendsIntoFile(String fileName, Collection<Collection<Person>> friendsCollection) {
 		String path = System.getProperty("user.dir") +"\\res\\"+ fileName +".txt";

@@ -30,6 +30,7 @@ public class Stopwatch {
 
    /**
      * Return elapsed time (in seconds) since this object was created.
+     * @return double elapsed time
      */
     public double elapsedTime() {
         long now = System.currentTimeMillis();

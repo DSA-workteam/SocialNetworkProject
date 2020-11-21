@@ -5,15 +5,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.HashTableADT;
 import exceptions.ElementNotFoundException;
 /**
+ * /**
  * Implementation of {@link HashTableADT} made with {@link ArrayList}
  * @author Borja Moralejo Tobajas
  *
- * @param <Value>
- * @param <Key>
+ *
+ * @param <Value>  - Value that stores the hashmap.
+ * @param <Key> - key that is going to use to compare or get the elements.
  */
 public class GenericArrayListHashTable<Value, Key extends Comparable<Key>> implements HashTableADT<Value,Key> {
 	
@@ -156,7 +157,7 @@ public class GenericArrayListHashTable<Value, Key extends Comparable<Key>> imple
 	/**
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	private void expandLookTable() {
 		Iterator<Node> it= getNodes().iterator();
 		size = (int) (size*1.5);

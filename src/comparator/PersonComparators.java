@@ -1,12 +1,7 @@
 package comparator;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
-import java.util.Iterator;
 
-import abstractDataTypesImplemented.GenericArrayListBinaryTree;
-import abstractDataTypesPackage.DataBucketADT;
 import dataStructuresImplemented.Person;
 import enums.PersonAttributesEnum;
 
@@ -171,9 +166,9 @@ public class PersonComparators {
 		}
 		
 	}
-	
-	private static ArrayList<Integer> order;
 	/*
+	private static ArrayList<Integer> order;
+	
 	private static ArrayList<Integer> inverseInorderTraversal(GenericArrayListBinaryTree<String, Integer> root) {
 		
 		order = new ArrayList<Integer>();

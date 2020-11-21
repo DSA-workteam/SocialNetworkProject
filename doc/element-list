@@ -1,6 +1,9 @@
 abstractDataTypesImplemented
-adt
+abstractDataTypesPackage
+comparator
 dataStructuresImplemented
+enums
 exceptions
+menuPackage
 socialNetworkPackage
 test

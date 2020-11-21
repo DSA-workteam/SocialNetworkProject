@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import abstractDataTypesPackage.DataBucketADT;
-import enums.MenuEnum;
 import exceptions.MenuClosedException;
 import socialNetworkPackage.SocialNetwork;
 

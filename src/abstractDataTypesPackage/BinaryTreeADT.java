@@ -11,15 +11,16 @@ import exceptions.ElementNotFoundException;
  * ADT of the Binary tree
  * @author Imanol Maraña Hurtado
  *
- * @param <T> Element
+ * @param <T> Element 
  */
 public interface BinaryTreeADT<T extends Comparable<T>>  {
 	
-	
 	/**
-	 * Given a key, returns the elements of all the nodes linked to the root. The collection of items will have an inorder form, being the first item the one of lower alphabetical value
-	 * @return A collection with all the elements linked to this node.
-	 */
+ 	* Given a key, returns the elements of all the nodes linked to the root. The collection of items will have an inorder form, being the first item the one of lower alphabetical value
+ 	* @return A collection with all the elements linked to this node.
+ 	* @param tree {@link GenericArrayListBinaryTree}
+ 	* @throws ElementNotFoundException {@link ElementNotFoundException}
+ 	*/
 	public Collection<T> getAllElemets(GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException;
 	
 	
@@ -70,28 +71,30 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	public String toString();
 	
 	
-	/**  
+    /**
+	* 	
 	* Performs an inorder traversal on this binary tree by calling an 
 	* overloaded, recursive inorder method that starts with the root. 
-	*
+	* @param tree {@link BinaryTreeADT}
 	* @return  an iterator over the elements of this binary tree
 	*/
 	public Iterator<T> iteratorInOrder(GenericArrayListBinaryTree<T> tree);
 	
 	
-	/**  
+	/** 
 	* Performs a preorder traversal on this binary tree by calling an 
 	* overloaded, recursive preorder method that starts with the root. 
-	*
+	* 
+	* @param tree {@link BinaryTreeADT}
 	* @return  an iterator over the elements of this binary tree
 	*/
 	public Iterator<T> iteratorPreOrder(GenericArrayListBinaryTree<T> tree);
 
 	
-	/**  
+	/**   
 	* Performs a postorder traversal on this binary tree by calling an 
 	* overloaded, recursive postorder method that starts with the root. 
-	*
+	* @param tree {@link BinaryTreeADT}
 	* @return  an iterator over the elements of this binary tree
 	*/
 	public Iterator<T> iteratorPostOrder(GenericArrayListBinaryTree<T> tree);
@@ -99,7 +102,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	
 	/**  
 	* Performs a levelorder traversal on the binary tree, using a queue.
-	*
+	* @param tree {@link BinaryTreeADT}
 	* @return  an iterator over the elements of this binary tree
 	*/
 	public Iterator<T> iteratorLevelOrder(GenericArrayListBinaryTree<T> tree);
