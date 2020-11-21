@@ -12,31 +12,44 @@ import enums.PersonAttributesEnum;
 
 public class PersonComparators {
 	
-	
-	private static int compareRecursiveStart(String[] names1, String[] names2) {
+	/**
+	 * This function goes through all the strings in the array and compares them one by
+	 * one until one of them hasn't a next one or when both have no more strings, this method is the front end.
+	 * @param strings1 - Array of Strings
+	 * @param strings2 - Array of Strings
+	 * @return comparation result, 1, -1 or 0
+	 */
+	private static int compareRecursiveStart(String[] strings1, String[] strings2) {
 		int ret = 0;
-		if(names1 != null && names2 != null) {
-			ret = compareRecursive(names1, names2, 0);
-		}else if(names1 == null && names2 == null)
+		if(strings1 != null && strings2 != null) {
+			ret = compareRecursive(strings1, strings2, 0);
+		}else if(strings1 == null && strings2 == null)
 			ret = 0;
-		else if(names1 == null)
+		else if(strings1 == null)
 			ret = 1;
-		else if(names2 == null)
+		else if(strings2 == null)
 			ret = -1;
 			 return ret;
 	}
-	private static int compareRecursive(String[] names1, String[] names2, int depth) {
+	/**
+	 * This is the worker method.
+	 * @param strings1 - Array of Strings
+	 * @param strings2 - Array of Strings
+	 * @param depth - The index of the array that it's currently working on.
+	 * @return comparation result, 1, -1 or 0
+	 */
+	private static int compareRecursive(String[] strings1, String[] strings2, int depth) {
 		int ret = 0;
 		
-		if(names1.length > depth && names2.length > depth) {
-			ret = names1[depth].compareTo(names2[depth]);
+		if(strings1.length > depth && strings2.length > depth) {
+			ret = strings1[depth].compareTo(strings2[depth]);
 			if(ret == 0)
-				ret = compareRecursive(names1, names2, depth+1);
-		}else if(names1.length <= depth && names2.length <= depth) {
+				ret = compareRecursive(strings1, strings2, depth+1);
+		}else if(strings1.length <= depth && strings2.length <= depth) {
 			ret = 0;
-		}else if(names1.length <= depth) {
+		}else if(strings1.length <= depth) {
 			ret = 1;
-		}else if(names2.length <= depth) {
+		}else if(strings2.length <= depth) {
 			ret = -1;
 		}
 		
@@ -44,6 +57,12 @@ public class PersonComparators {
 		return ret;
 	}
 	
+	
+	/**
+	 * Comparator that sorts Person by name
+	 * @author Borja Moralejo Tobajas
+	 *
+	 */
 	public static class ByName implements Comparator<Person>{
 
 		@Override
@@ -59,6 +78,11 @@ public class PersonComparators {
 		
 	
 	}
+	/**
+	 * Comparator that sorts Person by surname.
+	 * @author Borja Moralejo Tobajas
+	 *
+	 */
 	public static class BySurname implements Comparator<Person>{
 
 				@Override
@@ -73,7 +97,11 @@ public class PersonComparators {
 				}
 				
 			}
-	
+	/**
+	 * Comparator that sorts Person by suname and name.
+	 * @author Borja Moralejo Tobajas
+	 *
+	 */
 	public static class BySurnameAndName implements Comparator<Person>{
 
 		@Override
@@ -83,6 +111,11 @@ public class PersonComparators {
 		}
 		
 	}
+	/**
+	 * Comparator that sorts Person by Birthplace, surname and name.
+	 * @author Borja Moralejo Tobajas
+	 *
+	 */
 	public static class ByBirthplaceSurnameAndName implements Comparator<Person>{
 
 		@Override
@@ -100,6 +133,11 @@ public class PersonComparators {
 		}
 		
 	}
+	/**
+	 * Comparator that sorts Person by Birthdate, surname and name.
+	 * @author Borja Moralejo Tobajas
+	 *
+	 */
 	public static class ByBirthdateSurnameAndName implements Comparator<Person>{
 
 		@Override

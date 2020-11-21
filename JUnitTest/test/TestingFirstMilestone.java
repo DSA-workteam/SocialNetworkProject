@@ -21,7 +21,7 @@ class TestingFirstMilestone {
 		+ "4" + System.lineSeparator() + "friendsJUnitPrintTest"+ System.lineSeparator() 
 		+ "0" + System.lineSeparator() + "2" + System.lineSeparator() /*+ "1" + System.lineSeparator() + "Iturralde" 
 		+ "1" + System.lineSeparator() + "c" + System.lineSeparator() + "2" + System.lineSeparator() + "JUnitSurname" + System.lineSeparator() +*/
-		+ "2" + System.lineSeparator() + "Donostia" + System.lineSeparator() + "3" + System.lineSeparator() + "1990" + System.lineSeparator() + "2000" + System.lineSeparator() 
+		+ "2" + System.lineSeparator() + "Donostia" + System.lineSeparator() + "3" + System.lineSeparator() + "1990" + System.lineSeparator() + "2003" + System.lineSeparator() 
 		+ "4" + System.lineSeparator() + "residential" + System.lineSeparator() + "5" + System.lineSeparator() + "c" + System.lineSeparator() + "0" + System.lineSeparator() + "3" 
 		+ System.lineSeparator() + "1" + System.lineSeparator() + "10" + System.lineSeparator() + "Cloud Atlas" + System.lineSeparator() + "2"
 		+ System.lineSeparator() + "1" + System.lineSeparator() + "JUNITTEST,Jupiter,Unit,1-1-2000,unknown,Internet,Internet,,,,G777"
