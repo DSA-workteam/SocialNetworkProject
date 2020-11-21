@@ -448,8 +448,8 @@ public class MenuFunctions{
 					s2 = input;
 				case 3:
 					Collection<Person> friends = new ArrayList<Person>();
-					Collection<String> friendsNode = null;
-					Iterator<String> it = null;
+					Collection<NodeADT<String>> friendsNode = null;
+					Iterator<NodeADT<String>> it = null;
 					Collection<Collection<Person>> friendsCollection = new ArrayList<Collection<Person>>();
 					Person personToPrint = null;
 						for (Person person: pA1) {
@@ -460,7 +460,7 @@ public class MenuFunctions{
 							//Iterates over the friends that the selected person has and adds them to the overall friends list
 							while(it.hasNext()) {
 								try {
-									friends.add(DataHolder.getInstance().getPersonByID(it.next()));
+									friends.add(DataHolder.getInstance().getPersonByID(it.next().getContent()));
 								} catch (ElementNotFoundException e) {
 									error = true;
 								}

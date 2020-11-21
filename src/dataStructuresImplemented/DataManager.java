@@ -114,17 +114,20 @@ public class DataManager {
 			birthplace = person.getAttribute(PersonAttributesEnum.BIRTHPLACE);
 			// Iterates with all the homes that the person with the given ID has
 			for (String home: birthplace) {
-				System.out.println();
-				System.out.println("People that live in " + home);
-				System.out.println();
+				
 				try {
+					
 					people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.HOME, home);
+					System.out.println();
+					System.out.println("People that live in " + home);
+					System.out.println();
+					
 					// Iterates through all the people that have the correct birthplace and prints their name, surname, birthplace and study location
 					for (Person rPerson: people)
 						System.out.println(rPerson.attributeToString(PersonAttributesEnum.NAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.SURNAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.HOME) + ", " + rPerson.attributeToString(PersonAttributesEnum.STUDIEDAT));
 				}
 				catch (ElementNotFoundException e){
-					System.err.println("No one lives in the given place/places");
+					System.err.println("No one lives in "+home);
 				}
 			}
 		//There's no one with the given ID
@@ -184,19 +187,19 @@ public class DataManager {
 			writerPrinter.println("Id1,Id2");
 			DataHolder.getInstance().getPeople().iterator().forEachRemaining(person -> {
 				writerPrinter.print(person.getNode().toString());
-				try {
-					DataHolder.getInstance().removeRelationshipsOfPerson(person);
-				} catch (ElementNotFoundException e) {					
-					e.printStackTrace(); // Should not give this error
-				}
+				//try {
+				//	DataHolder.getInstance().removeRelationshipsOfPerson(person);
+				//} catch (ElementNotFoundException e) {					
+				//	e.printStackTrace(); // Should not give this error
+				//}
 				
 				
 			});;
 		
 			writerPrinter.close();
-			System.out.println("Reloading relationships");
+			//System.out.println("Reloading relationships");
 			System.out.println("Done printing relationships");
-			DataManager.getInstance().loadFile(fileName,1);
+			//DataManager.getInstance().loadFile(fileName,1);
 		} catch (FileNotFoundException e) {
 		}
 		

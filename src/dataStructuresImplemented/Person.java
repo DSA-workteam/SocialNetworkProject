@@ -3,6 +3,7 @@ package dataStructuresImplemented;
 
 import java.lang.reflect.Array;
 
+
 import abstractDataTypesImplemented.GenericArrayListDataBucket;
 import abstractDataTypesImplemented.GenericArrayListNode;
 import abstractDataTypesImplemented.GenericBinaryTreeNode;
@@ -22,7 +23,7 @@ public class Person implements Comparable<Person>{
 	
 	private DataBucketADT<String, String>[][] attributes;
 	private String id;
-	private NodeADT2<String> personalNode;
+	private NodeADT<String> personalNode;
 	
 	/**
 	 * Constructor of Person class. It uses unchecked casting.
@@ -84,7 +85,7 @@ public class Person implements Comparable<Person>{
 		}
 		
 		
-		personalNode = new GenericBinaryTreeNode<String>(id);
+		personalNode = new GenericArrayListNode<String>(id);
 		
 	}
 	
@@ -94,8 +95,8 @@ public class Person implements Comparable<Person>{
 	 */
 	public void createRelationshipWith(Person p) {
 		
-		personalNode.link(p.getAttribute(PersonAttributesEnum.ID)[0]);
-		p.getNode().link(id);
+		personalNode.link(p.getNode());
+		p.getNode().link(personalNode);
 	}
 	
 	
@@ -154,7 +155,7 @@ public class Person implements Comparable<Person>{
 	 * Gets the node of this person
 	 * @return The node of this person
 	 */
-	public NodeADT2<String> getNode() {
+	public NodeADT<String> getNode() {
 		return personalNode;
 	}
 	
@@ -175,7 +176,10 @@ public class Person implements Comparable<Person>{
 		}
 			return ret;
 	}
-	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
 	
 	/**
 	 * Given an attribute, returns a string with all the parameters of that attribute
@@ -217,7 +221,7 @@ public class Person implements Comparable<Person>{
 	@Override
 	public int compareTo(Person o) {
 		
-		return new PersonComparators.ByBirthdateSurnameAndName().compare(this, o);
+		return id.compareTo(o.id);//new PersonComparators.ByBirthdateSurnameAndName().compare(this, o);
 	}
 	
 }

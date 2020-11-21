@@ -156,7 +156,6 @@ public class RandomPeopleGenerator {
 
 			
 				for(int i = 0; i < size; i++) {
-					System.out.println(i);
 					ret[i] = s.nextLine();
 				}
 			
@@ -175,9 +174,9 @@ public class RandomPeopleGenerator {
 	public void createRandomRelationship() {
 		int size = DataHolder.getInstance().getNumberOfPeople();
 		Collection<Person> c = DataHolder.getInstance().getPeople();
-		if(size != 0) {
-			Person p1 = (Person) c.toArray()[random.nextInt(size)];
-			Person p2 = (Person) c.toArray()[random.nextInt(size)];
+		if(size > 1) {
+			Person p1 = (Person) c.toArray()[random.nextInt(size-1)];
+			Person p2 = (Person) c.toArray()[random.nextInt(size-1)];
 			if(p1 != p2)
 				p1.createRelationshipWith(p2);
 		}

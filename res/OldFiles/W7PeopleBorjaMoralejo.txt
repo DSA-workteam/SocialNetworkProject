@@ -1,0 +1,101 @@
+id,,,,,,,,,,
+1012,Gladis,Braney;Proietti;Greenfield,8-11-1978,Neither,Torrejón de Ardoz,Dos Hermanas,,Málaga,Nashville,G8
+Fumik1133,Fumiko,Nimmo;Terzis;Rapsomanikis,24-8-1984,Transfeminine,Rubí,Jaén,Lorca;Leganés,San Fernando;Guadalajara,The Sound of Music,G2
+Hortens1360,Hortensia,Warren;Dackerman;Leza,10-9-1955,Transsexual,Castellón de la Plana,,Logroño;Tarragona,Zaragoza,,G484
+Sim355,Simone,Marana;Worton;Chasalow,10-10-1985,Neutrois,Telde,Huelva,Granada,El Ejido;Barakaldo,,G556
+Nicho1817,Nichole,Braney,,Transmasculine,Las Palmas de Gran Canaria,Toledo;Sant Cugat del Vallès,Rivas-Vaciamadrid;Torrejón de Ardoz,,High Noon,G13
+1414,Salina,Diederich;Balding,9-9-1991,Transgender Person,Palma,Almería;Barakaldo,Valdemoro;Guadalajara,Dos Hermanas,,
+Marye1274,Maryellen,Mccoubrey,14-12-1979,Cisgender Man,Badalona,Sant Cugat del Vallès;Fuengirola,Las Palmas de Gran Canaria,,,
+Me1430,Mei,Davol;Mc-clure;Mandler,12-5-1950,,Girona,Valladolid;Toledo,Fuengirola;Badalona,Barakaldo;El Puerto de Santa María,,
+S1190,Salina,Goldie,,Neutrois,,Málaga,Huelva,Badalona,American Graffiti,
+Erv1554,Ervin,Kilson;Compton-wilcher,19-11-1990,Other,Donostia/San Sebastián,Marbella;Sant Cugat del Vallès,Orihuela,Mataró;Granada,The Best Years of Our Lives;All the President's Men,G5
+H653,Hisako,Nimmo;Zidek,17-2-2003,Transgender Male,Avilés,Valdemoro;Sant Cugat del Vallès,Badalona;Pontevedra,El Ejido,Platoon,G4
+K844,Kam,Rosenberg;Soultanian,,Gender Questioning,Murcia,Orihuela;L'Hospitalet de Llobregat,Pozuelo de Alarcón,Gijón;Chiclana de la Frontera,,G4
+Ya7,Yanira,Goulden;Truitt,,Transsexual Person,Mataró,Pontevedra,Reus,Santander,One Flew Over the Cuckoo's Nest,G4
+J1711,Jestine,Nimmo;Dobens;Terzis,,Gender Variant,Santiago de Compostela,Cornellà de Llobregat;Pamplona,Pontevedra;El Puerto de Santa María,Avilés;Girona,The Silence of the Lambs,
+M1996,Maryann,Modica;Gutierrez-jones,15-11-1970,,Dos Hermanas,Móstoles;Tarragona,Terrassa,Santander,,
+Ervi134,Ervin,Worton;Federman;Perricone,9-12-1992,Cisgender Male,,Las Rozas de Madrid,Gijón,Fuenlabrada,Forrest Gump;Who's Afraid of Virginia Woolf?,G172
+Ar1234,Aracelis,Conner;Vautin,13-10-1976,Trans,Getxo,,,Seville,Schindler's List,G184
+Kesh1677,Kesha,Iuchi,6-9-2005,Transsexual Woman,Manresa,Huelva,Talavera de la Reina,Cáceres,,G405
+Ji854,Jimmie,Warren,4-9-1951,Transsexual Female,Donostia/San Sebastián,Barakaldo;Huelva,Chiclana de la Frontera,Manresa,,G296
+1060,Tami,Kromm,21-4-1982,Transgender Woman,Getafe,,Terrassa;Bilbao,Valencia,Dr. Strangelove;A Clockwork Orange,
+1460,Laureen,Stewart-oaten,21-4-1995,Gender Questioning,,Cáceres;Roquetas de Mar,Jerez de la Frontera;Palma,Talavera de la Reina;Mijas,The Godfather Part II,G86
+1620,Gertrudis,Kilson;Marana,3-9-1984,Gender Fluid,Huelva,Lorca,Coslada;Málaga,Badalona,In the Heat of the Night;The Searchers,G266
+S776,Sabina,Chicurel;Cody-valdez;Proietti,,Androgyne,Manresa,Huelva;Guadalajara,Salamanca;Getxo,Rivas-Vaciamadrid;Las Palmas de Gran Canaria,Nashville,G6
+Suz796,Suzie,Seitz;Soultanian,,Trans Male,Bilbao,Valladolid,Sabadell;Alicante,Cartagena;Sant Cugat del Vallès,Chinatown,G2
+Re1736,Reda,Salsberg;Nardell;Naessens,7-6-1960,,,Rivas-Vaciamadrid,Córdoba,Las Rozas de Madrid;Zaragoza,The Sixth Sense,G171
+Fl490,Flor,Jorgenson;Bernardo;Mohr,24-7-1977,Autigender,Cornellà de Llobregat,Seville,,,Midnight Cowboy;Pulp Fiction,G255
+Juli372,Julieta,Rosenberger,27-2-1995,,,Móstoles,Cáceres,Torrevieja,The Bridge on the River Kwai,G281
+Agustin482,Agustina,Boone;Donia;Moreno-hornsleth,21-9-1954,Female,Leganés,Valladolid,San Fernando,Salamanca;Salamanca,,G89
+Jen1369,Jennie,Mohr;Coutouhas,26-5-1991,Trans Male,Jaén,Valdemoro,San Fernando,Jerez de la Frontera;El Puerto de Santa María,Sunset Boulevard,
+K333,Katheryn,Davol;Truitt,16-7-1964,Intersex,Salamanca,Córdoba;Badalona,San Cristóbal de La Laguna,Barakaldo,The Apartment,G3
+Tosh1148,Toshia,Piran,19-10-2003,Transgender Female,Cartagena,Girona,Leganés;Las Palmas de Gran Canaria,,,G0
+Kenda707,Kendall,Broun;Truitt,9-8-2005,Trans Woman,,Tarragona;Sant Cugat del Vallès,Rubí;Castellón de la Plana,Palma;Rivas-Vaciamadrid,Casablanca,
+M12,Marion,Mc-clure;Naples,2-3-1962,Other,Alcorcón,Talavera de la Reina,,Terrassa,Do the Right Thing,G0
+Danne1678,Dannette,Breed,,Non-binary,Mataró,,Donostia/San Sebastián,Seville;Donostia/San Sebastián,Butch Cassidy and the Sundance Kid,G152
+Audre496,Audrey,Michelson;Polinsky;Kromm,4-7-1996,Two-Spirit,San Sebastián de los Reyes,Zaragoza;Lorca,Jerez de la Frontera;Sant Cugat del Vallès,Móstoles,The Philadelphia Story;The Deer Hunter,G251
+Barb1774,Barbara,Dick,10-1-1994,FTM,,Dos Hermanas;Cornellà de Llobregat,Talavera de la Reina,Pozuelo de Alarcón;Albacete,The Deer Hunter,G144
+El654,Elly,Donia;Salsberg;Seitz,14-10-2002,Transsexual Male,Manresa,Orihuela,Cartagena,Fuengirola;Elche/Elx,West Side Story,G102
+482,Armida,Dunstan;Stevens,,Other,San Fernando,Valencia,Arona,Santiago de Compostela,,G110
+165,Prudence,Warren,21-7-1969,Non-binary,Badajoz,Reus,,,,G556
+Ana1372,Anamaria,,22-12-1954,,Burgos,Alcobendas,Avilés,Barakaldo,Blade Runner,G245
+D148,Delana,Federman;Billings,10-5-1971,Transgender,San Cristóbal de La Laguna,,Dos Hermanas;Rivas-Vaciamadrid,Getafe;Murcia,,G2
+J528,Jimmie,Baumann,20-10-1984,Two-Spirit,Reus,León;Donostia/San Sebastián,Murcia,Santiago de Compostela;Torrevieja,High Noon,G1
+Marce531,Marcelino,Peitz;Kaminski;Bernardo,,Transgender Female,San Cristóbal de La Laguna,Palencia;Pamplona,Lleida;Palencia,Torrent,,G72
+Armid1320,Armida,Levoff;Thurman,29-10-2005,Neither,Coslada,Pamplona;Ourense,Almería,,,G192
+1070,Seth,Kilson;Gewertz;Von,22-4-1995,Intersex,Parla,Salamanca;Parla,,Las Palmas de Gran Canaria;Cádiz,,G2
+Stanf661,Stanford,Soto;Diederich;Riesman,8-3-1991,Transgender Male,Mijas,Jaén;Ceuta,Dos Hermanas,Jerez de la Frontera,Raging Bull,G2
+Magdale572,Magdalen,Smith,2-1-1969,Transsexual Woman,Santa Coloma de Gramenet,,San Fernando;Talavera de la Reina,,,G82
+Li668,Lionel,Dunstan,18-5-1995,,Gijón,Santa Cruz de Tenerife;Madrid,Albacete;A Coruña,,Shane,G578
+Mi1416,Mimi,Tyler;Federman,10-9-2008,Cisgender Female,Jerez de la Frontera,Málaga;Salamanca,Chiclana de la Frontera,Sant Boi de Llobregat;Santiago de Compostela,Modern Times;The African Queen,G1
+1033,Audrey,Golovchenko;Marana;Overman,14-8-1984,Cis Woman,Guadalajara,Algeciras,Albacete;L'Hospitalet de Llobregat,Pozuelo de Alarcón;Jaén,The Deer Hunter;Goodfellas,
+21,Elba,Habbal;Esquirol,,Transmasculine,León,Torrevieja,Lleida,Chiclana de la Frontera;Santander,,G133
+Andrea1912,Andreas,Golovchenko;Rudolph;Mclaren,9-5-1985,,,Alcalá de Guadaíra,Pozuelo de Alarcón;Orihuela,Mataró,,G440
+Agust531,Agustina,Rhodes-defty;Ganong,22-4-2000,Cisgender Man,,Murcia;Torrejón de Ardoz,Palma;Torrevieja,Rubí,12 Angry Men,G160
+Cl140,Clifford,Rudolph,2-6-1995,Neutrois,Avilés,Palencia;Alcalá de Guadaíra,El Puerto de Santa María;Santa Cruz de Tenerife,Granada;Algeciras,,G8
+1313,Paul,Serre;Pacholok,16-11-1974,,Sant Boi de Llobregat,Gijón;Castellón de la Plana,Palma,Móstoles;Valdemoro,,G99
+1754,Lashanda,Serre;Marnon,1-4-1962,FTM,Jerez de la Frontera,Orihuela;Ceuta,,Reus;Rivas-Vaciamadrid,,G0
+K1372,Kesha,Worton;Brugnoli;Micheli,18-10-1986,Cis,Cáceres,Talavera de la Reina;Alcorcón,Logroño,Avilés,,G7
+Des749,Dessie,Mccoubrey,3-3-2006,Trans Male,Fuenlabrada,Girona,Salamanca,San Sebastián de los Reyes;Sant Boi de Llobregat,Star Wars,G510
+Delber197,Delbert,Ho;Bernardo;Soultanian,12-5-1967,MTF,Valladolid,Guadalajara,Elche/Elx;Torrevieja,Lorca,Citizen Kane;It's a Wonderful Life,G195
+G1379,Gwendolyn,Chiaramonte,25-5-1970,Cisgender Woman,Chiclana de la Frontera,Santander;Leganés,Móstoles;Alicante,Las Rozas de Madrid;Avilés,Apocalypse Now,G47
+1914,Hobert,,8-1-1956,Transsexual Female,Terrassa,Huelva;Tarragona,Córdoba,Seville;Cáceres,,G232
+Apol1682,Apolonia,Abbess;Humphreys;Connally,,Trans Person,L'Hospitalet de Llobregat,Donostia/San Sebastián,Coslada;Santa Cruz de Tenerife,Marbella;Girona,,
+Allys1082,Allyson,,26-10-1951,Cisgender Woman,Logroño,Santander,,Marbella,Casablanca,G326
+Ju637,Julie,Rosenberg;Spinoza,24-9-2009,Androgyne,Cornellà de Llobregat,Badajoz,El Puerto de Santa María;Coslada,Alcobendas;Badalona,Sullivan's Travels;To Kill a Mockingbird,G134
+Ke1190,Keeley,,4-3-1951,Androgynous,Tarragona,Barcelona;Móstoles,,Arona,,G4
+El744,Ela,Goulden;Warren,15-11-1975,Transgender Person,San Sebastián de los Reyes,Cádiz,Toledo;Pozuelo de Alarcón,Ourense;Reus,The Apartment,G228
+Mil1251,Mila,Spinoza;Charles;Micheli,23-6-1968,Transgender Female,Vélez-Málaga,Vélez-Málaga;Reus,,,Spartacus;Citizen Kane,G9
+Hobe1455,Hobert,Albeida;Rudolph;Kubiak,15-10-1986,Transgender Woman,Vigo,Castellón de la Plana;Manresa,Sabadell,,Bringing Up Baby,G498
+C941,Camilla,Jorgenson;Stroud,23-2-1958,Transgender Woman,Talavera de la Reina,Castellón de la Plana;Madrid,Toledo,,The Shawshank Redemption;The Godfather Part II,G69
+851,Julius,Song;Stalnaker,6-5-1965,Cisgender Woman,Vélez-Málaga,Palma;Parla,Málaga;Santiago de Compostela,Sabadell;El Puerto de Santa María,,G146
+A843,Audrey,Kerridge;De-lima,19-5-1964,Trans Woman,,Las Palmas de Gran Canaria;Orihuela,Arona;Castellón de la Plana,,,G236
+Lar1562,Lara,Koller,23-3-1984,Transmasculine,Torrejón de Ardoz,Torrevieja;Algeciras,Melilla;Palencia,Terrassa;Santander,,G288
+Tyesh666,Tyesha,Newburger,15-6-2000,Two-Spirit,Talavera de la Reina,Manresa;Cáceres,Barakaldo,Lugo;A Coruña,,G9
+1562,Otilia,Winship;Cody-valdez;Condenzio,16-2-1998,Transgender Man,Gijón,Bilbao,Pamplona,Getafe;Logroño,,G74
+Ma1848,Marlen,Newburger;Stang,6-2-1959,Transsexual Female,Reus,Mataró;Sabadell,Badalona,El Ejido;Granada,,G79
+Pr23,Prudence,Glenister;Dick,12-1-1991,Gender Questioning,,,Sabadell;Melilla,Badajoz,Nashville;Cabaret,G165
+Marilyn1509,Marilynn,Rapsomanikis;Perricone;Landweber,10-9-1984,Cisgender Male,,,Pontevedra,Cornellà de Llobregat,,G347
+Flo294,Flor,Goldie;Stein,18-6-1954,,Rivas-Vaciamadrid,Burgos,,Palencia,E.T. the Extra-Terrestrial;Duck Soup,G3
+Sin1246,Sindy,,5-5-2009,Trans Male,,Córdoba,Cartagena;Ceuta,Mijas,Double Indemnity;Nashville,G6
+Jus1450,Justa,Inada;Kromm,24-2-1990,Transsexual Person,Dos Hermanas,Lleida;Rivas-Vaciamadrid,Ceuta;Valladolid,,Do the Right Thing;Saving Private Ryan,
+1569,Bell,Hortaridas;Mohr,7-9-2002,Transsexual Male,Getafe,Marbella,,Granada,,G1
+Racq445,Racquel,Mell,24-11-1985,Intersex,Dos Hermanas,Málaga,Fuengirola;Leganés,San Cristóbal de La Laguna,,G137
+Gillia462,Gillian,Pilloton,15-6-1961,Neutrois,Pontevedra,,Burgos,Elche/Elx,The Apartment;The General,G8
+Fl276,Flor,Ho;Koller;Thurman,23-7-1980,Cisgender,Alicante,Lugo,Donostia/San Sebastián,L'Hospitalet de Llobregat;Torrevieja,Unforgiven,G0
+Zul61,Zula,Serre;Mell;Brugnoli,3-7-2004,Neutrois,Melilla,Oviedo;Las Rozas de Madrid,Oviedo;Palma,Tarragona,,G0
+Arde75,Ardelle,Ahsan,23-4-1972,Cisgender Man,Burgos,Chiclana de la Frontera;Logroño,Murcia;Palma,Roquetas de Mar,A Streetcar Named Desire;The African Queen,G207
+Anamar813,Anamaria,,,Trans Male,Barcelona,Getafe;Vigo,Rubí,Marbella;Seville,Yankee Doodle Dandy;In the Heat of the Night,
+Ste354,Stephnie,Froot;Greenfield,1-1-1988,Transsexual Person,Lorca,San Fernando,Sant Boi de Llobregat;El Puerto de Santa María,Leganés;Badalona,,G454
+C159,Candace,Paek,6-4-1987,Transsexual,Sant Boi de Llobregat,Valdemoro;Elche/Elx,Algeciras;Fuenlabrada,,The Philadelphia Story,G64
+Lil858,Lilliam,Goldie;Rosenberger;Mussington,6-5-2002,Transgender Man,Burgos,Guadalajara;El Ejido,Cádiz;Barcelona,Vélez-Málaga;Almería,,G358
+Wad60,Wade,Stroud;Catsouphes,20-11-2002,Intersex,El Ejido,Mijas;Pozuelo de Alarcón,Alicante;Reus,Reus;Terrassa,Midnight Cowboy,G2
+304,Suzy,Serre,10-1-1993,Bigender,Coslada,Pozuelo de Alarcón;Valladolid,Fuenlabrada,Valdemoro,,G7
+Delber968,Delbert,Perricone;Carleton;Albeida,21-1-1963,Trans Man,,Ourense,Seville;Mijas,,Yankee Doodle Dandy,G437
+80,Gertrudis,Newburger;Gomez-ibanez,27-9-1977,Cisgender Male,Lorca,,San Cristóbal de La Laguna,Manresa;Gijón,Lawrence of Arabia,G248
+Graci433,Gracia,Chernoff;Lidano,10-7-1971,Two-Spirit,Granada,Gijón,Córdoba,Dos Hermanas;Orihuela,,G34
+Nel911,Nell,Yamashita,14-11-1959,Cis Male,Las Rozas de Madrid,Almería;Parla,Pozuelo de Alarcón;Castellón de la Plana,Albacete;Gijón,Taxi Driver;Casablanca,G14
+Nori1105,Norine,Salsberg,14-6-2001,Other,Barakaldo,Leganés,Cartagena,León,Star Wars,G62
+W1865,Wyatt,Stewart-oaten;Mortilla;Hortaridas,3-10-1958,Trans Person,Guadalajara,San Sebastián de los Reyes,A Coruña;Madrid,Melilla,Goodfellas;Double Indemnity,G15
+S1628,Sindy,,26-10-1993,Cis,Fuenlabrada,Vélez-Málaga;Córdoba,Leganés;El Puerto de Santa María,Cornellà de Llobregat,,G57
+906,Toshia,Chiaramonte;Modica,18-3-1964,,Madrid,Pozuelo de Alarcón;Pontevedra,Vigo,Santa Cruz de Tenerife;San Cristóbal de La Laguna,E.T. the Extra-Terrestrial,G177

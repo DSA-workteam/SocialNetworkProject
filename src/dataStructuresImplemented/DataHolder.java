@@ -25,6 +25,7 @@ import exceptions.ImpulsoryAttributeRequiredException;
 
 /**
  * This is the main class which contains the data while in runtime. The data is stored in hash maps. The only thing that is not stored here is the friends relationships. They are stored in Person class, inside one of their attributes.
+ * This class is a singleton.
  * @author Borja Moralejo Tobajas and Imanol Maraña Hurtado
  *
  */
@@ -232,13 +233,13 @@ public class DataHolder{
 	public void removeRelationshipsOfPerson(Person p) throws ElementNotFoundException {
 		//Unlinks all the nodes that were attached to this node
 		p.getNode().getLinkedNodes().toArray();
-		Iterator<String> it = p.getNode().getLinkedNodes().iterator();
-		NodeADT2<String> node;
+		Iterator<NodeADT<String>> it = p.getNode().getLinkedNodes().iterator();
+		NodeADT<String> node;
 		while(it.hasNext()) {
-			node = getPersonByID(it.next()).getNode();
+			node = it.next();
 			System.out.println(node.getContent() +" unlinked of "+p.getNode().getContent()  );
-			node.unlink(p.getAttribute(PersonAttributesEnum.ID)[0]);
-		}
+			node.unlink(p.getNode());
+			}
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package menuPackage;
 
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import abstractDataTypesPackage.DataBucketADT;
@@ -17,9 +18,9 @@ import socialNetworkPackage.SocialNetwork;
  */
 public class MenuManager extends MenuPrint{
 
-	public MenuManager() {
+	public MenuManager(InputStream in) {
 		super();
-		run();		
+		run(in);		
 	}
 	
 	
@@ -27,10 +28,15 @@ public class MenuManager extends MenuPrint{
 	 * Main program's menu loop. It uses {@link FileInputStream} for the scanner, so it can be reopened.
 	 * @param dh - {@link DataBucketADT}. Referenced from the main method in {@link SocialNetwork}.
 	 */
-	private void run() {
-				// Console input 
-				FileInputStream fis = new FileInputStream(FileDescriptor.in);
-				Scanner scanner = new Scanner(fis);
+	private void run(InputStream in) {
+		Scanner scanner;
+				if(in == null) {
+					// Console input 
+					FileInputStream fis = new FileInputStream(FileDescriptor.in);
+					scanner = new Scanner(fis);
+				}else {
+					scanner = new Scanner(in);
+				}
 				
 				// To end the process when exited
 				boolean onMenu = true;

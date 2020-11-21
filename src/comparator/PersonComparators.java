@@ -135,6 +135,7 @@ public class PersonComparators {
 	}
 	
 	private static ArrayList<Integer> order;
+	/*
 	private static ArrayList<Integer> inverseInorderTraversal(GenericArrayListBinaryTree<String, Integer> root) {
 		
 		order = new ArrayList<Integer>();
@@ -147,6 +148,8 @@ public class PersonComparators {
 		return order;
 		
 	}
+	*/
+	/*
 	private static void recursiveInverseInOrder(GenericArrayListBinaryTree<String, Integer> node) {
 		if(node.more != null)
 			recursiveInverseInOrder(node.more);
@@ -215,5 +218,6 @@ public class PersonComparators {
 		
 		
 	}
+	*/
 	
 }
