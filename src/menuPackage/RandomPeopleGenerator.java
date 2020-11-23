@@ -148,7 +148,7 @@ public class RandomPeopleGenerator {
 	 */
 	private String[] loadSampleTextsFromFile(String fileName, int size) {
 		String[] ret = new String[size];
-		String path = System.getProperty("user.dir") +"\\res\\ResourcesForRandomGenerator\\"+ fileName+".txt";
+		String path = System.getProperty("user.dir") +"/res/ResourcesForRandomGenerator/"+ fileName+".txt";
 		File f = new File(path);
 		try {
 			Scanner s = new Scanner(f);

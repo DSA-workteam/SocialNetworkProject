@@ -45,7 +45,7 @@ public class DataManager {
 	 * @param option - 0 = load people; 1 = load relationships; 2 = load residence.
 	 */
 	public void loadFile(String fileName, int option) {
-		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
+		String path = System.getProperty("user.dir") +"/res/"+ fileName+".txt";
 		Stopwatch stopwatch = new Stopwatch();
 		File f = new File(path);
 		try {
@@ -159,7 +159,7 @@ public class DataManager {
 	 * @param fileName - String. Wanted file name.
 	 */
 	public void printIntoFile(String fileName) {
-		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
+		String path = System.getProperty("user.dir") +"/res/"+ fileName+".txt";
 		File writeFile = new File(path);
 		try {
 			PrintWriter writerPrinter = new PrintWriter(writeFile);
@@ -180,7 +180,7 @@ public class DataManager {
 	 * @param fileName - String. Wanted file name.
 	 */
 	public void printRelationshipsIntoFile(String fileName) {
-		String path = System.getProperty("user.dir") +"\\res\\"+ fileName+".txt";
+		String path = System.getProperty("user.dir") +"/res/"+ fileName+".txt";
 		File writeFile = new File(path);
 		try {
 			PrintWriter writerPrinter = new PrintWriter(writeFile);
@@ -213,7 +213,7 @@ public class DataManager {
 	 * @param friendsCollection -People to print into the file
 	 */
 	public void printPeoplesFriendsIntoFile(String fileName, Collection<Collection<Person>> friendsCollection) {
-		String path = System.getProperty("user.dir") +"\\res\\"+ fileName +".txt";
+		String path = System.getProperty("user.dir") +"/res/"+ fileName +".txt";
 		File writeFile = new File(path);
 		Person personToPrint = null;
 		try {

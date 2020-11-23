@@ -322,7 +322,7 @@ public class MenuFunctions{
 		
 			System.out.println();
 			sma.state = MenuEnum.MAIN;
-			sma.substate = 3;
+			sma.substate = 1;
 			break;
 		case RANDOM:
 			
