@@ -105,21 +105,21 @@ public class DataManager {
 	 */
 	private void loadResidential(String data) {
 		Person person;
-		String birthplace[];
+		String pHome[];
 		Person[] people;
 		System.out.println();
 		try {
 			// Gets the person and defines the variable home for easier manipulation
 			person = DataHolder.getInstance().getPersonByID(data);
-			birthplace = person.getAttribute(PersonAttributesEnum.BIRTHPLACE);
+			pHome = person.getAttribute(PersonAttributesEnum.HOME);
 			// Iterates with all the homes that the person with the given ID has
-			for (String home: birthplace) {
+			for (String home: pHome) {
 				
 				try {
 					
-					people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.HOME, home);
+					people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.BIRTHPLACE, home);
 					System.out.println();
-					System.out.println("People that live in " + home);
+					System.out.println("People that were born in " + home + ":");
 					System.out.println();
 					
 					// Iterates through all the people that have the correct birthplace and prints their name, surname, birthplace and study location
@@ -127,7 +127,7 @@ public class DataManager {
 						System.out.println(rPerson.attributeToString(PersonAttributesEnum.NAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.SURNAME) + ", " + rPerson.attributeToString(PersonAttributesEnum.HOME) + ", " + rPerson.attributeToString(PersonAttributesEnum.STUDIEDAT));
 				}
 				catch (ElementNotFoundException e){
-					System.err.println("No one lives in "+home);
+					System.err.println("No one was born in " + home);
 				}
 			}
 		//There's no one with the given ID

@@ -61,9 +61,9 @@ public class MenuFunctions{
 		switch(sma.state) {
 		
 		case BORNPEOPLE: // Point 7 of the programming project
-			System.out.println("This is the list of all the people that were born in "+input +":");
 			try {
 				Person[] people = DataHolder.getInstance().searchPeopleByAttribute(PersonAttributesEnum.BIRTHPLACE, input);
+				System.out.println("This is the list of all the people that were born in "+input +":");
 				int l = people.length;
 				String[] surnames;
 				for(int i = 0; i < l;i++) {
@@ -79,7 +79,7 @@ public class MenuFunctions{
 				System.out.println();
 
 			} catch (ElementNotFoundException e1) {
-				System.err.println("No one was born in that city");
+				System.err.println("No one was born in " + input);
 			}
 			
 			
@@ -116,14 +116,18 @@ public class MenuFunctions{
 					y1 = temp;
 				}
 				for(int i = y1; i < y2;i++)				
-					try {						
+					try {
+						Collection<Person> peopleInYearX = DataHolder.getInstance().getYearOfBirth(i +"").getCollection();
+						
 						System.out.println("People born in the year "+ i+ " sorted by birthplace, surnames and names: ");
 						
-						sortPersonArray(DataHolder.getInstance().getYearOfBirth(i +"").getCollection()).forEach(p -> {System.out.println(p);});
+						sortPersonArray(peopleInYearX).forEach(p -> {System.out.println(p);});
 						
 						System.out.println();
 					} catch (ElementNotFoundException e) {
+						System.err.println("No one was born in year " + i);
 					}
+				System.out.println();
 				
 				sma.substate = 2;
 				sma.state = MenuEnum.MAIN;				
