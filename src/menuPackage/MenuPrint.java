@@ -126,11 +126,12 @@ public class MenuPrint extends MenuFunctions{
 			break;
 		case BUILDPROFILES:
 			System.out.println("People that have the same profile: ");
-			
+			/*
 			Iterator<DataBucketADT<String, String>> it = DataHolder.getInstance().getCollectionOfAttribute(PersonAttributesEnum.MOVIES).iterator();
 			while(it.hasNext()) {
 				System.out.println(it.next().toString());
 			}
+			*/
 			System.out.println("Enter anything to continue:");
 
 

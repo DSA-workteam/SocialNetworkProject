@@ -2,11 +2,15 @@ package menuPackage;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
+import abstractDataTypesImplemented.GenericArrayListHashMap;
+import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.NodeADT;
 import comparator.PersonComparators;
+import comparator.Quicksort;
 import dataStructuresImplemented.DataHolder;
 import dataStructuresImplemented.DataManager;
 import dataStructuresImplemented.Person;
@@ -40,6 +44,9 @@ public class MenuFunctions{
 	
 	private String s1, s2; // Strings saved for later use in the functions
 	private Person[] pA1; // Array of person saved for later use in the functions 
+	
+	
+	private GenericArrayListHashMap<Person, String> profiles;
 
 	/**
 	 * Initializes the state machine of the menu
@@ -48,7 +55,9 @@ public class MenuFunctions{
 		sma = new StateMachineAttributes();
 		sma.state = MenuEnum.MAIN;
 		sma.substate = 0;
-		sma.parsedOption = 0;		
+		sma.parsedOption = 0;
+		
+		profiles = new GenericArrayListHashMap<Person, String>();
 	}
 	
 	/**
@@ -87,6 +96,36 @@ public class MenuFunctions{
 			sma.state = MenuEnum.MAIN;
 			break;
 		case BUILDPROFILES:	// Point 10 of the programming project
+			String profileName = "";
+			String[] movies = null;
+			profiles = new GenericArrayListHashMap<Person, String>();
+			// Every time the function is called it creates the profiles
+			
+			for(Person p:DataHolder.getInstance().getPeople()) {
+				profileName = "";
+				// Gets the person's movies and sorts them by name.
+				movies = p.getAttribute(PersonAttributesEnum.MOVIES);
+				if(movies != null && movies.length != 0) {
+					Quicksort.sort(movies);
+					
+					// Then concatenates the strings with a comma as separator
+					for(int i = 0; i < movies.length;i++)
+						if(i != movies.length-1)
+							profileName += movies[i]+",";
+						else 
+							profileName += movies[i];
+					
+					// Adds the people to the profile using the concatenated string
+					profiles.put(p, profileName);
+				}
+			}
+			
+			// Shows the profiles in console
+			Iterator<DataBucketADT<Person, String>> iter =profiles.getAllBuckets().iterator();
+			while(iter.hasNext()) {
+				System.out.println(iter.next().toString());
+			}
+
 			sma.substate = 2;
 			sma.state = MenuEnum.MAIN;
 			break;
