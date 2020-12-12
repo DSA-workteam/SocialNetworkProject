@@ -48,4 +48,6 @@ public interface NodeADT2<T extends Comparable<T> > {
 	 */
 	public void unlink(T node) throws ElementNotFoundException;
 	
+	public void rootTest();
+	
 }

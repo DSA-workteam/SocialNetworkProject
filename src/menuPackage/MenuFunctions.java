@@ -241,6 +241,11 @@ public class MenuFunctions{
 			break;
 		case LOADR: // Point 5 of the programming project
 			DataManager.getInstance().loadFile(input, 1);
+			try {
+				DataHolder.getInstance().getPersonByID("Peru57").getNode().rootTest();
+			} catch (ElementNotFoundException e1) {
+				System.out.println("No es Peru");
+			}
 			
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 1;
@@ -489,8 +494,8 @@ public class MenuFunctions{
 					s2 = input;
 				case 3:
 					Collection<Person> friends = new ArrayList<Person>();
-					Collection<NodeADT<String>> friendsNode = null;
-					Iterator<NodeADT<String>> it = null;
+					Collection<String> friendsNode = null;
+					Iterator<String> it = null;
 					Collection<Collection<Person>> friendsCollection = new ArrayList<Collection<Person>>();
 					Person personToPrint = null;
 						for (Person person: pA1) {
@@ -498,10 +503,15 @@ public class MenuFunctions{
 							friends.add(person);
 							friendsNode = person.getNode().getLinkedNodes();
 							it = friendsNode.iterator();
+							String nWord = null;
 							//Iterates over the friends that the selected person has and adds them to the overall friends list
 							while(it.hasNext()) {
 								try {
-									friends.add(DataHolder.getInstance().getPersonByID(it.next().getContent()));
+									nWord = it.next();
+									if(nWord != null)
+										friends.add(DataHolder.getInstance().getPersonByID(nWord));
+//									else
+//										System.out.println("null + 1");
 								} catch (ElementNotFoundException e) {
 									error = true;
 								}

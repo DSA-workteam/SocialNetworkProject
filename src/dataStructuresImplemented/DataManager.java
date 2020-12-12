@@ -95,7 +95,7 @@ public class DataManager {
 			System.out.println("At least one of the ID introduced to make the relationship with doesn't exist");
 		}
 		
-		
+		//Quitaste el sysout que printeaba el nombre de la gente al hacerse amigos?
 	}
 	
 	

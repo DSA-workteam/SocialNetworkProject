@@ -9,9 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import abstractDataTypesPackage.NodeADT;
+import abstractDataTypesPackage.NodeADT2;
 import dataStructuresImplemented.DataHolder;
 import dataStructuresImplemented.DataManager;
 import dataStructuresImplemented.Person;
+import enums.PersonAttributesEnum;
 import exceptions.ElementNotFoundException;
 import exceptions.ImpulsoryAttributeRequiredException;
 
@@ -33,11 +35,11 @@ class RelationshipsTesting {
 		data = "Silvia3,Silvia,Ruiz,20-06-2001,Madrid,Donostia,Madrid;Donostia,,Cadena Perpetua;Your voice,G25527";
 		Person p2 = new Person(data);	
 		
-		p.getNode().link(p2.getNode());
-		p2.getNode().link(p.getNode());
+		p.getNode().link(p2.getAttribute(PersonAttributesEnum.ID)[0]);
+		p2.getNode().link(p.getAttribute(PersonAttributesEnum.ID)[0]);
 
 		// Check if they are friends
-		assertTrue(p.getNode().getLinkedNodes().contains(p2.getNode()));
+		assertTrue(p.getNode().getLinkedNodes().contains(p2.getAttribute(PersonAttributesEnum.ID)[0]));
 		
 		
 	}
@@ -53,16 +55,16 @@ class RelationshipsTesting {
 		data = "Silvia3,Silvia,Ruiz,20-06-2001,Madrid,Donostia,Madrid;Donostia,,Cadena Perpetua;Your voice,G25527";
 		Person p2 = new Person(data);	
 		
-		p.getNode().link(p2.getNode());
-		p2.getNode().link(p.getNode());
+		p.getNode().link(p2.getAttribute(PersonAttributesEnum.ID)[0]);
+		p2.getNode().link(p.getAttribute(PersonAttributesEnum.ID)[0]);
 
 		// Check if they are linked
-		assertTrue(p.getNode().getLinkedNodes().contains(p2.getNode()));
+		assertTrue(p.getNode().getLinkedNodes().contains(p2.getAttribute(PersonAttributesEnum.ID)[0]));
 		
 		// Remove the links
-		p.getNode().unlink(p2.getNode());
+		p.getNode().unlink(p2.getAttribute(PersonAttributesEnum.ID)[0]);
 		// Check if they are not linked
-		assertFalse(p.getNode().getLinkedNodes().contains(p2.getNode()));
+		assertFalse(p.getNode().getLinkedNodes().contains(p2.getAttribute(PersonAttributesEnum.ID)[0]));
 
 	}
 	
@@ -72,15 +74,15 @@ class RelationshipsTesting {
 		DataManager.getInstance().loadFile("peopleJUnit", 0);
 		DataManager.getInstance().loadFile("friendsJUnit", 1);
 		// Check their relationships
-		NodeADT<String> peruNode = dh.getPersonByID("Peru57").getNode();
-		Collection<NodeADT<String>> c = peruNode.getLinkedNodes();
+		NodeADT2<String> peruNode = dh.getPersonByID("Peru57").getNode();
+		Collection<String> c = peruNode.getLinkedNodes();
 		// Remove from network
 		dh.removePersonFromNetwork(dh.getPersonByID("Peru57"));
 		// Check if their friends are still linked or not
 		boolean found = false;
-		Iterator<NodeADT<String>> it = c.iterator();
+		Iterator<String> it = c.iterator();
 		if(it.hasNext())
-			found = found | it.next().getLinkedNodes().contains(peruNode);
+			found = found | dh.getPersonByID(it.next()).getNode().getLinkedNodes().contains(/*peruNode this is with the previous node method*/ "Peru57");
 		assertFalse(found);
 	}
 

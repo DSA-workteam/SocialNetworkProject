@@ -29,8 +29,6 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	
 	
 	public GenericArrayListBinaryTree(T element){
-		left = null;
-		right = null;
 		this.element = element;
 		root = new GenericArrayListBinaryTree<T>();
 		root.element = element;
@@ -39,10 +37,10 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	
 	
 	@Override
-	public Collection<T> getAllElemets(GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException
+	public Collection<T> getAllElemets() throws ElementNotFoundException
 	{
 		Collection<T> ret = new ArrayList<T>();
-		inOrder(tree, ret);
+		inOrder(root, ret);
 		return ret;
 	}
 	
@@ -53,7 +51,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	 * @return Left
 	 */
 	public GenericArrayListBinaryTree<T> getLeft(){
-		return left;
+		return root.left;
 	}
 	
 	
@@ -63,14 +61,14 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	 * @return Right
 	 */
 	public GenericArrayListBinaryTree<T> getRight(){
-		return right;
+		return root.right;
 	}
 	
 	
 	
 	@Override
 	public T getKeyElement() {
-		return element;
+		return root.element;
 	}
 
 	
@@ -78,20 +76,20 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	@Override
 	public boolean addElement(T element) {
 		boolean added = true;
-		int comparation = this.element.compareTo(element);
+		int comparation = root.element.compareTo(element);
 		if(comparation == 0) 
 			added = false;
 		else if(comparation > 0) {
-			if(left != null)
-				added = left.addElement(element);
+			if(root.left != null)
+				added = root.left.addElement(element);
 			else {
-				left = new GenericArrayListBinaryTree<T>(element);
+				root.left = new GenericArrayListBinaryTree<T>(element);
 			}
 		}else {
-			if(right != null)
-				added = right.addElement(element);
+			if(root.right != null)
+				added = root.right.addElement(element);
 			else {
-				right = new GenericArrayListBinaryTree<T>(element);
+				root.right = new GenericArrayListBinaryTree<T>(element);
 			}
 		}
 		return added;
@@ -101,57 +99,31 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	
 	
 	@Override
-	public int depthOfElement(T element) {
-		int comparation = this.element.compareTo(element);
+	public int depthOfElement(T element) throws ElementNotFoundException{
+		if(root == null)
+			throw new ElementNotFoundException(element + " is not in the tree");
+		int comparation = root.element.compareTo(element);
 		int ret = 0;
-		if(comparation == 0) {
+		if(comparation == 0)
 			ret = 1;
-		}
-		else 
-			if(left != null)
-				if(comparation > 0) {
-					ret = 1 + left.depthOfElement(element);
-				}
-			else if (right != null)
-				if(comparation < 0)
-					ret = 1 + right.depthOfElement(element);
+		else
+			if(root != null) {
+				if(root.left != null)
+					if(comparation > 0)
+						ret = 1 + root.left.depthOfElement(element);
+				if (root.right != null)
+					if(comparation < 0)
+						ret = 1 + root.right.depthOfElement(element);
+			}
 		
 		return ret;
 	}
 
 
 	@Override
-	public void removeElement(T remElement, GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException{
+	public void removeElement(T remElement) throws ElementNotFoundException{
 		// TODO
-		if(root != null) {
-			int comparation = root.element.compareTo(remElement);
-			if(comparation == 0) {
-				GenericArrayListBinaryTree<T> aux1;
-				GenericArrayListBinaryTree<T> aux2;
-				if(root.left == null && root.right == null)
-					root = null;
-				else if(root.left == null || root.right == null) {
-					if(root.left == null)
-						root = root.right;
-					else
-						root = root.left;
-				}
-				else {
-					aux1 = root.left;
-					root = root.right;
-					aux2 = root;
-					while (root.right != null)
-						aux2 = aux2.left;
-					aux2.left = aux1;
-				}
-			}
-			else {
-				if(comparation < 0)
-					removeElement(remElement, tree);
-				else
-					removeElement(remElement, tree);
-			}
-		}
+		
 	}
 
 
@@ -159,10 +131,12 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	@Override
 	public int longestDepth() {
 		int dL = 0,dM = 0;
-		if(left != null )
-			dL = left.longestDepth();
-		if(right != null)
-			dM = right.longestDepth();
+		if(root != null) {
+			if(root.left != null )
+				dL = root.left.longestDepth();
+			if(root.right != null)
+				dM = root.right.longestDepth();
+		}
 		
 		return Math.max(dL, dM) + 1;
 	}
@@ -172,10 +146,12 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	@Override
 	public int shortestDepth() {
 		int dL = 0,dM = 0;
-		if(left != null )
-			dL = left.shortestDepth();
-		if(right != null)
-			dM = right.shortestDepth();
+		if(root != null) {
+			if(root.left != null )
+				dL = root.left.shortestDepth();
+			if(root.right != null)
+				dM = root.right.shortestDepth();
+		}
 		
 		return Math.min(dL, dM) + 1;
 	}
@@ -183,9 +159,9 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 	
 	@Override
-	public Iterator<T> iteratorInOrder(GenericArrayListBinaryTree<T> tree) {
+	public Iterator<T> iteratorInOrder() {
 		Collection<T> list = new ArrayList<T>();
-		inOrder(tree, list);
+		inOrder(root, list);
 		
 		return list.iterator();
 	}
@@ -193,9 +169,9 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 
 	@Override
-	public Iterator<T> iteratorPreOrder(GenericArrayListBinaryTree<T> tree) {
+	public Iterator<T> iteratorPreOrder() {
 		Collection<T> list = new ArrayList<T>();
-		preOrder(tree, list);
+		preOrder(root, list);
 		
 		return list.iterator();
 	}
@@ -203,9 +179,9 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 
 	@Override
-	public Iterator<T> iteratorPostOrder(GenericArrayListBinaryTree<T> tree) {
+	public Iterator<T> iteratorPostOrder() {
 		Collection<T> list = new ArrayList<T>();
-		postOrder(tree, list);
+		postOrder(root, list);
 		
 		return list.iterator();
 	}
@@ -213,20 +189,20 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 
 	@Override
-	public Iterator<T> iteratorLevelOrder(GenericArrayListBinaryTree<T> tree) {
+	public Iterator<T> iteratorLevelOrder() {
 		ArrayList<T> list = new ArrayList<T>();
 		ArrayList<GenericArrayListBinaryTree<T>> queue = new ArrayList<GenericArrayListBinaryTree<T>>();
-		list.add(tree.element);
-		queue.add(tree);
+		list.add(root.element);
+		queue.add(root);
 		
 		while (queue.size() > 0) {
-			if(queue.get(0).left != null)
-				queue.add(queue.get(0).left);
-			if(queue.get(0).right != null)
-				queue.add(queue.get(0).right);
+			if(queue.get(0).root.left != null)
+				queue.add(queue.get(0).root.left.root);
+			if(queue.get(0).root.right != null)
+				queue.add(queue.get(0).root.right.root);
 			queue.remove(0);
 			if (queue.size() != 0)
-				list.add(queue.get(0).element);
+				list.add(queue.get(0).root.element);
 		}
 		
 		return list.iterator();
@@ -241,9 +217,11 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	 */
 	private void inOrder(GenericArrayListBinaryTree<T> node, Collection<T> list) {
 		if(node != null) {
-			inOrder(node.left, list);
+			if(node.left != null)
+				inOrder(node.left.root, list);
 			list.add(node.element);
-			inOrder(node.right, list);
+			if(node.right != null)
+				inOrder(node.right.root, list);
 		}
 	}
 	

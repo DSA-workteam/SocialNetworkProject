@@ -21,7 +21,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
  	* @param tree {@link GenericArrayListBinaryTree}
  	* @throws ElementNotFoundException {@link ElementNotFoundException}
  	*/
-	public Collection<T> getAllElemets(GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException;
+	public Collection<T> getAllElemets() throws ElementNotFoundException;
 	
 	
 	/**
@@ -51,7 +51,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	 * @param element Given key to compare to that of the existing nodes
 	 * @return Int with the depth of the node whose key matches that of the given key
 	 */
-	public int depthOfElement(T element);
+	public int depthOfElement(T element) throws ElementNotFoundException;
 	
 	
 	/**
@@ -60,7 +60,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	 */
 	public int shortestDepth();
 	
-	public void removeElement(T remElem, GenericArrayListBinaryTree<T> tree) throws ElementNotFoundException;
+	public void removeElement(T remElem) throws ElementNotFoundException;
 	
 	
 	/**  
@@ -78,7 +78,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	* @param tree {@link BinaryTreeADT}
 	* @return  an iterator over the elements of this binary tree
 	*/
-	public Iterator<T> iteratorInOrder(GenericArrayListBinaryTree<T> tree);
+	public Iterator<T> iteratorInOrder();
 	
 	
 	/** 
@@ -88,7 +88,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	* @param tree {@link BinaryTreeADT}
 	* @return  an iterator over the elements of this binary tree
 	*/
-	public Iterator<T> iteratorPreOrder(GenericArrayListBinaryTree<T> tree);
+	public Iterator<T> iteratorPreOrder();
 
 	
 	/**   
@@ -97,7 +97,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	* @param tree {@link BinaryTreeADT}
 	* @return  an iterator over the elements of this binary tree
 	*/
-	public Iterator<T> iteratorPostOrder(GenericArrayListBinaryTree<T> tree);
+	public Iterator<T> iteratorPostOrder();
 
 	
 	/**  
@@ -105,6 +105,6 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	* @param tree {@link BinaryTreeADT}
 	* @return  an iterator over the elements of this binary tree
 	*/
-	public Iterator<T> iteratorLevelOrder(GenericArrayListBinaryTree<T> tree);
+	public Iterator<T> iteratorLevelOrder();
 	
 }

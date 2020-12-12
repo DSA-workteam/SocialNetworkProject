@@ -10,6 +10,7 @@ import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.HashMapADT;
 import abstractDataTypesPackage.HashTableADT;
 import abstractDataTypesPackage.NodeADT;
+import abstractDataTypesPackage.NodeADT2;
 import enums.PersonAttributesEnum;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
@@ -225,13 +226,12 @@ public class DataHolder{
 	 */
 	public void removeRelationshipsOfPerson(Person p) throws ElementNotFoundException {
 		//Unlinks all the nodes that were attached to this node
-		p.getNode().getLinkedNodes().toArray();
-		Iterator<NodeADT<String>> it = p.getNode().getLinkedNodes().iterator();
-		NodeADT<String> node;
+		Iterator<String> it = p.getNode().getLinkedNodes().iterator();
+		NodeADT2<String> node;
 		while(it.hasNext()) {
-			node = it.next();
+			node = getPersonByID(it.next()).getNode();
 			System.out.println(node.getContent() +" unlinked of "+p.getNode().getContent()  );
-			node.unlink(p.getNode());
+			node.unlink(p.getAttribute(PersonAttributesEnum.ID)[0]);
 			}
 	}
 	
