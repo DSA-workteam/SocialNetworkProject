@@ -45,9 +45,10 @@ public interface NodeADT2<T extends Comparable<T> > {
 	 * Unlinks with given node
 	 * @param node - NodeADT&lt;T&gt; to unlink to
 	 * @throws ElementNotFoundException - Unlink element was not found
+	 * @return whether the element has been removed or not. It will only give false if the element to remove is the same as the name of the node.
 	 */
-	public void unlink(T node) throws ElementNotFoundException;
+	public boolean unlink(T node) throws ElementNotFoundException;
 	
-	public void rootTest();
+//	public void rootTest();
 	
 }

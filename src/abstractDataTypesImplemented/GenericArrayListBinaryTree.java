@@ -37,7 +37,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	
 	
 	@Override
-	public Collection<T> getAllElemets() throws ElementNotFoundException
+	public Collection<T> getAllElements()
 	{
 		Collection<T> ret = new ArrayList<T>();
 		inOrder(root, ret);
@@ -121,13 +121,163 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 
 	@Override
-	public void removeElement(T remElement) throws ElementNotFoundException{
+	public T removeElement(T remElement) throws ElementNotFoundException{
 		// TODO
+		T result = null;
+		if(root != null) {
+			int comparation = remElement.compareTo(element);
+			if(comparation == 0) {
+				result = element;
+				root = rootReplacement(root);
+				element = root.element;
+			}
+			else {
+				GenericArrayListBinaryTree<T> current, parent = root;
+				boolean found = false;
+				if(comparation < 0)
+					current = root.left;
+				else
+					current = root.right;
+				
+				while(current != null && !found) {
+					int nComparation = remElement.compareTo(current.element);
+					if(nComparation == 0) {
+						found = true;
+						result = current.element;
+						System.out.println();
+						System.out.println(parent.element);
+						System.out.println();
+						if(current == parent.left) {
+							parent.root.left = replacement(current);
+						}
+						else {
+							parent.root.right = replacement(current);
+						}
+//						System.out.println(root.left.root.left.root.right.root.right.element);
+//						System.out.println();
+					}
+					else {
+						parent = current;
+						if(nComparation < 0)
+							current = current.root.left;
+						else
+							current = current.root.right;
+					}
+				}
+				
+				if(!found)
+					throw new ElementNotFoundException(remElement + "is not in the tree");
+			}
+		}
 		
+		return result;
+//		if(root == null)
+//			throw new ElementNotFoundException("The root is empty");
+//		if(root.left == null && root.right == null)
+//			throw new ElementNotFoundException("The root is empty");
+//		int compL = 0, compR = 0;
+//		if(root.left != null) {
+//			compL = root.left.element.compareTo(remElement);
+//			System.out.println(root.left.element);
+//			if(compL == 0) {
+//				if(root.left.root.left == null && root.left.root.right == null)
+//					root.left = null;
+//				else if(root.left.root.right == null)
+//					root.left = root.left.root.left;
+//				else if(root.left.root.left == null)
+//					root.left = root.left.root.right;
+//				else {
+//					GenericArrayListBinaryTree<T> aux = root.left.root.left;
+//					root.left = root.left.root.right;
+//					while (root.left != null)
+//						root.left = root.left.root.left;
+//					root.left = aux;
+//				}
+//			}
+//			else if(compL > 0)
+//				root.left.removeElement(remElement);
+//		}
+//		if(root.right != null) {
+//			compR = root.right.element.compareTo(remElement);
+//			System.out.println(root.right.element);
+//			if(compR == 0) {
+//				if(root.right.root.left == null && root.right.root.right == null)
+//					root.right = null;
+//				else if(root.right.root.right == null)
+//					root.right = root.right.root.left;
+//				else if(root.right.root.left == null)
+//					root.right = root.right.root.right;
+//				else {
+//					GenericArrayListBinaryTree<T> aux = root.left.root.left;
+//					root.right = root.right.root.right;
+//					while(root.left != null)
+//						root.left = root.left.root.left;
+//					root.left = aux;
+//				}
+//			}
+//			else if(compR < 0)
+//				root.right.removeElement(remElement);
+//		}
 	}
-
-
-
+	
+	
+	
+	private GenericArrayListBinaryTree<T> replacement(GenericArrayListBinaryTree<T> node){
+		GenericArrayListBinaryTree<T> result = null;
+		if(node.root.left == null && node.root.right == null)
+			result = null;
+		else if(node.root.left != null && node.root.right == null)
+			result = node.root.left;
+		else if(node.root.right != null && node.root.left == null)
+			result = node.root.right;
+		else {
+			GenericArrayListBinaryTree<T> current = node.root.right;
+			GenericArrayListBinaryTree<T> parent = node;
+			while (current.root.left != null) {
+				parent = current;
+				current = current.root.left;
+			}
+			if(node.root.right == current)
+				current.root.left = node.root.left;
+			else {
+				parent.root.left = current.root.right;
+				current.root.right = node.root.right;
+				current.root.left = node.root.left;
+			}
+			result = current;
+		}
+		return result;
+	}
+	
+	private GenericArrayListBinaryTree<T> rootReplacement(GenericArrayListBinaryTree<T> node){
+		GenericArrayListBinaryTree<T> result = null;
+		if(node.left == null && node.right == null)
+			result = null;
+		else if(node.left != null && node.right == null)
+			result = node.left.root;
+		else if(node.right != null && node.left == null)
+			result = node.right.root;
+		else {
+			GenericArrayListBinaryTree<T> current = node.right.root;
+			GenericArrayListBinaryTree<T> parent = node;
+			while (current.left != null) {
+				parent = current;
+				current = current.left.root;
+			}
+			if(node.right.root == current)
+				current.left.root = node.left.root;
+			else {
+				parent.left.root = current.right.root;
+				current.right.root = node.right.root;
+				current.left.root = node.left.root;
+			}
+			result = current;
+		}
+		return result;
+	}
+	
+	
+	
 	@Override
 	public int longestDepth() {
 		int dL = 0,dM = 0;

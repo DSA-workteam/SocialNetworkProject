@@ -2,6 +2,7 @@ package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import abstractDataTypesPackage.NodeADT2;
 import exceptions.ElementNotFoundException;
@@ -39,12 +40,8 @@ public class GenericBinaryTreeNode<T extends Comparable<T>> implements NodeADT2<
 	@Override
 	public Collection<T> getLinkedNodes() {
 		Collection<T> ret = new ArrayList<T>();
-		try {
-//			unlink((T)"Ane52");
-			ret = root.getAllElemets();
-		} catch (ElementNotFoundException e) {
-			System.err.println("There is no elements in the root");
-		}
+//		unlink((T)"Ane52");
+		ret = root.getAllElements();
 		return ret;
 	}
 
@@ -55,14 +52,31 @@ public class GenericBinaryTreeNode<T extends Comparable<T>> implements NodeADT2<
 	
 
 	@Override
-	public void unlink(T node) throws ElementNotFoundException{
-		root.removeElement(node);
-		count--;
+	public boolean unlink(T node) throws ElementNotFoundException{
+		boolean ret = false;
+		if(!node.equals(content)) {
+			root.removeElement(node);
+			count--;
+			ret = true;
+		}
+		return ret;
 	}
 	
 //	public void rootTest() {
 //		System.out.println();
-//		
+//		Collection <T> friends = root.getAllElements();
+//		Iterator<T> it = friends.iterator();
+//		while (it.hasNext())
+//			System.out.println(it.next());
+//		try {
+//			unlink((T) "Peru57");
+//		} catch (ElementNotFoundException e) {
+//			System.out.println("NO DEVERÍA DE SALIR ESTO");
+//		}
+//		friends = root.getAllElements();
+//		it = friends.iterator();
+//		while (it.hasNext())
+//			System.out.println(it.next());
 //		System.out.println();
 //	}
 	

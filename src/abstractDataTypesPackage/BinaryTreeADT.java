@@ -21,7 +21,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
  	* @param tree {@link GenericArrayListBinaryTree}
  	* @throws ElementNotFoundException {@link ElementNotFoundException}
  	*/
-	public Collection<T> getAllElemets() throws ElementNotFoundException;
+	public Collection<T> getAllElements();
 	
 	
 	/**
@@ -60,7 +60,7 @@ public interface BinaryTreeADT<T extends Comparable<T>>  {
 	 */
 	public int shortestDepth();
 	
-	public void removeElement(T remElem) throws ElementNotFoundException;
+	public T removeElement(T remElem) throws ElementNotFoundException;
 	
 	
 	/**  

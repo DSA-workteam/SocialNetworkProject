@@ -241,11 +241,11 @@ public class MenuFunctions{
 			break;
 		case LOADR: // Point 5 of the programming project
 			DataManager.getInstance().loadFile(input, 1);
-			try {
-				DataHolder.getInstance().getPersonByID("Peru57").getNode().rootTest();
-			} catch (ElementNotFoundException e1) {
-				System.out.println("No es Peru");
-			}
+//			try {
+//				DataHolder.getInstance().getPersonByID("Peru57").getNode().rootTest();
+//			} catch (ElementNotFoundException e1) {
+//				System.out.println("No es Peru");
+//			}
 			
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 1;
