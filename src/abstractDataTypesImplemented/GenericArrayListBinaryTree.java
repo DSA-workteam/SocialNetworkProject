@@ -20,7 +20,8 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	private T element;
 	private GenericArrayListBinaryTree<T> root;
 	
-
+	
+	//Empty constructor to create and initialise the root of each binary tree element
 	public GenericArrayListBinaryTree(){
 		left = null;
 		right = null;
@@ -28,6 +29,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	}
 	
 	
+	//Main constructor of the class
 	public GenericArrayListBinaryTree(T element){
 		this.element = element;
 		root = new GenericArrayListBinaryTree<T>();
@@ -47,7 +49,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	
 	
 	/**
-	 * Getter for the GenericArrayListBinaryTree&lt;T&gt; type parameter Left.
+	 * Returns the left node of the root
 	 * @return Left
 	 */
 	public GenericArrayListBinaryTree<T> getLeft(){
@@ -57,7 +59,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	
 	
 	/**
-	 * Getter for the GenericArrayListBinaryTree&lt;T&gt; type parameter Right.
+	 * Returns the right node of the root
 	 * @return Right
 	 */
 	public GenericArrayListBinaryTree<T> getRight(){
@@ -76,15 +78,16 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 	@Override
 	public boolean addElement(T element) {
 		boolean added = true;
-		int comparation = root.element.compareTo(element);
-		if(comparation == 0) 
+		int comparation = root.element.compareTo(element); //Makes the comparison for further checking
+		if(comparation == 0) //Checks if the element is already added
 			added = false;
-		else if(comparation > 0) {
-			if(root.left != null)
+		else if(comparation > 0) { //Checks if the element to add should be in the left
+			if(root.left != null) //Checks if the left node is empty or not and calls recursively if it's not null
 				added = root.left.addElement(element);
-			else {
+			else { //If it's null, it adds the element at the left of the current one
 				root.left = new GenericArrayListBinaryTree<T>(element);
 			}
+			//This step is repeated with the right side
 		}else {
 			if(root.right != null)
 				added = root.right.addElement(element);
@@ -122,109 +125,59 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 
 	@Override
 	public T removeElement(T remElement) throws ElementNotFoundException{
-		// TODO
 		T result = null;
-		if(root != null) {
-			int comparation = remElement.compareTo(element);
-			if(comparation == 0) {
+		if(root != null) { //Checks if the root is null
+			int comparation = remElement.compareTo(element); //Makes the initial comparison for further checking
+			if(comparation == 0) { //Checks if the element to remove is the root itself
 				result = element;
-				root = rootReplacement(root);
-				element = root.element;
+				root = rootReplacement(root); //Calls for the worker method specially made for this case
+				element = root.element; 
 			}
 			else {
 				GenericArrayListBinaryTree<T> current, parent = root;
 				boolean found = false;
-				if(comparation < 0)
+				if(comparation < 0) //Checks if the element to remove is in the left of the root
 					current = root.left;
 				else
 					current = root.right;
 				
-				while(current != null && !found) {
-					int nComparation = remElement.compareTo(current.element);
-					if(nComparation == 0) {
+				while(current != null && !found) { //Iterates until the element to remove is found or there are no more elements to compare with
+					int nComparation = remElement.compareTo(current.element); //Makes internal comparisons for further checking
+					if(nComparation == 0) { //Checks if we've reached the element to remove
 						found = true;
 						result = current.element;
-						System.out.println();
-						System.out.println(parent.element);
-						System.out.println();
-						if(current == parent.left) {
+						if(current == parent.left) { //Chooses the way to which call the worker method
 							parent.root.left = replacement(current);
 						}
 						else {
 							parent.root.right = replacement(current);
 						}
-//						System.out.println(root.left.root.left.root.right.root.right.element);
-//						System.out.println();
 					}
 					else {
 						parent = current;
-						if(nComparation < 0)
+						if(nComparation < 0) //Checks if the element to remove is at the left of the current one
 							current = current.root.left;
 						else
 							current = current.root.right;
 					}
 				}
 				
-				if(!found)
+				if(!found) //Checks if the element has been removed successfully
 					throw new ElementNotFoundException(remElement + "is not in the tree");
 			}
 		}
-		
 		return result;
-//		if(root == null)
-//			throw new ElementNotFoundException("The root is empty");
-//		if(root.left == null && root.right == null)
-//			throw new ElementNotFoundException("The root is empty");
-//		int compL = 0, compR = 0;
-//		if(root.left != null) {
-//			compL = root.left.element.compareTo(remElement);
-//			System.out.println(root.left.element);
-//			if(compL == 0) {
-//				if(root.left.root.left == null && root.left.root.right == null)
-//					root.left = null;
-//				else if(root.left.root.right == null)
-//					root.left = root.left.root.left;
-//				else if(root.left.root.left == null)
-//					root.left = root.left.root.right;
-//				else {
-//					GenericArrayListBinaryTree<T> aux = root.left.root.left;
-//					root.left = root.left.root.right;
-//					while (root.left != null)
-//						root.left = root.left.root.left;
-//					root.left = aux;
-//				}
-//			}
-//			else if(compL > 0)
-//				root.left.removeElement(remElement);
-//		}
-//		if(root.right != null) {
-//			compR = root.right.element.compareTo(remElement);
-//			System.out.println(root.right.element);
-//			if(compR == 0) {
-//				if(root.right.root.left == null && root.right.root.right == null)
-//					root.right = null;
-//				else if(root.right.root.right == null)
-//					root.right = root.right.root.left;
-//				else if(root.right.root.left == null)
-//					root.right = root.right.root.right;
-//				else {
-//					GenericArrayListBinaryTree<T> aux = root.left.root.left;
-//					root.right = root.right.root.right;
-//					while(root.left != null)
-//						root.left = root.left.root.left;
-//					root.left = aux;
-//				}
-//			}
-//			else if(compR < 0)
-//				root.right.removeElement(remElement);
-//		}
 	}
 	
 	
-	
+	/**
+	 * Worker method of RemoveElement for a common replacement
+	 * @param node Node  over which the replacement has to be made
+	 * @return Returns the new node with which be replaced
+	 */
 	private GenericArrayListBinaryTree<T> replacement(GenericArrayListBinaryTree<T> node){
 		GenericArrayListBinaryTree<T> result = null;
-		if(node.root.left == null && node.root.right == null)
+		if(node.root.left == null && node.root.right == null) //checks if the node has any son
 			result = null;
 		else if(node.root.left != null && node.root.right == null)
 			result = node.root.left;
@@ -233,7 +186,7 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 		else {
 			GenericArrayListBinaryTree<T> current = node.root.right;
 			GenericArrayListBinaryTree<T> parent = node;
-			while (current.root.left != null) {
+			while (current.root.left != null) { //Iterates until it finds a null left son
 				parent = current;
 				current = current.root.left;
 			}
@@ -246,9 +199,15 @@ public class GenericArrayListBinaryTree<T extends Comparable<T>> implements Bina
 			}
 			result = current;
 		}
-		return result;
+		return result; //Returns the new tree with which replace the old one
 	}
 	
+	
+	/**
+	 * Worker method of RemoveElement used only when the root is the element to eliminate. Works similar as the other worker mehtod
+	 * @param node Root node over which make the remove operation
+	 * @return Returns the new binary tree
+	 */
 	private GenericArrayListBinaryTree<T> rootReplacement(GenericArrayListBinaryTree<T> node){
 		GenericArrayListBinaryTree<T> result = null;
 		if(node.left == null && node.right == null)
