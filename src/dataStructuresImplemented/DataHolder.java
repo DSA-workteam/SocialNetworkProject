@@ -6,7 +6,9 @@ import java.util.Iterator;
 
 import abstractDataTypesImplemented.GenericArrayListHashMap;
 import abstractDataTypesImplemented.GenericArrayListHashTable;
+import abstractDataTypesImplemented.PersonUndirectedAdjacencyListIndexedGraph;
 import abstractDataTypesPackage.DataBucketADT;
+import abstractDataTypesPackage.GraphADT;
 import abstractDataTypesPackage.HashMapADT;
 import abstractDataTypesPackage.HashTableADT;
 import abstractDataTypesPackage.NodeADT;
@@ -29,7 +31,7 @@ public class DataHolder{
 	private static HashMapADT<String, String>[] attributesHashMaps;	
 	private static HashTableADT<Person, String> personLookTable;
 	private static HashMapADT<Person, String> dates; 
-	
+	private static GraphADT<Person> relationshipsGraph;
 	
 	// Singleton
 	
@@ -69,6 +71,8 @@ public class DataHolder{
 		
 		for(int i = 0; i < PersonAttributesEnum.values().length-1;i++)
 			attributesHashMaps[i] = new GenericArrayListHashMap<String, String>(hashMapsSize);
+		
+		relationshipsGraph = new PersonUndirectedAdjacencyListIndexedGraph();
 	}
 	
 	/**
@@ -166,6 +170,7 @@ public class DataHolder{
 			System.out.println(p.toString());
 			// Put the person in the Person Hash map
 			personLookTable.put(p ,id);		
+			relationshipsGraph.addVertex(p);
 			
 			// Put the person's attributes in the corresponding StringDataBucket
 			DataBucketADT<String, String>[][] attributes = p.getDataBuckets();
@@ -195,10 +200,9 @@ public class DataHolder{
 	public void removePersonFromNetwork(Person p) throws ElementNotFoundException{
 		String id = p.getAttribute(PersonAttributesEnum.ID)[0];
 		if(personLookTable.remove(p, id)){
-			
-			removeRelationshipsOfPerson(p);			
-			
-			//Removes the person's attribute from the database so it's unrelated again from it			
+			// Removes given person from the relationships of the network
+			relationshipsGraph.removeVertex(p);
+			// Removes the person's attribute from the database so it's unrelated again from it			
 			DataBucketADT<String, String>[][] attributes = p.getDataBuckets();
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null)
@@ -219,20 +223,11 @@ public class DataHolder{
 		
 	}
 	
-	/**
-	 * Removes given person from the relationships of the network
-	 * @param p - {@link Person}
-	 * @throws ElementNotFoundException - {@link ElementNotFoundException}
-	 */
-	public void removeRelationshipsOfPerson(Person p) throws ElementNotFoundException {
-		//Unlinks all the nodes that were attached to this node
-		Iterator<String> it = p.getNode().getLinkedNodes().iterator();
-		NodeADT2<String> node;
-		while(it.hasNext()) {
-			node = getPersonByID(it.next()).getNode();
-			System.out.println(node.getContent() +" unlinked of "+p.getNode().getContent()  );
-			node.unlink(p.getAttribute(PersonAttributesEnum.ID)[0]);
-			}
+	
+	
+	
+	public GraphADT<Person> getRelationshipsGraph(){
+		return relationshipsGraph;
 	}
 	
 	/**

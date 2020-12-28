@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import abstractDataTypesPackage.GraphADT;
 import enums.PersonAttributesEnum;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;
@@ -85,17 +86,21 @@ public class DataManager {
 		
 		String[] separatedID = data.split(",");
 		try {
+			
 			person1 = DataHolder.getInstance().getPersonByID(separatedID[0]);
 			person2 = DataHolder.getInstance().getPersonByID(separatedID[1]);
+			System.out.println(person1.getAttribute(PersonAttributesEnum.ID)[0]);
+			System.out.println(person2.getAttribute(PersonAttributesEnum.ID)[0]);
+
 			person1.createRelationshipWith(person2);
 			
+			System.out.println(DataHolder.getInstance().getRelationshipsGraph().edgeTo(person1, person2));
 
 		}
 		catch(ElementNotFoundException e) {
 			System.out.println("At least one of the ID introduced to make the relationship with doesn't exist");
 		}
 		
-		//Quitaste el sysout que printeaba el nombre de la gente al hacerse amigos?
 	}
 	
 	
@@ -185,20 +190,19 @@ public class DataManager {
 		try {
 			PrintWriter writerPrinter = new PrintWriter(writeFile);
 			writerPrinter.println("Id1,Id2");
-			DataHolder.getInstance().getPeople().iterator().forEachRemaining(person -> {
-				writerPrinter.print(person.getNode().toString());
-				//try {
-				//	DataHolder.getInstance().removeRelationshipsOfPerson(person);
-				//} catch (ElementNotFoundException e) {					
-				//	e.printStackTrace(); // Should not give this error
-				//}
-				
-				
+			GraphADT<Person> g = DataHolder.getInstance().getRelationshipsGraph();
+		/*	DataHolder.getInstance().getPeople().iterator().forEachRemaining(person -> {
+				if(g.getAdjacentsOf(person) != null)
+				for(Person p : g.getAdjacentsOf(person)) {
+					writerPrinter.print(person.getAttribute(PersonAttributesEnum.ID)[0]+","+p.getAttribute(PersonAttributesEnum.ID)[0]+"\n");					
+				}
+				g.removeVertex(person);				
 			});;
-		
+		*/
+			writerPrinter.print(g.toString());
 			writerPrinter.close();
-			//System.out.println("Reloading relationships");
 			System.out.println("Done printing relationships");
+			//System.out.println("Reloading relationships");			
 			//DataManager.getInstance().loadFile(fileName,1);
 		} catch (FileNotFoundException e) {
 		}

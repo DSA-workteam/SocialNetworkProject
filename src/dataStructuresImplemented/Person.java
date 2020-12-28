@@ -22,7 +22,13 @@ public class Person implements Comparable<Person>{
 	
 	private DataBucketADT<String, String>[][] attributes;
 	private String id;
-	private NodeADT2<String> personalNode;
+	private int graphID = -1;
+	
+
+	
+	public void setGraphID(int newID) { graphID = newID; }
+	
+	public int getGraphID() { return graphID; }
 	
 	/**
 	 * Constructor of Person class. It uses unchecked casting.
@@ -83,9 +89,6 @@ public class Person implements Comparable<Person>{
 			}
 		}
 		
-		
-		personalNode = new GenericBinaryTreeNode<String>(id);
-		
 	}
 	
 	/**
@@ -93,9 +96,8 @@ public class Person implements Comparable<Person>{
 	 * @param p - {@link Person}
 	 */
 	public void createRelationshipWith(Person p) {
+		DataHolder.getInstance().getRelationshipsGraph().addEdge(this, p);	
 		
-		personalNode.link(p.getAttribute(PersonAttributesEnum.ID)[0]);
-		p.getNode().link(id);
 	}
 	
 	
@@ -149,14 +151,6 @@ public class Person implements Comparable<Person>{
 		return ret;
 	}
 	
-	
-	/**
-	 * Gets the node of this person
-	 * @return The node of this person
-	 */
-	public NodeADT2<String> getNode() {
-		return personalNode;
-	}
 	
 	@Override
 	public boolean equals(Object obj) {

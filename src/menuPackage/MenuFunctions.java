@@ -59,7 +59,7 @@ public class MenuFunctions{
 		
 		profiles = new GenericArrayListHashMap<Person, String>();
 	}
-	
+
 	/**
 	 * This method is a collection of functions of the menu. In this method near all the functionality of the menu options are implemented.
 	 * @param input - String. It takes the input from the main menu loop.
@@ -223,7 +223,8 @@ public class MenuFunctions{
 			case 3: // Extra function by us, this shows the friends of the given id
 				
 				try {
-					System.out.println(DataHolder.getInstance().getPersonByID(input).getNode().toString());
+					Person p = DataHolder.getInstance().getPersonByID(input);
+					System.out.println(DataHolder.getInstance().getRelationshipsGraph().getAdjacentsOf(p).toString());
 				} catch (ElementNotFoundException e) {				
 					System.err.println("There's not such person with that id");
 				}
@@ -494,30 +495,15 @@ public class MenuFunctions{
 					s2 = input;
 				case 3:
 					Collection<Person> friends = new ArrayList<Person>();
-					Collection<String> friendsNode = null;
-					Iterator<String> it = null;
 					Collection<Collection<Person>> friendsCollection = new ArrayList<Collection<Person>>();
 					Person personToPrint = null;
 						for (Person person: pA1) {
-							boolean error = false;
+							//boolean error = false;
 							friends.add(person);
-							friendsNode = person.getNode().getLinkedNodes();
-							it = friendsNode.iterator();
-							String nWord = null;
-							//Iterates over the friends that the selected person has and adds them to the overall friends list
-							while(it.hasNext()) {
-								try {
-									nWord = it.next();
-									if(nWord != null)
-										friends.add(DataHolder.getInstance().getPersonByID(nWord));
-//									else
-//										System.out.println("null + 1");
-								} catch (ElementNotFoundException e) {
-									error = true;
-								}
-							}
-							if(error)
-								System.err.println("At least one of the friends' ID doesn't exist");
+							
+							for(Person friendOfPerson : DataHolder.getInstance().getRelationshipsGraph().getAdjacentsOf(person))
+								friends.add(friendOfPerson);
+							
 							friendsCollection.add(friends);
 							friends = new ArrayList<Person>();
 						}
@@ -566,7 +552,7 @@ public class MenuFunctions{
 	 * Sorting function for the Point 8 of the programming project. It sorts by birthplace, surnames and names using data streaming algorithm because the order of input doesn't matter at all.
 	 *
 	 * @param people - Collection {@link Collection} of people to be sorted
-	 * @return Steream {@link Person} sorted
+	 * @return Stream {@link Person} sorted
 	 */
 	private Stream<Person> sortPersonArray(Collection<Person> people){
 			
