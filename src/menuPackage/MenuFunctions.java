@@ -2,13 +2,12 @@ package menuPackage;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
 import abstractDataTypesImplemented.GenericArrayListHashMap;
+import abstractDataTypesImplemented.PersonUndirectedAdjacencyListIndexedGraph;
 import abstractDataTypesPackage.DataBucketADT;
-import abstractDataTypesPackage.NodeADT;
 import comparator.PersonComparators;
 import comparator.Quicksort;
 import dataStructuresImplemented.DataHolder;
@@ -128,6 +127,20 @@ public class MenuFunctions{
 
 			sma.substate = 2;
 			sma.state = MenuEnum.MAIN;
+			break;
+		case CLIQUES:
+			PersonUndirectedAdjacencyListIndexedGraph graph = (PersonUndirectedAdjacencyListIndexedGraph) DataHolder.getInstance().getRelationshipsGraph();
+				int n = 1;
+				for(Person[] clique : graph.getCliques()) {
+					System.out.println("Clique"+ n+ " of "+clique.length + " people");
+					for(Person p : clique)
+						if(p.getAttribute(PersonAttributesEnum.NAME) != null)
+							System.out.println(p.getAttribute(PersonAttributesEnum.NAME)[0]);
+					n++;
+					System.out.println();
+				}
+				sma.state = MenuEnum.MAIN;
+				sma.substate = 4;
 			break;
 		case DATES: // Point 8 of the programming project
 			if(sma.substate == 0) {
@@ -251,6 +264,10 @@ public class MenuFunctions{
 			sma.state = MenuEnum.MAIN;
 			sma.substate = 1;
 			break;
+		case LONGEST: // Point 12
+			
+			
+			break;
 		case MAIN: // Point 1 of the programming project and it used for navigating in the main menu
 			
 			try {
@@ -259,7 +276,7 @@ public class MenuFunctions{
 				case 0: // MAIN MENU
 					if(intCast == -1) {
 						throw new MenuClosedException();
-					}else if(intCast >= 1 && intCast <= 3) {
+					}else if(intCast >= 1 && intCast <= 4) {
 						sma.substate = intCast;
 					}
 					
@@ -347,6 +364,28 @@ public class MenuFunctions{
 						
 						sma.substate = 3;			
 						sma.state = MenuEnum.MAIN;
+						break;
+					default:
+						System.err.println("That sma.state doesn't exist");
+						break;
+					}
+					break;
+				case 4:
+					switch(intCast) {
+					case 0:
+						sma.substate = 0;
+						break;
+					case 1:
+						sma.substate = 0;
+						sma.state = MenuEnum.SHORTEST;
+						break;
+					case 2:
+						sma.substate = 0;
+						sma.state = MenuEnum.LONGEST;
+						break;
+					case 3:
+						sma.substate = 0;
+						sma.state = MenuEnum.CLIQUES;
 						break;
 					default:
 						System.err.println("That sma.state doesn't exist");
@@ -537,6 +576,10 @@ public class MenuFunctions{
 					break;
 			}
 			break;
+		 case SHORTEST: // Point 11
+			
+			break;
+			
 		
 		default:
 			break;

@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import abstractDataTypesImplemented.GenericArrayListDataBucket;
@@ -32,7 +34,6 @@ class DataBlockTesting {
 		// Check both elements in the collection
 		assertTrue(DB.getCollection().contains("Pepe"));
 		assertTrue(DB.getCollection().contains("Pipo"));
-
 
 	}
 	@Test

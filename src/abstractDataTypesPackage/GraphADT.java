@@ -64,7 +64,7 @@ public interface GraphADT<T> {
 	/**
 	 * Gets the adjacent elements of the given element
 	 * @param adjsOfT - Element to check adjacent.
-	 * @return
+	 * @return {@link Iterable} of adjacents of element
 	 */
 	public Iterable<T> getAdjacentsOf(T adjsOfT);
 	

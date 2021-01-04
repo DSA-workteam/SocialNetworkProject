@@ -6,7 +6,6 @@ import java.lang.reflect.Array;
 
 import abstractDataTypesImplemented.GenericArrayListDataBucket;
 import abstractDataTypesImplemented.GenericArrayListNode;
-import abstractDataTypesImplemented.GenericBinaryTreeNode;
 import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.NodeADT;
 import abstractDataTypesPackage.NodeADT2;
@@ -20,7 +19,7 @@ import exceptions.ImpulsoryAttributeRequiredException;
 public class Person implements Comparable<Person>{
 	
 	
-	private DataBucketADT<String, String>[][] attributes;
+	private DataBucketADT<Person, String>[][] attributes;
 	private String id;
 	private int graphID = -1;
 	
@@ -38,7 +37,7 @@ public class Person implements Comparable<Person>{
 	@SuppressWarnings("unchecked")
 	public Person(String combinedData) throws ImpulsoryAttributeRequiredException{
 		// Initializing the DataBucketADT[][] 
-		attributes = (DataBucketADT<String, String>[][]) Array.newInstance(DataBucketADT[].class, PersonAttributesEnum.values().length-1);
+		attributes = (DataBucketADT<Person, String>[][]) Array.newInstance(DataBucketADT[].class, PersonAttributesEnum.values().length-1);
 		
 		
 		// Separating the input parameter in arrays of attributes
@@ -78,13 +77,13 @@ public class Person implements Comparable<Person>{
 				// Initializing the array with the same size as different attribute choices are
 				if(nOfAttributes != 0) {
 				
-					attributes[i-1] = (DataBucketADT<String, String>[]) Array.newInstance(DataBucketADT.class,nOfAttributes);
+					attributes[i-1] = (DataBucketADT<Person, String>[]) Array.newInstance(DataBucketADT.class,nOfAttributes);
 					
 					
 					
 					// This loop assigns each attribute into each array position
 					for(int j = 0; j < nOfAttributes;j++)						
-						attributes[i-1][j] = new GenericArrayListDataBucket<String, String>(attributesData[j]);
+						attributes[i-1][j] = new GenericArrayListDataBucket<Person, String>(attributesData[j]);
 				}
 			}
 		}
@@ -106,7 +105,7 @@ public class Person implements Comparable<Person>{
 	 * It's mainly use is for removing the person from the DataBuckets and then if the DataBuckets are left empty, they are removed from the main HashMap 
 	 * @return attributes - DataBucket&lt;String, String&gt;[][]
 	 */
-	public DataBucketADT<String, String>[][] getDataBuckets(){
+	public DataBucketADT<Person, String>[][] getDataBuckets(){
 		return attributes;
 	}
 	
@@ -115,7 +114,7 @@ public class Person implements Comparable<Person>{
 	 * @param attribute - {@link PersonAttributesEnum}. This is used for selecting which attribute do we want. Use the enumerator for selecting the attribute.
 	 * @return {@link DataBucketADT}[]
 	 */
-	public DataBucketADT<String, String>[] getAttributesRelatedDataBuckets(PersonAttributesEnum attribute){
+	public DataBucketADT<Person, String>[] getAttributesRelatedDataBuckets(PersonAttributesEnum attribute){
 		if(attribute == PersonAttributesEnum.ID)
 			return null;
 		return attributes[attribute.ordinal()-1];

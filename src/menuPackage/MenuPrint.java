@@ -33,6 +33,9 @@ public class MenuPrint extends MenuFunctions{
 			case 2:
 				showSecondMilestoneMenu();
 				break;
+			case 4:
+				showThirdMilestoneMenu();
+				break;
 			case 3:
 				showExtraFeatures();
 				break;
@@ -54,6 +57,7 @@ public class MenuPrint extends MenuFunctions{
 		System.out.println("1. Show First Milestone Menu");
 		System.out.println("2. Show Second Milestone Menu");
 		System.out.println("3. Show extra features Menu");
+		System.out.println("4. Show Third Milestone Menu");
 
 
 		System.out.println("-1. Log out form the program");
@@ -80,11 +84,18 @@ public class MenuPrint extends MenuFunctions{
 		System.out.println("	4. Residential (point 9)");
 		System.out.println("	5. Build profiles (point 10)");
 		System.out.println("0. Back");
-
-
-
 	}
 	
+	
+	/**
+	 * Shows Third Milestone menu to the user by printing it in the console
+	 */
+	private void showThirdMilestoneMenu() {
+		System.out.println("	1. Shortest path (point 11)");
+		System.out.println("	2. Longest path (point 12)");
+		System.out.println("	3. Cliques (point 13)");
+		System.out.println("0. Back");
+	}
 	
 	/**
 	 * Shows our extra features menu to the user by printing it in the console
@@ -136,6 +147,11 @@ public class MenuPrint extends MenuFunctions{
 
 
 			break;
+		case CLIQUES:
+			System.out.println("This is the list of the cliques in the network:");
+			System.out.println("Enter anything to continue:");
+
+			break;
 		case DATES:
 			
 			if(sma.substate == 0) {
@@ -177,6 +193,8 @@ public class MenuPrint extends MenuFunctions{
 			break;
 		case LOADR:
 			System.out.println("Please, insert the name of the file from which you wish to load the relationships");
+			break;
+		case LONGEST:
 			break;
 		case PRINTP:
 			System.out.println("Please, insert the name of the file which you will create to print the people data in");
@@ -233,6 +251,8 @@ public class MenuPrint extends MenuFunctions{
 					System.out.println("Enter anything to continue");
 					break;
 			}
+			break;
+		case SHORTEST:
 			break;
 		case MAIN:
 			break;

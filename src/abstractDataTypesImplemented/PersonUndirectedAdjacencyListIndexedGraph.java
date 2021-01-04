@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import abstractDataTypesPackage.GraphADT;
 import abstractDataTypesPackage.HashTableADT;
+import dataStructuresImplemented.GraphFunctions;
 import dataStructuresImplemented.Person;
 import enums.PersonAttributesEnum;
 import exceptions.ElementNotFoundException;
@@ -21,7 +22,8 @@ public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Perso
 	private IntegerUndirectedAdjacencyListIndexedGraph graph;
 	private ArrayList<Person> people;
 	private ArrayList<HashTableADT<Person, Integer>> adjacencyList;
-	
+	public GraphFunctions graphFunctions;
+
 	/**
 	 * Constructor of the class, initializes the variables
 	 */
@@ -29,6 +31,7 @@ public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Perso
 		graph = new IntegerUndirectedAdjacencyListIndexedGraph();
 		people = new ArrayList<Person>();
 		adjacencyList = new ArrayList<HashTableADT<Person, Integer>>();
+		graphFunctions = new GraphFunctions(graph);
 	}
 	
 	
@@ -143,6 +146,28 @@ public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Perso
 			verteces.add(people.get(index));
 		
 		return verteces;
+	}
+	
+	/**
+	 * This function returns the collection of cliques of the graph.
+	 * @return {@link Iterable} collection of arrays of Person objects that form a clique.
+	 */
+	public Iterable<Person[]> getCliques(){
+		ArrayList<Person[]> ret = new ArrayList<Person[]>();
+		Person[] cliquePerson;
+		
+		// Gets the cliques in symbols and transforms them into Person[]
+		for(Integer[] clique : graphFunctions.retrieveCliques()){
+			cliquePerson = new Person[clique.length];
+			for(int i = 0; i < clique.length; i++) {
+				cliquePerson[i] = people.get(clique[i]);
+			}
+			ret.add(cliquePerson);
+		}
+		
+		
+		
+		return ret;
 	}
 	
 	/**

@@ -28,7 +28,7 @@ import exceptions.ElementNotFoundException;
 public class DataHolder{
 
 	
-	private static HashMapADT<String, String>[] attributesHashMaps;	
+	private static HashMapADT<Person, String>[] attributesHashMaps;	
 	private static HashTableADT<Person, String> personLookTable;
 	private static HashMapADT<Person, String> dates; 
 	private static GraphADT<Person> relationshipsGraph;
@@ -65,12 +65,12 @@ public class DataHolder{
 	private DataHolder(int hashMapsSize) {
 		personLookTable = new GenericArrayListHashTable<Person, String>(hashMapsSize);
 		
-		attributesHashMaps = (HashMapADT<String, String>[]) Array.newInstance(GenericArrayListHashMap.class, PersonAttributesEnum.values().length-1);
+		attributesHashMaps = (HashMapADT<Person, String>[]) Array.newInstance(GenericArrayListHashMap.class, PersonAttributesEnum.values().length-1);
 		
 		dates = new GenericArrayListHashMap<Person, String>(hashMapsSize);
 		
 		for(int i = 0; i < PersonAttributesEnum.values().length-1;i++)
-			attributesHashMaps[i] = new GenericArrayListHashMap<String, String>(hashMapsSize);
+			attributesHashMaps[i] = new GenericArrayListHashMap<Person, String>(hashMapsSize);
 		
 		relationshipsGraph = new PersonUndirectedAdjacencyListIndexedGraph();
 	}
@@ -82,7 +82,7 @@ public class DataHolder{
 	 * @return databucket - {@link DataBucketADT}.
 	 * @throws ElementNotFoundException
 	 */
-	private DataBucketADT<String, String> getDataBucketOf(PersonAttributesEnum attribute, String key) throws ElementNotFoundException{
+	private DataBucketADT<Person, String> getDataBucketOf(PersonAttributesEnum attribute, String key) throws ElementNotFoundException{
 		// Searches inside the conflicts inside the hash map
 		if(attribute == PersonAttributesEnum.ID)
             throw new ElementNotFoundException("id databucket");
@@ -99,8 +99,8 @@ public class DataHolder{
 	 * @param key - String. Wanted key.
 	 * @return DataBucketADT<String, String>. {@link DataBucketADT} It returns an object, it could be recently created or from the hash map created.
 	 */
-	private DataBucketADT<String, String> constructorUseDataBucket(PersonAttributesEnum attribute, String key, String value) {
-		DataBucketADT<String, String> ret;
+	private DataBucketADT<Person, String> constructorUseDataBucket(PersonAttributesEnum attribute, String key, Person value) {
+		DataBucketADT<Person, String> ret;
 		try {
 			ret = getDataBucketOf(attribute, key);
 			ret.add(value);
@@ -118,7 +118,7 @@ public class DataHolder{
 	 * @param attribute - {@link PersonAttributesEnum}.
 	 * @return {@link Collection} {@link DataBucketADT}
 	 */
-	public Collection<DataBucketADT<String, String>> getCollectionOfAttribute(PersonAttributesEnum attribute){
+	public Collection<DataBucketADT<Person, String>> getCollectionOfAttribute(PersonAttributesEnum attribute){
 		return attributesHashMaps[attribute.ordinal()-1].getAllBuckets();
 	}
 	
@@ -173,11 +173,11 @@ public class DataHolder{
 			relationshipsGraph.addVertex(p);
 			
 			// Put the person's attributes in the corresponding StringDataBucket
-			DataBucketADT<String, String>[][] attributes = p.getDataBuckets();
+			DataBucketADT<Person, String>[][] attributes = p.getDataBuckets();
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null) {
 					for(int j = 0; j < attributes[i].length;j++) {
-						attributes[i][j] = constructorUseDataBucket(PersonAttributesEnum.values()[i+1], attributes[i][j].getKey(), id);
+						attributes[i][j] = constructorUseDataBucket(PersonAttributesEnum.values()[i+1], attributes[i][j].getKey(), p);
 						
 					}
 					if(PersonAttributesEnum.values()[i+1] == PersonAttributesEnum.BIRTHDATE) {
@@ -203,17 +203,17 @@ public class DataHolder{
 			// Removes given person from the relationships of the network
 			relationshipsGraph.removeVertex(p);
 			// Removes the person's attribute from the database so it's unrelated again from it			
-			DataBucketADT<String, String>[][] attributes = p.getDataBuckets();
+			DataBucketADT<Person, String>[][] attributes = p.getDataBuckets();
 			for(int i = 0; i < attributes.length; i++)
 				if(attributes[i] != null)
 				for(int j = 0; j < attributes[i].length;j++) {
 					
-					DataBucketADT<String, String> dataBucket = attributes[i][j];				
+					DataBucketADT<Person, String> dataBucket = attributes[i][j];				
 					// If the collection of databucket is empty, removes that databucket from the hashmap
 					
-					if(attributes[i][j].remove(id) ) {
+					if(attributes[i][j].remove(p) ) {
 						if(attributes[i][j].size() == 0 )
-							attributesHashMaps[i].remove(id, dataBucket.getKey());
+							attributesHashMaps[i].remove(p, dataBucket.getKey());
 					}
 				}
 			
@@ -225,7 +225,10 @@ public class DataHolder{
 	
 	
 	
-	
+	/**
+	 * Getter of the relationship graph.
+	 * @return GraphADT - Person type
+	 */
 	public GraphADT<Person> getRelationshipsGraph(){
 		return relationshipsGraph;
 	}
@@ -256,12 +259,12 @@ public class DataHolder{
 			ret = new Person[1];
 			ret[0] = getPersonByID(value);
 		}else { //If the selected attribute is not ID, searches for the output by other way
-			Collection<String> IDs = getDataBucketOf(attribute, value).getCollection();
+			Collection<Person> IDs = getDataBucketOf(attribute, value).getCollection();
 			ret = new Person[IDs.size()];
-			Iterator<String> it = IDs.iterator();
+			Iterator<Person> it = IDs.iterator();
 			int i = 0;
 			while(it.hasNext()) {
-				ret[i++] = getPersonByID(it.next());
+				ret[i++] = it.next();
 			}
 		}
 		
