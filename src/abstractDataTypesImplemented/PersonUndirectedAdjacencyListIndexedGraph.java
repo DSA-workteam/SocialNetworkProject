@@ -173,11 +173,17 @@ public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Perso
 		return ret;
 	}
 	
+	/**
+	 * Returns an Iterable<Person> containing the shortest path between two people if they are at less than 6 steps. Returns null if anyone of them is not in the graph or if there wasn't a connection between them at a distance less than 6. Returns a single element if both of them are equal. The path returned is from person1 to person2
+	 * @param person1
+	 * @param person2
+	 * @return
+	 */
 	public Iterable<Person> pathAtDistance6(Person person1, Person person2) {
 		ArrayList<Person> ret = null;
-		if(person1.getGraphID() != -1 && person2.getGraphID() != -1) {
-			Iterable<Integer> BFS = graphFunctions.BFS(person1.getGraphID(), person2.getGraphID());
-			if(BFS != null) {
+		if(person1.getGraphID() != -1 && person2.getGraphID() != -1) { // Checks if both of them are in the graph or not
+			Iterable<Integer> BFS = graphFunctions.BFS(person1.getGraphID(), person2.getGraphID()); // Calls to the method that makes the appropriate operations
+			if(BFS != null) { // Checks if there has been found a connection between both of them and transforms the array of Integer into an array of Person
 				ret = new ArrayList<Person>();
 				Iterator<Integer> it = BFS.iterator();
 				while(it.hasNext())
@@ -187,11 +193,17 @@ public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Perso
 		return ret;
 	}
 	
+	/**
+	 * Returns an Iterable<Person> containing the longest path between two people. Returns null if anyone of them is not in the graph or if there wasn't a connection between them. Returns a single element if both of them are equal. The path returned is from person1 to person2
+	 * @param person1 First person of the search
+	 * @param person2 Second person of the search
+	 * @return Iterable<Person> containing the longest path
+	 */
 	public Iterable<Person> largerConnectionBetween(Person person1, Person person2){
 		ArrayList<Person> ret = null;
-		if(person1.getGraphID() != -1 && person2.getGraphID() != -1) {
-			Iterable<Integer> DFS = graphFunctions.DFS(person1.getGraphID(), person2.getGraphID());
-			if(DFS != null) {
+		if(person1.getGraphID() != -1 && person2.getGraphID() != -1) { // Checks if both of them are in the graph or not 
+			Iterable<Integer> DFS = graphFunctions.DFS(person1.getGraphID(), person2.getGraphID()); // Calls to the method that makes the appropriate operations
+			if(DFS != null) { // Checks if there has been found a connection between both of them and transforms the array of Integer into an array of Person
 				ret = new ArrayList<Person>();
 				Iterator<Integer> it = DFS.iterator();
 				while(it.hasNext())

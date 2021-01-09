@@ -43,18 +43,24 @@ public class GraphFunctions {
 	
 	
 	
+	/**
+	 * Makes a DFS search between two elements and returns the longest path between them using backtracking
+	 * @param source Initial node from which start the search
+	 * @param objective Objective to reach
+	 * @return An Iterable<Integer> with the longest path to the objective. It will be null if there's no path and at least an element if there is. If the source and objective are the same, returns a single element
+	 */
 	public Iterable<Integer> DFS(Integer source, Integer objective) {
 		largerDFS = null;
-		if(!source.equals(objective)) {
+		if(!source.equals(objective)) { //Checks if the elements are equal.
 			currentTry = new ArrayList<Integer>();
 			currentTry.add(source);
-			DFSWorker(source, objective);
-			if(largerDFS != null)
+			DFSWorker(source, objective); // Calls to the worker method to make the appropriate operations
+			if(largerDFS != null) // Checks if the connection has been found, and in case it has been, adds the objective as the final step
 				largerDFS.add(objective);
 		}
 		else {
 			largerDFS = new ArrayList<Integer>();
-			largerDFS.add(objective);
+			largerDFS.add(objective); //Adds itself to the final list
 		}
 		return largerDFS;
 	}
@@ -64,23 +70,23 @@ public class GraphFunctions {
 	private void DFSWorker (Integer source, Integer objective){
 		Iterator<Integer> adjacents = graph.getAdjacentsOf(source).iterator();
 		Integer actual;
-		while(adjacents.hasNext()) {
+		while(adjacents.hasNext()) { // Iterates over all the adjacent of the source node
 			actual = adjacents.next();
-			if(actual.equals(objective)) {
-				if(largerDFS == null) {
+			if(actual.equals(objective)) { // Checks if the objective has been found
+				if(largerDFS == null) { // Initializes the final array in case it wasn't
 					largerDFS = new ArrayList<Integer>();
-					Iterator<Integer> cloner = currentTry.iterator();
+					Iterator<Integer> cloner = currentTry.iterator(); // Clones the elements from the current try into the final list
 					while (cloner.hasNext())
 						largerDFS.add(cloner.next());
 				}
-				else if(currentTry.size() > largerDFS.size()) {
+				else if(currentTry.size() > largerDFS.size()) { // Checks if the current try is longer than the previous one
 					largerDFS = new ArrayList<Integer>();
-					Iterator<Integer> cloner = currentTry.iterator();
+					Iterator<Integer> cloner = currentTry.iterator(); // Clones the elements from the current try into the final list
 					while (cloner.hasNext())
 						largerDFS.add(cloner.next());
 				}
 			}
-			else if(!currentTry.contains(actual)) {
+			else if(!currentTry.contains(actual)) { // Continues with the other adjacent in case that they weren't already visited 
 				currentTry.add(actual);
 				DFSWorker(actual, objective);
 				currentTry.remove(actual);
