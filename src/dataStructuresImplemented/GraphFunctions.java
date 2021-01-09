@@ -1,9 +1,12 @@
 package dataStructuresImplemented;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import abstractDataTypesImplemented.GenericArrayListHashMap;
 import abstractDataTypesImplemented.GenericArrayListHashTable;
 import abstractDataTypesPackage.GraphADT;
+import abstractDataTypesPackage.HashMapADT;
 import abstractDataTypesPackage.HashTableADT;
 import comparator.Quicksort;
 import exceptions.ElementNotFoundException;
@@ -17,19 +20,73 @@ public class GraphFunctions {
 		private ArrayList<Integer> friendsFromRoot;
 		private int n, element;
 		
+	// Variables used in BFS
+		private ArrayList<Integer> trackList;
+		private ArrayList<Integer> alreadyOnList;
+		
+	// variables used in DFS
+		private ArrayList<Integer> largerDFS;
+		private ArrayList<Integer> currentTry;
 	
 	public GraphFunctions(GraphADT<Integer> graph) {
 		this.graph = graph;
 	}
 	
-	public void DFS(){
-		
+	/**
+	 * Returns a HashMap containing a list of keys in which are an array of all the elements at key distance from the vertex
+	 * @param vertex Root based on which the hashMap is made
+	 * @return A hashMap containing the level at which are the direct and indirect connections within the graph
+	 */
+	public Iterable<Integer> BFS(Integer source, Integer objective){
+		return null;
 	}
 	
-	public void BFS() {
-		
+	
+	
+	public Iterable<Integer> DFS(Integer source, Integer objective) {
+		largerDFS = null;
+		if(!source.equals(objective)) {
+			currentTry = new ArrayList<Integer>();
+			currentTry.add(source);
+			DFSWorker(source, objective);
+			if(largerDFS != null)
+				largerDFS.add(objective);
+		}
+		else {
+			largerDFS = new ArrayList<Integer>();
+			largerDFS.add(objective);
+		}
+		return largerDFS;
 	}
-
+	
+	
+	
+	private void DFSWorker (Integer source, Integer objective){
+		Iterator<Integer> adjacents = graph.getAdjacentsOf(source).iterator();
+		Integer actual;
+		while(adjacents.hasNext()) {
+			actual = adjacents.next();
+			if(actual.equals(objective)) {
+				if(largerDFS == null) {
+					largerDFS = new ArrayList<Integer>();
+					Iterator<Integer> cloner = currentTry.iterator();
+					while (cloner.hasNext())
+						largerDFS.add(cloner.next());
+				}
+				else if(currentTry.size() > largerDFS.size()) {
+					largerDFS = new ArrayList<Integer>();
+					Iterator<Integer> cloner = currentTry.iterator();
+					while (cloner.hasNext())
+						largerDFS.add(cloner.next());
+				}
+			}
+			else if(!currentTry.contains(actual)) {
+				currentTry.add(actual);
+				DFSWorker(actual, objective);
+				currentTry.remove(actual);
+			}
+		}
+	}
 	
 	
 	

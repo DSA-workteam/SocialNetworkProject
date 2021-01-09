@@ -1,8 +1,11 @@
 package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import abstractDataTypesPackage.GraphADT;
+import abstractDataTypesPackage.HashMapADT;
 import abstractDataTypesPackage.HashTableADT;
 import dataStructuresImplemented.GraphFunctions;
 import dataStructuresImplemented.Person;
@@ -167,6 +170,34 @@ public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Perso
 		
 		
 		
+		return ret;
+	}
+	
+	public Iterable<Person> pathAtDistance6(Person person1, Person person2) {
+		ArrayList<Person> ret = null;
+		if(person1.getGraphID() != -1 && person2.getGraphID() != -1) {
+			Iterable<Integer> BFS = graphFunctions.BFS(person1.getGraphID(), person2.getGraphID());
+			if(BFS != null) {
+				ret = new ArrayList<Person>();
+				Iterator<Integer> it = BFS.iterator();
+				while(it.hasNext())
+					ret.add(people.get(it.next()));
+			}
+		}
+		return ret;
+	}
+	
+	public Iterable<Person> largerConnectionBetween(Person person1, Person person2){
+		ArrayList<Person> ret = null;
+		if(person1.getGraphID() != -1 && person2.getGraphID() != -1) {
+			Iterable<Integer> DFS = graphFunctions.DFS(person1.getGraphID(), person2.getGraphID());
+			if(DFS != null) {
+				ret = new ArrayList<Person>();
+				Iterator<Integer> it = DFS.iterator();
+				while(it.hasNext())
+					ret.add(people.get(it.next()));
+			}
+		}
 		return ret;
 	}
 	
