@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import abstractDataTypesImplemented.IntegerUndirectedAdjacencyListIndexedGraph;
 import abstractDataTypesImplemented.PersonUndirectedAdjacencyListIndexedGraph;
 import abstractDataTypesPackage.GraphADT;
 import dataStructuresImplemented.Person;

@@ -83,12 +83,11 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>
     */
    public boolean contains (T targetElement) 
    {
-      T temp;
       boolean found = false;
       
       try 
       {
-         temp = find (targetElement);
+         find(targetElement);
          found = true;
       }
       catch (Exception ElementNotFoundException) 

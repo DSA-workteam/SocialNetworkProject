@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import abstractDataTypesImplemented.PersonUndirectedAdjacencyListIndexedGraph;
-import abstractDataTypesPackage.GraphADT;
 import dataStructuresImplemented.Person;
 import exceptions.ImpulsoryAttributeRequiredException;
 

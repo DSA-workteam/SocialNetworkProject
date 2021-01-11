@@ -1,8 +1,5 @@
 package menuPackage;
 
-import java.util.Iterator;
-
-import abstractDataTypesPackage.DataBucketADT;
 import dataStructuresImplemented.DataHolder;
 import enums.MenuEnum;
 import enums.PersonAttributesEnum;
@@ -10,7 +7,7 @@ import enums.PersonAttributesEnum;
 
 /**
  * Menu class which means that the main functionality of this class is to show to the user the input that has to enter to make certain functions.
- * @author Borja Moralejo Tobajas
+ * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
  *
  */
 public class MenuPrint extends MenuFunctions{
@@ -33,10 +30,10 @@ public class MenuPrint extends MenuFunctions{
 			case 2:
 				showSecondMilestoneMenu();
 				break;
-			case 4:
+			case 3:
 				showThirdMilestoneMenu();
 				break;
-			case 3:
+			case 4:
 				showExtraFeatures();
 				break;
 			default:
@@ -56,8 +53,8 @@ public class MenuPrint extends MenuFunctions{
 		
 		System.out.println("1. Show First Milestone Menu");
 		System.out.println("2. Show Second Milestone Menu");
-		System.out.println("3. Show extra features Menu");
-		System.out.println("4. Show Third Milestone Menu");
+		System.out.println("3. Show Third Milestone Menu");
+		System.out.println("4. Show extra features Menu");
 
 
 		System.out.println("-1. Log out form the program");
@@ -195,6 +192,10 @@ public class MenuPrint extends MenuFunctions{
 			System.out.println("Please, insert the name of the file from which you wish to load the relationships");
 			break;
 		case LONGEST:
+			if(sma.substate == 0)
+				System.out.println("Please, insert the ID of the first person whose path you want to search");
+			else
+				System.out.println("Please, insert another ID to make the operation");
 			break;
 		case PRINTP:
 			System.out.println("Please, insert the name of the file which you will create to print the people data in");
@@ -253,6 +254,10 @@ public class MenuPrint extends MenuFunctions{
 			}
 			break;
 		case SHORTEST:
+			if(sma.substate == 0)
+				System.out.println("Please, insert the ID of the first person whose path you want to search");
+			else
+				System.out.println("Please, insert another ID to make the operation");
 			break;
 		case MAIN:
 			break;

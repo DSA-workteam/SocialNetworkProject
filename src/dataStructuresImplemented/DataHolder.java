@@ -11,8 +11,6 @@ import abstractDataTypesPackage.DataBucketADT;
 import abstractDataTypesPackage.GraphADT;
 import abstractDataTypesPackage.HashMapADT;
 import abstractDataTypesPackage.HashTableADT;
-import abstractDataTypesPackage.NodeADT;
-import abstractDataTypesPackage.NodeADT2;
 import enums.PersonAttributesEnum;
 import exceptions.AlreadyOnTheCollectionException;
 import exceptions.ElementNotFoundException;

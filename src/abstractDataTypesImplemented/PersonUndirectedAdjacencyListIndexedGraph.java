@@ -1,11 +1,9 @@
 package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import abstractDataTypesPackage.GraphADT;
-import abstractDataTypesPackage.HashMapADT;
 import abstractDataTypesPackage.HashTableADT;
 import dataStructuresImplemented.GraphFunctions;
 import dataStructuresImplemented.Person;
@@ -14,7 +12,7 @@ import exceptions.ElementNotFoundException;
 /**
  *  This class is an implementation of GraphADT with the type Person. It's an undirected graph using adjacency list.
  *  Uses an {@link IntegerUndirectedAdjacencyListIndexedGraph} as base and assigns each {@link Person} an ID that symbolizes a vertex in the graph.
- * @author Borja Moralejo Tobajas
+ * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
  *
  */
 public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Person>{

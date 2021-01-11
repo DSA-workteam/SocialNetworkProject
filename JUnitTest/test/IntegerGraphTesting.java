@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import abstractDataTypesImplemented.IntegerUndirectedAdjacencyListIndexedGraph;
-import abstractDataTypesPackage.GraphADT;
 
 class IntegerGraphTesting {
 	IntegerUndirectedAdjacencyListIndexedGraph graph;

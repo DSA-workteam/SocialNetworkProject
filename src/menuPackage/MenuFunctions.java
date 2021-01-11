@@ -22,7 +22,7 @@ import exceptions.MenuClosedException;
 
 /**
  * This class has all the functionalities of the menu.
- * @author Borja Moralejo Tobajas
+ * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
  *
  */
 public class MenuFunctions{
@@ -43,6 +43,8 @@ public class MenuFunctions{
 	
 	private String s1, s2; // Strings saved for later use in the functions
 	private Person[] pA1; // Array of person saved for later use in the functions 
+	
+	private PersonUndirectedAdjacencyListIndexedGraph graph;
 	
 	
 	private GenericArrayListHashMap<Person, String> profiles;
@@ -129,7 +131,7 @@ public class MenuFunctions{
 			sma.state = MenuEnum.MAIN;
 			break;
 		case CLIQUES:
-			PersonUndirectedAdjacencyListIndexedGraph graph = (PersonUndirectedAdjacencyListIndexedGraph) DataHolder.getInstance().getRelationshipsGraph();
+			graph = (PersonUndirectedAdjacencyListIndexedGraph) DataHolder.getInstance().getRelationshipsGraph();
 				int n = 1;
 				for(Person[] clique : graph.getCliques()) {
 					System.out.println("Clique"+ n+ " of "+clique.length + " people");
@@ -140,7 +142,7 @@ public class MenuFunctions{
 					System.out.println();
 				}
 				sma.state = MenuEnum.MAIN;
-				sma.substate = 4;
+				sma.substate = 3;
 			break;
 		case DATES: // Point 8 of the programming project
 			if(sma.substate == 0) {
@@ -198,7 +200,7 @@ public class MenuFunctions{
 				}finally {
 					if(intCast == 0) {
 						sma.state = MenuEnum.MAIN;
-						sma.substate = 3;
+						sma.substate = 4;
 					}else if(intCast >= 0&& intCast <= 3){
 						sma.substate = intCast;
 					}
@@ -265,8 +267,41 @@ public class MenuFunctions{
 			sma.substate = 1;
 			break;
 		case LONGEST: // Point 12
-			
-			
+				if(sma.substate == 0) {
+					try {
+						pA1 = new Person[2];
+						pA1[0] = DataHolder.getInstance().getPersonByID(input);
+						sma.substate = 1;
+					} catch (ElementNotFoundException e) {
+						System.err.println("The person with ID " + input + " does not exixst");
+						sma.state = MenuEnum.MAIN;
+						sma.substate = 3;
+					}
+				} else
+					try {
+						pA1[1] = DataHolder.getInstance().getPersonByID(input);
+						graph = (PersonUndirectedAdjacencyListIndexedGraph) DataHolder.getInstance().getRelationshipsGraph();
+						try {
+							Iterator<Person> longestPath = graph.largerConnectionBetween(pA1[0], pA1[1]).iterator();
+								System.out.println();
+								System.out.print("The longest path between " + pA1[0].attributeToString(PersonAttributesEnum.ID) + " and " + pA1[1].attributeToString(PersonAttributesEnum.ID) + " is made by the connection of the following people: ");
+								System.out.println();
+								System.out.print(longestPath.next().attributeToString(PersonAttributesEnum.ID));
+								while(longestPath.hasNext())
+									System.out.print(" ---> " + longestPath.next().attributeToString(PersonAttributesEnum.ID));
+								System.out.println();
+								System.out.println();
+						}
+						catch (NullPointerException e) {
+							System.out.println(pA1[0].attributeToString(PersonAttributesEnum.ID) + " and " + pA1[1].attributeToString(PersonAttributesEnum.ID) + " are not connected");
+						}
+						sma.state = MenuEnum.MAIN;
+						sma.substate = 3;
+					} catch (ElementNotFoundException e1) {
+						System.err.println("The person with ID " + input + " does not exixst");
+						sma.state = MenuEnum.MAIN;
+						sma.substate = 3;
+					}
 			break;
 		case MAIN: // Point 1 of the programming project and it used for navigating in the main menu
 			
@@ -341,7 +376,29 @@ public class MenuFunctions{
 					}
 					
 					break;
-				case 3: // EXTRA FEATURES MENU
+				case 3:
+					switch(intCast) {
+					case 0:
+						sma.substate = 0;
+						break;
+					case 1:
+						sma.substate = 0;
+						sma.state = MenuEnum.SHORTEST;
+						break;
+					case 2:
+						sma.substate = 0;
+						sma.state = MenuEnum.LONGEST;
+						break;
+					case 3:
+						sma.substate = 0;
+						sma.state = MenuEnum.CLIQUES;
+						break;
+					default:
+						System.err.println("That sma.state doesn't exist");
+						break;
+					}
+					break;
+				case 4: // EXTRA FEATURES MENU
 					switch(intCast) {
 					case 0:
 						sma.substate = 0;
@@ -364,28 +421,6 @@ public class MenuFunctions{
 						
 						sma.substate = 3;			
 						sma.state = MenuEnum.MAIN;
-						break;
-					default:
-						System.err.println("That sma.state doesn't exist");
-						break;
-					}
-					break;
-				case 4:
-					switch(intCast) {
-					case 0:
-						sma.substate = 0;
-						break;
-					case 1:
-						sma.substate = 0;
-						sma.state = MenuEnum.SHORTEST;
-						break;
-					case 2:
-						sma.substate = 0;
-						sma.state = MenuEnum.LONGEST;
-						break;
-					case 3:
-						sma.substate = 0;
-						sma.state = MenuEnum.CLIQUES;
 						break;
 					default:
 						System.err.println("That sma.state doesn't exist");
@@ -421,7 +456,7 @@ public class MenuFunctions{
 				
 					if(intCast == 0) {
 						sma.state = MenuEnum.MAIN;
-						sma.substate = 3;
+						sma.substate = 4;
 					}else if(intCast >= 0&& intCast <= 2){
 						sma.substate = intCast;
 					}						
@@ -471,7 +506,7 @@ public class MenuFunctions{
 					sma.parsedOption = Integer.parseInt(input);
 					if(sma.parsedOption == 0) {
 						sma.state = MenuEnum.MAIN;
-						sma.substate = 3;
+						sma.substate = 4;
 					}else if(sma.parsedOption > 0 && sma.parsedOption <= 11)
 						sma.substate = 1;
 				}catch(NumberFormatException e) {
@@ -495,7 +530,7 @@ public class MenuFunctions{
 				}
 				
 				sma.state = MenuEnum.MAIN;
-				sma.substate = 3;
+				sma.substate = 4;
 			}			
 			break;
 		case SEARCHFRIENDS: // Point 6 of the programming project
@@ -576,8 +611,42 @@ public class MenuFunctions{
 					break;
 			}
 			break;
-		 case SHORTEST: // Point 11
-			
+		case SHORTEST: // Point 11
+			if(sma.substate == 0) {
+				try {
+					pA1 = new Person[2];
+					pA1[0] = DataHolder.getInstance().getPersonByID(input);
+					sma.substate = 1;
+				} catch (ElementNotFoundException e) {
+					System.err.println("The person with ID " + input + " does not exixst");
+					sma.state = MenuEnum.MAIN;
+					sma.substate = 3;
+				}
+			} else
+				try {
+					pA1[1] = DataHolder.getInstance().getPersonByID(input);
+					graph = (PersonUndirectedAdjacencyListIndexedGraph) DataHolder.getInstance().getRelationshipsGraph();
+					try {
+						Iterator<Person> it = graph.pathAtDistance6(pA1[0], pA1[1]).iterator();
+							System.out.println();
+							System.out.print("The shortest path at a maximum of 6 steps between " + pA1[0].attributeToString(PersonAttributesEnum.ID) + " and " + pA1[1].attributeToString(PersonAttributesEnum.ID) + " is made by the connection of the following people: ");
+							System.out.println();
+							System.out.print(it.next().attributeToString(PersonAttributesEnum.ID));
+							while(it.hasNext())
+								System.out.print(" ---> " + it.next().attributeToString(PersonAttributesEnum.ID));
+							System.out.println();
+							System.out.println();
+					}
+					catch (NullPointerException e) {
+						System.out.println(pA1[0].attributeToString(PersonAttributesEnum.ID) + " and " + pA1[1].attributeToString(PersonAttributesEnum.ID) + " are not connected or their connection is not within 6 steps");
+					}
+					sma.state = MenuEnum.MAIN;
+					sma.substate = 3;
+				} catch (ElementNotFoundException e1) {
+					System.err.println("The person with ID " + input + " does not exixst");
+					sma.state = MenuEnum.MAIN;
+					sma.substate = 3;
+				}
 			break;
 			
 		

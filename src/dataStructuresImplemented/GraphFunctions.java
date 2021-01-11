@@ -3,10 +3,8 @@ package dataStructuresImplemented;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import abstractDataTypesImplemented.GenericArrayListHashMap;
 import abstractDataTypesImplemented.GenericArrayListHashTable;
 import abstractDataTypesPackage.GraphADT;
-import abstractDataTypesPackage.HashMapADT;
 import abstractDataTypesPackage.HashTableADT;
 import comparator.Quicksort;
 import exceptions.ElementNotFoundException;

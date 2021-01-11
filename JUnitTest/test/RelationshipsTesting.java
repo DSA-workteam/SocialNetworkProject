@@ -1,21 +1,21 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Collection;
-import java.util.Iterator;
+//import java.util.Collection;
+//import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 
-import abstractDataTypesPackage.NodeADT;
-import abstractDataTypesPackage.NodeADT2;
+//import abstractDataTypesPackage.NodeADT;
+//import abstractDataTypesPackage.NodeADT2;
 import dataStructuresImplemented.DataHolder;
-import dataStructuresImplemented.DataManager;
-import dataStructuresImplemented.Person;
-import enums.PersonAttributesEnum;
-import exceptions.ElementNotFoundException;
-import exceptions.ImpulsoryAttributeRequiredException;
+//import dataStructuresImplemented.DataManager;
+//import dataStructuresImplemented.Person;
+//import enums.PersonAttributesEnum;
+//import exceptions.ElementNotFoundException;
+//import exceptions.ImpulsoryAttributeRequiredException;
 
 class RelationshipsTesting {
 	DataHolder dh;

@@ -5,10 +5,7 @@ import java.lang.reflect.Array;
 
 
 import abstractDataTypesImplemented.GenericArrayListDataBucket;
-import abstractDataTypesImplemented.GenericArrayListNode;
 import abstractDataTypesPackage.DataBucketADT;
-import abstractDataTypesPackage.NodeADT;
-import abstractDataTypesPackage.NodeADT2;
 import enums.PersonAttributesEnum;
 import exceptions.ImpulsoryAttributeRequiredException;
 /**
