@@ -20,10 +20,6 @@ public class GraphFunctions {
 		private ArrayList<Integer> friendsFromRoot;
 		private int n, element;
 		
-	// Variables used in BFS
-		private ArrayList<Integer> trackList;
-		private ArrayList<Integer> alreadyOnList;
-		
 	// variables used in DFS
 		private ArrayList<Integer> largerDFS;
 		private ArrayList<Integer> currentTry;
@@ -38,7 +34,63 @@ public class GraphFunctions {
 	 * @return A hashMap containing the level at which are the direct and indirect connections within the graph
 	 */
 	public Iterable<Integer> BFS(Integer source, Integer objective){
-		return null;
+		ArrayList<Integer> ret = new ArrayList<Integer> ();
+		if(!source.equals(objective)) { // Checks if the two elements are the same
+			ArrayList<Integer> queue = new ArrayList<Integer>(); // Creates a queue and some other useful arrays for further use
+			int vN = graph.getVertexNumber(); // As this value is used more than once, a new constant is generated
+			boolean[] marked = new boolean[vN];
+			int[] edgeTo = new int[vN];
+			int[] distTo = new int[vN];
+			for(int i = 0; i < vN; i++) // Sets all the values in the array to a preset value
+				distTo[i] = Integer.MAX_VALUE;
+			marked[source] = true; // Marks the source as visited as well as added to the queue and set its distance to 0
+			distTo[source] = 0;
+			queue.add(0, source);
+
+			Integer actual; // Initializes some Variables
+			Integer adj;
+			Integer last = 0;
+			int cont = 1;
+			boolean done = false;
+			Iterator<Integer> it;
+			while(!queue.isEmpty() && cont < 6 && !done) { // Iterates over all the elements until it reaches the end of the queue or reaches the try limit or the final is found
+				actual = queue.remove(0);
+				it = graph.getAdjacentsOf(actual).iterator();
+				while(it.hasNext() && !done) { // Iterates over all the adjacent unless the element to search is found
+					adj = it.next();
+					if(!marked[adj]) { // Makes some operations if the element wasn't previously checked
+						edgeTo[adj] = actual;
+						distTo[adj] = distTo[actual] + 1;
+						if(adj.equals(objective)) { // Checks if we've found the element we were searching for
+							done = true;
+							last = adj;
+						}
+						else {
+							marked[adj] = true;
+							queue.add(0, adj);
+						}
+					}
+				}
+				cont++;
+			}
+
+			if(!done) // Checks if the element has been found, indicating whether there's a connection between them or not
+				ret = null;
+			else {
+				int dist = distTo[last];
+				actual = last;
+				while(dist != 0) { // Goes over all the elements until reaching the source
+					ret.add(0, actual);
+					dist--;
+					if(dist != 0)
+						actual = edgeTo[actual];
+				}
+				ret.add(0, source);
+			}
+		}
+		else
+			ret.add(source); // Adds itself only if the element to search is the same as the source
+		return ret;
 	}
 	
 	
