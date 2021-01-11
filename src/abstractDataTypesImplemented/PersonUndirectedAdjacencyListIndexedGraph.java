@@ -12,7 +12,7 @@ import exceptions.ElementNotFoundException;
 /**
  *  This class is an implementation of GraphADT with the type Person. It's an undirected graph using adjacency list.
  *  Uses an {@link IntegerUndirectedAdjacencyListIndexedGraph} as base and assigns each {@link Person} an ID that symbolizes a vertex in the graph.
- * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
+ * @author Borja Moralejo Tobajas and Imanol Maraña Hurtado
  *
  */
 public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Person>{
@@ -172,10 +172,10 @@ public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Perso
 	}
 	
 	/**
-	 * Returns an Iterable<Person> containing the shortest path between two people if they are at less than 6 steps. Returns null if anyone of them is not in the graph or if there wasn't a connection between them at a distance less than 6. Returns a single element if both of them are equal. The path returned is from person1 to person2
-	 * @param person1
-	 * @param person2
-	 * @return
+	 * Returns an {@link Iterable} Person type containing the shortest path between two people if they are at less than 6 steps. Returns null if anyone of them is not in the graph or if there wasn't a connection between them at a distance less than 6. Returns a single element if both of them are equal. The path returned is from person1 to person2
+	 * @param person1 {@link Person}
+	 * @param person2 {@link Person}
+	 * @return {@link Iterable} Person type if there's path, null if there is not
 	 */
 	public Iterable<Person> pathAtDistance6(Person person1, Person person2) {
 		ArrayList<Person> ret = null;
@@ -192,10 +192,10 @@ public class PersonUndirectedAdjacencyListIndexedGraph implements GraphADT<Perso
 	}
 	
 	/**
-	 * Returns an Iterable<Person> containing the longest path between two people. Returns null if anyone of them is not in the graph or if there wasn't a connection between them. Returns a single element if both of them are equal. The path returned is from person1 to person2
+	 * Returns an {@link Iterable} Person type containing the longest path between two people. Returns null if anyone of them is not in the graph or if there wasn't a connection between them. Returns a single element if both of them are equal. The path returned is from person1 to person2
 	 * @param person1 First person of the search
 	 * @param person2 Second person of the search
-	 * @return Iterable<Person> containing the longest path
+	 * @return {@link Iterable} Person type containing the longest path
 	 */
 	public Iterable<Person> largerConnectionBetween(Person person1, Person person2){
 		ArrayList<Person> ret = null;

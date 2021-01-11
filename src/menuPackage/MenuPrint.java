@@ -7,7 +7,7 @@ import enums.PersonAttributesEnum;
 
 /**
  * Menu class which means that the main functionality of this class is to show to the user the input that has to enter to make certain functions.
- * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
+ * @author Borja Moralejo Tobajas and Imanol Maraña Hurtado
  *
  */
 public class MenuPrint extends MenuFunctions{

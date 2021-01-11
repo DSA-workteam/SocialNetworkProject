@@ -21,9 +21,16 @@ public class Person implements Comparable<Person>{
 	private int graphID = -1;
 	
 
-	
+	/**
+	 * Sets the symbol that this Person is going to use in the GraphADT of Dataholder.
+	 * @param newID - new symbol or id.
+	 */
 	public void setGraphID(int newID) { graphID = newID; }
 	
+	/**
+	 * Gets the symbol that this Person is using in the relationship GraphADT of the DataHolder, if this variable == -1, that means that it's not in the graph.
+	 * @return int - symbol or id used
+	 */
 	public int getGraphID() { return graphID; }
 	
 	/**

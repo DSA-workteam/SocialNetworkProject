@@ -1,9 +1,11 @@
 package abstractDataTypesImplemented;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import abstractDataTypesPackage.GraphADT;
+import exceptions.ElementNotFoundException;
 
 /**
  * This class is the implementation of GraphADT that uses Integers as the base type. 
@@ -19,7 +21,7 @@ public class IntegerUndirectedAdjacencyListIndexedGraph implements GraphADT<Inte
 	private int nOfEdges = 0;
 	
 	
-	private ArrayList<ArrayList<Integer>> adjacencyList; //It needs to be arraylist of bst<Interger>
+	private ArrayList<LinkedBinarySearchTree<Integer>> adjacencyList; //It needs to be arraylist of bst<Interger>
 	private LinkedList<Integer> vacantIntegers;
 	private ArrayList<Boolean> isVacant; 
 	
@@ -27,7 +29,7 @@ public class IntegerUndirectedAdjacencyListIndexedGraph implements GraphADT<Inte
 	 * Constructor of the class
 	 */
 	public IntegerUndirectedAdjacencyListIndexedGraph() {
-		adjacencyList = new ArrayList<ArrayList<Integer>>(10);
+		adjacencyList = new ArrayList<LinkedBinarySearchTree<Integer>>(10);
 		vacantIntegers = new LinkedList<Integer>();
 		isVacant = new ArrayList<Boolean>(10);
 	}
@@ -74,14 +76,14 @@ public class IntegerUndirectedAdjacencyListIndexedGraph implements GraphADT<Inte
 		if(element == getIndex()) { 
 			nOfVertices+=1;
 			if(element == maxVertexIndex){ // The vacant queue is empty, must take the last index
-				adjacencyList.add(maxVertexIndex, new ArrayList<Integer>());
+				adjacencyList.add(maxVertexIndex, new LinkedBinarySearchTree<Integer>());
 				isVacant.add(maxVertexIndex, false);
 				
 				maxVertexIndex++;
 
 			}else { // Is going to replace the place of a removed element
 				
-				adjacencyList.set(vacantIntegers.removeFirst(), new ArrayList<Integer>());
+				adjacencyList.set(vacantIntegers.removeFirst(), new LinkedBinarySearchTree<Integer>());
 				isVacant.set(element, false);
 			}
 		}else
@@ -98,7 +100,11 @@ public class IntegerUndirectedAdjacencyListIndexedGraph implements GraphADT<Inte
 				
 				// Remove all edges of element
 				for(int other : getAdjacentsOf(element)) {
-					adjacencyList.get(other).remove(element);
+					try {
+						adjacencyList.get(other).removeElement(element);
+					} catch (ElementNotFoundException e) {
+						e.printStackTrace();
+					}
 					nOfEdges--;
 				}
 				
@@ -117,8 +123,8 @@ public class IntegerUndirectedAdjacencyListIndexedGraph implements GraphADT<Inte
 		boolean added = false;
 		if(areElementsValid(element1, element2)) {
 				if(!adjacencyList.get(element1).contains(element2)) {
-					adjacencyList.get(element1).add(element2);
-					adjacencyList.get(element2).add(element1);
+					adjacencyList.get(element1).addElement(element2);
+					adjacencyList.get(element2).addElement(element1);
 					added = true;
 					nOfEdges++;
 				}
@@ -133,8 +139,12 @@ public class IntegerUndirectedAdjacencyListIndexedGraph implements GraphADT<Inte
 		boolean removed = false;
 		if(areElementsValid(element1, element2)){
 				if(adjacencyList.get(element1).contains(element2)) {
-					adjacencyList.get(element1).remove(element2);
-					adjacencyList.get(element2).remove(element1);
+					try {
+						adjacencyList.get(element1).removeElement(element2);
+						adjacencyList.get(element2).removeElement(element1);
+					} catch (ElementNotFoundException e) {
+						e.printStackTrace();
+					}
 					removed = true;
 					nOfEdges--;
 				}else {
@@ -146,9 +156,12 @@ public class IntegerUndirectedAdjacencyListIndexedGraph implements GraphADT<Inte
 
 	@Override
 	public Iterable<Integer> getAdjacentsOf(Integer adjsOfT) {
-		Iterable<Integer> ret = null;
-		if(!isVacant.get(adjsOfT))
-			ret = adjacencyList.get(adjsOfT);
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+		Iterator<Integer> it;
+		if(!isVacant.get(adjsOfT)) {
+			it = adjacencyList.get(adjsOfT).iteratorInOrder();
+			while(it.hasNext()) ret.add(it.next());
+		}
 		return ret;
 	}
 

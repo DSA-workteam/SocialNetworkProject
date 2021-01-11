@@ -146,7 +146,7 @@ public class GenericArrayListHashMap<Value,Key extends Comparable<Key>> implemen
 		return N;
 	}
 
-	
+	/*
 	@SuppressWarnings({ "unchecked", "unused" })
 	private void expandHashMap() {
 		Iterator<DataBucketADT<Value, Key>> it= getAllBuckets().iterator();
@@ -160,7 +160,7 @@ public class GenericArrayListHashMap<Value,Key extends Comparable<Key>> implemen
 		it.forEachRemaining(bucket -> hashMap[hashCode(bucket.getKey())].add(bucket));
 
 	}
-	
+	*/
 	
 	@Override
 	public Collection<Value> getAllElements() {

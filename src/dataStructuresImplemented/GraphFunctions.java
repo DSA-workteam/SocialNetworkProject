@@ -9,6 +9,12 @@ import abstractDataTypesPackage.HashTableADT;
 import comparator.Quicksort;
 import exceptions.ElementNotFoundException;
 
+/**
+ * This class contains functions that are going to be used with a GraphADT of type Integer. 
+ * Dataholder's PersonUndirectedAdjacencyListIndexedGraph has an IntegerUndirectedAdjacencyListIndexedGraph that is going to be used here.
+ * @author Borja Moralejo Tobajas and Imanol Maraña Hurtado
+ *
+ */
 public class GraphFunctions {
 	// Graph that is working on
 	private GraphADT<Integer> graph;
@@ -27,9 +33,11 @@ public class GraphFunctions {
 	}
 	
 	/**
-	 * Returns a HashMap containing a list of keys in which are an array of all the elements at key distance from the vertex
-	 * @param vertex Root based on which the hashMap is made
-	 * @return A hashMap containing the level at which are the direct and indirect connections within the graph
+	 * Returns an array of Integers that is the shortest path between the two points at a maximum distance of 6.
+	 * If there's no path or is too long, it returns null;
+	 * @param source - Source Integer that the functions must start looking at
+	 * @param objective - Objective Integer that is the search target.
+	 * @return {@link Iterable} of Integer if there's path, null if there is not
 	 */
 	public Iterable<Integer> BFS(Integer source, Integer objective){
 		ArrayList<Integer> ret = new ArrayList<Integer> ();
@@ -97,7 +105,7 @@ public class GraphFunctions {
 	 * Makes a DFS search between two elements and returns the longest path between them using backtracking
 	 * @param source Initial node from which start the search
 	 * @param objective Objective to reach
-	 * @return An Iterable<Integer> with the longest path to the objective. It will be null if there's no path and at least an element if there is. If the source and objective are the same, returns a single element
+	 * @return An {@link Iterable} Integer type with the longest path to the objective. It will be null if there's no path and at least an element if there is. If the source and objective are the same, returns a single element
 	 */
 	public Iterable<Integer> DFS(Integer source, Integer objective) {
 		largerDFS = null;
@@ -116,7 +124,11 @@ public class GraphFunctions {
 	}
 	
 	
-	
+	/**
+	 * This function uses recursion to traverse the graph in depth first search and searches for the objective. It only returns the longest chain that relates source and objective.
+	 * @param source - Integer element
+	 * @param objective - Integer objective
+	 */
 	private void DFSWorker (Integer source, Integer objective){
 		Iterator<Integer> adjacents = graph.getAdjacentsOf(source).iterator();
 		Integer actual;

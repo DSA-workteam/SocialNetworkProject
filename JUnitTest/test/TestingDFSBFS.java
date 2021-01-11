@@ -32,7 +32,7 @@ class TestingDFSBFS {
 			p5 = new Person(data);
 			data = "Hasflun,,,,,,,,,,";
 			p6 = new Person(data);
-			data = "NSFW_NTR,,,,,,,,,,";
+			data = "Imanol,,,,,,,,,,";
 			p7 = new Person(data);
 		} catch (ImpulsoryAttributeRequiredException e) {
 			
@@ -72,8 +72,8 @@ class TestingDFSBFS {
 		
 		
 		//Testing DFS with a person that doesn't exist, Should return null
-		assertTrue(new Person("XDDX,,,,,,,,,,").getGraphID() == -1); //GraphID == -1 means that it's not in the graph
-		assertNull(graph.largerConnectionBetween(new Person("XDDX,,,,,,,,,,"), p7));
+		assertTrue(new Person("NotInTheGraph,,,,,,,,,,").getGraphID() == -1); //GraphID == -1 means that it's not in the graph
+		assertNull(graph.largerConnectionBetween(new Person("NotInTheGraph,,,,,,,,,,"), p7));
 		
 		
 		//Testing DFS with two person that are at distance 1. Should return an array of size 2
@@ -104,50 +104,98 @@ class TestingDFSBFS {
 	
 	@Test
 	void testBFS() throws ImpulsoryAttributeRequiredException{
-		//Testing DFS with the same person. Should return an array containing only himself.
-		Iterator<Person> method = graph.pathAtDistance6(p7, p7).iterator();
-		ArrayList<Person> tester = new ArrayList<Person>();
-		while (method.hasNext())
-			tester.add(method.next());
-		ArrayList<Person> aux = new ArrayList<Person>();
-		aux.add(p7);
-		assertTrue(tester.size() == 1);
-		assertTrue(tester.equals(aux));
+		//Testing BFS with the same person. Should return an array containing only himself.
+				Iterator<Person> method = graph.pathAtDistance6(p7, p7).iterator();
+				ArrayList<Person> tester = new ArrayList<Person>();
+				while (method.hasNext())
+					tester.add(method.next());
+				ArrayList<Person> aux = new ArrayList<Person>();
+				aux.add(p7);
+				assertTrue(tester.size() == 1);
+				assertTrue(tester.equals(aux));
+				
+				
+				//Testing BFS with two people that are not connected to each other not directly nor indirectly. Should return null
+				assertTrue(p2.getGraphID() != -1 && p7.getGraphID() != -1); //Checking whether both of them are in the graph or not
+				assertNull(graph.pathAtDistance6(p2, p7));
+				
+				//Testing BFS with a person that doesn't exist, Should return null
+				assertTrue(new Person("NotInTheGraph,,,,,,,,,,").getGraphID() == -1); //GraphID == -1 means that it's not in the graph
+				assertNull(graph.pathAtDistance6(new Person("NotInTheGraph,,,,,,,,,,"), p7));
+				
+				//Testing BFS with two person that are at distance 1. Should return an array of size 2
+				method = graph.pathAtDistance6(p1, p2).iterator();
+				tester = new ArrayList<Person>();
+				while (method.hasNext())
+					tester.add(method.next());
+				aux = new ArrayList<Person>();
+				aux.add(p1);
+				aux.add(p2);
+				assertTrue(tester.size() == 2);
+				assertTrue(tester.equals(aux));
+				
+
+				//Testing BFS with two people that aren't at distance 1. Should return an array of size 3
+				method = graph.pathAtDistance6(p1, p4).iterator();
+				tester = new ArrayList<Person>();
+				while (method.hasNext())
+					tester.add(method.next());
+				aux = new ArrayList<Person>();
+				aux.add(p1);
+				aux.add(p2);
+				aux.add(p4);
+				assertTrue(tester.size() == 3);
+				assertTrue(tester.equals(aux));
+
+				
+				
+				// Testing BFS with a long chain, and testing a distance longer than 6
+				String data = "Pipo1,PinPin,PonPon,4-2-2003,male,Los Angeles,San Francisco,San Francisco,Los Angeles,Pipo,G77371";
+				Person ptest1, ptest2, ptest3, ptest4, ptest5, ptest6;
+				
+				ptest1 = new Person(data);
+				data = "Pipo2,PinPin,PonPon,4-2-2003,male,Los Angeles,San Francisco,San Francisco,Los Angeles,Pipo,G77371";
+				ptest2 = new Person(data);
+				data = "Pipo3,PinPin,PonPon,4-2-2003,male,Los Angeles,San Francisco,San Francisco,Los Angeles,Pipo,G77371";
+				ptest3 = new Person(data);
+				data = "Pipo4,PinPin,PonPon,4-2-2003,male,Los Angeles,San Francisco,San Francisco,Los Angeles,Pipo,G77371";
+				ptest4 = new Person(data);
+				data = "Pipo5,PinPin,PonPon,4-2-2003,male,Los Angeles,San Francisco,San Francisco,Los Angeles,Pipo,G77371";
+				ptest5 = new Person(data);
+				data = "Pipo6,PinPin,PonPon,4-2-2003,male,Los Angeles,San Francisco,San Francisco,Los Angeles,Pipo,G77371";
+				ptest6 = new Person(data);
+				graph.addVertex(ptest1);
+				graph.addVertex(ptest2);
+				graph.addVertex(ptest3);
+				graph.addVertex(ptest4);
+				graph.addVertex(ptest5);
+				graph.addVertex(ptest6);
+
+				graph.addEdge(p1, ptest1);
+				graph.addEdge(ptest1, ptest2);
+				graph.addEdge(ptest2, ptest3);
+				graph.addEdge(ptest3, ptest4);
+				graph.addEdge(ptest4, ptest5);
+				graph.addEdge(ptest5, ptest6);
+				
+				// Should return null, target is at a larger distance than 6
+				assertNull(graph.pathAtDistance6(p1, ptest6));
+				
+				
+				// Now testing max distance
+				method = graph.pathAtDistance6(p1, ptest5).iterator();
+				tester = new ArrayList<Person>();
+				while (method.hasNext())
+					tester.add(method.next());
+				aux = new ArrayList<Person>();
+				aux.add(p1);
+				aux.add(ptest1);
+				aux.add(ptest2);
+				aux.add(ptest3);
+				aux.add(ptest4);
+				aux.add(ptest5);
+				assertTrue(tester.equals(aux));
+
 		
-		
-		//Testing BFS with two people that are not connected to each other not directly nor indirectly. Should return null
-		assertTrue(p2.getGraphID() != -1 && p7.getGraphID() != -1); //Checking whether both of them are in the graph or not
-		assertNull(graph.pathAtDistance6(p2, p7));
-		
-		
-		//Testing DFS with a person that doesn't exist, Should return null
-		assertTrue(new Person("asdfg,,,,,,,,,,").getGraphID() == -1); //GraphID == -1 means that it's not in the graph
-		assertNull(graph.pathAtDistance6(new Person("asdfg,,,,,,,,,,"), p7));
-		
-		
-		//Testing DFS with two person that are at distance 1. Should return an array of size 2
-		method = graph.pathAtDistance6(p1, p2).iterator();
-		tester = new ArrayList<Person>();
-		while (method.hasNext())
-			tester.add(method.next());
-		aux = new ArrayList<Person>();
-		aux.add(p1);
-		aux.add(p2);
-		assertTrue(tester.size() == 2);
-		assertTrue(tester.equals(aux));
-		
-		System.out.println("Lo que interesa");
-		
-		//Testing DFS with two people that aren't at distance 1. Should return an array of size 3
-		method = graph.pathAtDistance6(p1, p4).iterator();
-		tester = new ArrayList<Person>();
-		while (method.hasNext())
-			tester.add(method.next());
-		aux = new ArrayList<Person>();
-		aux.add(p1);
-		aux.add(p2);
-		aux.add(p4);
-		assertTrue(tester.size() == 3);
-		assertTrue(tester.equals(aux));
 	}
 }

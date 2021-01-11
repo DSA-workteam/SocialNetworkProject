@@ -3,8 +3,17 @@ package test;
 
 
 
-import socialNetworkPackage.SocialNetwork;
+//import socialNetworkPackage.SocialNetwork;
 
+/**
+ * Class for testing the time that takes the project executing with different data structures.
+ * This should not be executed, this was for the project report.
+ * 
+ * After changing the main menu, this test doesn't actually work, it needs to change the input string.
+ * @author Borja Moralejo Tobajas
+ *
+ */
+/*
 class TestingMenuTimes {
 
 	//@Test
@@ -56,3 +65,4 @@ class TestingMenuTimes {
 	}
 
 }
+*/

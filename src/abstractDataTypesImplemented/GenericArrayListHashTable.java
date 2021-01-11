@@ -141,10 +141,12 @@ public class GenericArrayListHashTable<Value, Key extends Comparable<Key>> imple
 		return getAllElements().iterator();		
 	}
 	
+	
 	/**
 	 * Gets all the nodes of the hashTable
 	 * @return
 	 */
+	/*
 	private Collection<Node> getNodes(){
 		ArrayList<Node> list = new ArrayList<Node>(N);
 		for(int i = 0; i < size;i++) {
@@ -154,9 +156,8 @@ public class GenericArrayListHashTable<Value, Key extends Comparable<Key>> imple
 		}
 		return list;
 	}
-	/**
-	 * 
-	 */
+    */
+	/* Unused feature
 	@SuppressWarnings({ "unchecked", "unused" })
 	private void expandLookTable() {
 		Iterator<Node> it= getNodes().iterator();
@@ -169,5 +170,6 @@ public class GenericArrayListHashTable<Value, Key extends Comparable<Key>> imple
 		}
 		it.forEachRemaining(node -> lookTable[hashCode(node.k)].add(node));
 	}
-
+*/
+	
 }

@@ -22,7 +22,7 @@ import exceptions.MenuClosedException;
 
 /**
  * This class has all the functionalities of the menu.
- * @author Borja Moralejo Tobajas & Imanol Maraña Hurtado
+ * @author Borja Moralejo Tobajas and Imanol Maraña Hurtado
  *
  */
 public class MenuFunctions{

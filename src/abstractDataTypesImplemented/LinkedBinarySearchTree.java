@@ -10,7 +10,6 @@ package abstractDataTypesImplemented;
 
 import abstractDataTypesPackage.BinarySearchTreeADT;
 import exceptions.ElementNotFoundException;
-import exceptions.EmptyCollectionException;
 
 public class LinkedBinarySearchTree<T>  extends LinkedBinaryTree<T>
                                   implements BinarySearchTreeADT<T>
@@ -121,144 +120,12 @@ public class LinkedBinarySearchTree<T>  extends LinkedBinaryTree<T>
       return result;
    }
 
-   /**
-    * Removes elements that match the specified target element from 
-    * the binary search tree. Throws a ElementNotFoundException if 
-    * the sepcified target element is not found in this tree.
-    *
-    * @param targetElement              the element being sought in the binary \
-    *                                   search tree
-    * @throws ElementNotFoundException  if an element not found exception occurs
-    */
-   public void removeAllOccurrences (T targetElement)
-                                    throws ElementNotFoundException 
-   {  removeElement(targetElement);     
-      try
-      {  while (contains( (T) targetElement))
-            removeElement(targetElement);
-      }    
-      catch (Exception ElementNotFoundException)
-      {
-      }
-   }
+   
 
-   /**
-    * Removes the node with the least value from the binary search
-    * tree and returns a reference to its element.  Throws an
-    * EmptyBinarySearchTreeException if this tree is empty. 
-    *
-    * @return                           a reference to the node with the least 
-    *                                   value
-    * @throws EmptyCollectionException  if an empty collection exception occurs
-    */
-   public T removeMin() throws EmptyCollectionException 
-   {  T result = null;
-
-      if (isEmpty())
-         throw new EmptyCollectionException ("binary search tree");
-      else 
-      {  if (root.left == null) 
-         {  result = root.element;
-            root = root.right;
-         }
-         else 
-         {  BinaryTreeNode<T> parent = root;
-            BinaryTreeNode<T> current = root.left;
-            while (current.left != null) 
-            {  parent = current;
-               current = current.left;
-            }
-            result =  current.element;
-            parent.left = current.right;
-         }
-         count--;
-      }
-       return result;
-   }
-
-   /**
-    * Removes the node with the highest value from the binary
-    * search tree and returns a reference to its element.  Throws an
-    * EmptyBinarySearchTreeException if this tree is empty. 
-    *
-    * @return  a reference to the node with the highest value
-    * @throws EmptyCollectionException  if an empty collection exception occurs
-    */
-   public T removeMax() throws EmptyCollectionException 
-   { T result = null;
-
-      if (isEmpty())
-           throw new EmptyCollectionException ("binary search tree");
-      else 
-      {
-         if (root.right == null) 
-         {  result =  root.element;
-            root = root.left;
-         }
-         else 
-         {  BinaryTreeNode<T> parent = root;
-            BinaryTreeNode<T> current = root.right;
-            while (current.right != null) 
-            {  parent = current;
-               current = current.right;
-            }
-            
-            result =  current.element;
-            parent.right = current.left;
-         }
-         count--;
-      }
-      return result;
-   }
+  
 
 
-   /**
-    * Returns the element with the least value in the binary search
-    * tree. It does not remove the node from the binary search tree. 
-    * Throws an EmptyBinarySearchTreeException if this tree is empty.
-    *
-    * @return  the element with the least value
-    * @throws EmptyCollectionException  if an empty collection exception occurs
-    */
-   public T findMin() throws EmptyCollectionException 
-   { T result = null;
-
-      if (isEmpty())
-         throw new EmptyCollectionException ("binary search tree");
-      else 
-      { BinaryTreeNode<T> current = root;     
-         while (current.left != null)
-            current = current.left;
-       
-         result = current.element;
-      }
-      return result;
-   }
-
-   /**
-    * Returns the element with the highest value in the binary
-    * search tree.  It does not remove the node from the binary
-    * search tree.  Throws an EmptyBinarySearchTreeException if this 
-    * tree is empty.
-    *
-    * @return  the element with the highest value
-    * @throws EmptyCollectionException  if an empty collection exception occurs
-    */
-   public T findMax() throws EmptyCollectionException 
-   {  T result = null;
-
-      if (isEmpty())
-           throw new EmptyCollectionException ("binary search tree");
-      else 
-      {  BinaryTreeNode<T> current = root;
-      
-         while (current.right != null)
-            current = current.right;
-         
-         result = current.element;
-      }
-      return result;
-   }
+  
 
    @SuppressWarnings("unchecked")
    /**
