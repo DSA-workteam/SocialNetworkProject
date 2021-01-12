@@ -6068,7 +6068,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF23avB1L474wo="
 									},
-									"name": "BFS",
+									"name": "DFS",
 									"parameters": [
 										{
 											"_type": "UMLParameter",
@@ -22071,7 +22071,7 @@
 											"top": 1428,
 											"width": 427.7685546875,
 											"height": 13,
-											"text": "+BFS(source: Integer, objective: Integer): Iterable<Integer>",
+											"text": "+DFS(source: Integer, objective: Integer): Iterable<Integer>",
 											"horizontalAlignment": 0
 										},
 										{
