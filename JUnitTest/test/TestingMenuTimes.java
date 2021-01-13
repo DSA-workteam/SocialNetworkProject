@@ -58,10 +58,7 @@ class TestingMenuTimes {
 		//System.setIn(in);
 		SocialNetwork.main(input);
 
-		// do your thing
-
-		// optionally, reset System.in to its original
-		//System.setIn(sysInBackup);
+		
 	}
 
 }

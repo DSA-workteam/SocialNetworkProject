@@ -80,10 +80,7 @@ class TestingMenu {
 		//System.setIn(in);
 		SocialNetwork.main(input);
 
-		// do your thing
 
-		// optionally, reset System.in to its original
-		//System.setIn(sysInBackup);
 	}
 
 }
